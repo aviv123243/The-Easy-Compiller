@@ -4,7 +4,7 @@ CXX = g++
 CXXFLAGS = -std=c++17
 
 SOURCES = Main.cpp lexer.cpp parser.cpp
-TARGET = tec
+TARGET = ../bin/tec
 
 all: $(TARGET)
 
