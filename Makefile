@@ -3,8 +3,8 @@ CXX = g++
 #CXXFLAGS = -Wall -Wextra -std=c++17
 CXXFLAGS = -std=c++17
 
-SOURCES = Main.cpp lexer.cpp parser.cpp
-TARGET = ../bin/tec
+SOURCES = src/Main.cpp src/lexer.cpp src/parser.cpp
+TARGET = bin/tec
 
 all: $(TARGET)
 

@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 //-------ONLY FOR CONVENIENCE---------
     else if (argc == 1)
     {
-        filePath = "C:\\Users\\pc-admin\\Documents\\aviv coading\\COMPILLER\\demos\\DEMO2.EZ";
+        filePath = "demos\\DEMO2.EZ";
     }
 //-------------------------------------    
 
