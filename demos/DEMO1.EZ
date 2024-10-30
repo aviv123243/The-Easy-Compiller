@@ -1,0 +1,19 @@
+
+fn main() => int
+{
+    int x = 7;
+    int y = 6;
+    print(max(x,y));
+
+    return 0;
+}
+
+fn max(int x,int y) => int
+{
+    int res;
+
+    if(x > y) res = x;
+    if(y > x) res = y;
+
+    return res;
+}
