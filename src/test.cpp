@@ -4,10 +4,10 @@
 using namespace std;
 int main()
 {
-    DFA dfa("intConfig.txt");
+    DFA dfa("doubleConfig.txt");
 
-    //dfa.printTM();
+    // dfa.printTM();
 
-    string num = "13";
-    cout << dfa.inLanguage(num);
+    string num = "1.1";
+    cout << boolalpha << dfa.inLanguage(num);
 }

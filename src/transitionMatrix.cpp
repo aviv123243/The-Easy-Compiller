@@ -124,7 +124,9 @@ bool transitionMatrix::isSymbolExists(char alpha) const
     return (alphabetIt != _alphabetToIndex.end());
 }
 
-// same as the checkState() method but instad of returning a bool its throwing an error if the state is invalid
+
+// checks if the state exists and compare the result with the wantedResult
+// if there is no matching it prints an corresponding error
 void transitionMatrix::isStateExistsWErr(int state, bool wantedResult) const
 {
     if (isStateExsists(state) != wantedResult)
@@ -132,11 +134,11 @@ void transitionMatrix::isStateExistsWErr(int state, bool wantedResult) const
         stringstream ss;
         ss << "state " << state << " does not exist!";
         throw runtime_error(ss.str());
-    }
+    } 
 }
 
-// same as the checkSymbol() method but instad of returning a bool its throwing an error if the state is invalid
-//
+// checks if the symbol exists and compare the result with the wantedResult
+// if there is no matching it prints an corresponding error
 void transitionMatrix::isSymbolExistsErr(char alpha, bool wantedResult) const
 {
     if (isSymbolExists(alpha) != wantedResult)
