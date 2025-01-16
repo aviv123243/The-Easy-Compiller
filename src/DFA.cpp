@@ -35,7 +35,7 @@ void DFA::addEndState(char state)
     _endStates.push_back(state);
 }
 
-//initialising an empty matrix
+//initialising an empty dfa
 void DFA::initMatrix()
 {
     int length = _stateCount;
