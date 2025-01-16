@@ -17,6 +17,25 @@ void DFA::addAlpha(char alpha)
     _alphabetToIndex[alpha] = nextIndex;
 }
 
+//sets a start state
+//if the state dosent exists the function throws an error 
+void DFA::setStartState(int state)
+{
+    isStateExistsWErr(state,true);
+
+    _startState = state;
+}
+
+//adding an end state
+//if the state dosent exists the function throws an error 
+void DFA::addEndState(char state)
+{
+    isStateExistsWErr(state,true);
+
+    _endStates.push_back(state);
+}
+
+//initialising an empty matrix
 void DFA::initMatrix()
 {
     int length = _stateCount;

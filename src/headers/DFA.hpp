@@ -28,6 +28,8 @@ public:
     DFA(string DFAConfigFile);
     int addState();
     void addAlpha(char alpha);
+    void setStartState(int state);
+    void addEndState(char state);
     int getState(int state, char alpha) const;
     void initMatrix();
     void insertTransition(int from, char alpha, int to);
