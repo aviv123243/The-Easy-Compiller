@@ -8,6 +8,6 @@ int main()
 
     // dfa.printTM();
 
-    string num = "1.1";
+    string num = "7.7.0";
     cout << boolalpha << dfa.inLanguage(num);
 }

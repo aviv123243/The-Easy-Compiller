@@ -1,24 +1,41 @@
-#ifndef __DFA
-#define __DFA
+#ifndef __TRANSITION_MATRIX
+#define __TRANSITION_MATRIX
 
-#include "transitionMatrix.hpp"
-#include <vector>
 #include <string>
+#include <vector>
+#include <sstream>
+#include <algorithm>
+#include <iostream>
+#include <unordered_map>
 
 using namespace std;
 
 class DFA
 {
-    private:
-        int _startState;
-        vector<int> _endStates;
-        transitionMatrix _tm;
+private:
+    int **_mat;
+    int _stateCount;
+    int _startState;
+    vector<int> _endStates;
 
-    public:
-        DFA(string DFAConfigFile);
-        bool inLanguage(string &word) const;
-        void printTM();
+    unordered_map<char, int> _alphabetToIndex;
+
+    void isStateExistsWErr(int state, bool wantedResult) const;
+    void isSymbolExistsErr(char alpha, bool wantedResult) const;
+
+public:
+    DFA(vector<int> *states, vector<char> *alphabet);
+    DFA(string DFAConfigFile);
+    int addState();
+    void addAlpha(char alpha);
+    int getState(int state, char alpha) const;
+    void initMatrix();
+    void insertTransition(int from, char alpha, int to);
+    void insertTransitionString(string &transition);
+    bool isStateExsists(int state) const;
+    bool isSymbolExists(const char alpha) const;
+    bool inLanguage(string &word) const;
+    void printMatrix() const;
 };
-
 
 #endif
