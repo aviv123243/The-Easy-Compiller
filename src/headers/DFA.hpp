@@ -24,10 +24,11 @@ private:
     void isSymbolExistsErr(char alpha, bool wantedResult) const;
 
 public:
-    DFA(vector<int> *states, vector<char> *alphabet);
+    DFA(int stateCount, vector<char> *alphabet);
     DFA(string DFAConfigFile);
-    int addState();
+    DFA();
     void addAlpha(char alpha);
+    void setStateCount(int numOfStates);
     void setStartState(int state);
     void addEndState(char state);
     int getState(int state, char alpha) const;
@@ -36,7 +37,8 @@ public:
     void insertTransitionString(string &transition);
     bool isStateExsists(int state) const;
     bool isSymbolExists(const char alpha) const;
-    bool inLanguage(string &word) const;
+    pair<bool, int> inLanguage(string &word) const;
+    void writeDFAToFile(string dstFile);
     void printMatrix() const;
 };
 

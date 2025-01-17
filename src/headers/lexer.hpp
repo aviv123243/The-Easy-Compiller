@@ -1,6 +1,7 @@
 #ifndef __LEXER
 #define __LEXER
 
+#include "DFA.hpp"
 #include <string>
 #include <vector>
 
@@ -63,50 +64,18 @@ struct SyntaxToken
     string val;
 };
 
-
-
-
 class Lexer
 {
     private:
-    
-        string _sorceCode;
-        int _cursor;
-        int _codeLen;
-        char _current;
-        vector<string> kewWords = {"if","for","while","return","fn","int"};
-
-        void next() 
-        {
-            _cursor++;
-            _current = peek(0);
-        } 
-
-        SyntaxToken * nextToken();
+        DFA dfa;
 
     public:
-        Lexer(string sorceCode)
-        {
-            _sorceCode = sorceCode;
-            _cursor = 0;
-            _codeLen = sorceCode.length();
-            _current = peek(0);
-        }
+        // Lexer(string srcFile);
+        // SyntaxToken getNextToken(); const
 
-        char GetCurrent() const {return _current;}
-       
-        vector<SyntaxToken *> GenerateTokes();
-
-        char peek(int);     
 };
 
-void PrintTokens(vector<SyntaxToken *> * tokens);
 
-void PrintTokensNoWhiteSpace(vector<SyntaxToken *> * tokens);
-
-string SyntaxKindToString(syntaxKind kind);
-
-string SyntaxTokenToString(SyntaxToken * token);
 
 
 

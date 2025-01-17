@@ -2,13 +2,81 @@
 #include <fstream>
 using namespace std;
 
-// increases the state count and returns the new state
-int DFA::addState()
+DFA::DFA(string DFAConfigFile)
 {
-    _stateCount++;
-    return _stateCount - 1;
+    _stateCount = 0;
+
+    ifstream file(DFAConfigFile);
+    string currLine;
+    stringstream ss;
+    int currentNum;
+    int from;
+    char currSymbol;
+    int to;
+
+    if (!file.is_open())
+    {
+        throw runtime_error("Failed to open file");
+    }
+
+    // initialising states
+    getline(file, currLine);
+    ss.clear();
+    ss.str(currLine);
+    ss >> _stateCount;
+
+    // initialising start state
+    getline(file, currLine);
+    ss.clear();
+    ss.str(currLine);
+    ss >> currentNum;
+    _startState = currentNum;
+
+    // initialising end states
+    getline(file, currLine);
+    ss.clear();
+    ss.str(currLine);
+
+    while (ss >> currentNum)
+    {
+        _endStates.push_back(currentNum);
+    }
+
+    // initialising alphabet
+    getline(file, currLine);
+    ss.clear();
+    ss.str(currLine);
+
+    while (ss >> currSymbol)
+    {
+        addAlpha(currSymbol);
+    }
+
+    // initialising matrix
+    initMatrix();
+
+    // initialising transitions
+    while (getline(file, currLine))
+    {
+        insertTransitionString(currLine);
+    }
 }
 
+DFA::DFA(int stateCount, vector<char> *alphabet)
+{
+    _stateCount = stateCount;
+
+    for (char alpha : *alphabet)
+    {
+        addAlpha(alpha);
+    }
+
+    initMatrix();
+}
+
+DFA::DFA() : _mat(nullptr), _stateCount(0), _startState(0) {}
+
+// adding new symbol to alphabet
 void DFA::addAlpha(char alpha)
 {
     isSymbolExistsErr(alpha, false);
@@ -17,25 +85,37 @@ void DFA::addAlpha(char alpha)
     _alphabetToIndex[alpha] = nextIndex;
 }
 
-//sets a start state
-//if the state dosent exists the function throws an error 
+void DFA::setStateCount(int numOfStates)
+{
+    if (numOfStates > 0)
+    {
+        _stateCount = numOfStates;
+    }
+    else
+    {
+        throw runtime_error("invalid number of states!");
+    }
+}
+
+// sets a start state
+// if the state dosent exists the function throws an error
 void DFA::setStartState(int state)
 {
-    isStateExistsWErr(state,true);
+    isStateExistsWErr(state, true);
 
     _startState = state;
 }
 
-//adding an end state
-//if the state dosent exists the function throws an error 
+// adding an end state
+// if the state dosent exists the function throws an error
 void DFA::addEndState(char state)
 {
-    isStateExistsWErr(state,true);
+    isStateExistsWErr(state, true);
 
     _endStates.push_back(state);
 }
 
-//initialising an empty dfa
+// initialising an empty dfa sized according to alphabet and number of states
 void DFA::initMatrix()
 {
     int length = _stateCount;
@@ -57,24 +137,6 @@ void DFA::initMatrix()
             }
         }
     }
-}
-
-// Initialize the matrix as a 2D array of integers
-DFA::DFA(vector<int> *states, vector<char> *alphabet)
-{
-    _mat = nullptr;
-
-    for (int state : *states)
-    {
-        addState();
-    }
-
-    for (char alpha : *alphabet)
-    {
-        addAlpha(alpha);
-    }
-
-    initMatrix();
 }
 
 void DFA::insertTransition(int from, char alpha, int to)
@@ -122,73 +184,6 @@ int DFA::getState(int state, char alpha) const
     int res = _mat[state][_alphabetToIndex.at(alpha)];
 
     return res;
-}
-
-DFA::DFA(string DFAConfigFile)
-{
-    _stateCount = 0;
-
-    ifstream file(DFAConfigFile);
-    string currLine;
-    stringstream ss;
-    int currentNum;
-    int from;
-    char currSymbol;
-    int to;
-
-    if (!file.is_open())
-    {
-        throw runtime_error("Failed to open file");
-    }
-
-    // initialising states
-    getline(file, currLine);
-    ss.clear();
-    ss.str(currLine);
-    while (ss >> currentNum)
-    {
-        if (currentNum != addState())
-        {
-            cout << currentNum;
-            throw runtime_error("invalid state!");
-        }
-    }
-
-    // initialising start state
-    getline(file, currLine);
-    ss.clear();
-    ss.str(currLine);
-    ss >> currentNum;
-    _startState = currentNum;
-
-    // initialising end states
-    getline(file, currLine);
-    ss.clear();
-    ss.str(currLine);
-
-    while (ss >> currentNum)
-    {
-        _endStates.push_back(currentNum);
-    }
-
-    // initialising alphabet
-    getline(file, currLine);
-    ss.clear();
-    ss.str(currLine);
-
-    while (ss >> currSymbol)
-    {
-        addAlpha(currSymbol);
-    }
-
-    // initialising matrix
-    initMatrix();
-
-    // initialising transitions
-    while (getline(file, currLine))
-    {
-        insertTransitionString(currLine);
-    }
 }
 
 // Helper function to check if the state exists, returns an error message if not
@@ -269,7 +264,69 @@ void DFA::printMatrix() const
     }
 }
 
-bool DFA::inLanguage(string &word) const
+void DFA::writeDFAToFile(string dstFile)
+{
+    ofstream destf(dstFile);
+
+    if (!destf)
+    {
+        std::cerr << "Error opening file: " << dstFile << std::endl;
+        return;
+    }
+
+    destf << _stateCount << endl; // write state count
+
+    destf << _startState << endl; // write start state
+
+    // write end states
+    for (int i = 0; i < _endStates.size(); i++)
+    {
+        destf << _endStates[i] << " ";
+    }
+
+    destf << endl;
+
+    // write alphabet
+    unordered_map<int, char> indexToAlphabet;
+    for (const auto &pair : _alphabetToIndex)
+    {
+        indexToAlphabet[pair.second] = pair.first; // Reverse key-value
+    }
+
+    for (int i = 0; i < indexToAlphabet.size(); i++)
+    {
+        destf << indexToAlphabet.at(i) << " ";
+    }
+
+    destf << endl;
+
+    // write transitions
+    for (int i = 0; i < _stateCount; i++)
+    {
+        for (int j = 0; j < indexToAlphabet.size(); j++)
+        {
+            int from = i;
+            int alpha = indexToAlphabet.at(j);
+            int to = getState(from,alpha);
+
+            if(to != -1)
+            {
+                destf << i << " "
+                  << indexToAlphabet.at(j) << " "
+                  << getState(i, indexToAlphabet.at(j)) << endl;
+            }
+            
+        }
+    }
+
+    destf.close();
+}
+
+//checks if a certain word is in the language
+//returns a pair of values
+//val 1-> is the word in the language
+//val 2-> ending state
+pair<bool, int> DFA::inLanguage(string &word) const
 {
     int currState = _startState;
     int i = 0;
@@ -280,5 +337,6 @@ bool DFA::inLanguage(string &word) const
         i++;
     }
 
-    return find(_endStates.begin(), _endStates.end(), currState) != _endStates.end();
+    bool isInLang = find(_endStates.begin(), _endStates.end(), currState) != _endStates.end();
+    return make_pair(isInLang,currState);
 }
