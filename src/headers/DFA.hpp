@@ -30,7 +30,9 @@ public:
     void addAlpha(char alpha);
     void setStateCount(int numOfStates);
     void setStartState(int state);
+    int getStartState() const;
     void addEndState(char state);
+    const vector<int> & getEndStates() const;
     int getState(int state, char alpha) const;
     void initMatrix();
     void insertTransition(int from, char alpha, int to);

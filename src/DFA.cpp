@@ -110,6 +110,12 @@ void DFA::setStartState(int state)
     _startState = state;
 }
 
+// returns start state
+int DFA::getStartState() const
+{
+    return _startState;
+}
+
 // adding an end state
 // if the state dosent exists the function throws an error
 void DFA::addEndState(char state)
@@ -117,6 +123,12 @@ void DFA::addEndState(char state)
     isStateExistsWErr(state, true);
 
     _endStates.push_back(state);
+}
+
+//returns a read only vector of end states
+const vector<int> &DFA::getEndStates() const
+{
+    return _endStates;
 }
 
 // initialising an empty dfa sized according to alphabet and number of states
@@ -335,7 +347,7 @@ pair<bool, int> DFA::inLanguage(string &word) const
         currState = getState(currState, word[i]);
         i++;
     }
-    
+
     bool isInLang = find(_endStates.begin(), _endStates.end(), currState) != _endStates.end();
     return make_pair(isInLang, currState);
 }

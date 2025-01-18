@@ -10,7 +10,7 @@ int main()
 
     dfa.printMatrix();
 
-    string num = "\"\"";
+    string num = " ";
     cout << boolalpha << dfa.inLanguage(num).first << endl;
     cout << dfa.inLanguage(num).second;
 }
