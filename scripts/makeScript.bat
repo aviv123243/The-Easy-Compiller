@@ -1,0 +1,1 @@
+g++ setupLexerDfa.cpp ..\src\DFA.cpp -o out

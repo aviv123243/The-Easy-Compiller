@@ -8,9 +8,9 @@ int main()
 {
     DFA dfa("lexerDFA.txt");
 
-    //dfa.printMatrix();
+    dfa.printMatrix();
 
-    string num = " 777";
+    string num = "777";
     cout << boolalpha << dfa.inLanguage(num).first << endl;
     cout << dfa.inLanguage(num).second;
 }

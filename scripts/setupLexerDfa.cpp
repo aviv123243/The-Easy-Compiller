@@ -6,7 +6,7 @@ int main()
 {
     DFA dfa;
     
-    dfa.setStateCount(19);
+    dfa.setStateCount(4);
     
     //initialising the alphabet
     for (char i = '!'; i <= '~'; i++)
@@ -44,5 +44,5 @@ int main()
         dfa.insertTransition(3,i,3);
     }
 
-    dfa.writeDFAToFile("lexerDFA.txt");
+    dfa.writeDFAToFile("C:\\Users\\pc-admin\\Documents\\aviv coading\\COMPILLER\\src\\lexerDFA.txt");
 }

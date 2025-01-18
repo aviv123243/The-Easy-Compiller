@@ -1,5 +1,7 @@
 #include "headers/DFA.hpp"
 #include <fstream>
+#include <iomanip>
+#include <string>
 using namespace std;
 
 DFA::DFA(string DFAConfigFile)
@@ -8,6 +10,7 @@ DFA::DFA(string DFAConfigFile)
 
     ifstream file(DFAConfigFile);
     string currLine;
+    char TransitionLine[13];
     stringstream ss;
     int currentNum;
     int from;
@@ -56,8 +59,10 @@ DFA::DFA(string DFAConfigFile)
     initMatrix();
 
     // initialising transitions
-    while (getline(file, currLine))
+    while (file.read(TransitionLine,12))
     {
+        TransitionLine[12] = '\0';
+        currLine.assign(TransitionLine);
         insertTransitionString(currLine);
     }
 }
@@ -162,12 +167,9 @@ void DFA::insertTransitionString(string &transition)
     char alpha;
     int to;
 
-    stringstream ss(transition);
-
-    if (!(ss >> from >> alpha >> to))
-    {
-        throw runtime_error("Invalid transition format. Expected format: <from> <alpha> <to>");
-    }
+    from = stoi(transition.substr(0,4)); // convert ascii to int
+    alpha = transition[5];
+    to = stoi(transition.substr(7,4)); // convert ascii to int
 
     insertTransition(from, alpha, to);
 }
@@ -306,26 +308,25 @@ void DFA::writeDFAToFile(string dstFile)
         for (int j = 0; j < indexToAlphabet.size(); j++)
         {
             int from = i;
-            int alpha = indexToAlphabet.at(j);
-            int to = getState(from,alpha);
+            char alpha = indexToAlphabet.at(j);
+            int to = getState(from, alpha);
 
-            if(to != -1)
+            if (to != -1)
             {
-                destf << i << " "
-                  << indexToAlphabet.at(j) << " "
-                  << getState(i, indexToAlphabet.at(j)) << endl;
+                destf << left << setw(4) << setfill(' ') << i << " "
+                      << alpha << " "
+                      << left << setw(4) << setfill(' ') << getState(i, alpha) << endl;
             }
-            
         }
     }
 
     destf.close();
 }
 
-//checks if a certain word is in the language
-//returns a pair of values
-//val 1-> is the word in the language
-//val 2-> ending state
+// checks if a certain word is in the language
+// returns a pair of values
+// val 1-> is the word in the language
+// val 2-> ending state
 pair<bool, int> DFA::inLanguage(string &word) const
 {
     int currState = _startState;
@@ -338,5 +339,7 @@ pair<bool, int> DFA::inLanguage(string &word) const
     }
 
     bool isInLang = find(_endStates.begin(), _endStates.end(), currState) != _endStates.end();
-    return make_pair(isInLang,currState);
+    return make_pair(isInLang, currState);
 }
+
+
