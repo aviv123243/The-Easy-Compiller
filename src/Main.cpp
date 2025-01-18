@@ -26,8 +26,17 @@ int main(int argc, char **argv)
 
     Lexer lex("lexerDFAConfig.txt", filePath);
 
-    cout << SyntaxTokenToString(lex.getNextToken()) << '|' << endl;
-    cout << SyntaxTokenToString(lex.getNextToken()) << '|' << endl;
-    cout << SyntaxTokenToString(lex.getNextToken()) << '|' << endl;
-    cout << SyntaxTokenToString(lex.getNextToken()) << '|' << endl;
+    lex.printTransitionMatrix();
+    
+    SyntaxToken currToken;
+
+    while ((currToken = lex.getNextToken()).kind != syntaxKind::END_OF_FILE)
+    {
+        cout << SyntaxTokenToString(currToken) << endl;
+    }
+
+    cout << SyntaxTokenToString(currToken) << endl;
+    
+    
+    
 }

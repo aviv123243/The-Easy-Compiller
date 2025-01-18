@@ -12,29 +12,49 @@ using namespace std;
 SyntaxToken Lexer::getNextToken()
 {
     char currentChar;
-    int currentState = dfa.getStartState();
+    int currentState = _dfa.getStartState();
     fstream src(_srcFile);
     stringstream currentToken;
     SyntaxToken resToken;
+    src.seekg(0, ios::end);
+    int fileSize = src.tellg();
     src.seekg(_cursor, ios::beg);
+
+    if (_cursor >= fileSize)
+    {
+        resToken.kind = syntaxKind::END_OF_FILE;
+        return resToken;
+    }
 
     if (!src.is_open())
     {
         cerr << "Error: Unable to open file " << _srcFile << endl;
-        return resToken; 
+        return resToken;
     }
 
-    while (src.get(currentChar) && dfa.getState(currentState, currentChar) != -1)
+    src.get(currentChar);
+
+    src.seekg(-1, ios::cur);
+
+    while (src.get(currentChar) && isWhitespace(currentChar))
     {
-        //cout << "Reading: " << currentChar << " from state: " << currentState << endl;
+        _cursor++;
+    }
+
+    src.seekg(-1, ios::cur);
+
+    while (src.get(currentChar) && _dfa.getState(currentState, currentChar) != -1)
+    {
+        // cout << "Reading: " << currentChar << " from state: " << currentState << endl;
+
         currentToken << currentChar;
-        currentState = dfa.getState(currentState, currentChar);
+        currentState = _dfa.getState(currentState, currentChar);
         _cursor++;
     }
 
     _cursor++;
 
-    vector<int> endStates = dfa.getEndStates();
+    vector<int> endStates = _dfa.getEndStates();
     if (find(endStates.begin(), endStates.end(), currentState) != endStates.end())
     {
         resToken.kind = syntaxKind(currentState);
@@ -50,12 +70,21 @@ SyntaxToken Lexer::getNextToken()
 
 // print & print helper funcs:
 
+void Lexer::printTransitionMatrix() const
+{
+    _dfa.printMatrix();
+}
+
 string SyntaxKindToString(syntaxKind kind)
 {
     switch (kind)
     {
     case INTEGER_LITERAL:
         return "INTEGER_LITERAL";
+    case FLOAT_LITERAL:
+        return "FLOAT_LITERAL";
+    case STRING_LITERAL:
+        return "STRING_LITERAL";
     case IDENTIFIER:
         return "IDENTIFIER";
     case KEYWORD_IF:
@@ -157,4 +186,9 @@ string SyntaxTokenToString(SyntaxToken token)
     }
 
     return res.str();
+}
+
+bool isWhitespace(char ch)
+{
+    return ch == ' ' || ch == '\n' || ch == '\t';
 }

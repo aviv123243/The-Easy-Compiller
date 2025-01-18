@@ -72,15 +72,17 @@ class Lexer
 private:
     int _cursor;
     string _srcFile;
-    DFA dfa;
+    DFA _dfa;
 
 public:
-    Lexer(string DFAConfigFile, string srcFile) : dfa(DFAConfigFile), _cursor(0) ,_srcFile(srcFile) {}
+    Lexer(string DFAConfigFile, string srcFile) : _dfa(DFAConfigFile), _cursor(0), _srcFile(srcFile) {}
+    void printTransitionMatrix() const;
     SyntaxToken getNextToken();
 };
 
 string SyntaxTokenToString(SyntaxToken token);
 string SyntaxKindToString(syntaxKind kind);
+bool isWhitespace(char ch);
 
 // void PrintTokens(vector<SyntaxToken *> *tokens)
 // {
