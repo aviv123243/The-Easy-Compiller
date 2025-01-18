@@ -14,7 +14,7 @@ DFA::DFA(string DFAConfigFile)
     stringstream ss;
     int currentNum;
     int from;
-    char currSymbol;
+    char currSymbol[2];
     int to;
 
     if (!file.is_open())
@@ -46,20 +46,19 @@ DFA::DFA(string DFAConfigFile)
     }
 
     // initialising alphabet
-    getline(file, currLine);
-    ss.clear();
-    ss.str(currLine);
-
-    while (ss >> currSymbol)
+    int newLineCount = 0;
+    while (file.read(currSymbol, 2) && !(currSymbol[0] == '$' && currSymbol[1] == '$'))
     {
-        addAlpha(currSymbol);
+        addAlpha(currSymbol[0]);
     }
+
+    getline(file, currLine);
 
     // initialising matrix
     initMatrix();
 
     // initialising transitions
-    while (file.read(TransitionLine,12))
+    while (file.read(TransitionLine, 12))
     {
         TransitionLine[12] = '\0';
         currLine.assign(TransitionLine);
@@ -167,9 +166,9 @@ void DFA::insertTransitionString(string &transition)
     char alpha;
     int to;
 
-    from = stoi(transition.substr(0,4)); // convert ascii to int
+    from = stoi(transition.substr(0, 4)); // convert ascii to int
     alpha = transition[5];
-    to = stoi(transition.substr(7,4)); // convert ascii to int
+    to = stoi(transition.substr(7, 4)); // convert ascii to int
 
     insertTransition(from, alpha, to);
 }
@@ -299,8 +298,7 @@ void DFA::writeDFAToFile(string dstFile)
     {
         destf << indexToAlphabet.at(i) << " ";
     }
-
-    destf << endl;
+    destf << "$$" << endl;
 
     // write transitions
     for (int i = 0; i < _stateCount; i++)
@@ -337,9 +335,7 @@ pair<bool, int> DFA::inLanguage(string &word) const
         currState = getState(currState, word[i]);
         i++;
     }
-
+    
     bool isInLang = find(_endStates.begin(), _endStates.end(), currState) != _endStates.end();
     return make_pair(isInLang, currState);
 }
-
-

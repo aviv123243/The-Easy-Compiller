@@ -6,11 +6,11 @@ using namespace std;
 
 int main()
 {
-    DFA dfa("lexerDFA.txt");
+    DFA dfa("lexerDFAConfig.txt");
 
     dfa.printMatrix();
 
-    string num = "777";
+    string num = "\"\"";
     cout << boolalpha << dfa.inLanguage(num).first << endl;
     cout << dfa.inLanguage(num).second;
 }
