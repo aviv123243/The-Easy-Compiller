@@ -42,10 +42,11 @@ SyntaxToken Lexer::getNextToken()
     }
 
     src.seekg(-1, ios::cur);
+    _cursor--;
 
     while (src.get(currentChar) && _dfa.getState(currentState, currentChar) != -1)
     {
-        // cout << "Reading: " << currentChar << " from state: " << currentState << endl;
+        //cout << "Reading: " << currentChar << " from state: " << currentState << endl;
 
         currentToken << currentChar;
         currentState = _dfa.getState(currentState, currentChar);

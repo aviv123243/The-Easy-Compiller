@@ -8,6 +8,9 @@ int main()
     
     dfa.setStateCount(7);
     
+    int endState = 1;
+    int midState = 20;
+
     //initialising the alphabet
     for (char i = ' '; i <= '~'; i++)
     {
@@ -19,7 +22,7 @@ int main()
     dfa.setStartState(0);
     
     //--[integer]-- (end state=1)
-    dfa.addEndState(1);
+    dfa.addEndState(endState++); //1
     for (int i = '1'; i <= '9'; i++)
     {
         dfa.insertTransition(0,i,1);

@@ -26,8 +26,8 @@ int main(int argc, char **argv)
 
     Lexer lex("lexerDFAConfig.txt", filePath);
 
-    lex.printTransitionMatrix();
-    
+    //lex.printTransitionMatrix();
+
     SyntaxToken currToken;
 
     while ((currToken = lex.getNextToken()).kind != syntaxKind::END_OF_FILE)
