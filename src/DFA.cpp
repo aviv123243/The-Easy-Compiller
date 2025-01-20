@@ -118,7 +118,7 @@ int DFA::getStartState() const
 
 // adding an end state
 // if the state dosent exists the function throws an error
-void DFA::addEndState(char state)
+void DFA::addEndState(int state)
 {
     isStateExistsWErr(state, true);
 
@@ -155,8 +155,14 @@ void DFA::initMatrix()
     }
 }
 
+//inserts a new transition to the table
+//if the transition with (from,alpha) allready exists it overrides it   
 void DFA::insertTransition(int from, char alpha, int to)
-{
+{   
+    // std::cout << "Inserting transition: "
+    //       << "from = " << from
+    //       << ", alpha = " << alpha
+    //       << ", to = " << to << std::endl;
     // check if the state exists
     isStateExistsWErr(from, true);
 
@@ -250,7 +256,7 @@ void DFA::printMatrix() const
     cout << "Symbols: ";
     for (int i = 0; i < indexToAlphabet.size(); i++)
     {
-        cout << indexToAlphabet.at(i) << " ";
+        cout << indexToAlphabet.at(i) <<'\t'<< " ";
     }
     cout << endl;
 
@@ -259,17 +265,17 @@ void DFA::printMatrix() const
     // Print each row (transition for each state)
     for (int i = 0; i < length; i++)
     {
-        cout << "State " << i << ": "; // Print the state index at the start of the row
+        cout << " State " << i << ": "; // Print the state index at the start of the row
         for (int j = 0; j < width; j++)
         {
             // Print transitions, replacing -1 (trap states) with 'T'
             if (_mat[i][j] == -1)
             {
-                cout << 'T';
+                cout << '\t' <<'T';
             }
             else
             {
-                cout << _mat[i][j];
+                cout << '\t' <<_mat[i][j];
             }
             cout << " ";
         }

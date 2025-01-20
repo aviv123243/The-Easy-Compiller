@@ -26,17 +26,20 @@ int main(int argc, char **argv)
 
     Lexer lex("lexerDFAConfig.txt", filePath);
 
-    //lex.printTransitionMatrix();
-
+    // lex.printTransitionMatrix();
     SyntaxToken currToken;
 
     while ((currToken = lex.getNextToken()).kind != syntaxKind::END_OF_FILE)
     {
-        cout << SyntaxTokenToString(currToken) << endl;
+        cout << syntaxTokenToString(currToken) << endl;
     }
 
-    cout << SyntaxTokenToString(currToken) << endl;
+    // for (int i = 0; i < 4; i++)
+    // {
+    //     currToken = lex.getNextToken();
+    //     cout << syntaxTokenToString(currToken) << endl;
+    // }
     
-    
-    
+
+    cout << syntaxTokenToString(currToken) << endl;
 }

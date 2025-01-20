@@ -8,58 +8,15 @@
 
 using namespace std;
 
-enum syntaxKind
-{
-    INTEGER_LITERAL = 1,
-    FLOAT_LITERAL = 3,
-    STRING_LITERAL = 5,
-    IDENTIFIER = 6,
-    KEYWORD_IF,
-    KEYWORD_WHILE,
-    KEYWORD_FOR,
-    KEYWORD_FN,
-    KEYWORD_RETURN,
-    RIGHT_ARROW,
-    ASSIGN,
-    INT,
-    COMMA,
+enum syntaxKind { INTEGER_LITERAL = 1, FLOAT_LITERAL, STRING_LITERAL, IDENTIFIER, KEYWORD_IF, KEYWORD_WHILE, KEYWORD_FOR, KEYWORD_FN,
+                    KEYWORD_RET, KEYWORD_INT, KEYWORD_FLOAT, EQUALS, COMMA, PLUS, MINUS, SLASH, STAR, AMPERSAND, PIPE, BANG, SEMICOLON,
+                     LESS_THAN, GREATER_THAN, OPEN_PAREN, CLOSED_PAREN, OPEN_CURLY, CLOSED_CURLY, OPEN_BRACKET, CLOSED_BRACKET, RIGHT_ARROW,
+                    PLUS_EQUALS, DASH_EQUALS, SLASH_EQUALS, STAR_EQUALS, EQUALS_EQUALS, LESS_THAN_EQUALS, GREATER_THAN_EQUALS, 
+                    AMPERSAND_AMPERSAND, PIPE_PIPE, BANG_EQUALS, END_OF_FILE, UNEXPECTED_TOKEN };
 
-    PLUS,
-    MINUS,
-    SLASH,
-    STAR,
-    AMPERSAND,
-    PIPE,
+extern string syntaxkindToString[];
 
-    // not inplamanted
-    PLUS_EQUALS,
-    DASH_EQUALS,
-    SLASH_EQUALS,
-    STAR_EQUALS,
-    //^^^^^^^^^^^^^^^^^
 
-    OPEN_PAREN,
-    CLOSED_PAREN,
-    OPEN_CURLY,
-    CLOSED_CURLY,
-    OPEN_BRACKET,
-    CLOSED_BRACKET,
-
-    SEMICOLON,
-    LESS_THAN,
-    GREATER_THAN,
-
-    BANG,
-    EQUALS_EQUALS,
-    LESS_THAN_EQUALS,
-    GREATER_THAN_EQUALS,
-    AMPERSAND_AMPERSAND,
-    PIPE_PIPE,
-    BANG_EQUALS,
-    END_OF_FILE,
-    WHITESPACE,
-    UNEXPECTED_TOKEN
-};
 
 struct SyntaxToken
 {
@@ -69,27 +26,17 @@ struct SyntaxToken
 
 class Lexer
 {
-private:
-    int _cursor;
-    string _srcFile;
-    DFA _dfa;
+    private:
+        int _cursor;
+        string _srcFile;
+        DFA _dfa;
 
-public:
-    Lexer(string DFAConfigFile, string srcFile) : _dfa(DFAConfigFile), _cursor(0), _srcFile(srcFile) {}
-    void printTransitionMatrix() const;
-    SyntaxToken getNextToken();
+    public:
+        Lexer(string DFAConfigFile, string srcFile) : _dfa(DFAConfigFile), _cursor(0), _srcFile(srcFile) {}
+        void printTransitionMatrix() const;
+        SyntaxToken getNextToken();
 };
 
-string SyntaxTokenToString(SyntaxToken token);
-string SyntaxKindToString(syntaxKind kind);
+string syntaxTokenToString(SyntaxToken token);
 bool isWhitespace(char ch);
-
-// void PrintTokens(vector<SyntaxToken *> *tokens)
-// {
-//     for (SyntaxToken *token : *tokens)
-//     {
-//         cout << SyntaxTokenToString(token) << endl;
-//     }
-// }
-
 #endif

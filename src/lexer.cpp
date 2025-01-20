@@ -9,6 +9,12 @@
 
 using namespace std;
 
+string syntaxkindToString[] = {"", "INTEGER_LITERAL", "FLOAT_LITERAL", "STRING_LITERAL", "IDENTIFIER", "KEYWORD_IF", "KEYWORD_WHILE", "KEYWORD_FOR",
+                               "KEYWORD_FN", "KEYWORD_RET", "KEYWORD_INT", "KEYWORD_FLOAT", "EQUALS", "COMMA", "PLUS", "MINUS", "SLASH", "STAR", "AMPERSAND",
+                               "PIPE", "BANG", "SEMICOLON", "LESS_THAN", "GREATER_THAN", "OPEN_PAREN", "CLOSED_PAREN", "OPEN_CURLY", "CLOSED_CURLY", "OPEN_BRACKET",
+                               "CLOSED_BRACKET", "RIGHT_ARROW", "PLUS_EQUALS", "DASH_EQUALS", "SLASH_EQUALS", "STAR_EQUALS", "EQUALS_EQUALS", "LESS_THAN_EQUALS",
+                               "GREATER_THAN_EQUALS", "AMPERSAND_AMPERSAND", "PIPE_PIPE", "BANG_EQUALS", "END_OF_FILE", "UNEXPECTED_TOKEN"};
+
 SyntaxToken Lexer::getNextToken()
 {
     char currentChar;
@@ -46,14 +52,17 @@ SyntaxToken Lexer::getNextToken()
 
     while (src.get(currentChar) && _dfa.getState(currentState, currentChar) != -1)
     {
-        //cout << "Reading: " << currentChar << " from state: " << currentState << endl;
+        cout << "Reading: " << currentChar << " from state: " << currentState << endl;
 
         currentToken << currentChar;
         currentState = _dfa.getState(currentState, currentChar);
+        cout << "gone to: " << currentState << endl;
         _cursor++;
     }
 
     _cursor++;
+
+    cout << " from state: " << currentState << endl;
 
     vector<int> endStates = _dfa.getEndStates();
     if (find(endStates.begin(), endStates.end(), currentState) != endStates.end())
@@ -76,109 +85,11 @@ void Lexer::printTransitionMatrix() const
     _dfa.printMatrix();
 }
 
-string SyntaxKindToString(syntaxKind kind)
-{
-    switch (kind)
-    {
-    case INTEGER_LITERAL:
-        return "INTEGER_LITERAL";
-    case FLOAT_LITERAL:
-        return "FLOAT_LITERAL";
-    case STRING_LITERAL:
-        return "STRING_LITERAL";
-    case IDENTIFIER:
-        return "IDENTIFIER";
-    case KEYWORD_IF:
-        return "KEYWORD_IF";
-    case KEYWORD_WHILE:
-        return "KEYWORD_WHILE";
-    case KEYWORD_FOR:
-        return "KEYWORD_FOR";
-    case KEYWORD_FN:
-        return "KEYWORD_FN";
-    case KEYWORD_RETURN:
-        return "KEYWORD_RETURN";
-    case RIGHT_ARROW:
-        return "RIGHT_ARROW";
-    case ASSIGN:
-        return "ASSIGN";
-    case INT:
-        return "INT";
-    case COMMA:
-        return "COMMA";
-
-    case PLUS:
-        return "PLUS";
-    case MINUS:
-        return "MINUS";
-    case SLASH:
-        return "SLASH";
-    case STAR:
-        return "STAR";
-    case AMPERSAND:
-        return "AMPERSAND";
-    case PIPE:
-        return "PIPE";
-
-    case PLUS_EQUALS:
-        return "PLUS_EQUALS";
-    case DASH_EQUALS:
-        return "DASH_EQUALS";
-    case SLASH_EQUALS:
-        return "SLASH_EQUALS";
-    case STAR_EQUALS:
-        return "STAR_EQUALS";
-
-    case OPEN_PAREN:
-        return "OPEN_PAREN";
-    case CLOSED_PAREN:
-        return "CLOSED_PAREN";
-    case OPEN_CURLY:
-        return "OPEN_CURLY";
-    case CLOSED_CURLY:
-        return "CLOSED_CURLY";
-    case OPEN_BRACKET:
-        return "OPEN_BRACKET";
-    case CLOSED_BRACKET:
-        return "CLOSED_BRACKET";
-    case SEMICOLON:
-        return "SEMICOLON";
-    case LESS_THAN:
-        return "LESS_THAN";
-    case GREATER_THAN:
-        return "GREATER_THAN";
-
-    case BANG:
-        return "BANG";
-    case EQUALS_EQUALS:
-        return "EQUALS_EQUALS";
-    case LESS_THAN_EQUALS:
-        return "LESS_THAN_EQUALS";
-    case GREATER_THAN_EQUALS:
-        return "GREATER_THAN_EQUALS";
-    case AMPERSAND_AMPERSAND:
-        return "AMPERSAND_AMPERSAND";
-    case PIPE_PIPE:
-        return "PIPE_PIPE";
-    case BANG_EQUALS:
-        return "BANG_EQUALS";
-    case END_OF_FILE:
-        return "END_OF_FILE";
-    case WHITESPACE:
-        return "WHITESPACE";
-    case UNEXPECTED_TOKEN:
-        return "UNEXPECTED_TOKEN";
-
-    default:
-        return "UNKNOWN";
-    }
-}
-
-string SyntaxTokenToString(SyntaxToken token)
+string syntaxTokenToString(SyntaxToken token)
 {
     stringstream res;
     string tokenValue = token.val;
-    res << SyntaxKindToString(token.kind)
+    res << syntaxkindToString[token.kind]
         << " ";
 
     if (!tokenValue.empty())
