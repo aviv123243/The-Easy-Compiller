@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     //-------ONLY FOR CONVENIENCE---------
     else if (argc == 1)
     {
-        filePath = "C:\\Users\\pc-admin\\Documents\\aviv coading\\COMPILLER\\demos\\DEMO3.EZ";
+        filePath = "..\\demos\\DEMO3.EZ";
     }
     //-------------------------------------
 
@@ -29,16 +29,16 @@ int main(int argc, char **argv)
     // lex.printTransitionMatrix();
     SyntaxToken currToken;
 
-    while ((currToken = lex.getNextToken()).kind != syntaxKind::END_OF_FILE)
-    {
-        cout << syntaxTokenToString(currToken) << endl;
-    }
-
-    // for (int i = 0; i < 4; i++)
+    // while ((currToken = lex.getNextToken()).kind != syntaxKind::END_OF_FILE)
     // {
-    //     currToken = lex.getNextToken();
     //     cout << syntaxTokenToString(currToken) << endl;
     // }
+
+    for (int i = 0; i < 10; i++)
+    {
+        currToken = lex.getNextToken();
+        cout << syntaxTokenToString(currToken) << endl;
+    }
     
 
     cout << syntaxTokenToString(currToken) << endl;

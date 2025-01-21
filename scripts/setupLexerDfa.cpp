@@ -11,7 +11,7 @@ int main()
     dfa.setStateCount(110);
 
     int endState = 1;
-    int midState = 43;
+    int midState = 50;
 
     // initialising the alphabet
     for (char i = ' '; i <= '~'; i++)
@@ -38,7 +38,7 @@ int main()
     endState++;
     //--[float]-- (end state=2)
     dfa.addEndState(endState);
-    dfa.insertTransition(midState, '.', endState);
+    dfa.insertTransition(endState - 1, '.', midState);
 
     for (int i = '0'; i <= '9'; i++)
     {
@@ -98,7 +98,7 @@ int main()
         {
             for (k = 'A'; k <= 'z'; k++)
             {
-                dfa.insertTransition(midState, k, syntaxKind::IDENTIFIER); // setting deafult to be an id
+                dfa.insertTransition(midState, k, syntaxKind::IDENTIFIER + 1); // setting deafult to be an id
             }
 
             dfa.insertTransition(midState, keyWords[i][j], midState + 1);
@@ -107,6 +107,7 @@ int main()
 
         dfa.insertTransition(midState, keyWords[i][j], endState);
 
+        midState++;
         endState++;
     }
 
@@ -120,5 +121,5 @@ int main()
         endState++;
     }
 
-    dfa.writeDFAToFile("C:\\Users\\pc-admin\\Documents\\aviv coading\\COMPILLER\\src\\lexerDFAConfig.txt");
+    dfa.writeDFAToFile("..\\src\\lexerDFAConfig.txt");
 }

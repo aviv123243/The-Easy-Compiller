@@ -35,7 +35,7 @@ class Lexer
         DFA _dfa;
 
     public:
-        Lexer(string DFAConfigFile, string srcFile) : _dfa(DFAConfigFile), _cursor(0), _srcFile(srcFile) {}
+        Lexer(string DFAConfigFile, string srcFile) : _dfa(DFAConfigFile), _srcFile(srcFile) {_cursor = 0;}
         void printTransitionMatrix() const;
         SyntaxToken getNextToken();
 };

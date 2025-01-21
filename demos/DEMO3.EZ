@@ -1,1 +1,3 @@
-int i = 5;
+float(main()){
+    int i = 5;
+}

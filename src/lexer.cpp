@@ -31,12 +31,13 @@ SyntaxToken Lexer::getNextToken()
 {
     char currentChar;
     int currentState = _dfa.getStartState();
-    fstream src(_srcFile);
     stringstream currentToken;
     SyntaxToken resToken;
+    ifstream src(_srcFile);
     src.seekg(0, ios::end);
     int fileSize = src.tellg();
     src.seekg(_cursor, ios::beg);
+    cout << "cursor at " << this ->_cursor << endl;
 
     if (_cursor >= fileSize)
     {
@@ -46,30 +47,36 @@ SyntaxToken Lexer::getNextToken()
 
     if (!src.is_open())
     {
-        cerr << "Error: Unable to open file " << _srcFile << endl;
+        runtime_error("Error: Unable to open sorce file") ;
         return resToken;
     }
 
-    src.get(currentChar);
+    // src.get(currentChar);
 
-    src.seekg(-1, ios::cur);
+    // src.seekg(-1, ios::cur);
 
-    while (src.get(currentChar) && isWhitespace(currentChar))
-    {
-        _cursor++;
-    }
+    // while (src.get(currentChar) && isWhitespace(currentChar))
+    // {
+    //     cout << "currentChar " << currentChar;  
+    //     _cursor++;
+    // }
 
-    src.seekg(-1, ios::cur);
-    _cursor--;
+    // src.seekg(-1, ios::cur);
+    // _cursor--;
 
     while (src.get(currentChar) && _dfa.getState(currentState, currentChar) != -1)
     {
         currentToken << currentChar;
+        cout << "currentChar " << currentChar << endl;  
         currentState = _dfa.getState(currentState, currentChar);
+
+        cout << "gone to " << currentState << endl;
         _cursor++;
     }
 
     _cursor++;
+
+    //cout << "cursor at " << this ->_cursor << endl;
 
     vector<int> endStates = _dfa.getEndStates();
     if (find(endStates.begin(), endStates.end(), currentState) != endStates.end())
@@ -87,7 +94,7 @@ SyntaxToken Lexer::getNextToken()
 
 syntaxKind getSyntaxKind(int state)
 {
-    if(state<syntaxKind::UNEXPECTED_TOKEN) return endStateToSyntaxKind[state];
+    if(state < syntaxKind::UNEXPECTED_TOKEN) return endStateToSyntaxKind[state];
 
     return syntaxKind::IDENTIFIER;
 }
@@ -116,5 +123,5 @@ string syntaxTokenToString(SyntaxToken token)
 
 bool isWhitespace(char ch)
 {
-    return ch == ' ' || ch == '\n' || ch == '\t';
+    return ch == ' ' || ch == '\n' || ch == '\t'|| ch == '\r';
 }
