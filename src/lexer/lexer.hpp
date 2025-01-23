@@ -1,7 +1,7 @@
 #ifndef __LEXER
 #define __LEXER
 
-#include "DFA.hpp"
+#include "../DFA/DFA.hpp"
 #include <string>
 #include <vector>
 #include <sstream>

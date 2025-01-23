@@ -1,4 +1,4 @@
-#include "headers/lexer.hpp"
+#include "../lexer/lexer.hpp"
 // #include "headers/parser.hpp"
 #include <string>
 #include <sstream>
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     }
     //-------------------------------------
 
-    Lexer lex("lexerDFAConfig.txt", filePath);
+    Lexer lex("..\\src\\lexerDFAConfig.txt", filePath);
 
     // lex.printTransitionMatrix();
     SyntaxToken currToken;

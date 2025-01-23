@@ -1,5 +1,5 @@
-#include "headers/lexer.hpp"
-#include "headers/DFA.hpp"
+#include "../lexer/lexer.hpp"
+#include "../DFA/DFA.hpp"
 #include <string>
 #include <vector>
 #include <sstream>

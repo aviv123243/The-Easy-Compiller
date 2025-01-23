@@ -1,4 +1,4 @@
-#include "headers/DFA.hpp"
+#include "../DFA/DFA.hpp"
 #include <fstream>
 #include <iomanip>
 #include <string>
@@ -19,7 +19,7 @@ DFA::DFA(string DFAConfigFile)
 
     if (!file.is_open())
     {
-        throw runtime_error("Failed to open file");
+        throw runtime_error("Failed to open file " + DFAConfigFile);
     }
 
     // initialising states
