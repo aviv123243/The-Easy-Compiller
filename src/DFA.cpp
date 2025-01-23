@@ -120,8 +120,9 @@ int DFA::getStartState() const
 // if the state dosent exists the function throws an error
 void DFA::addEndState(int state)
 {
+    //if the number is not a state return an error
     isStateExistsWErr(state, true);
-
+    
     _endStates.push_back(state);
 }
 
@@ -129,6 +130,18 @@ void DFA::addEndState(int state)
 const vector<int> &DFA::getEndStates() const
 {
     return _endStates;
+}
+
+//returns a vector of the alphabet
+vector<char> DFA::getAlphabet() const
+{
+    vector<char> alphabet;
+
+    for (const auto& pair : _alphabetToIndex) {
+        alphabet.push_back(pair.first);
+    }
+
+    return alphabet;
 }
 
 // initialising an empty dfa sized according to alphabet and number of states

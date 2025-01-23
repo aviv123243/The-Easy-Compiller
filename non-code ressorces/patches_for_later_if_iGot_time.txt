@@ -1,0 +1,2 @@
+in DFA.cpp file:
+    changing the endStats and the States vectors to sets

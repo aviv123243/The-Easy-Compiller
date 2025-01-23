@@ -1,5 +1,5 @@
-#ifndef __TRANSITION_MATRIX
-#define __TRANSITION_MATRIX
+#ifndef __DFA
+#define __DFA
 
 #include <string>
 #include <vector>
@@ -33,6 +33,7 @@ public:
     int getStartState() const;
     void addEndState(int state);
     const vector<int> & getEndStates() const;
+    vector<char> getAlphabet() const;
     int getState(int state, char alpha) const;
     void initMatrix();
     void insertTransition(int from, char alpha, int to);

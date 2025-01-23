@@ -2,16 +2,19 @@
 #include "../src/headers/lexer.hpp"
 #include <iostream>
 
+#define START_STATE 0
+
 using namespace std;
 int main()
 {
     DFA dfa;
     int i, j, k;
+    int prev;
 
-    dfa.setStateCount(110);
+    dfa.setStateCount(120);
 
     int endState = 1;
-    int midState = 50;
+    int midState = 90;
 
     // initialising the alphabet
     for (char i = ' '; i <= '~'; i++)
@@ -19,15 +22,21 @@ int main()
         dfa.addAlpha(i);
     }
 
+    dfa.addAlpha('\n');
+    dfa.addAlpha('\r');
+    dfa.addAlpha('\t');
+
     dfa.initMatrix();
 
-    dfa.setStartState(0);
+    vector<char> alphabet = dfa.getAlphabet();
+
+    dfa.setStartState(START_STATE);
 
     //--[integer]-- (end state=1)
     dfa.addEndState(endState); // 1
     for (int i = '1'; i <= '9'; i++)
     {
-        dfa.insertTransition(0, i, endState);
+        dfa.insertTransition(START_STATE, i, endState);
     }
 
     for (int i = '0'; i <= '9'; i++)
@@ -54,7 +63,7 @@ int main()
     endState++;
     //--[string literal]-- (end state=3)
     dfa.addEndState(endState); // 3
-    dfa.insertTransition(0, '"', midState);
+    dfa.insertTransition(START_STATE, '"', midState);
 
     for (int i = ' '; i <= '~'; i++)
     {
@@ -69,13 +78,15 @@ int main()
     //--[id]-- (end state=4)
     dfa.addEndState(endState);
 
-    for (int i = 'A'; i <= 'z'; i++)
+    for (int i = 'A'; i <= 'Z'; i++)
     {
-        dfa.insertTransition(0, i, endState);
+        dfa.insertTransition(START_STATE, i, endState);
+        dfa.insertTransition(endState, i, endState);
     }
 
-    for (int i = 'A'; i <= 'z'; i++)
+    for (int i = 'a'; i <= 'z'; i++)
     {
+        dfa.insertTransition(START_STATE, i, endState);
         dfa.insertTransition(endState, i, endState);
     }
 
@@ -91,35 +102,100 @@ int main()
 
     for (i = 0; i < keyWords.size(); i++)
     {
+        prev = START_STATE;
         dfa.addEndState(endState);
 
-        dfa.insertTransition(0, keyWords[i][0], midState);
-        for (j = 1; j < keyWords[i].size() - 1; j++)
+        for (j = 0; j < keyWords[i].size() - 1; j++)
         {
-            for (k = 'A'; k <= 'z'; k++)
+            // check if the connection already exists
+            if (dfa.getState(prev, keyWords[i][j]) == syntaxKind::IDENTIFIER + 1 || dfa.getState(prev, keyWords[i][j]) == -1)
             {
-                dfa.insertTransition(midState, k, syntaxKind::IDENTIFIER + 1); // setting deafult to be an id
+                // if the connection is non-existant, make it
+                dfa.insertTransition(prev, keyWords[i][j], midState);
+                midState++;
             }
 
-            dfa.insertTransition(midState, keyWords[i][j], midState + 1);
-            midState++;
+            // for any other letter unrealated to the keyword labale it as ID
+            for (k = 'A'; k <= 'Z'; k++)
+            {
+                if (dfa.getState(prev, k) == -1)
+                {
+                    dfa.insertTransition(prev, k, syntaxKind::IDENTIFIER + 1);
+                }
+            }
+
+            for (k = 'a'; k <= 'z'; k++)
+            {
+                if (dfa.getState(prev, k) == -1)
+                {
+                    dfa.insertTransition(prev, k, syntaxKind::IDENTIFIER + 1);
+                }
+            }
+
+            // defining it as an ID end state
+            prev = dfa.getState(prev, keyWords[i][j]);
+            dfa.addEndState(prev);
         }
 
-        dfa.insertTransition(midState, keyWords[i][j], endState);
+        // connect to end state
+        dfa.insertTransition(prev, keyWords[i][j], endState);
 
-        midState++;
+        for (k = 'A'; k <= 'z'; k++)
+        {
+            if (dfa.getState(prev, k) == -1)
+                dfa.insertTransition(prev, k, syntaxKind::IDENTIFIER + 1);
+        }
         endState++;
     }
 
-    //---------[single symobls]---------
-    vector<char> symobls = {'=', ',', '+', '-', '/', '*', '&', '|', '!', ';', '<', '>', '(', ')', '{', '}', '[', ']'};
+    //---------[other symobls]---------
+    vector<string> symbols = {"=", ",", "+", "-", "/", "*", "&", "|", "!", ";", "<", ">", "(", ")", "{", "}", "[", "]", "=>","++","--", "+=", "-=", "/=", "*=", "==", "<=", ">=", "&&", "||", "!="};
 
-    for (i = 0; i < symobls.size() - 1; i++)
+    for (i = 0; i < symbols.size(); i++)
     {
+        j = 0;
+        prev = START_STATE;
         dfa.addEndState(endState);
-        dfa.insertTransition(0, symobls[i], endState);
+
+        if (symbols[i].size() == 2)
+        {
+            // Set up the first state
+            if (dfa.getState(prev, symbols[i][j]) == -1)
+            {
+                dfa.insertTransition(prev, symbols[i][j], midState);
+                midState++;
+            }
+
+            // move to the next state
+            prev = dfa.getState(prev, symbols[i][j]);
+            j++;
+        }
+
+        // connect to end state
+        dfa.insertTransition(prev, symbols[i][j], endState);
         endState++;
+    }
+
+    //---------[skip state]---------
+    vector<char> whiteSpaceCharacters = {' ', '\t', '\n', '\r'};
+    for (i = 0; i < whiteSpaceCharacters.size(); i++)
+    {
+        dfa.insertTransition(START_STATE, whiteSpaceCharacters[i], midState);
+        dfa.insertTransition(midState, whiteSpaceCharacters[i], midState);
+    }
+    midState++;
+
+    prev = dfa.getState(START_STATE, '<');
+    dfa.insertTransition(prev, '>', midState);
+    prev = midState;
+    midState++;
+
+    for (i = 0; i < alphabet.size(); i++)
+    {
+        if (alphabet[i] != '\n')
+            dfa.insertTransition(prev, alphabet[i], prev);
     }
 
     dfa.writeDFAToFile("..\\src\\lexerDFAConfig.txt");
+    cout << "created config file!";
 }

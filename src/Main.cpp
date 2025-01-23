@@ -29,16 +29,16 @@ int main(int argc, char **argv)
     // lex.printTransitionMatrix();
     SyntaxToken currToken;
 
-    // while ((currToken = lex.getNextToken()).kind != syntaxKind::END_OF_FILE)
-    // {
-    //     cout << syntaxTokenToString(currToken) << endl;
-    // }
-
-    for (int i = 0; i < 10; i++)
+    while ((currToken = lex.getNextToken()).kind != syntaxKind::END_OF_FILE)
     {
-        currToken = lex.getNextToken();
         cout << syntaxTokenToString(currToken) << endl;
     }
+
+    // for (int i = 0; i < 15; i++)
+    // {
+    //     currToken = lex.getNextToken();
+    //     cout << syntaxTokenToString(currToken) << endl;
+    // }
     
 
     cout << syntaxTokenToString(currToken) << endl;
