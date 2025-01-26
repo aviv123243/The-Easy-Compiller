@@ -3,7 +3,7 @@ CXX = g++
 #CXXFLAGS = -Wall -Wextra -std=c++17
 CXXFLAGS = -std=c++17
 
-SOURCES = src/main/Main.cpp src/DFA/DFA.cpp src/lexer/lexer.cpp
+SOURCES = src/main/Main.cpp src/DFA/DFA.cpp src/lexer/lexer.cpp src/errorHandler/errorHandler.cpp 
 TARGET = bin/tec
 
 all: $(TARGET)

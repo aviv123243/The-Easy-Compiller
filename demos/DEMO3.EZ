@@ -1,6 +1,4 @@
-fn main(float x) => int <> this is the main function
+fn main(fn
 {
-    while(x++ != y++) x += 1;
-
-    ret 5;
+    _main
 }

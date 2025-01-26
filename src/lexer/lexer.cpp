@@ -1,5 +1,6 @@
 #include "../lexer/lexer.hpp"
 #include "../DFA/DFA.hpp"
+#include "../errors/errors.hpp"
 #include <string>
 #include <vector>
 #include <sstream>
@@ -12,7 +13,7 @@ using namespace std;
 string syntaxkindToString[] = {"INTEGER_LITERAL", "FLOAT_LITERAL", "STRING_LITERAL", "IDENTIFIER", "KEYWORD_IF", "KEYWORD_WHILE", "KEYWORD_FOR",
                                "KEYWORD_FN", "KEYWORD_RET", "KEYWORD_INT", "KEYWORD_FLOAT", "EQUALS", "COMMA", "PLUS", "MINUS", "SLASH", "STAR", "AMPERSAND",
                                "PIPE", "BANG", "SEMICOLON", "LESS_THAN", "GREATER_THAN", "OPEN_PAREN", "CLOSED_PAREN", "OPEN_CURLY", "CLOSED_CURLY", "OPEN_BRACKET",
-                               "CLOSED_BRACKET", "RIGHT_ARROW","PLUS_PLUS","DASH_DASH", "PLUS_EQUALS", "DASH_EQUALS", "SLASH_EQUALS", "STAR_EQUALS", "EQUALS_EQUALS", "LESS_THAN_EQUALS",
+                               "CLOSED_BRACKET", "RIGHT_ARROW", "PLUS_PLUS", "DASH_DASH", "PLUS_EQUALS", "DASH_EQUALS", "SLASH_EQUALS", "STAR_EQUALS", "EQUALS_EQUALS", "LESS_THAN_EQUALS",
                                "GREATER_THAN_EQUALS", "AMPERSAND_AMPERSAND", "PIPE_PIPE", "BANG_EQUALS", "END_OF_FILE", "UNEXPECTED_TOKEN"};
 
 syntaxKind endStateToSyntaxKind[] = {
@@ -63,13 +64,40 @@ syntaxKind endStateToSyntaxKind[] = {
     syntaxKind::UNEXPECTED_TOKEN,
 };
 
-Lexer::Lexer(string DFAConfigFile, string srcFile) : _dfa(DFAConfigFile), _cursor(0), _srcFile(srcFile)
+Lexer::Lexer(string srcFile, string DFAConfigFile, ErrorHandler *handler)
+    : _srcFile(srcFile), _dfa(DFAConfigFile), _errorHandler(handler), _cursor(0), _currLine(1), _currColumn(0)
 {
     ifstream src(_srcFile);
 
     src.seekg(0, ios::end);
     _fileSize = src.tellg();
     src.close();
+}
+
+vector<SyntaxToken> Lexer::getTokens()
+{
+    vector<SyntaxToken> tokens;
+    SyntaxToken currToken;
+
+    int currLine;
+    int currColumn;
+
+    while ((currToken = getNextToken()).kind != syntaxKind::END_OF_FILE)
+    {
+        currLine = _currLine;
+        currColumn = _currColumn;
+
+        tokens.push_back(currToken);
+
+        // if the token is invalid, add an error to the handler
+        if (currToken.kind == syntaxKind::UNEXPECTED_TOKEN)
+        {
+            _errorHandler->addError(new SyntaxError("Unexpected token error", currLine, currColumn));
+        }
+    }
+
+    tokens.push_back(currToken); // pushing the EOF token
+    return tokens;
 }
 
 SyntaxToken Lexer::getNextToken()
@@ -105,21 +133,30 @@ SyntaxToken Lexer::getNextToken()
     {
         // cout << "transition from state " << currentState << " with char " << currentChar
         //      << " gone to: " << _dfa.getState(currentState, currentChar) << endl;
+        updatePosition(currentChar);
         autoTerminated = false;
         val << currentChar;
         currentState = _dfa.getState(currentState, currentChar);
         src.get(currentChar);
+        cout << "read from loop: " << currentChar << endl;
         _cursor++;
     }
-    _cursor--;
+
+    if (!autoTerminated)
+    {
+        _cursor--;
+    }
+
+    if (autoTerminated)
+    {
+        updatePosition(currentChar);
+    }
 
     src.close();
 
     // if the state is a skip state, take the token after it
     if (isSkipState(currentState))
     {
-        if (autoTerminated) 
-            _cursor--;
         resToken = getNextToken();
     }
     else
@@ -135,15 +172,28 @@ SyntaxToken Lexer::getNextToken()
         // else the token is invalid so return an unexpected token
         else
         {
-            cout << "syntaxKind::UNEXPECTED_TOKEN at state " << currentState << endl;
             resToken.kind = syntaxKind::UNEXPECTED_TOKEN;
-            if (autoTerminated)
-                _cursor++;
         }
     }
 
     return resToken;
 }
+
+void Lexer::updatePosition(char ch)
+{
+    cout << "char: " << ch;
+    if (ch == '\n')
+    {
+        _currLine++;
+        _currColumn = 0;
+    }
+    else
+    {
+        _currColumn++;
+    }
+    cout << " at: {" << _currLine << ":" << _currColumn << "}" << endl;
+}
+// print & print helper funcs:
 
 syntaxKind getSyntaxKind(int state)
 {
@@ -152,8 +202,6 @@ syntaxKind getSyntaxKind(int state)
 
     return syntaxKind::IDENTIFIER;
 }
-
-// print & print helper funcs:
 
 void Lexer::printTransitionMatrix() const
 {
@@ -177,7 +225,7 @@ string syntaxTokenToString(SyntaxToken token)
 
 bool isSkipState(int state)
 {
-    return state == 105 || state == 106;
+    return state == NUM_OF_STATES - 1 || state == NUM_OF_STATES - 2;
 }
 
 bool isWhitespace(char ch)

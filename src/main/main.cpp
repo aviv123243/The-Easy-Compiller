@@ -1,4 +1,5 @@
 #include "../lexer/lexer.hpp"
+#include "../errorHandler/errorHandler.hpp"
 // #include "headers/parser.hpp"
 #include <string>
 #include <sstream>
@@ -9,6 +10,7 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+    //   errorHandler   errors;
     string filePath;
 
     if (argc > 2)
@@ -24,22 +26,19 @@ int main(int argc, char **argv)
     }
     //-------------------------------------
 
-    Lexer lex("..\\src\\lexerDFAConfig.txt", filePath);
+    ErrorHandler errorHandler;
+    Lexer lex(filePath, "..\\src\\lexerDFAConfig.txt", &errorHandler);
+    vector<SyntaxToken> tokens = lex.getTokens();
 
-    // lex.printTransitionMatrix();
-    SyntaxToken currToken;
-
-    while ((currToken = lex.getNextToken()).kind != syntaxKind::END_OF_FILE)
+    if (errorHandler.getErrorCount() > 0)
     {
-        cout << syntaxTokenToString(currToken) << endl;
+        errorHandler.printErrors();
     }
-
-    // for (int i = 0; i < 15; i++)
-    // {
-    //     currToken = lex.getNextToken();
-    //     cout << syntaxTokenToString(currToken) << endl;
-    // }
-    
-
-    cout << syntaxTokenToString(currToken) << endl;
+    else
+    {
+        for (int i = 0; i < tokens.size(); i++)
+        {
+            cout << syntaxTokenToString(tokens[i]) << endl;
+        }
+    }
 }

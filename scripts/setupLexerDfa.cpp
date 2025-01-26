@@ -1,5 +1,5 @@
-#include "../src/headers/DFA.hpp"
-#include "../src/headers/lexer.hpp"
+#include "../src/DFA/DFA.hpp"
+#include "../src/lexer/lexer.hpp"
 #include <iostream>
 
 #define START_STATE 0
@@ -11,10 +11,10 @@ int main()
     int i, j, k;
     int prev;
 
-    dfa.setStateCount(120);
+    dfa.setStateCount(NUM_OF_STATES);
 
     int endState = 1;
-    int midState = 90;
+    int midState = 70;
 
     // initialising the alphabet
     for (char i = ' '; i <= '~'; i++)
@@ -177,23 +177,25 @@ int main()
     }
 
     //---------[skip state]---------
+    //the skip states are the last two states
+
+    int skipState1 = NUM_OF_STATES - 2;
+    int skipState2 = NUM_OF_STATES - 1;
+
     vector<char> whiteSpaceCharacters = {' ', '\t', '\n', '\r'};
     for (i = 0; i < whiteSpaceCharacters.size(); i++)
     {
-        dfa.insertTransition(START_STATE, whiteSpaceCharacters[i], midState);
-        dfa.insertTransition(midState, whiteSpaceCharacters[i], midState);
+        dfa.insertTransition(START_STATE, whiteSpaceCharacters[i], skipState1);
+        dfa.insertTransition(skipState1, whiteSpaceCharacters[i], skipState1);
     }
-    midState++;
 
     prev = dfa.getState(START_STATE, '<');
-    dfa.insertTransition(prev, '>', midState);
-    prev = midState;
-    midState++;
+    dfa.insertTransition(prev, '>', skipState2);
 
     for (i = 0; i < alphabet.size(); i++)
     {
         if (alphabet[i] != '\n')
-            dfa.insertTransition(prev, alphabet[i], prev);
+            dfa.insertTransition(skipState2, alphabet[i], skipState2);
     }
 
     dfa.writeDFAToFile("..\\src\\lexerDFAConfig.txt");

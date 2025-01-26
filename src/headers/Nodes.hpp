@@ -2,7 +2,7 @@
 #define __NODES
 
 
-#include "lexer.hpp"
+#include "../lexer/lexer.hpp"
 #include <sstream>
 
 class ASTNode
