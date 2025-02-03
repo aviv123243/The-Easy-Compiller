@@ -13,6 +13,12 @@ using namespace std;
 class DFA
 {
 private:
+    
+
+    void isStateExistsWErr(int state, bool wantedResult) const;
+    void isSymbolExistsErr(char alpha, bool wantedResult) const;
+
+public:
     int **_mat;
     int _stateCount;
     int _startState;
@@ -20,10 +26,6 @@ private:
 
     unordered_map<char, int> _alphabetToIndex;
 
-    void isStateExistsWErr(int state, bool wantedResult) const;
-    void isSymbolExistsErr(char alpha, bool wantedResult) const;
-
-public:
     DFA(int stateCount, vector<char> *alphabet);
     DFA(string DFAConfigFile);
     DFA();

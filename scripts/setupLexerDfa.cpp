@@ -1,10 +1,71 @@
 #include "../src/DFA/DFA.hpp"
 #include "../src/lexer/lexer.hpp"
 #include <iostream>
+#include <fstream>
+#include <unordered_map>
+#include <vector>
 
 #define START_STATE 0
 
 using namespace std;
+
+void generateGraphviz(int** mat, int numStates, std::unordered_map<char, int>& charToIndex, const std::string& outputFile) {
+    std::ofstream out(outputFile);
+
+    // Write the header for the Graphviz DOT file
+    out << "digraph DFA {\n";
+    
+    // Optional: To mark start state (assuming state 0 is the start state)
+    out << "  0 [shape=circle, style=filled, color=lightgray];\n";
+    
+    // Optional: If you want to mark accepting states
+    // For example, assuming the last state is an accepting state
+    out << "  \"" << numStates - 1 << "\" [shape=doublecircle];\n";
+
+    // Loop through all states
+    for (int state = 0; state < numStates; ++state) {
+        // Loop through all input symbols
+        for (const auto& pair : charToIndex) {
+            char inputSymbol = pair.first;
+            int symbolIndex = pair.second;
+
+            string inputSymbolStr = string(1, inputSymbol);
+
+            if (inputSymbol == '\n') {
+                inputSymbolStr = "\\n";
+            } else if (inputSymbol == '\r') {
+                inputSymbolStr = "\\r";
+            } else if (inputSymbol == '\t') {
+                inputSymbolStr = "\\t";
+            } else if (inputSymbol == ' ') {
+                inputSymbolStr = "space";
+            } else if (inputSymbol == '"') {
+                inputSymbolStr = "\\\"";
+            }else if (inputSymbol == '"') {
+                inputSymbolStr = "\\\"";
+            }else if (inputSymbol == '\\') {
+                inputSymbolStr = "\\\\";
+            }
+            
+            
+
+            // Get the target state from the transition matrix
+            int nextState = mat[state][symbolIndex];
+            
+            // Ensure that the transition label is not empty
+            if (inputSymbol != '\0') {
+                // Write the transition to the DOT file with the label
+                out << "  \"" << state << "\" -> \"" << nextState << "\" [label=\"" << inputSymbolStr << "\"];\n";
+            }
+        }
+    }
+
+    // Write the footer for the Graphviz DOT file
+    out << "}\n";
+
+    out.close();
+}
+
 int main()
 {
     DFA dfa;
@@ -198,6 +259,7 @@ int main()
             dfa.insertTransition(skipState2, alphabet[i], skipState2);
     }
 
+    generateGraphviz(dfa._mat, NUM_OF_STATES, dfa._alphabetToIndex, "graph.dot");
     dfa.writeDFAToFile("..\\src\\lexerDFAConfig.txt");
     cout << "created config file!";
 }

@@ -13,8 +13,8 @@ using namespace std;
 string syntaxkindToString[] = {"INTEGER_LITERAL", "FLOAT_LITERAL", "STRING_LITERAL", "IDENTIFIER", "KEYWORD_IF", "KEYWORD_WHILE", "KEYWORD_FOR",
                                "KEYWORD_FN", "KEYWORD_RET", "KEYWORD_INT", "KEYWORD_FLOAT", "EQUALS", "COMMA", "PLUS", "MINUS", "SLASH", "STAR", "AMPERSAND",
                                "PIPE", "BANG", "SEMICOLON", "LESS_THAN", "GREATER_THAN", "OPEN_PAREN", "CLOSED_PAREN", "OPEN_CURLY", "CLOSED_CURLY", "OPEN_BRACKET",
-                               "CLOSED_BRACKET", "RIGHT_ARROW", "PLUS_PLUS", "DASH_DASH", "PLUS_EQUALS", "DASH_EQUALS", "SLASH_EQUALS", "STAR_EQUALS", "EQUALS_EQUALS", "LESS_THAN_EQUALS",
-                               "GREATER_THAN_EQUALS", "AMPERSAND_AMPERSAND", "PIPE_PIPE", "BANG_EQUALS", "END_OF_FILE", "UNEXPECTED_TOKEN"};
+                               "CLOSED_BRACKET", "RIGHT_ARROW", "PLUS_PLUS", "DASH_DASH", "PLUS_EQUALS", "DASH_EQUALS", "SLASH_EQUALS", "STAR_EQUALS", "EQUALS_EQUALS",
+                               "LESS_THAN_EQUALS", "GREATER_THAN_EQUALS", "AMPERSAND_AMPERSAND", "PIPE_PIPE", "BANG_EQUALS", "END_OF_FILE", "UNEXPECTED_TOKEN"};
 
 syntaxKind endStateToSyntaxKind[] = {
     syntaxKind::UNEXPECTED_TOKEN,
@@ -110,7 +110,7 @@ SyntaxToken Lexer::getNextToken()
     ifstream src(_srcFile);
     src.seekg(_cursor, ios::beg);
 
-    // cout << "cursor at " << this->_cursor << endl;
+    cout << "cursor at " << this->_cursor << endl;
 
     if (_cursor >= _fileSize)
     {
@@ -126,6 +126,8 @@ SyntaxToken Lexer::getNextToken()
 
     src.get(currentChar);
     _cursor++;
+    cout << "read from beggining: " << currentChar << endl;
+
     // cout << "transition from state " << currentState << " with char " << currentChar
     //      << " gone to: " << _dfa.getState(currentState, currentChar) << endl;
 
@@ -134,7 +136,10 @@ SyntaxToken Lexer::getNextToken()
         // cout << "transition from state " << currentState << " with char " << currentChar
         //      << " gone to: " << _dfa.getState(currentState, currentChar) << endl;
         updatePosition(currentChar);
-        autoTerminated = false;
+
+        if (autoTerminated)
+            autoTerminated = false;
+
         val << currentChar;
         currentState = _dfa.getState(currentState, currentChar);
         src.get(currentChar);
@@ -158,6 +163,7 @@ SyntaxToken Lexer::getNextToken()
     if (isSkipState(currentState))
     {
         resToken = getNextToken();
+        cout << "skipped token! " <<  endl;
     }
     else
     {
@@ -167,12 +173,14 @@ SyntaxToken Lexer::getNextToken()
         {
             resToken.kind = getSyntaxKind(currentState);
             resToken.val = val.str();
+            cout << "GOOD token! " <<  endl;
         }
 
         // else the token is invalid so return an unexpected token
         else
         {
             resToken.kind = syntaxKind::UNEXPECTED_TOKEN;
+            cout << "BAD token! " <<  endl;
         }
     }
 
@@ -182,12 +190,16 @@ SyntaxToken Lexer::getNextToken()
 void Lexer::updatePosition(char ch)
 {
     cout << "char: " << ch;
-    if (ch == '\n')
+    if (ch == '\t')
     {
-        _currLine++;
-        _currColumn = 0;
+        _currColumn += 4; // assuming a tab is 4 spaces
     }
-    else
+    else if (ch == '\n')
+    {
+        _currColumn = 0;
+        _currLine++;
+    }
+    else if (ch != '\r') // Skip carriage return characters
     {
         _currColumn++;
     }

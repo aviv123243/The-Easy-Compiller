@@ -87,6 +87,7 @@ public:
     Lexer(string srcFile, string DFAConfigFile, ErrorHandler *handler);
     vector<SyntaxToken> getTokens();
     SyntaxToken getNextToken();
+    SyntaxToken getNextToken2();
     void updatePosition(char ch);
     void printTransitionMatrix() const;
 };

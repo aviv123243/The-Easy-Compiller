@@ -1,4 +1,5 @@
-fn main(fn
-{
-    _main
+fn _h <> _h
+{   
+    _float f = 1.2;
+    ret f == 3;
 }
