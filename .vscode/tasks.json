@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "src/main/main.cpp",
+                "src/lexer/*.cpp",
+                "src/errorHandler/*.cpp",
+                "-I", "src/",       // Include all headers
+                "-g",
+                "-o", "bin/output"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Building all C++ files properly so you can stop suffering"
+        }
+    ]
+}

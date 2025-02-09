@@ -1,1 +1,1 @@
-g++ setupLexerDfa.cpp ..\src\DFA\DFA.cpp -o out
+g++ setupLexerDfa.cpp ..\src\DFA\DFA.cpp ..\src\lexer\lexer.cpp ..\src\errorHandler\errorHandler.cpp -o out

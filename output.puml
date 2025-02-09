@@ -1,0 +1,167 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class DFA {
+	+DFA(int stateCount, vector<char>* alphabet)
+	+DFA(string DFAConfigFile)
+	+DFA()
+	+isStateExsists(int state) : bool {query}
+	+isSymbolExists(const char alpha) : bool {query}
+	+_startState : int
+	+_stateCount : int
+	+getStartState() : int {query}
+	+getState(int state, char alpha) : int {query}
+	+_mat : int**
+	+inLanguage(string& word) : pair<bool , int> {query}
+	+_alphabetToIndex : unordered_map<char, int>
+	+getAlphabet() : vector<char> {query}
+	+_endStates : vector<int>
+	+getEndStates() : vector<int>& {query}
+	+addAlpha(char alpha) : void
+	+addEndState(int state) : void
+	+initMatrix() : void
+	+insertTransition(int from, char alpha, int to) : void
+	+insertTransitionString(string& transition) : void
+	-isStateExistsWErr(int state, bool wantedResult) : void {query}
+	-isSymbolExistsErr(char alpha, bool wantedResult) : void {query}
+	+printMatrix() : void {query}
+	+setStartState(int state) : void
+	+setStateCount(int numOfStates) : void
+	+writeDFAToFile(string dstFile) : void
+}
+
+
+abstract class Error {
+	+Error(string body)
+	#_body : string
+	+{abstract} toString() : string {query}
+}
+
+
+class ErrorHandler {
+	+ErrorHandler()
+	+getErrorCount() : int {query}
+	-_errors : vector<Error*>
+	+addError(Error* error) : void
+	+printErrors() : void
+}
+
+
+class Lexer {
+	+Lexer(string srcFile, string DFAConfigFile, ErrorHandler* handler)
+	-_dfa : DFA
+	-_errorHandler : ErrorHandler*
+	+getNextToken() : SyntaxToken
+	+getNextToken2() : SyntaxToken
+	-_currColumn : int
+	-_currLine : int
+	-_cursor : int
+	-_fileSize : int
+	-_srcFile : string
+	+getTokens() : vector<SyntaxToken>
+	+printTransitionMatrix() : void {query}
+	+updatePosition(char ch) : void
+}
+
+
+class SyntaxError {
+	+SyntaxError(string body, int line, int column)
+	-_column : int
+	-_line : int
+	+toString() : string {query}
+}
+
+
+enum syntaxKind {
+	AMPERSAND
+	AMPERSAND_AMPERSAND
+	BANG
+	BANG_EQUALS
+	CLOSED_BRACKET
+	CLOSED_CURLY
+	CLOSED_PAREN
+	COMMA
+	DASH_DASH
+	DASH_EQUALS
+	END_OF_FILE
+	EQUALS
+	EQUALS_EQUALS
+	FLOAT_LITERAL
+	GREATER_THAN
+	GREATER_THAN_EQUALS
+	IDENTIFIER
+	INTEGER_LITERAL
+	KEYWORD_FLOAT
+	KEYWORD_FN
+	KEYWORD_FOR
+	KEYWORD_IF
+	KEYWORD_INT
+	KEYWORD_RET
+	KEYWORD_WHILE
+	LESS_THAN
+	LESS_THAN_EQUALS
+	MINUS
+	OPEN_BRACKET
+	OPEN_CURLY
+	OPEN_PAREN
+	PIPE
+	PIPE_PIPE
+	PLUS
+	PLUS_EQUALS
+	PLUS_PLUS
+	RIGHT_ARROW
+	SEMICOLON
+	SLASH
+	SLASH_EQUALS
+	STAR
+	STAR_EQUALS
+	STRING_LITERAL
+	UNEXPECTED_TOKEN
+}
+
+
+class SyntaxToken {
+	+val : string
+	+kind : syntaxKind
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+Error <|-- SyntaxError
+
+
+
+
+
+/' Aggregation relationships '/
+
+ErrorHandler o-- Error
+
+
+Lexer *-- DFA
+
+
+Lexer o-- ErrorHandler
+
+
+SyntaxToken *-- syntaxKind
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml

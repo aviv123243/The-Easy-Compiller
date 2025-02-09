@@ -79,21 +79,9 @@ vector<SyntaxToken> Lexer::getTokens()
     vector<SyntaxToken> tokens;
     SyntaxToken currToken;
 
-    int currLine;
-    int currColumn;
-
     while ((currToken = getNextToken()).kind != syntaxKind::END_OF_FILE)
     {
-        currLine = _currLine;
-        currColumn = _currColumn;
-
         tokens.push_back(currToken);
-
-        // if the token is invalid, add an error to the handler
-        if (currToken.kind == syntaxKind::UNEXPECTED_TOKEN)
-        {
-            _errorHandler->addError(new SyntaxError("Unexpected token error", currLine, currColumn));
-        }
     }
 
     tokens.push_back(currToken); // pushing the EOF token
@@ -179,8 +167,10 @@ SyntaxToken Lexer::getNextToken()
         // else the token is invalid so return an unexpected token
         else
         {
+            // if the token is invalid, add an error to the handler
             resToken.kind = syntaxKind::UNEXPECTED_TOKEN;
             cout << "BAD token! " <<  endl;
+            _errorHandler->addError(new SyntaxError("Unexpected token error", _currLine, _currColumn));
         }
     }
 

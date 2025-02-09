@@ -172,11 +172,6 @@ void DFA::initMatrix()
 //if the transition with (from,alpha) allready exists it overrides it   
 void DFA::insertTransition(int from, char alpha, int to)
 {   
-    // std::cout << "Inserting transition: "
-    //       << "from = " << from
-    //       << ", alpha = " << alpha
-    //       << ", to = " << to << std::endl;
-    // check if the state exists
     isStateExistsWErr(from, true);
 
     // check if alpha exists in alphabet

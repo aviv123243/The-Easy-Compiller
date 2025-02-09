@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug (GDB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/tec.exe",   // Path to your compiled executable
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe", // Path to gdb.exe from MSYS2/MinGW64
+            "preLaunchTask": "build",  // This makes sure the build task is run before debugging
+            "linux": {
+                "miDebuggerPath": "/usr/bin/gdb"
+            },
+            "osx": {
+                "miDebuggerPath": "/usr/local/bin/gdb"
+            },
+            "windows": {
+                "miDebuggerPath": "C:/mingw/bin/gdb.exe"
+            },
+            "logging": {
+                "moduleLoad": false,
+                "trace": false,
+                "engineLogging": false,
+                "programOutput": false
+            }
+        }
+    ]
+}
