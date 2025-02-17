@@ -1,5 +1,5 @@
-fn _h <> _h
+fn main() => int <> _h
 {   
-    _float f = 1.2;
-    ret f == 3;
+    float x1 = 1.2;
+    ret (f == 3);
 }

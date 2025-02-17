@@ -65,7 +65,7 @@ syntaxKind endStateToSyntaxKind[] = {
 };
 
 Lexer::Lexer(string srcFile, string DFAConfigFile, ErrorHandler *handler)
-    : _srcFile(srcFile), _dfa(DFAConfigFile), _errorHandler(handler), _cursor(0), _currLine(1), _currColumn(0)
+    : _srcFile(srcFile), _dfa(DFAConfigFile), _errorHandler(handler), _cursor(0), _currLine(1), _currColumn(1)
 {
     ifstream src(_srcFile);
 
@@ -92,13 +92,11 @@ SyntaxToken Lexer::getNextToken()
 {
     char currentChar;
     stringstream val;
-    bool autoTerminated = true;
     int currentState = _dfa.getStartState();
+    int prevState;
     SyntaxToken resToken;
     ifstream src(_srcFile);
     src.seekg(_cursor, ios::beg);
-
-    cout << "cursor at " << this->_cursor << endl;
 
     if (_cursor >= _fileSize)
     {
@@ -112,46 +110,38 @@ SyntaxToken Lexer::getNextToken()
         return resToken;
     }
 
-    src.get(currentChar);
-    _cursor++;
-    cout << "read from beggining: " << currentChar << endl;
-
-    // cout << "transition from state " << currentState << " with char " << currentChar
-    //      << " gone to: " << _dfa.getState(currentState, currentChar) << endl;
-
-    while (_dfa.getState(currentState, currentChar) != -1 && _cursor <= _fileSize)
+    do
     {
-        // cout << "transition from state " << currentState << " with char " << currentChar
-        //      << " gone to: " << _dfa.getState(currentState, currentChar) << endl;
-        updatePosition(currentChar);
-
-        if (autoTerminated)
-            autoTerminated = false;
-
-        val << currentChar;
-        currentState = _dfa.getState(currentState, currentChar);
+        // get the next character
         src.get(currentChar);
-        cout << "read from loop: " << currentChar << endl;
         _cursor++;
-    }
 
-    if (!autoTerminated)
-    {
-        _cursor--;
-    }
+        // get the corresponding next state
+        prevState = currentState;
+        currentState = _dfa.getState(currentState, currentChar);
 
-    if (autoTerminated)
-    {
-        updatePosition(currentChar);
-    }
+        // if we didnt finish lexing the token, recognize it.
+        if (currentState != -1)
+        {
+            val << currentChar;
+        }
 
+        // if we dident pocess the token, update the position
+        if (currentState != -1 || prevState == _dfa.getStartState())
+        {
+            updatePosition(currentChar);
+        }
+
+    } while (currentState != -1 && _cursor <= _fileSize);
+
+    _cursor--;
+    currentState = prevState;
     src.close();
 
     // if the state is a skip state, take the token after it
     if (isSkipState(currentState))
     {
         resToken = getNextToken();
-        cout << "skipped token! " <<  endl;
     }
     else
     {
@@ -161,15 +151,14 @@ SyntaxToken Lexer::getNextToken()
         {
             resToken.kind = getSyntaxKind(currentState);
             resToken.val = val.str();
-            cout << "GOOD token! " <<  endl;
         }
 
         // else the token is invalid so return an unexpected token
         else
         {
-            // if the token is invalid, add an error to the handler
+            // if the token is invalid, add an error to the handler and skip it
+            _cursor++;
             resToken.kind = syntaxKind::UNEXPECTED_TOKEN;
-            cout << "BAD token! " <<  endl;
             _errorHandler->addError(new SyntaxError("Unexpected token error", _currLine, _currColumn));
         }
     }
@@ -179,24 +168,25 @@ SyntaxToken Lexer::getNextToken()
 
 void Lexer::updatePosition(char ch)
 {
-    cout << "char: " << ch;
+    cout << "char: (" << ch << ") [" << static_cast<int>(ch) << "] ";
     if (ch == '\t')
     {
         _currColumn += 4; // assuming a tab is 4 spaces
     }
-    else if (ch == '\n')
+    else if (ch == 0x0A)
     {
         _currColumn = 0;
         _currLine++;
+        _cursor++; //skip the carriage return in the src code
     }
-    else if (ch != '\r') // Skip carriage return characters
+    else if (ch != 0x0D) // Skip carriage return characters
     {
         _currColumn++;
     }
-    cout << " at: {" << _currLine << ":" << _currColumn << "}" << endl;
+    cout << "at {" << _currLine << ":" << _currColumn << "}" << endl;
 }
-// print & print helper funcs:
 
+// print & print helper funcs:
 syntaxKind getSyntaxKind(int state)
 {
     if (state < syntaxKind::UNEXPECTED_TOKEN)
