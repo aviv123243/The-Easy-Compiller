@@ -12,7 +12,7 @@ using namespace std;
 
 #define NUM_OF_STATES 107
 
-enum syntaxKind
+enum SyntaxKind
 {
     INTEGER_LITERAL,
     FLOAT_LITERAL,
@@ -57,16 +57,17 @@ enum syntaxKind
     PIPE_PIPE,
     BANG_EQUALS,
     END_OF_FILE,
-    UNEXPECTED_TOKEN
+    UNEXPECTED_TOKEN,
+    SYNTAX_KIND_COUNT
 };
 
 extern string syntaxkindToString[];
 
-extern syntaxKind endStateToSyntaxKind[];
+extern SyntaxKind endStateToSyntaxKind[];
 
 struct SyntaxToken
 {
-    syntaxKind kind;
+    SyntaxKind kind;
     string val;
 };
 
@@ -91,7 +92,7 @@ public:
     void printTransitionMatrix() const;
 };
 
-syntaxKind getSyntaxKind(int state);
+SyntaxKind getSyntaxKind(int state);
 string syntaxTokenToString(SyntaxToken token);
 bool isSkipState(int state);
 bool isWhitespace(char ch);

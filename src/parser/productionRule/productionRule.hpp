@@ -1,0 +1,30 @@
+#ifndef __PRODUCTION_RULE
+#define __PRODUCTION_RULE
+
+#include "../../lexer/lexer.hpp"
+#include "../parser.hpp"
+
+class productionRule
+{
+private:
+    // left side of the production rule
+    NonTerminal _left;
+
+    // right side of the production rule
+    int _numOfRightSideSymbols;
+    vector<int> _rightSideSymbols;
+    vector<GrammarSymbolType> _rightSideTypes;
+
+public:
+    productionRule(NonTerminal left);
+    ~productionRule();
+    void addSymbol(SyntaxKind terminal);
+    void addSymbol(NonTerminal nonTerminal);
+    NonTerminal getNonTerminal(int index);
+    SyntaxKind getTerminal(int index);
+    GrammarSymbolType getType(int index);
+    int getNumOfRightSideSymbols();
+    NonTerminal getLeft();
+};
+
+#endif

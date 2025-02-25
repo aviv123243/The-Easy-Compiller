@@ -42,3 +42,20 @@ int main(int argc, char **argv)
         }
     }
 }
+
+// int main()
+// {
+//     gotoTable table;
+//     nonTerminal nt1 = nonTerminal(nonTerminalKind::PROGRAM);
+//     nonTerminal nt11 = nonTerminal(nonTerminalKind::PROGRAM);
+//     nonTerminal nt2 = nonTerminal(nonTerminalKind::STATEMENT);
+//     nonTerminal nt3 = nonTerminal(nonTerminalKind::EXPRESSION);
+
+//     table.add(nt1, 0, 1);
+//     table.add(nt1, 1, 2);
+//     table.add(nt2, 0, 3);
+//     table.add(nt2, 1, 4);
+
+//     cout << table.get(nt1, 0) << endl;
+//     cout << table.get(nt11, 0) << endl;
+// }

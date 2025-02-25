@@ -16,52 +16,52 @@ string syntaxkindToString[] = {"INTEGER_LITERAL", "FLOAT_LITERAL", "STRING_LITER
                                "CLOSED_BRACKET", "RIGHT_ARROW", "PLUS_PLUS", "DASH_DASH", "PLUS_EQUALS", "DASH_EQUALS", "SLASH_EQUALS", "STAR_EQUALS", "EQUALS_EQUALS",
                                "LESS_THAN_EQUALS", "GREATER_THAN_EQUALS", "AMPERSAND_AMPERSAND", "PIPE_PIPE", "BANG_EQUALS", "END_OF_FILE", "UNEXPECTED_TOKEN"};
 
-syntaxKind endStateToSyntaxKind[] = {
-    syntaxKind::UNEXPECTED_TOKEN,
-    syntaxKind::INTEGER_LITERAL,
-    syntaxKind::FLOAT_LITERAL,
-    syntaxKind::STRING_LITERAL,
-    syntaxKind::IDENTIFIER,
-    syntaxKind::KEYWORD_IF,
-    syntaxKind::KEYWORD_WHILE,
-    syntaxKind::KEYWORD_FOR,
-    syntaxKind::KEYWORD_FN,
-    syntaxKind::KEYWORD_RET,
-    syntaxKind::KEYWORD_INT,
-    syntaxKind::KEYWORD_FLOAT,
-    syntaxKind::EQUALS,
-    syntaxKind::COMMA,
-    syntaxKind::PLUS,
-    syntaxKind::MINUS,
-    syntaxKind::SLASH,
-    syntaxKind::STAR,
-    syntaxKind::AMPERSAND,
-    syntaxKind::PIPE,
-    syntaxKind::BANG,
-    syntaxKind::SEMICOLON,
-    syntaxKind::LESS_THAN,
-    syntaxKind::GREATER_THAN,
-    syntaxKind::OPEN_PAREN,
-    syntaxKind::CLOSED_PAREN,
-    syntaxKind::OPEN_CURLY,
-    syntaxKind::CLOSED_CURLY,
-    syntaxKind::OPEN_BRACKET,
-    syntaxKind::CLOSED_BRACKET,
-    syntaxKind::RIGHT_ARROW,
-    syntaxKind::PLUS_PLUS,
-    syntaxKind::DASH_DASH,
-    syntaxKind::PLUS_EQUALS,
-    syntaxKind::DASH_EQUALS,
-    syntaxKind::SLASH_EQUALS,
-    syntaxKind::STAR_EQUALS,
-    syntaxKind::EQUALS_EQUALS,
-    syntaxKind::LESS_THAN_EQUALS,
-    syntaxKind::GREATER_THAN_EQUALS,
-    syntaxKind::AMPERSAND_AMPERSAND,
-    syntaxKind::PIPE_PIPE,
-    syntaxKind::BANG_EQUALS,
-    syntaxKind::END_OF_FILE,
-    syntaxKind::UNEXPECTED_TOKEN,
+SyntaxKind endStateToSyntaxKind[] = {
+    SyntaxKind::UNEXPECTED_TOKEN,
+    SyntaxKind::INTEGER_LITERAL,
+    SyntaxKind::FLOAT_LITERAL,
+    SyntaxKind::STRING_LITERAL,
+    SyntaxKind::IDENTIFIER,
+    SyntaxKind::KEYWORD_IF,
+    SyntaxKind::KEYWORD_WHILE,
+    SyntaxKind::KEYWORD_FOR,
+    SyntaxKind::KEYWORD_FN,
+    SyntaxKind::KEYWORD_RET,
+    SyntaxKind::KEYWORD_INT,
+    SyntaxKind::KEYWORD_FLOAT,
+    SyntaxKind::EQUALS,
+    SyntaxKind::COMMA,
+    SyntaxKind::PLUS,
+    SyntaxKind::MINUS,
+    SyntaxKind::SLASH,
+    SyntaxKind::STAR,
+    SyntaxKind::AMPERSAND,
+    SyntaxKind::PIPE,
+    SyntaxKind::BANG,
+    SyntaxKind::SEMICOLON,
+    SyntaxKind::LESS_THAN,
+    SyntaxKind::GREATER_THAN,
+    SyntaxKind::OPEN_PAREN,
+    SyntaxKind::CLOSED_PAREN,
+    SyntaxKind::OPEN_CURLY,
+    SyntaxKind::CLOSED_CURLY,
+    SyntaxKind::OPEN_BRACKET,
+    SyntaxKind::CLOSED_BRACKET,
+    SyntaxKind::RIGHT_ARROW,
+    SyntaxKind::PLUS_PLUS,
+    SyntaxKind::DASH_DASH,
+    SyntaxKind::PLUS_EQUALS,
+    SyntaxKind::DASH_EQUALS,
+    SyntaxKind::SLASH_EQUALS,
+    SyntaxKind::STAR_EQUALS,
+    SyntaxKind::EQUALS_EQUALS,
+    SyntaxKind::LESS_THAN_EQUALS,
+    SyntaxKind::GREATER_THAN_EQUALS,
+    SyntaxKind::AMPERSAND_AMPERSAND,
+    SyntaxKind::PIPE_PIPE,
+    SyntaxKind::BANG_EQUALS,
+    SyntaxKind::END_OF_FILE,
+    SyntaxKind::UNEXPECTED_TOKEN,
 };
 
 Lexer::Lexer(string srcFile, string DFAConfigFile, ErrorHandler *handler)
@@ -79,7 +79,7 @@ vector<SyntaxToken> Lexer::getTokens()
     vector<SyntaxToken> tokens;
     SyntaxToken currToken;
 
-    while ((currToken = getNextToken()).kind != syntaxKind::END_OF_FILE)
+    while ((currToken = getNextToken()).kind != SyntaxKind::END_OF_FILE)
     {
         tokens.push_back(currToken);
     }
@@ -100,7 +100,7 @@ SyntaxToken Lexer::getNextToken()
 
     if (_cursor >= _fileSize)
     {
-        resToken.kind = syntaxKind::END_OF_FILE;
+        resToken.kind = SyntaxKind::END_OF_FILE;
         return resToken;
     }
 
@@ -158,7 +158,7 @@ SyntaxToken Lexer::getNextToken()
         {
             // if the token is invalid, add an error to the handler and skip it
             _cursor++;
-            resToken.kind = syntaxKind::UNEXPECTED_TOKEN;
+            resToken.kind = SyntaxKind::UNEXPECTED_TOKEN;
             _errorHandler->addError(new SyntaxError("Unexpected token error", _currLine, _currColumn));
         }
     }
@@ -168,31 +168,30 @@ SyntaxToken Lexer::getNextToken()
 
 void Lexer::updatePosition(char ch)
 {
-    cout << "char: (" << ch << ") [" << static_cast<int>(ch) << "] ";
     if (ch == '\t')
     {
-        _currColumn += 4; // assuming a tab is 4 spaces
+        _currColumn += 4; // (tab is 4 spaces)
     }
     else if (ch == 0x0A)
     {
         _currColumn = 0;
         _currLine++;
-        _cursor++; //skip the carriage return in the src code
+
+        _cursor++; // skip the carriage return in the src code
     }
     else if (ch != 0x0D) // Skip carriage return characters
     {
         _currColumn++;
     }
-    cout << "at {" << _currLine << ":" << _currColumn << "}" << endl;
 }
 
 // print & print helper funcs:
-syntaxKind getSyntaxKind(int state)
+SyntaxKind getSyntaxKind(int state)
 {
-    if (state < syntaxKind::UNEXPECTED_TOKEN)
+    if (state < SyntaxKind::UNEXPECTED_TOKEN)
         return endStateToSyntaxKind[state];
 
-    return syntaxKind::IDENTIFIER;
+    return SyntaxKind::IDENTIFIER;
 }
 
 void Lexer::printTransitionMatrix() const

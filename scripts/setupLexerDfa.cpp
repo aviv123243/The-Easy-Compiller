@@ -113,7 +113,7 @@ int main()
         for (j = 0; j < keyWords[i].size() - 1; j++)
         {
             // check if the connection already exists
-            if (dfa.getState(prev, keyWords[i][j]) == syntaxKind::IDENTIFIER + 1 || dfa.getState(prev, keyWords[i][j]) == -1)
+            if (dfa.getState(prev, keyWords[i][j]) == SyntaxKind::IDENTIFIER + 1 || dfa.getState(prev, keyWords[i][j]) == -1)
             {
                 // if the connection is non-existant, make it
                 dfa.insertTransition(prev, keyWords[i][j], midState);
@@ -125,7 +125,7 @@ int main()
             {
                 if (dfa.getState(prev, k) == -1)
                 {
-                    dfa.insertTransition(prev, k, syntaxKind::IDENTIFIER + 1);
+                    dfa.insertTransition(prev, k, SyntaxKind::IDENTIFIER + 1);
                 }
             }
 
@@ -133,7 +133,7 @@ int main()
             {
                 if (dfa.getState(prev, k) == -1)
                 {
-                    dfa.insertTransition(prev, k, syntaxKind::IDENTIFIER + 1);
+                    dfa.insertTransition(prev, k, SyntaxKind::IDENTIFIER + 1);
                 }
             }
 
@@ -148,7 +148,7 @@ int main()
         for (k = 'A'; k <= 'z'; k++)
         {
             if (dfa.getState(prev, k) == -1)
-                dfa.insertTransition(prev, k, syntaxKind::IDENTIFIER + 1);
+                dfa.insertTransition(prev, k, SyntaxKind::IDENTIFIER + 1);
         }
         endState++;
     }

@@ -1,42 +1,55 @@
-#include "lexer.hpp"
-#include "Nodes.hpp"
+#ifndef PARSER
+#define PARSER
+
+#include "../lexer/lexer.hpp"
+// #include "../nodes/nodes.hpp"
 #include <string>
 #include <vector>
 #include <sstream>
 #include <algorithm>
 #include <iostream>
 
-class Parser
+enum GrammarSymbolType
 {
-private:
-    vector<SyntaxToken*> _tokens;
-    SyntaxToken *_current;
-    int _currentTokenIndex;
-    int _size;
-    stringstream _diagnostics;
-public:
-    Parser(vector<SyntaxToken*> *tokens);
-    SyntaxToken * Match(syntaxKind kind);
-    SyntaxToken * Peek(int offset);
-    SyntaxToken * NextToken();
-    ExpressionNode * Parse();
-    ExpressionNode * ParseExpression();
-    ExpressionNode * ParseTermExpression();
-    ExpressionNode * ParseFactorExpression();
-    ExpressionNode * ParseUnaryExpression();
-    ExpressionNode * ParsePrimaryExpression();
-
-    string getDiagnostics()
-    {
-        return _diagnostics.str();
-    }
+    TERMINAL,
+    NON_TERMINAL
 };
 
-void PrintParseTree(ASTNode * base);
+enum NonTerminal
+{
+    PROGRAM,
+    STATEMENT,
+    EXPRESSION,
+    BINARY_EXPRESSION,
+    UNARY_EXPRESSION,
+    PRIMARY_EXPRESSION,
+    LITERAL_EXPRESSION,
+    IDENTIFIER_EXPRESSION,
+    PARENTHESIZED_EXPRESSION,
+    ASSIGNMENT_EXPRESSION,
+    CALL_EXPRESSION,
+    ARGUMENT_LIST,
+    IF_STATEMENT,
+    WHILE_STATEMENT,
+    FOR_STATEMENT,
+    FUNCTION_DECLARATION,
+    RETURN_STATEMENT,
+    VARIABLE_DECLARATION,
+    TYPE,
+    BLOCK,
+    STATEMENT_LIST,
+    EXPRESSION_STATEMENT,
+    EMPTY_STATEMENT,
+    NON_TERMINAL_COUNT
+};
 
+class Parser
+{
+    private:
+        vector<SyntaxToken> _tokens;
 
+    public:
+};
 
-
-
-
+#endif
 

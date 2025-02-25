@@ -1,0 +1,3 @@
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build/CMakeFiles/MyProjectExecutable.dir
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build/CMakeFiles/edit_cache.dir
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build/CMakeFiles/rebuild_cache.dir
