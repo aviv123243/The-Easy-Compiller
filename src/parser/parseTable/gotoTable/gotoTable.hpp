@@ -1,21 +1,23 @@
 #ifndef __GOTO_TABLE
 #define __GOTO_TABLE
 
-#include "../../parser.hpp"
+#include "../../../token/token.hpp"
+#include "../../grammerSymbol/grammerSymbol.hpp"
+
 #include <map>
 #include <vector>
 
-class gotoTable
+class GotoTable
 {
 private:
     int **_table;
     int _numOfStates;
 
 public:
-    gotoTable(int numOfStates);
-    ~gotoTable();
-    void add(int startState, NonTerminal nt, int endState);
-    int get(int state, NonTerminal nt);
+    GotoTable(int numOfStates);
+    ~GotoTable();
+    void add(int startState, NonTerminalKind nt, int endState);
+    int get(int state, NonTerminalKind nt);
 };
 
 #endif

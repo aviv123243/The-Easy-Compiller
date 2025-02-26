@@ -200,6 +200,30 @@ src/lexer/lexer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexer.cpp.s
 .PHONY : src/lexer/lexer.cpp.s
 
+src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.obj: src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.obj
+.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.obj
+
+# target to build an object file
+src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.obj
+.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.obj
+
+src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.i: src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.i
+.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.i
+
+# target to preprocess a source file
+src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.i
+.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.i
+
+src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.s: src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.s
+.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.s
+
+# target to generate assembly for a file
+src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.s
+.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.s
+
 src/main/main.obj: src/main/main.cpp.obj
 .PHONY : src/main/main.obj
 
@@ -223,6 +247,30 @@ src/main/main.s: src/main/main.cpp.s
 src/main/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/main/main.cpp.s
 .PHONY : src/main/main.cpp.s
+
+src/nodes/nodes.obj: src/nodes/nodes.cpp.obj
+.PHONY : src/nodes/nodes.obj
+
+# target to build an object file
+src/nodes/nodes.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/nodes/nodes.cpp.obj
+.PHONY : src/nodes/nodes.cpp.obj
+
+src/nodes/nodes.i: src/nodes/nodes.cpp.i
+.PHONY : src/nodes/nodes.i
+
+# target to preprocess a source file
+src/nodes/nodes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/nodes/nodes.cpp.i
+.PHONY : src/nodes/nodes.cpp.i
+
+src/nodes/nodes.s: src/nodes/nodes.cpp.s
+.PHONY : src/nodes/nodes.s
+
+# target to generate assembly for a file
+src/nodes/nodes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/nodes/nodes.cpp.s
+.PHONY : src/nodes/nodes.cpp.s
 
 src/parser/parseTable/actionTable/actionTable.obj: src/parser/parseTable/actionTable/actionTable.cpp.obj
 .PHONY : src/parser/parseTable/actionTable/actionTable.obj
@@ -338,9 +386,15 @@ help:
 	@echo ... src/lexer/lexer.obj
 	@echo ... src/lexer/lexer.i
 	@echo ... src/lexer/lexer.s
+	@echo ... src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.obj
+	@echo ... src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.i
+	@echo ... src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.s
 	@echo ... src/main/main.obj
 	@echo ... src/main/main.i
 	@echo ... src/main/main.s
+	@echo ... src/nodes/nodes.obj
+	@echo ... src/nodes/nodes.i
+	@echo ... src/nodes/nodes.s
 	@echo ... src/parser/parseTable/actionTable/actionTable.obj
 	@echo ... src/parser/parseTable/actionTable/actionTable.i
 	@echo ... src/parser/parseTable/actionTable/actionTable.s

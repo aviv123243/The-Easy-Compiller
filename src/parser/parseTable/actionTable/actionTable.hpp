@@ -1,33 +1,21 @@
 #ifndef __ACTION_TABLE
 #define __ACTION_TABLE
 
-#include "../../lexer/lexer.hpp"
+#include "../action/action.hpp"
+#include "../../../token/token.hpp"
+#include "../../grammerSymbol/grammerSymbol.hpp"
 
-enum actionType
+class ActionTable
 {
-    SHIFT,
-    REDUCE,
-    ACCEPT,
-    ERROR
-};
+    private:
+        action **_table;
+        int _numOfStates;
 
-struct action
-{
-    actionType type;
-    int num;
-};
-
-class actionTable
-{
-private:
-    action **_table;
-    int _numOfStates;
-
-public:
-    actionTable(int numOfStates);
-    ~actionTable();
-    void add(int state, SyntaxKind terminal, action act);
-    action get(int state, SyntaxKind terminal);
+    public:
+        ActionTable(int numOfStates);
+        ~ActionTable();
+        void add(int state, SyntaxKind terminal, action act);
+        action get(int state, SyntaxKind terminal);
 };
 
 #endif

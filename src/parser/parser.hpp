@@ -1,55 +1,49 @@
 #ifndef PARSER
 #define PARSER
 
-#include "../lexer/lexer.hpp"
-// #include "../nodes/nodes.hpp"
+#include "productionRule/productionRule.hpp"
+#include "parseTable/gotoTable/gotoTable.hpp"
+#include "parseTable/actionTable/actionTable.hpp"
+#include "../nodes/nodes.hpp"
+#include "../errorHandler/errorHandler.hpp"
+#include "../errors/errors.hpp"
+#include <stack>
 #include <string>
 #include <vector>
 #include <sstream>
 #include <algorithm>
 #include <iostream>
 
-enum GrammarSymbolType
-{
-    TERMINAL,
-    NON_TERMINAL
-};
+extern string nonTerminalKindToString[];
 
-enum NonTerminal
+struct StackItem
 {
-    PROGRAM,
-    STATEMENT,
-    EXPRESSION,
-    BINARY_EXPRESSION,
-    UNARY_EXPRESSION,
-    PRIMARY_EXPRESSION,
-    LITERAL_EXPRESSION,
-    IDENTIFIER_EXPRESSION,
-    PARENTHESIZED_EXPRESSION,
-    ASSIGNMENT_EXPRESSION,
-    CALL_EXPRESSION,
-    ARGUMENT_LIST,
-    IF_STATEMENT,
-    WHILE_STATEMENT,
-    FOR_STATEMENT,
-    FUNCTION_DECLARATION,
-    RETURN_STATEMENT,
-    VARIABLE_DECLARATION,
-    TYPE,
-    BLOCK,
-    STATEMENT_LIST,
-    EXPRESSION_STATEMENT,
-    EMPTY_STATEMENT,
-    NON_TERMINAL_COUNT
+    int state;
+    ASTNode *node;
 };
 
 class Parser
 {
-    private:
-        vector<SyntaxToken> _tokens;
+private:
+    // parse table
+    ActionTable _actionTable;
+    GotoTable _gotoTable;
+    stack<StackItem> _stack;
 
-    public:
+    vector<SyntaxToken *> _tokens;
+    vector<productionRule> _rules;
+
+    ErrorHandler *_errorHandler;
+
+    int _cursor;
+
+public:
+    Parser(vector<SyntaxToken *> tokens, int numOfStates,ErrorHandler *handler);
+    void parse();
+    void shift(int state, SyntaxToken *token);
+    void reduce(int ruleNum);
+    bool match(ASTNode *node, SyntaxKind type);
+    bool match(ASTNode *node, NonTerminalKind type);
 };
 
 #endif
-

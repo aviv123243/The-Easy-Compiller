@@ -1,14 +1,17 @@
 #ifndef __PRODUCTION_RULE
 #define __PRODUCTION_RULE
 
-#include "../../lexer/lexer.hpp"
-#include "../parser.hpp"
+#include "../../token/token.hpp"
+#include "../grammerSymbol/grammerSymbol.hpp"
+#include <vector>
+
+using namespace std;
 
 class productionRule
 {
 private:
     // left side of the production rule
-    NonTerminal _left;
+    NonTerminalKind _left;
 
     // right side of the production rule
     int _numOfRightSideSymbols;
@@ -16,15 +19,15 @@ private:
     vector<GrammarSymbolType> _rightSideTypes;
 
 public:
-    productionRule(NonTerminal left);
+    productionRule(NonTerminalKind left);
     ~productionRule();
     void addSymbol(SyntaxKind terminal);
-    void addSymbol(NonTerminal nonTerminal);
-    NonTerminal getNonTerminal(int index);
+    void addSymbol(NonTerminalKind nonTerminal);
+    NonTerminalKind getNonTerminal(int index);
     SyntaxKind getTerminal(int index);
     GrammarSymbolType getType(int index);
     int getNumOfRightSideSymbols();
-    NonTerminal getLeft();
+    NonTerminalKind getLeft();
 };
 
 #endif

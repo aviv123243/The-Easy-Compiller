@@ -1,6 +1,8 @@
 #ifndef __ERROR_HANDLER
 #define __ERROR_HANDLER
 
+class ErrorHandler;
+
 #include "../errors/errors.hpp"
 #include <vector>
 #include <iostream>

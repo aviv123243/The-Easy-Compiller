@@ -129,8 +129,17 @@ CMakeFiles/MyProjectExecutable.dir/src/main/main.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unordered_map.h \
  c:\users\admin\documents\coding\the-easy-compiller\src\errorhandler\errorhandler.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\errors\errors.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\lexer\lexer.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\lexer\lexerdebuggingutils\lexerdebuggingutils.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\errors\errors.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\parser\grammersymbol\grammersymbol.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\lexer\lexerdebuggingutils\lexerdebuggingutils.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\errorhandler\errorhandler.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\parser\productionrule\productionrule.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\parser\grammersymbol\grammersymbol.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\fstream \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\codecvt.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\basic_file.h \

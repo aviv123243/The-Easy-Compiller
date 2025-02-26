@@ -1,10 +1,12 @@
 #include "productionRule.hpp"
-#include "../../lexer/lexer.hpp"
-#include "../parser.hpp"
+#include "../GrammerSymbol/grammerSymbol.hpp"
+#include <iostream>
 #include <vector>
 #include <map>
 
-productionRule::productionRule(NonTerminal left) : _left(left), _numOfRightSideSymbols(0) {}
+using namespace std;
+
+productionRule::productionRule(NonTerminalKind left) : _left(left), _numOfRightSideSymbols(0) {}
 
 productionRule::~productionRule() {}
 
@@ -15,7 +17,7 @@ void productionRule::addSymbol(SyntaxKind terminal)
     _numOfRightSideSymbols++;
 }
 
-void productionRule::addSymbol(NonTerminal nonTerminal)
+void productionRule::addSymbol(NonTerminalKind nonTerminal)
 {
     _rightSideSymbols.push_back(nonTerminal);
     _rightSideTypes.push_back(GrammarSymbolType::NON_TERMINAL);
@@ -26,30 +28,34 @@ SyntaxKind productionRule::getTerminal(int index)
 {
     if (index >= _numOfRightSideSymbols)
     {
-        runtime_error("Index out of range");
+        cerr << ("Index out of range");
+        exit(1);
     }
 
     if (_rightSideTypes[index] != GrammarSymbolType::TERMINAL)
     {
-        runtime_error("Symbol at index is not a terminal");
+        cerr << ("Symbol at index is not a terminal");
+        exit(1);
     }
 
     return (SyntaxKind)_rightSideSymbols[index];
 }
 
-NonTerminal productionRule::getNonTerminal(int index)
+NonTerminalKind productionRule::getNonTerminal(int index)
 {
     if (index >= _numOfRightSideSymbols)
     {
-        runtime_error("Index out of range");
+        cerr << ("Index out of range");
+        exit(1);
     }
 
     if (_rightSideTypes[index] != GrammarSymbolType::NON_TERMINAL)
     {
-        runtime_error("Symbol at index is not a non terminal");
+        cerr << ("Symbol at index is not a non terminal");
+        exit(1);
     }
 
-    return (NonTerminal)_rightSideSymbols[index];
+    return (NonTerminalKind)_rightSideSymbols[index];
 }
 
 GrammarSymbolType productionRule::getType(int index)
@@ -67,7 +73,7 @@ int productionRule::getNumOfRightSideSymbols()
     return _numOfRightSideSymbols;
 }
 
-NonTerminal productionRule::getLeft()
+NonTerminalKind productionRule::getLeft()
 {
     return _left;
 }

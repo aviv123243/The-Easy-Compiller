@@ -1,6 +1,8 @@
 #ifndef __ERRORS
 #define __ERRORS
 
+#include "../lexer/lexer.hpp"
+#include "../lexer/lexerDebuggingUtils/lexerDebuggingUtils.hpp"
 #include <string>
 using namespace std;
 
@@ -11,6 +13,7 @@ class Error
 
     public:
         Error(string body) : _body(body) {}
+        Error() : _body("") {}
 
         virtual string toString() const = 0;  
 };
@@ -27,6 +30,26 @@ class SyntaxError : public Error
         string toString() const override
         {
             return "Syntax Error: " + _body + " in " + to_string(_line) + ":" + to_string(_column);
+        }
+};
+
+class SyntacticError : public Error
+{
+    public:
+        SyntacticError(SyntaxToken * token) {
+            int line = token -> line;
+            int column = token ->column;
+
+            _body = "unvalid placment of token " + syntaxTokenToString(*token) + "on" + "{" + to_string(line) +":" + to_string(column) + "}";
+        }
+
+        SyntacticError() {
+            _body = "broken code structure";
+        }
+
+        string toString() const override
+        {
+            return "SyntaticError: " + _body;
         }
 };
 

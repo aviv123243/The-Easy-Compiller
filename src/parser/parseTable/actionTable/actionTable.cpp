@@ -1,12 +1,14 @@
 #include "actionTable.hpp"
 #include <map>
 #include <vector>
-#include "../../parser.hpp"
-#include "../../../lexer/lexer.hpp"
+#include "../action/action.hpp"
+#include "../../../nodes/nodes.hpp"
+#include "../../../token/token.hpp"
+#include "../../grammerSymbol/grammerSymbol.hpp"
 
 using namespace std;
 
-actionTable ::actionTable(int numOfStates) : _numOfStates(numOfStates)
+ActionTable ::ActionTable(int numOfStates) : _numOfStates(numOfStates)
 {
     _table = new action *[_numOfStates];
     for (int i = 0; i < _numOfStates; i++)
@@ -20,7 +22,7 @@ actionTable ::actionTable(int numOfStates) : _numOfStates(numOfStates)
     }
 }
 
-actionTable ::~actionTable()
+ActionTable ::~ActionTable()
 {
     for (int i = 0; i < _numOfStates; i++)
     {
@@ -29,7 +31,7 @@ actionTable ::~actionTable()
     delete[] _table;
 }
 
-void actionTable ::add(int state, SyntaxKind terminal, action act)
+void ActionTable ::add(int state, SyntaxKind terminal, action act)
 {
     if (state >= _numOfStates || terminal >= SyntaxKind::SYNTAX_KIND_COUNT)
     {
@@ -46,7 +48,7 @@ void actionTable ::add(int state, SyntaxKind terminal, action act)
     }
 }
 
-action actionTable ::get(int state, SyntaxKind terminal)
+action ActionTable ::get(int state, SyntaxKind terminal)
 {
     if (state >= _numOfStates || terminal >= SyntaxKind::SYNTAX_KIND_COUNT)
     {
