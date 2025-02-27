@@ -4,6 +4,8 @@
 #include "productionRule/productionRule.hpp"
 #include "parseTable/gotoTable/gotoTable.hpp"
 #include "parseTable/actionTable/actionTable.hpp"
+#include "productionRule/productionRule.hpp"
+#include "stackItem/stackItem.hpp"
 #include "../nodes/nodes.hpp"
 #include "../errorHandler/errorHandler.hpp"
 #include "../errors/errors.hpp"
@@ -15,12 +17,6 @@
 #include <iostream>
 
 extern string nonTerminalKindToString[];
-
-struct StackItem
-{
-    int state;
-    ASTNode *node;
-};
 
 class Parser
 {
@@ -38,12 +34,19 @@ private:
     int _cursor;
 
 public:
-    Parser(vector<SyntaxToken *> tokens, int numOfStates,ErrorHandler *handler);
-    void parse();
+    Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler);
+    SyntaxToken *getNextToken();
+    SyntaxToken *peek(int index);
+    void addProductionRule(productionRule rule);
     void shift(int state, SyntaxToken *token);
     void reduce(int ruleNum);
     bool match(ASTNode *node, SyntaxKind type);
-    bool match(ASTNode *node, NonTerminalKind type);
+    bool match(ASTNode *node, NonTerminal type);
+    ASTNode *parse();
+
+    // Debugging
+    void printStack();
+    void printRules();
 };
 
 #endif

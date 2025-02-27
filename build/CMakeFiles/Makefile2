@@ -84,12 +84,12 @@ clean: CMakeFiles/MyProjectExecutable.dir/clean
 CMakeFiles/MyProjectExecutable.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target MyProjectExecutable"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13 "Built target MyProjectExecutable"
 .PHONY : CMakeFiles/MyProjectExecutable.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/MyProjectExecutable.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles 11
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/MyProjectExecutable.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles 0
 .PHONY : CMakeFiles/MyProjectExecutable.dir/rule
@@ -101,7 +101,7 @@ MyProjectExecutable: CMakeFiles/MyProjectExecutable.dir/rule
 # codegen rule for target.
 CMakeFiles/MyProjectExecutable.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Finished codegen for target MyProjectExecutable"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13 "Finished codegen for target MyProjectExecutable"
 .PHONY : CMakeFiles/MyProjectExecutable.dir/codegen
 
 # clean rule for target.

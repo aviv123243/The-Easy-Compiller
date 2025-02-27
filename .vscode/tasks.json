@@ -4,23 +4,15 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "g++",
-            "args": [
-                "src/main/main.cpp",
-                "src/lexer/*.cpp",
-                "src/errorHandler/*.cpp",
-                "-I", "src/",       // Include all headers
-                "-g",
-                "-o", "bin/output"
-            ],
+            "command": "mingw32-make",
+            "options": {
+                "cwd": "${workspaceFolder}/build" // Matches your build directory
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "detail": "Building all C++ files properly so you can stop suffering"
+            "problemMatcher": ["$gcc"] // Catches GCC errors in the Problems pane
         }
     ]
 }

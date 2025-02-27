@@ -6,8 +6,9 @@
 
 using namespace std;
 
-TerminalNode::TerminalNode(SyntaxKind syntaxKind, SyntaxToken *token) : _syntaxKind(syntaxKind), _token(token)
+TerminalNode::TerminalNode(SyntaxToken *token) : _token(token)
 {
+    _syntaxKind = token->kind;
     _type = GrammarSymbolType::TERMINAL;
 }
 
@@ -29,7 +30,7 @@ const vector<ASTNode *> &TerminalNode::GetChildren() const
 
 //--------------------------------non terminal node--------------------------------
 
-NonTerminalNode::NonTerminalNode(NonTerminalKind nonTerminalKind)
+NonTerminalNode::NonTerminalNode(NonTerminal nonTerminalKind)
     : _nonTerminalKind(nonTerminalKind), _children()
 {
     _type = GrammarSymbolType::NON_TERMINAL;
@@ -45,7 +46,7 @@ void NonTerminalNode::AddChildToFront(ASTNode *child)
     _children.insert(_children.begin(), child);
 }
 
-NonTerminalKind NonTerminalNode::getNonTerminalKind() const
+NonTerminal NonTerminalNode::getNonTerminalKind() const
 {
     return _nonTerminalKind;
 }
@@ -53,4 +54,45 @@ NonTerminalKind NonTerminalNode::getNonTerminalKind() const
 const std::vector<ASTNode *> &NonTerminalNode::GetChildren() const
 {
     return _children;
+}
+
+//--------------------------------debugging--------------------------------
+
+string AstNodeToString(ASTNode *node)
+{
+    if (node->GetType() == GrammarSymbolType::TERMINAL)
+    {
+        return syntaxKindToString(((TerminalNode *)node)->getTerminalKind());
+    }
+    else
+    {
+        return nonTerminalToString(((NonTerminalNode *)node)->getNonTerminalKind());
+    }
+}
+
+void printAstNode(ASTNode *node)
+{
+    cout << AstNodeToString(node) << endl;
+}
+
+void PrintParseTree(ASTNode *parent, const string &prefix = "", bool isLast = true)
+{
+    cout << "AST" << endl;
+
+    if (parent == nullptr)
+    {
+        return;
+    }
+
+    cout << prefix;
+
+    cout << (isLast ? "|__ " : "|-- ") << AstNodeToString(parent) << endl;
+
+    vector<ASTNode *> children = parent->GetChildren();
+    int childernCount = children.size();
+    for (int i = 0; i < childernCount; i++)
+    {
+        string newPrefix = prefix + (isLast ? "    " : "|   ");
+        PrintParseTree(children.at(i), newPrefix, i == childernCount - 1);
+    }
 }

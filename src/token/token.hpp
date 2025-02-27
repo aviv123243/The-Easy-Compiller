@@ -62,4 +62,9 @@ struct SyntaxToken
     int column;
 };
 
+
+string syntaxTokenToString(SyntaxToken token);
+string syntaxKindToString(SyntaxKind kind);
+void printSyntaxToken(SyntaxToken token);
+
 #endif

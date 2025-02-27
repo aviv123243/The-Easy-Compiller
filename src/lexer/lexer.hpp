@@ -16,8 +16,6 @@ using namespace std;
 
 #define NUM_OF_STATES 107
 
-extern string syntaxkindToString[];
-
 extern SyntaxKind endStateToSyntaxKind[];
 
 class Lexer
@@ -36,7 +34,7 @@ private:
 public:
     Lexer(string srcFile, string DFAConfigFile, ErrorHandler *handler);
     vector<SyntaxToken *> getTokens();
-    SyntaxToken * getNextToken();
+    SyntaxToken *getNextToken();
     void updatePosition(char ch);
     void printTransitionMatrix() const;
 };

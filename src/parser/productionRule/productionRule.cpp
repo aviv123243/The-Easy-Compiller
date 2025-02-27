@@ -1,12 +1,14 @@
 #include "productionRule.hpp"
 #include "../GrammerSymbol/grammerSymbol.hpp"
+#include "../../token/token.hpp"
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include <map>
 
 using namespace std;
 
-productionRule::productionRule(NonTerminalKind left) : _left(left), _numOfRightSideSymbols(0) {}
+productionRule::productionRule(NonTerminal left) : _left(left), _numOfRightSideSymbols(0) {}
 
 productionRule::~productionRule() {}
 
@@ -17,7 +19,7 @@ void productionRule::addSymbol(SyntaxKind terminal)
     _numOfRightSideSymbols++;
 }
 
-void productionRule::addSymbol(NonTerminalKind nonTerminal)
+void productionRule::addSymbol(NonTerminal nonTerminal)
 {
     _rightSideSymbols.push_back(nonTerminal);
     _rightSideTypes.push_back(GrammarSymbolType::NON_TERMINAL);
@@ -41,7 +43,7 @@ SyntaxKind productionRule::getTerminal(int index)
     return (SyntaxKind)_rightSideSymbols[index];
 }
 
-NonTerminalKind productionRule::getNonTerminal(int index)
+NonTerminal productionRule::getNonTerminal(int index)
 {
     if (index >= _numOfRightSideSymbols)
     {
@@ -55,7 +57,7 @@ NonTerminalKind productionRule::getNonTerminal(int index)
         exit(1);
     }
 
-    return (NonTerminalKind)_rightSideSymbols[index];
+    return (NonTerminal)_rightSideSymbols[index];
 }
 
 GrammarSymbolType productionRule::getType(int index)
@@ -73,7 +75,28 @@ int productionRule::getNumOfRightSideSymbols()
     return _numOfRightSideSymbols;
 }
 
-NonTerminalKind productionRule::getLeft()
+NonTerminal productionRule::getLeft()
 {
     return _left;
+}
+
+string productionRule::toString()
+{
+    stringstream str;
+    str << nonTerminalToString(_left)
+        << " \e[0;33m=>\033[0m";
+
+    for (int i = 0; i < _numOfRightSideSymbols; i++)
+    {
+        if (_rightSideTypes[i] == GrammarSymbolType::TERMINAL)
+        {
+            str << " " << syntaxKindToString[(SyntaxKind)(_rightSideSymbols[i])];
+        }
+        else
+        {
+            str << " " << nonTerminalToString((NonTerminal)_rightSideSymbols[i]);
+        }
+    }
+
+    return str.str();
 }

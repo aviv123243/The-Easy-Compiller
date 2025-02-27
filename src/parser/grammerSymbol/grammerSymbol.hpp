@@ -1,13 +1,17 @@
 #ifndef __GAMMER_SYMBOL
 #define __GAMMER_SYMBOL
 
+#include <string>
+
+using namespace std;
+
 enum GrammarSymbolType
 {
     TERMINAL,
     NON_TERMINAL
 };
 
-enum NonTerminalKind
+enum NonTerminal
 {
     PROGRAM,
     STATEMENT,
@@ -34,5 +38,7 @@ enum NonTerminalKind
     EMPTY_STATEMENT,
     NON_TERMINAL_COUNT
 };
+
+string nonTerminalToString(NonTerminal kind);
 
 #endif

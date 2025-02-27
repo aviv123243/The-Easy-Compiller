@@ -200,30 +200,6 @@ src/lexer/lexer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexer.cpp.s
 .PHONY : src/lexer/lexer.cpp.s
 
-src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.obj: src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.obj
-.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.obj
-
-# target to build an object file
-src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.obj
-.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.obj
-
-src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.i: src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.i
-.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.i
-
-# target to preprocess a source file
-src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.i
-.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.i
-
-src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.s: src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.s
-.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.s
-
-# target to generate assembly for a file
-src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.s
-.PHONY : src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.cpp.s
-
 src/main/main.obj: src/main/main.cpp.obj
 .PHONY : src/main/main.obj
 
@@ -271,6 +247,30 @@ src/nodes/nodes.s: src/nodes/nodes.cpp.s
 src/nodes/nodes.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/nodes/nodes.cpp.s
 .PHONY : src/nodes/nodes.cpp.s
+
+src/parser/grammerSymbol/grammerSymbol.obj: src/parser/grammerSymbol/grammerSymbol.cpp.obj
+.PHONY : src/parser/grammerSymbol/grammerSymbol.obj
+
+# target to build an object file
+src/parser/grammerSymbol/grammerSymbol.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj
+.PHONY : src/parser/grammerSymbol/grammerSymbol.cpp.obj
+
+src/parser/grammerSymbol/grammerSymbol.i: src/parser/grammerSymbol/grammerSymbol.cpp.i
+.PHONY : src/parser/grammerSymbol/grammerSymbol.i
+
+# target to preprocess a source file
+src/parser/grammerSymbol/grammerSymbol.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.i
+.PHONY : src/parser/grammerSymbol/grammerSymbol.cpp.i
+
+src/parser/grammerSymbol/grammerSymbol.s: src/parser/grammerSymbol/grammerSymbol.cpp.s
+.PHONY : src/parser/grammerSymbol/grammerSymbol.s
+
+# target to generate assembly for a file
+src/parser/grammerSymbol/grammerSymbol.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.s
+.PHONY : src/parser/grammerSymbol/grammerSymbol.cpp.s
 
 src/parser/parseTable/actionTable/actionTable.obj: src/parser/parseTable/actionTable/actionTable.cpp.obj
 .PHONY : src/parser/parseTable/actionTable/actionTable.obj
@@ -368,6 +368,54 @@ src/parser/productionRule/productionRule.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.s
 .PHONY : src/parser/productionRule/productionRule.cpp.s
 
+src/parser/stackItem/stackItem.obj: src/parser/stackItem/stackItem.cpp.obj
+.PHONY : src/parser/stackItem/stackItem.obj
+
+# target to build an object file
+src/parser/stackItem/stackItem.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj
+.PHONY : src/parser/stackItem/stackItem.cpp.obj
+
+src/parser/stackItem/stackItem.i: src/parser/stackItem/stackItem.cpp.i
+.PHONY : src/parser/stackItem/stackItem.i
+
+# target to preprocess a source file
+src/parser/stackItem/stackItem.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.i
+.PHONY : src/parser/stackItem/stackItem.cpp.i
+
+src/parser/stackItem/stackItem.s: src/parser/stackItem/stackItem.cpp.s
+.PHONY : src/parser/stackItem/stackItem.s
+
+# target to generate assembly for a file
+src/parser/stackItem/stackItem.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.s
+.PHONY : src/parser/stackItem/stackItem.cpp.s
+
+src/token/token.obj: src/token/token.cpp.obj
+.PHONY : src/token/token.obj
+
+# target to build an object file
+src/token/token.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj
+.PHONY : src/token/token.cpp.obj
+
+src/token/token.i: src/token/token.cpp.i
+.PHONY : src/token/token.i
+
+# target to preprocess a source file
+src/token/token.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.i
+.PHONY : src/token/token.cpp.i
+
+src/token/token.s: src/token/token.cpp.s
+.PHONY : src/token/token.s
+
+# target to generate assembly for a file
+src/token/token.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.s
+.PHONY : src/token/token.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -386,15 +434,15 @@ help:
 	@echo ... src/lexer/lexer.obj
 	@echo ... src/lexer/lexer.i
 	@echo ... src/lexer/lexer.s
-	@echo ... src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.obj
-	@echo ... src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.i
-	@echo ... src/lexer/lexerDebuggingUtils/lexerDebuggingUtils.s
 	@echo ... src/main/main.obj
 	@echo ... src/main/main.i
 	@echo ... src/main/main.s
 	@echo ... src/nodes/nodes.obj
 	@echo ... src/nodes/nodes.i
 	@echo ... src/nodes/nodes.s
+	@echo ... src/parser/grammerSymbol/grammerSymbol.obj
+	@echo ... src/parser/grammerSymbol/grammerSymbol.i
+	@echo ... src/parser/grammerSymbol/grammerSymbol.s
 	@echo ... src/parser/parseTable/actionTable/actionTable.obj
 	@echo ... src/parser/parseTable/actionTable/actionTable.i
 	@echo ... src/parser/parseTable/actionTable/actionTable.s
@@ -407,6 +455,12 @@ help:
 	@echo ... src/parser/productionRule/productionRule.obj
 	@echo ... src/parser/productionRule/productionRule.i
 	@echo ... src/parser/productionRule/productionRule.s
+	@echo ... src/parser/stackItem/stackItem.obj
+	@echo ... src/parser/stackItem/stackItem.i
+	@echo ... src/parser/stackItem/stackItem.s
+	@echo ... src/token/token.obj
+	@echo ... src/token/token.i
+	@echo ... src/token/token.s
 .PHONY : help
 
 

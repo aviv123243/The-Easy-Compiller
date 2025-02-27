@@ -11,7 +11,7 @@ class productionRule
 {
 private:
     // left side of the production rule
-    NonTerminalKind _left;
+    NonTerminal _left;
 
     // right side of the production rule
     int _numOfRightSideSymbols;
@@ -19,15 +19,16 @@ private:
     vector<GrammarSymbolType> _rightSideTypes;
 
 public:
-    productionRule(NonTerminalKind left);
+    productionRule(NonTerminal left);
     ~productionRule();
     void addSymbol(SyntaxKind terminal);
-    void addSymbol(NonTerminalKind nonTerminal);
-    NonTerminalKind getNonTerminal(int index);
+    void addSymbol(NonTerminal nonTerminal);
+    NonTerminal getNonTerminal(int index);
     SyntaxKind getTerminal(int index);
     GrammarSymbolType getType(int index);
     int getNumOfRightSideSymbols();
-    NonTerminalKind getLeft();
+    NonTerminal getLeft();
+    string toString();
 };
 
 #endif

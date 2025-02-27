@@ -16,8 +16,8 @@ private:
 public:
     GotoTable(int numOfStates);
     ~GotoTable();
-    void add(int startState, NonTerminalKind nt, int endState);
-    int get(int state, NonTerminalKind nt);
+    void add(int startState, NonTerminal nt, int endState);
+    int get(int state, NonTerminal nt);
 };
 
 #endif

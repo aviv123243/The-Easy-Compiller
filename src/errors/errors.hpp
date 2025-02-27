@@ -1,8 +1,7 @@
 #ifndef __ERRORS
 #define __ERRORS
 
-#include "../lexer/lexer.hpp"
-#include "../lexer/lexerDebuggingUtils/lexerDebuggingUtils.hpp"
+#include "../token/token.hpp"
 #include <string>
 using namespace std;
 
