@@ -15,7 +15,7 @@ string nonTerminalEnumToString[] = {
 string nonTerminalToString(NonTerminal kind)
 {
     stringstream res;
-    res << "\033[31m<"
+    res << "\e[1;34m<"
         << nonTerminalEnumToString[(int)kind]
         << ">\033[0m";
 

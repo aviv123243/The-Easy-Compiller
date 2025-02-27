@@ -68,7 +68,7 @@ int main(int argc, char **argv)
 
         cout << "Parsing...5" << endl;
 
-        parser.printStack();
+        parser.printRules();
         ASTNode *root = parser.parse();
 
         cout << "Parsing...6" << endl;

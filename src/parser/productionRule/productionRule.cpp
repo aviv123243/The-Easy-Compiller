@@ -90,7 +90,7 @@ string productionRule::toString()
     {
         if (_rightSideTypes[i] == GrammarSymbolType::TERMINAL)
         {
-            str << " " << syntaxKindToString[(SyntaxKind)(_rightSideSymbols[i])];
+            str << " " << syntaxKindToString((SyntaxKind)(_rightSideSymbols[i]));
         }
         else
         {

@@ -14,7 +14,7 @@ string syntaxTokenToString(SyntaxToken token)
 {
     stringstream res;
     string tokenValue = token.val;
-    res << syntaxKindToString[token.kind]
+    res << syntaxKindToString(token.kind)
         << " ";
 
     if (!tokenValue.empty())

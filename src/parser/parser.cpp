@@ -114,7 +114,6 @@ ASTNode *Parser::parse()
 
     do
     {
-        printStack();
         int state = _stack.top().state;
 
         act = _actionTable.get(state, token->kind);
@@ -176,6 +175,6 @@ void Parser::printRules()
 {
     for (int i = 0; i < _rules.size(); i++)
     {
-        cout << "Rule " << i << ": " << _rules[i].toString() << endl;
+        cout << "\e[0;31mRule "  << i << "\e[0;37m : " << _rules[i].toString() << endl;
     }
 }
