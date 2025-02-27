@@ -55,5 +55,6 @@ public:
 
 string AstNodeToString(ASTNode *node);
 void printAstNode(ASTNode *node);
-void PrintParseTree(ASTNode *parent, const std::string &prefix, bool isLast);
+void PrintParseTree(ASTNode *parent);
+void PrintParseTreeHelper(ASTNode *parent, const std::string &prefix, bool isLast);
 #endif

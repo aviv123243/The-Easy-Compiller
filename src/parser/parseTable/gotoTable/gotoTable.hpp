@@ -11,9 +11,10 @@ class GotoTable
 {
 private:
     int **_table;
-    int _numOfStates;
 
 public:
+    int _numOfStates;
+
     GotoTable(int numOfStates);
     ~GotoTable();
     void add(int startState, NonTerminal nt, int endState);

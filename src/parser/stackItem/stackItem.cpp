@@ -9,7 +9,7 @@ using namespace std;
 string stackItemToString(StackItem item)
 {
     stringstream res;
-    res << "(" << ""<<AstNodeToString(item.node)<<"" << " |" << item.state << ")";
+    res << "(" << ""<<AstNodeToString(item.node)<<"" << " | " << item.state << ")";
     return res.str();
 }
 

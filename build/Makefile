@@ -272,6 +272,30 @@ src/parser/grammerSymbol/grammerSymbol.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.s
 .PHONY : src/parser/grammerSymbol/grammerSymbol.cpp.s
 
+src/parser/parseTable/action/action.obj: src/parser/parseTable/action/action.cpp.obj
+.PHONY : src/parser/parseTable/action/action.obj
+
+# target to build an object file
+src/parser/parseTable/action/action.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj
+.PHONY : src/parser/parseTable/action/action.cpp.obj
+
+src/parser/parseTable/action/action.i: src/parser/parseTable/action/action.cpp.i
+.PHONY : src/parser/parseTable/action/action.i
+
+# target to preprocess a source file
+src/parser/parseTable/action/action.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.i
+.PHONY : src/parser/parseTable/action/action.cpp.i
+
+src/parser/parseTable/action/action.s: src/parser/parseTable/action/action.cpp.s
+.PHONY : src/parser/parseTable/action/action.s
+
+# target to generate assembly for a file
+src/parser/parseTable/action/action.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.s
+.PHONY : src/parser/parseTable/action/action.cpp.s
+
 src/parser/parseTable/actionTable/actionTable.obj: src/parser/parseTable/actionTable/actionTable.cpp.obj
 .PHONY : src/parser/parseTable/actionTable/actionTable.obj
 
@@ -443,6 +467,9 @@ help:
 	@echo ... src/parser/grammerSymbol/grammerSymbol.obj
 	@echo ... src/parser/grammerSymbol/grammerSymbol.i
 	@echo ... src/parser/grammerSymbol/grammerSymbol.s
+	@echo ... src/parser/parseTable/action/action.obj
+	@echo ... src/parser/parseTable/action/action.i
+	@echo ... src/parser/parseTable/action/action.s
 	@echo ... src/parser/parseTable/actionTable/actionTable.obj
 	@echo ... src/parser/parseTable/actionTable/actionTable.i
 	@echo ... src/parser/parseTable/actionTable/actionTable.s

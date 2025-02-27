@@ -86,7 +86,7 @@ SyntaxToken * Lexer::getNextToken()
         currentState = _dfa.getState(currentState, currentChar);
 
         // if we didnt finish lexing the token, recognize it.
-        if (currentState != -1)
+        if (currentState != -1 && _cursor <= _fileSize)
         {
             val << currentChar;
         }

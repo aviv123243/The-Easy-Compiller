@@ -37,6 +37,12 @@
 },
 {
   "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\MyProjectExecutable.dir\\src\\parser\\parseTable\\action\\action.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\parser\\parseTable\\action\\action.cpp",
+  "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/action/action.cpp",
+  "output": "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\MyProjectExecutable.dir\\src\\parser\\parseTable\\actionTable\\actionTable.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\parser\\parseTable\\actionTable\\actionTable.cpp",
   "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/actionTable/actionTable.cpp",
   "output": "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj"

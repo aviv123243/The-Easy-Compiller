@@ -75,10 +75,13 @@ void printAstNode(ASTNode *node)
     cout << AstNodeToString(node) << endl;
 }
 
-void PrintParseTree(ASTNode *parent, const string &prefix = "", bool isLast = true)
+void PrintParseTree(ASTNode *node)
 {
-    cout << "AST" << endl;
+    PrintParseTreeHelper(node,"",true);
+}
 
+void PrintParseTreeHelper(ASTNode *parent, const string &prefix, bool isLast)
+{
     if (parent == nullptr)
     {
         return;
@@ -89,10 +92,12 @@ void PrintParseTree(ASTNode *parent, const string &prefix = "", bool isLast = tr
     cout << (isLast ? "|__ " : "|-- ") << AstNodeToString(parent) << endl;
 
     vector<ASTNode *> children = parent->GetChildren();
+
     int childernCount = children.size();
+
     for (int i = 0; i < childernCount; i++)
     {
         string newPrefix = prefix + (isLast ? "    " : "|   ");
-        PrintParseTree(children.at(i), newPrefix, i == childernCount - 1);
+        PrintParseTreeHelper(children.at(i), newPrefix, i == childernCount - 1);
     }
 }

@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/MyProjectExecutable.dir/src/nodes/nodes.cpp.obj.d"
   "CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj"
   "CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj.d"
+  "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj"
+  "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj.d"
   "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj"
   "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj.d"
   "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj"

@@ -36,6 +36,7 @@ private:
 public:
     Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler);
     SyntaxToken *getNextToken();
+    SyntaxToken *getCurrToken();
     SyntaxToken *peek(int index);
     void addProductionRule(productionRule rule);
     void shift(int state, SyntaxToken *token);

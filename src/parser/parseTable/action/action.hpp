@@ -1,5 +1,9 @@
 #ifndef __ACTION
 #define __ACTION
+#include <string>
+#include <sstream>
+
+using namespace std;
 
 enum actionType
 {
@@ -15,4 +19,5 @@ struct action
     int num;
 };
 
+string actionTypeToString(action type);
 #endif
