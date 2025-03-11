@@ -14,6 +14,8 @@
 #include <vector>
 #include <sstream>
 #include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
 #include <iostream>
 
 extern string nonTerminalKindToString[];
@@ -25,29 +27,49 @@ private:
     ActionTable _actionTable;
     GotoTable _gotoTable;
     stack<StackItem> _stack;
+    int _currState;
 
+    action getCurrAction();
+    void shift(action currAction);
+    void reduce(action currAction);
+    bool match(ASTNode *node, SyntaxKind type);
+    bool match(ASTNode *node, NonTerminal type);
+
+    //First and Follow sets
+    unordered_map<NonTerminal, unordered_set<SyntaxKind>> _firstSets;
+    unordered_map<NonTerminal, unordered_set<SyntaxKind>> _followSets;
+    
+    unordered_set<SyntaxKind> &computeFirst(NonTerminal nt);
+    unordered_set<SyntaxKind> &computeFollow(NonTerminal nt);
+    void computeFirstSets();
+    void computeFollowSets();
+
+    //Navigation and helpers
     vector<SyntaxToken *> _tokens;
     vector<productionRule> _rules;
-
-    ErrorHandler *_errorHandler;
-
     int _cursor;
 
-public:
-    Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler);
     SyntaxToken *getNextToken();
     SyntaxToken *getCurrToken();
     SyntaxToken *peek(int index);
     void addProductionRule(productionRule rule);
-    void shift(int state, SyntaxToken *token);
-    void reduce(int ruleNum);
-    bool match(ASTNode *node, SyntaxKind type);
-    bool match(ASTNode *node, NonTerminal type);
+
+    //error handling
+    ErrorHandler *_errorHandler;
+
+    
+
+public:
+    Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler);
+    
+    
     ASTNode *parse();
 
     // Debugging
     void printStack();
     void printRules();
+    void printFirstSet();
+    void printFollowSet();
 };
 
 #endif

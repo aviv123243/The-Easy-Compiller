@@ -41,13 +41,13 @@ int main(int argc, char **argv)
             cout << syntaxTokenToString(*tokens[i]) << endl;
         }
 
-        // Parser parser(tokens, 10, &errorHandler);
-
-        // ASTNode *root = parser.parse();
-        // PrintParseTree(root);
-
+        Parser parser(tokens, 10, &errorHandler);
+        parser.printFirstSet();
+        parser.printFollowSet();
+        parser.printRules();
         
 
-        // ASTNode *root = parser.parse();
+        ASTNode *root = parser.parse();
+        PrintParseTree(root);
     }
 }

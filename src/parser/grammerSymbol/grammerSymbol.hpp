@@ -5,6 +5,8 @@
 
 using namespace std;
 
+
+
 enum GrammarSymbolType
 {
     TERMINAL,
@@ -38,6 +40,7 @@ enum NonTerminal
     EMPTY_STATEMENT,
     NON_TERMINAL_COUNT
 };
+ 
 
 string nonTerminalToString(NonTerminal kind);
 

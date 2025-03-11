@@ -11,71 +11,74 @@
 using namespace std;
 
 Parser::Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler)
-    : _actionTable(numOfStates), _gotoTable(numOfStates), _rules(), _stack(), _errorHandler(handler), _cursor(0), _tokens(tokens) 
-    {
-        productionRule S(NonTerminal::STATEMENT);
-        S.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
-        S.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
+    : _actionTable(numOfStates), _gotoTable(numOfStates), _rules(), _stack(), _errorHandler(handler), _cursor(0), _tokens(tokens)
+{
+    productionRule S(NonTerminal::STATEMENT);
+    S.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
+    S.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
 
-        productionRule exp(NonTerminal::EXPRESSION);
-        exp.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
-        exp.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
+    productionRule exp(NonTerminal::EXPRESSION);
+    exp.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
+    exp.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
 
-        productionRule primaryExp1(NonTerminal::PRIMARY_EXPRESSION);
-        primaryExp1.addSymbol(SyntaxKind::IDENTIFIER);
-        primaryExp1.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
+    productionRule primaryExp1(NonTerminal::PRIMARY_EXPRESSION);
+    primaryExp1.addSymbol(SyntaxKind::IDENTIFIER);
+    primaryExp1.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
 
-        productionRule primaryExp2(NonTerminal::PRIMARY_EXPRESSION);
-        primaryExp2.addSymbol(SyntaxKind::FLOAT_LITERAL);
+    productionRule primaryExp2(NonTerminal::PRIMARY_EXPRESSION);
+    primaryExp2.addSymbol(SyntaxKind::FLOAT_LITERAL);
 
-        addProductionRule(S);
-        addProductionRule(exp);
-        addProductionRule(primaryExp1);
-        addProductionRule(primaryExp2);
+    addProductionRule(S);
+    addProductionRule(exp);
+    addProductionRule(primaryExp1);
+    addProductionRule(primaryExp2);
 
-        //state 0
-        _actionTable.add(0, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 3});
-        _actionTable.add(0, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 4});
-        _gotoTable.add(0, NonTerminal::EXPRESSION, 1);
-        _gotoTable.add(0, NonTerminal::PRIMARY_EXPRESSION, 2);
+    // state 0
+    _actionTable.add(0, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 3});
+    _actionTable.add(0, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 4});
+    _gotoTable.add(0, NonTerminal::EXPRESSION, 1);
+    _gotoTable.add(0, NonTerminal::PRIMARY_EXPRESSION, 2);
 
-        //state 1
-        _actionTable.add(1, SyntaxKind::END_OF_FILE, action{actionType::ACCEPT, 0});
+    // state 1
+    _actionTable.add(1, SyntaxKind::END_OF_FILE, action{actionType::ACCEPT, 0});
 
-        //state 2
-        _actionTable.add(2, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 6});
-        _actionTable.add(2, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 7});
-        _gotoTable.add(2, NonTerminal::PRIMARY_EXPRESSION, 5);
+    // state 2
+    _actionTable.add(2, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 6});
+    _actionTable.add(2, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 7});
+    _gotoTable.add(2, NonTerminal::PRIMARY_EXPRESSION, 5);
 
-        //state 3
-        _actionTable.add(3, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 3});
-        _actionTable.add(3, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 4});
-        _gotoTable.add(3, NonTerminal::PRIMARY_EXPRESSION, 8);
+    // state 3
+    _actionTable.add(3, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 3});
+    _actionTable.add(3, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 4});
+    _gotoTable.add(3, NonTerminal::PRIMARY_EXPRESSION, 8);
 
-        //state 4
-        _actionTable.add(4, SyntaxKind::IDENTIFIER, action{actionType::REDUCE, 3});
-        _actionTable.add(4, SyntaxKind::FLOAT_LITERAL, action{actionType::REDUCE, 3});
+    // state 4
+    _actionTable.add(4, SyntaxKind::IDENTIFIER, action{actionType::REDUCE, 3});
+    _actionTable.add(4, SyntaxKind::FLOAT_LITERAL, action{actionType::REDUCE, 3});
 
-        //state 5
-        _actionTable.add(5, SyntaxKind::END_OF_FILE, action{actionType::REDUCE, 1});
+    // state 5
+    _actionTable.add(5, SyntaxKind::END_OF_FILE, action{actionType::REDUCE, 1});
 
-        //state 6
-        _actionTable.add(6, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 6});
-        _actionTable.add(6, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 7});
-        _gotoTable.add(6, NonTerminal::PRIMARY_EXPRESSION, 9);
+    // state 6
+    _actionTable.add(6, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 6});
+    _actionTable.add(6, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 7});
+    _gotoTable.add(6, NonTerminal::PRIMARY_EXPRESSION, 9);
 
-        //state 7
-        _actionTable.add(7, SyntaxKind::END_OF_FILE, action{actionType::REDUCE, 3});
-        
-        //state 8
-        _actionTable.add(8, SyntaxKind::IDENTIFIER, action{actionType::REDUCE, 2});
-        _actionTable.add(8, SyntaxKind::FLOAT_LITERAL, action{actionType::REDUCE, 2});
+    // state 7
+    _actionTable.add(7, SyntaxKind::END_OF_FILE, action{actionType::REDUCE, 3});
 
-        //state 9
-        _actionTable.add(9, SyntaxKind::END_OF_FILE, action{actionType::REDUCE, 2});
+    // state 8
+    _actionTable.add(8, SyntaxKind::IDENTIFIER, action{actionType::REDUCE, 2});
+    _actionTable.add(8, SyntaxKind::FLOAT_LITERAL, action{actionType::REDUCE, 2});
 
-        _stack.push(StackItem{0, new NonTerminalNode(NonTerminal::PROGRAM)});
-    }   
+    // state 9
+    _actionTable.add(9, SyntaxKind::END_OF_FILE, action{actionType::REDUCE, 2});
+
+    _stack.push(StackItem{0, new NonTerminalNode(NonTerminal::PROGRAM)});
+
+    computeFirstSets();
+    computeFollowSets();
+}
 
 SyntaxToken *Parser::getNextToken()
 {
@@ -138,20 +141,32 @@ bool Parser::match(ASTNode *node, NonTerminal type)
     return true;
 }
 
-void Parser::shift(int state, SyntaxToken *token)
+action Parser::getCurrAction()
 {
-    cout << "Shifting to state " << state << " with token " << syntaxTokenToString(*token) << endl;
+    return _actionTable.get(_stack.top().state, peek(0)->kind);
+}
+
+void Parser::shift(action currAction)
+{
+    int state = currAction.num;
+    SyntaxToken *token = getNextToken();
+
+    cout << "Shifting to state " << currAction.num << " with token " << syntaxTokenToString(*token) << endl;
     // Create a new terminalNode
     ASTNode *node = new TerminalNode(token);
 
     // Push to stack
     _stack.push(StackItem{state, node});
+
+    // Update current state
+    _currState = state;
 }
 
-void Parser::reduce(int ruleNum)
+void Parser::reduce(action currAction)
 {
-    cout << "Reducing with rule " << ruleNum << endl;
-    productionRule rule = _rules[ruleNum];
+    int productionRuleNum = currAction.num;
+    cout << "Reducing with rule " << productionRuleNum << endl;
+    productionRule rule = _rules[productionRuleNum];
 
     // Create a new nonTerminalNode
     NonTerminalNode *node = new NonTerminalNode(rule.getLeft());
@@ -174,13 +189,16 @@ void Parser::reduce(int ruleNum)
     }
 
     // Push to stack
-    _stack.push(StackItem{_gotoTable.get(_stack.top().state, rule.getLeft()), node});
+    int currentState = _stack.top().state;
+    _stack.push(StackItem{_gotoTable.get(currentState, rule.getLeft()), node});
+
+    // Update current state
+    _currState = currentState;
 }
 
 ASTNode *Parser::parse()
 {
-    SyntaxToken *token = peek(0);
-    action act;
+    action currAction;
 
     do
     {
@@ -189,31 +207,28 @@ ASTNode *Parser::parse()
         cout << endl;
         int state = _stack.top().state;
 
-        act = _actionTable.get(state, peek(0)->kind);
-        cout << "state:"<< state << " token:"<< syntaxTokenToString(*peek(0))<<" Action: " << actionTypeToString(act) << endl;
-        
-        if (act.type == actionType::REDUCE)
+        currAction = getCurrAction();
+        cout << "state:" << state << " token:" << syntaxTokenToString(*peek(0)) << " Action: " << actionTypeToString(currAction) << endl;
+
+        if (currAction.type == actionType::REDUCE)
         {
-            reduce(act.num);
+            reduce(currAction);
         }
         else
         {
-            if (act.type == actionType::SHIFT)
+            if (currAction.type == actionType::SHIFT)
             {
-                shift(act.num, token);
+                shift(currAction);
             }
 
-            else if (act.type == actionType::ERROR)
+            else if (currAction.type == actionType::ERROR)
             {
-                cout << "Error" << endl;
-                _errorHandler->addError(new SyntacticError(token));
+                // cout << "Error" << endl;
+                // _errorHandler->addError(new SyntacticError(token));
             }
-
-            token = getNextToken();
         }
-     
 
-    } while (act.type != actionType::ACCEPT);
+    } while (currAction.type != actionType::ACCEPT);
 
     return _stack.top().node;
 }
@@ -243,7 +258,7 @@ void Parser::printStack()
         tempStack.pop();
         _stack.push(item);
     }
-    
+
     cout << " ->" << endl;
 }
 
@@ -251,6 +266,149 @@ void Parser::printRules()
 {
     for (int i = 0; i < _rules.size(); i++)
     {
-        cout << "\e[0;31mRule "  << i << "\e[0;37m : " << _rules[i].toString() << endl;
+        cout << "\e[0;31mRule " << i << "\e[0;37m : " << _rules[i].toString() << endl;
     }
+}
+
+void Parser::printFirstSet()
+{
+    for (int i = 0; i < _rules.size(); i++)
+    {
+        NonTerminal nt = _rules[i].getLeft();
+        cout << "first(" << nonTerminalToString(nt) << ") = {";
+
+        int j = _firstSets[_rules[i].getLeft()].size(); // size of follow set
+        for (const SyntaxKind &terminal : _firstSets[nt])
+        {
+            cout << syntaxKindToString(terminal);
+            if (j != 1)
+                cout << ", ";
+
+            j--;
+        }
+
+        cout << "}" << endl;
+    }
+}
+
+void Parser::printFollowSet()
+{
+    for (int i = 0; i < _rules.size(); i++)
+    {
+        NonTerminal nt = _rules[i].getLeft();
+        cout << "follow(" << nonTerminalToString(nt) << ") = {";
+
+        int j = _followSets[_rules[i].getLeft()].size(); // size of follow set
+        for (const SyntaxKind &terminal : _followSets[nt])
+        {
+            cout << syntaxKindToString(terminal);
+            if (j != 1)
+                cout << ", ";
+
+            j--;
+        }
+
+        cout << "}" << endl;
+    }
+}
+
+void Parser::computeFirstSets()
+{
+    for (int i = 0; i < _rules.size(); i++)
+    {
+        _firstSets[_rules[i].getLeft()] = unordered_set<SyntaxKind>();
+    }
+
+    for (int i = 0; i < _rules.size(); i++)
+    {
+        computeFirst(_rules[i].getLeft());
+    }
+}
+
+unordered_set<SyntaxKind> &Parser::computeFirst(NonTerminal nt)
+{
+    if (_firstSets[nt].size() > 0)
+    {
+        return _firstSets[nt];
+    }
+
+    unordered_set<SyntaxKind> &firstSet = _firstSets[nt];
+    for (int i = 0; i < _rules.size(); i++)
+    {
+        if (_rules[i].getLeft() == nt)
+        {
+            GrammarSymbolType type = _rules[i].getType(0);
+            if (type == GrammarSymbolType::TERMINAL)
+            {
+                firstSet.insert(_rules[i].getTerminal(0));
+            }
+            else if (type == GrammarSymbolType::NON_TERMINAL)
+            {
+                // Recursively compute FIRST set for non-terminal
+                unordered_set<SyntaxKind> &subFirstSet = computeFirst(_rules[i].getNonTerminal(0));
+                firstSet.insert(subFirstSet.begin(), subFirstSet.end());
+            }
+        }
+    }
+
+    return firstSet;
+}
+
+void Parser::computeFollowSets()
+{
+    // Initialize follow sets for all non-terminals
+    for (int i = 0; i < _rules.size(); i++)
+    {
+        _followSets[_rules[i].getLeft()] = unordered_set<SyntaxKind>();
+    }
+
+    // Add EOF marker to the follow set of the start symbol
+    _followSets[NonTerminal::STATEMENT].insert(SyntaxKind::END_OF_FILE);
+
+    bool changed;
+    do
+    {
+        changed = false;
+        // iterate over every rule
+        for (int i = 0; i < _rules.size(); i++)
+        {
+            productionRule &rule = _rules[i];
+
+            // iterate over every right hand side symbol
+            for (int j = 0; j < rule.getNumOfRightSideSymbols(); j++)
+            {
+                // if you found in the form of αBβ follow(B) = first(β)
+                if (rule.getType(j) == GrammarSymbolType::NON_TERMINAL)
+                {
+                    NonTerminal B = rule.getNonTerminal(j);
+                    unordered_set<SyntaxKind> followB = _followSets[B];
+
+                    if (j == rule.getNumOfRightSideSymbols() - 1)
+                    {
+                        // if is last symbol and nonterminal follow(A) = follow(B)
+                        unordered_set<SyntaxKind> followA = _followSets[rule.getLeft()];
+                        followB.insert(followA.begin(), followA.end());
+                    }
+                    else
+                    {
+                        if (rule.getType(j) == GrammarSymbolType::TERMINAL)
+                        {
+                            followB.insert(rule.getTerminal(j));
+                        }
+                        else
+                        {
+                            unordered_set<SyntaxKind> firstNext = _firstSets[rule.getNonTerminal(j + 1)];
+                            followB.insert(firstNext.begin(), firstNext.end());
+                        }
+                    }
+
+                    if (_followSets[B].size() != followB.size())
+                    {
+                        _followSets[B] = followB;
+                        changed = true;
+                    }
+                }
+            }
+        }
+    } while (changed);
 }

@@ -51,6 +51,7 @@ enum SyntaxKind
     BANG_EQUALS,
     END_OF_FILE,
     UNEXPECTED_TOKEN,
+    EPSILON,
     SYNTAX_KIND_COUNT
 };
 
