@@ -20,14 +20,18 @@ private:
 
 public:
     productionRule(NonTerminal left);
+    productionRule();
     ~productionRule();
-    void addSymbol(SyntaxKind terminal);
-    void addSymbol(NonTerminal nonTerminal);
+    productionRule& addSymbol(SyntaxKind terminal);
+    productionRule& addSymbol(NonTerminal nonTerminal);
+    productionRule& addSymbol();
     NonTerminal getNonTerminal(int index);
     SyntaxKind getTerminal(int index);
     GrammarSymbolType getType(int index);
     int getNumOfRightSideSymbols();
     NonTerminal getLeft();
+    void setLeft(NonTerminal left);
+    void reset();
     string toString();
 };
 

@@ -1,0 +1,135 @@
+Program -> FunctionDecl Program
+         | /* empty */ ;
+
+FunctionDecl -> KEYWORD_FN IDENTIFIER OPEN_PAREN ParamList CLOSED_PAREN RIGHT_ARROW Type OPEN_CURLY StmtList CLOSED_CURLY ;
+
+ParamList -> Param ParamTail
+          | /* empty */ ;
+
+ParamTail -> COMMA Param ParamTail
+          | /* empty */ ;
+
+Param -> Type IDENTIFIER ;
+
+Type -> BaseType TypeTail ;
+
+BaseType -> KEYWORD_INT
+          | KEYWORD_FLOAT
+          | KEYWORD_CHAR ;
+
+TypeTail -> OPEN_BRACKET INTEGER_LITERAL CLOSED_BRACKET TypeTail
+          | STAR TypeTail
+          | /* empty */ ;
+
+StmtList -> Stmt StmtList
+         | /* empty */ ;
+
+Stmt -> VarDeclStmt
+      | AssignStmt 
+      | IfStmt
+      | WhileStmt
+      | ForStmt
+      | ReturnStmt
+      | ExprStmt ;
+
+Body -> OPEN_CURLY StmtList CLOSED_CURLY
+      | Stmt ;
+
+VarDeclExpr -> Type IDENTIFIER InitOpt ;
+
+VarDeclStmt -> VarDeclExpr SEMICOLON ;
+
+InitOpt -> EQUALS Expr
+         | /* empty */ ;
+
+AssignExpr -> AssignTarget AssignOp Expr
+
+AssignStmt -> AssignExpr SEMICOLON;
+
+AssignTarget -> IDENTIFIER  
+             | IDENTIFIER OPEN_BRACKET Expr CLOSED_BRACKET  
+             | STAR IDENTIFIER
+			 
+AssignOp -> EQUALS | PLUS_EQUALS |MINUS_EQUALS|SLASH_EQUALS|STAR_EQUALS|
+			AMPERSAND_EQUALS|PIPE_EQUALS|CARET_EQUALS|TILDE_EQUALS ;
+
+IfStmt -> KEYWORD_IF OPEN_PAREN Expr CLOSED_PAREN Body ElseOpt ;
+
+ElseOpt -> KEYWORD_ELSE Body
+         | /* empty */ ;
+
+WhileStmt -> KEYWORD_WHILE OPEN_PAREN Expr CLOSED_PAREN Body ;
+
+ForStmt -> KEYWORD_FOR OPEN_PAREN ForInit SEMICOLON ExprOpt SEMICOLON ForUpdate CLOSED_PAREN Body ;
+
+ForInit -> VarDeclExpr
+         | AssignExpr 
+         | /* empty */ ;
+
+ExprOpt -> Expr
+         | /* empty */ ;
+
+ForUpdate -> AssignExpr 
+           | /* empty */ ;
+
+ReturnStmt -> KEYWORD_RET ExprOpt SEMICOLON;
+
+ExprStmt -> Expr SEMICOLON ;
+
+ExprList -> Expr ExprTail
+         | /* empty */ ;
+
+ExprTail -> COMMA Expr ExprTail
+         | /* empty */ ;
+
+Expr -> UnaryExpr RelOpTail ;
+
+RelOpTail -> RelOp UnaryExpr
+          | /* empty */ ;
+
+RelOp -> LESS_THAN
+       | GREATER_THAN
+       | LESS_THAN_EQUALS
+       | GREATER_THAN_EQUALS
+       | EQUALS_EQUALS
+       | BANG_EQUALS ;
+
+UnaryExpr -> UnaryOpList SimpleExpr 
+ 
+UnaryOpList -> UnaryOp UnaryOpList  
+            | /* empty */  
+			
+UnaryOp -> MINUS  
+        | BANG     
+
+SimpleExpr -> Term AddOpTail ;
+
+AddOpTail -> AddOp Term AddOpTail
+          | /* empty */ ;
+
+AddOp -> PLUS
+       | MINUS
+	   | PIPE
+	   | CARET
+       | PIPE_PIPE ;
+
+Term -> Factor MulOpTail ;
+
+MulOpTail -> MulOp Factor MulOpTail
+          | /* empty */ ;
+
+MulOp -> STAR
+       | SLASH
+	   | AMPERSAND
+       | AMPERSAND_AMPERSAND ;
+
+Factor -> OPEN_PAREN Expr CLOSED_PAREN
+        | IDENTIFIER
+        | INTEGER_LITERAL
+        | FLOAT_LITERAL
+        | CHAR_LITERAL
+        | IDENTIFIER FunctionCallOp ;
+		
+FunctionCallOp -> OPEN_PAREN ExprList CLOSED_PAREN
+				| /* empty */ ;
+

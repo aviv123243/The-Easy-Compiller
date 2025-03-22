@@ -12,22 +12,22 @@
 using namespace std;
 
 SyntaxKind endStateToSyntaxKind[] = {
-    SyntaxKind::UNEXPECTED_TOKEN, SyntaxKind::INTEGER_LITERAL, SyntaxKind::FLOAT_LITERAL,
-    SyntaxKind::STRING_LITERAL, SyntaxKind::IDENTIFIER, SyntaxKind::KEYWORD_IF,
+    SyntaxKind::UNEXPECTED_TOKEN, SyntaxKind::INTEGER_LITERAL, SyntaxKind::FLOAT_LITERAL, SyntaxKind::CHAR_LITERAL,
+    SyntaxKind::STRING_LITERAL, SyntaxKind::IDENTIFIER, SyntaxKind::KEYWORD_IF,SyntaxKind::KEYWORD_ELSE,
     SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR, SyntaxKind::KEYWORD_FN,
-    SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
+    SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT, SyntaxKind::KEYWORD_CHAR,
     SyntaxKind::EQUALS, SyntaxKind::COMMA, SyntaxKind::PLUS, SyntaxKind::MINUS,
     SyntaxKind::SLASH, SyntaxKind::STAR, SyntaxKind::AMPERSAND, SyntaxKind::PIPE,
-    SyntaxKind::BANG, SyntaxKind::SEMICOLON, SyntaxKind::LESS_THAN, SyntaxKind::GREATER_THAN,
-    SyntaxKind::OPEN_PAREN, SyntaxKind::CLOSED_PAREN, SyntaxKind::OPEN_CURLY,
+    SyntaxKind::CARET, SyntaxKind::TILDE,SyntaxKind::BANG, SyntaxKind::SEMICOLON, SyntaxKind::LESS_THAN,
+    SyntaxKind::GREATER_THAN, SyntaxKind::OPEN_PAREN, SyntaxKind::CLOSED_PAREN, SyntaxKind::OPEN_CURLY,
     SyntaxKind::CLOSED_CURLY, SyntaxKind::OPEN_BRACKET, SyntaxKind::CLOSED_BRACKET,
-    SyntaxKind::RIGHT_ARROW, SyntaxKind::PLUS_PLUS, SyntaxKind::DASH_DASH,
-    SyntaxKind::PLUS_EQUALS, SyntaxKind::DASH_EQUALS, SyntaxKind::SLASH_EQUALS,
-    SyntaxKind::STAR_EQUALS, SyntaxKind::EQUALS_EQUALS, SyntaxKind::LESS_THAN_EQUALS,
+    SyntaxKind::RIGHT_ARROW, SyntaxKind::PLUS_PLUS, SyntaxKind::MINUS_MINUS,
+    SyntaxKind::PLUS_EQUALS, SyntaxKind::MINUS_EQUALS, SyntaxKind::SLASH_EQUALS,
+    SyntaxKind::STAR_EQUALS, SyntaxKind::AMPERSAND_EQUALS,SyntaxKind::PIPE_EQUALS, SyntaxKind::CARET_EQUALS,
+    SyntaxKind::TILDE_EQUALS, SyntaxKind::EQUALS_EQUALS, SyntaxKind::LESS_THAN_EQUALS,
     SyntaxKind::GREATER_THAN_EQUALS, SyntaxKind::AMPERSAND_AMPERSAND, SyntaxKind::PIPE_PIPE,
     SyntaxKind::BANG_EQUALS, SyntaxKind::END_OF_FILE, SyntaxKind::UNEXPECTED_TOKEN
 };
-
 
 Lexer::Lexer(string srcFile, string DFAConfigFile, ErrorHandler *handler)
     : _srcFile(srcFile), _dfa(DFAConfigFile), _errorHandler(handler), _cursor(0), _currLine(1), _currColumn(1)
@@ -41,31 +41,31 @@ Lexer::Lexer(string srcFile, string DFAConfigFile, ErrorHandler *handler)
 
 vector<SyntaxToken *> Lexer::getTokens()
 {
-    vector<SyntaxToken*> tokens;
-    SyntaxToken * currToken;
+    vector<SyntaxToken *> tokens;
+    SyntaxToken *currToken;
 
-    while ((currToken = getNextToken()) -> kind != SyntaxKind::END_OF_FILE)
+    while ((currToken = getNextToken())->kind != SyntaxKind::END_OF_FILE)
     {
         tokens.push_back(currToken);
     }
 
-    tokens.push_back( currToken); // pushing the EOF token
+    tokens.push_back(currToken); // pushing the EOF token
     return tokens;
 }
 
-SyntaxToken * Lexer::getNextToken()
+SyntaxToken *Lexer::getNextToken()
 {
     char currentChar;
     stringstream val;
     int currentState = _dfa.getStartState();
     int prevState;
-    SyntaxToken * resToken = new SyntaxToken();
+    SyntaxToken *resToken = new SyntaxToken();
     ifstream src(_srcFile);
     src.seekg(_cursor, ios::beg);
 
     if (_cursor >= _fileSize)
     {
-        resToken -> kind = SyntaxKind::END_OF_FILE;
+        resToken->kind = SyntaxKind::END_OF_FILE;
         return resToken;
     }
 
@@ -112,14 +112,14 @@ SyntaxToken * Lexer::getNextToken()
     else
     {
         // else if the state is an end state, return the token
-        resToken -> line = _currLine;
-        resToken -> column = _currColumn;
+        resToken->line = _currLine;
+        resToken->column = _currColumn;
 
         vector<int> endStates = _dfa.getEndStates();
         if (find(endStates.begin(), endStates.end(), currentState) != endStates.end())
         {
-            resToken -> kind = getSyntaxKind(currentState);
-            resToken -> val = val.str();
+            resToken->kind = getSyntaxKind(currentState);
+            resToken->val = val.str();
         }
 
         // else the token is invalid so return an unexpected token
@@ -127,7 +127,7 @@ SyntaxToken * Lexer::getNextToken()
         {
             // if the token is invalid, add an error to the handler and skip it
             _cursor++;
-            resToken -> kind = SyntaxKind::UNEXPECTED_TOKEN;
+            resToken->kind = SyntaxKind::UNEXPECTED_TOKEN;
             _errorHandler->addError(new SyntaxError("Unexpected token error", _currLine, _currColumn));
         }
     }

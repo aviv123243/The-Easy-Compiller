@@ -161,11 +161,26 @@ CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.s:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.s"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\grammerSymbol\grammerSymbol.cpp -o CMakeFiles\MyProjectExecutable.dir\src\parser\grammerSymbol\grammerSymbol.cpp.s
 
+CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj: CMakeFiles/MyProjectExecutable.dir/flags.make
+CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj: CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp
+CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/initParserFunctions.cpp
+CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj: CMakeFiles/MyProjectExecutable.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj -MF CMakeFiles\MyProjectExecutable.dir\src\parser\initParserFunctions.cpp.obj.d -o CMakeFiles\MyProjectExecutable.dir\src\parser\initParserFunctions.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\initParserFunctions.cpp
+
+CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.i"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\initParserFunctions.cpp > CMakeFiles\MyProjectExecutable.dir\src\parser\initParserFunctions.cpp.i
+
+CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.s"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\initParserFunctions.cpp -o CMakeFiles\MyProjectExecutable.dir\src\parser\initParserFunctions.cpp.s
+
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj: CMakeFiles/MyProjectExecutable.dir/flags.make
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj: CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/action/action.cpp
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj: CMakeFiles/MyProjectExecutable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj -MF CMakeFiles\MyProjectExecutable.dir\src\parser\parseTable\action\action.cpp.obj.d -o CMakeFiles\MyProjectExecutable.dir\src\parser\parseTable\action\action.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\parseTable\action\action.cpp
 
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.i: cmake_force
@@ -180,7 +195,7 @@ CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj: CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/actionTable/actionTable.cpp
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj: CMakeFiles/MyProjectExecutable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj -MF CMakeFiles\MyProjectExecutable.dir\src\parser\parseTable\actionTable\actionTable.cpp.obj.d -o CMakeFiles\MyProjectExecutable.dir\src\parser\parseTable\actionTable\actionTable.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\parseTable\actionTable\actionTable.cpp
 
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.i: cmake_force
@@ -195,7 +210,7 @@ CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj: CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/gotoTable/gotoTable.cpp
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj: CMakeFiles/MyProjectExecutable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj -MF CMakeFiles\MyProjectExecutable.dir\src\parser\parseTable\gotoTable\gotoTable.cpp.obj.d -o CMakeFiles\MyProjectExecutable.dir\src\parser\parseTable\gotoTable\gotoTable.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\parseTable\gotoTable\gotoTable.cpp
 
 CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.i: cmake_force
@@ -210,7 +225,7 @@ CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.obj: CMakeFiles/MyProje
 CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.obj: CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp
 CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parser.cpp
 CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.obj: CMakeFiles/MyProjectExecutable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.obj"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.obj -MF CMakeFiles\MyProjectExecutable.dir\src\parser\parser.cpp.obj.d -o CMakeFiles\MyProjectExecutable.dir\src\parser\parser.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\parser.cpp
 
 CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.i: cmake_force
@@ -225,7 +240,7 @@ CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.
 CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.obj: CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp
 CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/productionRule/productionRule.cpp
 CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.obj: CMakeFiles/MyProjectExecutable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.obj"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.obj -MF CMakeFiles\MyProjectExecutable.dir\src\parser\productionRule\productionRule.cpp.obj.d -o CMakeFiles\MyProjectExecutable.dir\src\parser\productionRule\productionRule.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\productionRule\productionRule.cpp
 
 CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.i: cmake_force
@@ -240,7 +255,7 @@ CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj: CMake
 CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj: CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp
 CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/stackItem/stackItem.cpp
 CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj: CMakeFiles/MyProjectExecutable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj -MF CMakeFiles\MyProjectExecutable.dir\src\parser\stackItem\stackItem.cpp.obj.d -o CMakeFiles\MyProjectExecutable.dir\src\parser\stackItem\stackItem.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\stackItem\stackItem.cpp
 
 CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.i: cmake_force
@@ -251,11 +266,41 @@ CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.s: cmake_f
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.s"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\stackItem\stackItem.cpp -o CMakeFiles\MyProjectExecutable.dir\src\parser\stackItem\stackItem.cpp.s
 
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj: CMakeFiles/MyProjectExecutable.dir/flags.make
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj: CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/symbolTable.cpp
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj: CMakeFiles/MyProjectExecutable.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj -MF CMakeFiles\MyProjectExecutable.dir\src\symbolTable\symbolTable.cpp.obj.d -o CMakeFiles\MyProjectExecutable.dir\src\symbolTable\symbolTable.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\symbolTable.cpp
+
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.i"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\symbolTable.cpp > CMakeFiles\MyProjectExecutable.dir\src\symbolTable\symbolTable.cpp.i
+
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.s"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\symbolTable.cpp -o CMakeFiles\MyProjectExecutable.dir\src\symbolTable\symbolTable.cpp.s
+
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj: CMakeFiles/MyProjectExecutable.dir/flags.make
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj: CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/tableEntery/tableEntery.cpp
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj: CMakeFiles/MyProjectExecutable.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj -MF CMakeFiles\MyProjectExecutable.dir\src\symbolTable\tableEntery\tableEntery.cpp.obj.d -o CMakeFiles\MyProjectExecutable.dir\src\symbolTable\tableEntery\tableEntery.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\tableEntery\tableEntery.cpp
+
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.i"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\tableEntery\tableEntery.cpp > CMakeFiles\MyProjectExecutable.dir\src\symbolTable\tableEntery\tableEntery.cpp.i
+
+CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.s"
+	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\tableEntery\tableEntery.cpp -o CMakeFiles\MyProjectExecutable.dir\src\symbolTable\tableEntery\tableEntery.cpp.s
+
 CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj: CMakeFiles/MyProjectExecutable.dir/flags.make
 CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj: CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp
 CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/token/token.cpp
 CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj: CMakeFiles/MyProjectExecutable.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj"
 	C:\MinGW\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj -MF CMakeFiles\MyProjectExecutable.dir\src\token\token.cpp.obj.d -o CMakeFiles\MyProjectExecutable.dir\src\token\token.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\token\token.cpp
 
 CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.i: cmake_force
@@ -274,12 +319,15 @@ MyProjectExecutable_OBJECTS = \
 "CMakeFiles/MyProjectExecutable.dir/src/main/main.cpp.obj" \
 "CMakeFiles/MyProjectExecutable.dir/src/nodes/nodes.cpp.obj" \
 "CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj" \
+"CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj" \
 "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj" \
 "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj" \
 "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj" \
 "CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.obj" \
 "CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.obj" \
 "CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj" \
+"CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj" \
+"CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj" \
 "CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj"
 
 # External object files for target MyProjectExecutable
@@ -291,18 +339,21 @@ MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/lexer/lexer.cpp.
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/main/main.cpp.obj
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/nodes/nodes.cpp.obj
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj
+MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.obj
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.obj
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj
+MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj
+MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/build.make
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/linkLibs.rsp
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/objects1.rsp
 MyProjectExecutable.exe: CMakeFiles/MyProjectExecutable.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable MyProjectExecutable.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable MyProjectExecutable.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\MyProjectExecutable.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

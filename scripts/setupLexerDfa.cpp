@@ -37,7 +37,7 @@ int main()
 
     dfa.setStartState(START_STATE);
 
-    //--[integer]-- (end state=1)
+    //--[integer]--
     dfa.addEndState(endState); // 1
     for (int i = '0'; i <= '9'; i++)
     {
@@ -50,7 +50,7 @@ int main()
     }
 
     endState++;
-    //--[float]-- (end state=2)
+    //--[float]--
     dfa.addEndState(endState);
     dfa.insertTransition(endState - 1, '.', midState);
 
@@ -66,8 +66,23 @@ int main()
 
     midState++;
     endState++;
-    //--[string literal]-- (end state=3)
-    dfa.addEndState(endState); // 3
+    //--[char]--
+    dfa.addEndState(endState);
+    dfa.insertTransition(START_STATE, '\'', midState);
+
+    for (int i = ' '; i <= '~'; i++)
+    {
+        if (i != '\'')
+            dfa.insertTransition(midState, i, midState + 1);
+    }
+
+    midState++;
+    dfa.insertTransition(midState, '\'', endState);
+
+    midState++;
+    endState++;
+    //--[string literal]--
+    dfa.addEndState(endState);
     dfa.insertTransition(START_STATE, '"', midState);
 
     for (int i = ' '; i <= '~'; i++)
@@ -80,7 +95,7 @@ int main()
 
     midState++;
     endState++;
-    //--[id]-- (end state=4)
+    //--[id]--
     dfa.addEndState(endState);
 
     for (int i = 'A'; i <= 'Z'; i++)
@@ -103,7 +118,7 @@ int main()
     dfa.insertTransition(endState, '_', endState);
     endState++;
     //---------[keyWords]---------
-    vector<string> keyWords = {"if", "while", "for", "fn", "ret", "int", "float"};
+    vector<string> keyWords = {"if", "else", "while", "for", "fn", "ret", "int", "float", "char"};
 
     for (i = 0; i < keyWords.size(); i++)
     {
@@ -154,7 +169,7 @@ int main()
     }
 
     //---------[other symobls]---------
-    vector<string> symbols = {"=", ",", "+", "-", "/", "*", "&", "|", "!", ";", "<", ">", "(", ")", "{", "}", "[", "]", "=>", "++", "--", "+=", "-=", "/=", "*=", "==", "<=", ">=", "&&", "||", "!="};
+    vector<string> symbols = {"=", ",", "+", "-", "/", "*", "&", "|", "^", "~", "!", ";", "<", ">", "(", ")", "{", "}", "[", "]", "=>", "++", "--", "+=", "-=", "/=", "*=","&=", "|=", "^=", "~=", "==", "<=", ">=", "&&", "||", "!="};
 
     for (i = 0; i < symbols.size(); i++)
     {

@@ -18,11 +18,12 @@ bool SymbolTable::isExists(string name)
 //add entery to table 
 //if symbol already exists it wont do enything and return false
 //otherwise returns true
-bool SymbolTable::addEntery(tableEntery entery)
+bool SymbolTable::addSymbol(SyntaxToken *nameToken,SyntaxToken *valTypeToken,enteryType enterytype)
 {
-    if(isExists(entery.symbol->val)) return false;
+    if(isExists(nameToken -> val)) return false;
 
-    _table[entery.symbol->val] = entery;
+    tableEntery entery = createEntery(nameToken,valTypeToken,enterytype);
+    _table[entery.name] = entery;
 }
 
 //returns an vector of the inner scopes 

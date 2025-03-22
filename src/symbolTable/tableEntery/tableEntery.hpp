@@ -14,9 +14,10 @@ enum enteryType
 
 struct tableEntery
 {
-    SyntaxToken *symbol;
-    enteryType valType;
+    string name;
+    enteryType enteryType;
+    SyntaxKind valType;
 };
 
-tableEntery createEntery(SyntaxToken *symbol,enteryType type);
+tableEntery createEntery(SyntaxToken *nameToken,SyntaxToken *valTypeToken,enteryType enterytype);
 #endif

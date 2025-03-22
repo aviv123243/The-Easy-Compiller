@@ -18,9 +18,8 @@ class SymbolTable
         SymbolTable();
         tableEntery getEntery(string name);
         bool isExists(string name);
-        bool addEntery(tableEntery entery);
-        const vector<SymbolTable*> &getInnerScopes();
-        
+        bool addSymbol(SyntaxToken *nameToken,SyntaxToken *valTypeToken,enteryType enterytype);
+        const vector<SymbolTable*> &getInnerScopes();   
 };
 
 

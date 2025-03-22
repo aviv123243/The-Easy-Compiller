@@ -6,6 +6,14 @@
 #include <map>
 #include <vector>
 
+//not updated
+string syntaxKindEnumToString[] = {"INTEGER_LITERAL", "FLOAT_LITERAL", "STRING_LITERAL", "IDENTIFIER", "KEYWORD_IF", "KEYWORD_WHILE", "KEYWORD_FOR",
+    "KEYWORD_FN", "KEYWORD_RET", "KEYWORD_INT", "KEYWORD_FLOAT", "KEYWORD_CHAR", "EQUALS", "COMMA", "PLUS", "MINUS", "SLASH", "STAR", "AMPERSAND",
+    "PIPE", "BANG", "SEMICOLON", "LESS_THAN", "GREATER_THAN", "OPEN_PAREN", "CLOSED_PAREN", "OPEN_CURLY", "CLOSED_CURLY", "OPEN_BRACKET",
+    "CLOSED_BRACKET", "RIGHT_ARROW", "PLUS_PLUS", "DASH_DASH", "PLUS_EQUALS", "DASH_EQUALS", "SLASH_EQUALS", "STAR_EQUALS", "EQUALS_EQUALS",
+    "LESS_THAN_EQUALS", "GREATER_THAN_EQUALS", "AMPERSAND_AMPERSAND", "PIPE_PIPE", "BANG_EQUALS", "END_OF_FILE", "UNEXPECTED_TOKEN"};
+
+    
 //garbege function that "seppose" to generate a graphviz file but its trush
 //maybe it will be imporved in the future
 //i hate this function
@@ -28,7 +36,7 @@ void generateGraphviz(int **mat, int numStates, std::unordered_map<char, int> &c
     { // Excluding the last two states (skip states)
         if (i >= 43 && i <= 104) continue;
 
-        out << "  " << i << " [shape=doublecircle, label=\"" << syntaxkindToString[getSyntaxKind(i)]  << "\"];\n";
+        out << "  " << i << " [shape=doublecircle, label=\"" << syntaxKindEnumToString[getSyntaxKind(i)]  << "\"];\n";
     }
     // Mark skip states specially
     out << "  " << (numStates - 2) << " [shape=doublecircle, style=dashed, label=\"WhiteSpace\"];\n";

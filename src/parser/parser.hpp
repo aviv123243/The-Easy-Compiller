@@ -35,16 +35,19 @@ private:
     bool match(ASTNode *node, SyntaxKind type);
     bool match(ASTNode *node, NonTerminal type);
 
-    //First and Follow sets
+    // init functions
+    void initProductionRules();
+    void fillTables();
+
+    // First and Follow sets
     unordered_map<NonTerminal, unordered_set<SyntaxKind>> _firstSets;
     unordered_map<NonTerminal, unordered_set<SyntaxKind>> _followSets;
-    
+
     unordered_set<SyntaxKind> &computeFirst(NonTerminal nt);
-    unordered_set<SyntaxKind> &computeFollow(NonTerminal nt);
     void computeFirstSets();
     void computeFollowSets();
 
-    //Navigation and helpers
+    // Navigation and helpers
     vector<SyntaxToken *> _tokens;
     vector<productionRule> _rules;
     int _cursor;
@@ -54,15 +57,12 @@ private:
     SyntaxToken *peek(int index);
     void addProductionRule(productionRule rule);
 
-    //error handling
+    // error handling
     ErrorHandler *_errorHandler;
-
-    
 
 public:
     Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler);
-    
-    
+
     ASTNode *parse();
 
     // Debugging

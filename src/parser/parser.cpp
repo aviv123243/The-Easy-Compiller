@@ -13,69 +13,6 @@ using namespace std;
 Parser::Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler)
     : _actionTable(numOfStates), _gotoTable(numOfStates), _rules(), _stack(), _errorHandler(handler), _cursor(0), _tokens(tokens)
 {
-    productionRule S(NonTerminal::STATEMENT);
-    S.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
-    S.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
-
-    productionRule exp(NonTerminal::EXPRESSION);
-    exp.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
-    exp.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
-
-    productionRule primaryExp1(NonTerminal::PRIMARY_EXPRESSION);
-    primaryExp1.addSymbol(SyntaxKind::IDENTIFIER);
-    primaryExp1.addSymbol(NonTerminal::PRIMARY_EXPRESSION);
-
-    productionRule primaryExp2(NonTerminal::PRIMARY_EXPRESSION);
-    primaryExp2.addSymbol(SyntaxKind::FLOAT_LITERAL);
-
-    addProductionRule(S);
-    addProductionRule(exp);
-    addProductionRule(primaryExp1);
-    addProductionRule(primaryExp2);
-
-    // state 0
-    _actionTable.add(0, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 3});
-    _actionTable.add(0, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 4});
-    _gotoTable.add(0, NonTerminal::EXPRESSION, 1);
-    _gotoTable.add(0, NonTerminal::PRIMARY_EXPRESSION, 2);
-
-    // state 1
-    _actionTable.add(1, SyntaxKind::END_OF_FILE, action{actionType::ACCEPT, 0});
-
-    // state 2
-    _actionTable.add(2, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 6});
-    _actionTable.add(2, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 7});
-    _gotoTable.add(2, NonTerminal::PRIMARY_EXPRESSION, 5);
-
-    // state 3
-    _actionTable.add(3, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 3});
-    _actionTable.add(3, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 4});
-    _gotoTable.add(3, NonTerminal::PRIMARY_EXPRESSION, 8);
-
-    // state 4
-    _actionTable.add(4, SyntaxKind::IDENTIFIER, action{actionType::REDUCE, 3});
-    _actionTable.add(4, SyntaxKind::FLOAT_LITERAL, action{actionType::REDUCE, 3});
-
-    // state 5
-    _actionTable.add(5, SyntaxKind::END_OF_FILE, action{actionType::REDUCE, 1});
-
-    // state 6
-    _actionTable.add(6, SyntaxKind::IDENTIFIER, action{actionType::SHIFT, 6});
-    _actionTable.add(6, SyntaxKind::FLOAT_LITERAL, action{actionType::SHIFT, 7});
-    _gotoTable.add(6, NonTerminal::PRIMARY_EXPRESSION, 9);
-
-    // state 7
-    _actionTable.add(7, SyntaxKind::END_OF_FILE, action{actionType::REDUCE, 3});
-
-    // state 8
-    _actionTable.add(8, SyntaxKind::IDENTIFIER, action{actionType::REDUCE, 2});
-    _actionTable.add(8, SyntaxKind::FLOAT_LITERAL, action{actionType::REDUCE, 2});
-
-    // state 9
-    _actionTable.add(9, SyntaxKind::END_OF_FILE, action{actionType::REDUCE, 2});
-
-    _stack.push(StackItem{0, new NonTerminalNode(NonTerminal::PROGRAM)});
-
     computeFirstSets();
     computeFollowSets();
 }
@@ -139,6 +76,10 @@ bool Parser::match(ASTNode *node, NonTerminal type)
     }
 
     return true;
+}
+
+void Parser::fillTables()
+{
 }
 
 action Parser::getCurrAction()
@@ -363,7 +304,7 @@ void Parser::computeFollowSets()
     }
 
     // Add EOF marker to the follow set of the start symbol
-    _followSets[NonTerminal::STATEMENT].insert(SyntaxKind::END_OF_FILE);
+    //_followSets[start].insert(SyntaxKind::END_OF_FILE);
 
     bool changed;
     do

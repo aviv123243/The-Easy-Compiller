@@ -272,6 +272,30 @@ src/parser/grammerSymbol/grammerSymbol.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.s
 .PHONY : src/parser/grammerSymbol/grammerSymbol.cpp.s
 
+src/parser/initParserFunctions.obj: src/parser/initParserFunctions.cpp.obj
+.PHONY : src/parser/initParserFunctions.obj
+
+# target to build an object file
+src/parser/initParserFunctions.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj
+.PHONY : src/parser/initParserFunctions.cpp.obj
+
+src/parser/initParserFunctions.i: src/parser/initParserFunctions.cpp.i
+.PHONY : src/parser/initParserFunctions.i
+
+# target to preprocess a source file
+src/parser/initParserFunctions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.i
+.PHONY : src/parser/initParserFunctions.cpp.i
+
+src/parser/initParserFunctions.s: src/parser/initParserFunctions.cpp.s
+.PHONY : src/parser/initParserFunctions.s
+
+# target to generate assembly for a file
+src/parser/initParserFunctions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.s
+.PHONY : src/parser/initParserFunctions.cpp.s
+
 src/parser/parseTable/action/action.obj: src/parser/parseTable/action/action.cpp.obj
 .PHONY : src/parser/parseTable/action/action.obj
 
@@ -416,6 +440,54 @@ src/parser/stackItem/stackItem.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.s
 .PHONY : src/parser/stackItem/stackItem.cpp.s
 
+src/symbolTable/symbolTable.obj: src/symbolTable/symbolTable.cpp.obj
+.PHONY : src/symbolTable/symbolTable.obj
+
+# target to build an object file
+src/symbolTable/symbolTable.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj
+.PHONY : src/symbolTable/symbolTable.cpp.obj
+
+src/symbolTable/symbolTable.i: src/symbolTable/symbolTable.cpp.i
+.PHONY : src/symbolTable/symbolTable.i
+
+# target to preprocess a source file
+src/symbolTable/symbolTable.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.i
+.PHONY : src/symbolTable/symbolTable.cpp.i
+
+src/symbolTable/symbolTable.s: src/symbolTable/symbolTable.cpp.s
+.PHONY : src/symbolTable/symbolTable.s
+
+# target to generate assembly for a file
+src/symbolTable/symbolTable.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.s
+.PHONY : src/symbolTable/symbolTable.cpp.s
+
+src/symbolTable/tableEntery/tableEntery.obj: src/symbolTable/tableEntery/tableEntery.cpp.obj
+.PHONY : src/symbolTable/tableEntery/tableEntery.obj
+
+# target to build an object file
+src/symbolTable/tableEntery/tableEntery.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj
+.PHONY : src/symbolTable/tableEntery/tableEntery.cpp.obj
+
+src/symbolTable/tableEntery/tableEntery.i: src/symbolTable/tableEntery/tableEntery.cpp.i
+.PHONY : src/symbolTable/tableEntery/tableEntery.i
+
+# target to preprocess a source file
+src/symbolTable/tableEntery/tableEntery.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.i
+.PHONY : src/symbolTable/tableEntery/tableEntery.cpp.i
+
+src/symbolTable/tableEntery/tableEntery.s: src/symbolTable/tableEntery/tableEntery.cpp.s
+.PHONY : src/symbolTable/tableEntery/tableEntery.s
+
+# target to generate assembly for a file
+src/symbolTable/tableEntery/tableEntery.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.s
+.PHONY : src/symbolTable/tableEntery/tableEntery.cpp.s
+
 src/token/token.obj: src/token/token.cpp.obj
 .PHONY : src/token/token.obj
 
@@ -467,6 +539,9 @@ help:
 	@echo ... src/parser/grammerSymbol/grammerSymbol.obj
 	@echo ... src/parser/grammerSymbol/grammerSymbol.i
 	@echo ... src/parser/grammerSymbol/grammerSymbol.s
+	@echo ... src/parser/initParserFunctions.obj
+	@echo ... src/parser/initParserFunctions.i
+	@echo ... src/parser/initParserFunctions.s
 	@echo ... src/parser/parseTable/action/action.obj
 	@echo ... src/parser/parseTable/action/action.i
 	@echo ... src/parser/parseTable/action/action.s
@@ -485,6 +560,12 @@ help:
 	@echo ... src/parser/stackItem/stackItem.obj
 	@echo ... src/parser/stackItem/stackItem.i
 	@echo ... src/parser/stackItem/stackItem.s
+	@echo ... src/symbolTable/symbolTable.obj
+	@echo ... src/symbolTable/symbolTable.i
+	@echo ... src/symbolTable/symbolTable.s
+	@echo ... src/symbolTable/tableEntery/tableEntery.obj
+	@echo ... src/symbolTable/tableEntery/tableEntery.i
+	@echo ... src/symbolTable/tableEntery/tableEntery.s
 	@echo ... src/token/token.obj
 	@echo ... src/token/token.i
 	@echo ... src/token/token.s

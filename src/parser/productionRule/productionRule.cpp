@@ -10,21 +10,34 @@ using namespace std;
 
 productionRule::productionRule(NonTerminal left) : _left(left), _numOfRightSideSymbols(0) {}
 
+//productionRule::productionRule() {addSymbol(SyntaxKind::EPSILON);}
+
 productionRule::~productionRule() {}
 
-void productionRule::addSymbol(SyntaxKind terminal)
+productionRule& productionRule::addSymbol(SyntaxKind terminal)
 {
     _rightSideSymbols.push_back(terminal);
     _rightSideTypes.push_back(GrammarSymbolType::TERMINAL);
     _numOfRightSideSymbols++;
+
+    return *this;
 }
 
-void productionRule::addSymbol(NonTerminal nonTerminal)
+productionRule& productionRule::addSymbol(NonTerminal nonTerminal)
 {
     _rightSideSymbols.push_back(nonTerminal);
     _rightSideTypes.push_back(GrammarSymbolType::NON_TERMINAL);
     _numOfRightSideSymbols++;
+
+    return *this;
 }
+
+productionRule& productionRule::addSymbol()
+{
+    return addSymbol(SyntaxKind::EPSILON);
+}
+
+
 
 SyntaxKind productionRule::getTerminal(int index)
 {
@@ -78,6 +91,18 @@ int productionRule::getNumOfRightSideSymbols()
 NonTerminal productionRule::getLeft()
 {
     return _left;
+}
+
+void productionRule::setLeft(NonTerminal left)
+{
+    _left = left;
+}
+
+void productionRule::reset()
+{
+    _numOfRightSideSymbols = 0;
+    _rightSideSymbols.clear();
+    _rightSideTypes.clear();
 }
 
 string productionRule::toString()

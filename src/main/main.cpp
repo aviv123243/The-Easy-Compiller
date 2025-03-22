@@ -39,15 +39,16 @@ int main(int argc, char **argv)
         for (int i = 0; i < tokens.size(); i++)
         {
             cout << syntaxTokenToString(*tokens[i]) << endl;
+            cout << "kind" << tokens[i] -> kind << endl;
         }
 
-        Parser parser(tokens, 10, &errorHandler);
-        parser.printFirstSet();
-        parser.printFollowSet();
-        parser.printRules();
+        // Parser parser(tokens, 10, &errorHandler);
+        // parser.printFirstSet();
+        // parser.printFollowSet();
+        // parser.printRules();
         
 
-        ASTNode *root = parser.parse();
-        PrintParseTree(root);
+        // ASTNode *root = parser.parse();
+        // PrintParseTree(root);
     }
 }

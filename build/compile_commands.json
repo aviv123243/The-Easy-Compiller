@@ -37,6 +37,12 @@
 },
 {
   "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\MyProjectExecutable.dir\\src\\parser\\initParserFunctions.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\parser\\initParserFunctions.cpp",
+  "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/initParserFunctions.cpp",
+  "output": "CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\MyProjectExecutable.dir\\src\\parser\\parseTable\\action\\action.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\parser\\parseTable\\action\\action.cpp",
   "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/action/action.cpp",
   "output": "CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj"
@@ -70,6 +76,18 @@
   "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\MyProjectExecutable.dir\\src\\parser\\stackItem\\stackItem.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\parser\\stackItem\\stackItem.cpp",
   "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/stackItem/stackItem.cpp",
   "output": "CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\MyProjectExecutable.dir\\src\\symbolTable\\symbolTable.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\symbolTable\\symbolTable.cpp",
+  "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/symbolTable.cpp",
+  "output": "CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
+  "command": "C:\\MinGW\\bin\\g++.exe  @CMakeFiles/MyProjectExecutable.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\MyProjectExecutable.dir\\src\\symbolTable\\tableEntery\\tableEntery.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\symbolTable\\tableEntery\\tableEntery.cpp",
+  "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/tableEntery/tableEntery.cpp",
+  "output": "CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj"
 },
 {
   "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
