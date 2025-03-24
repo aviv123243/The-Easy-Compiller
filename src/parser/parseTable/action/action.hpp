@@ -10,7 +10,7 @@ enum actionType
     SHIFT,
     REDUCE,
     ACCEPT,
-    ERROR
+    DEFAULT,
 };
 
 struct action

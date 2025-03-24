@@ -14,8 +14,8 @@ string actionTypeToString(action type)
     case actionType::ACCEPT:
         res << "acc";
         break;
-    case actionType::ERROR:
-        res << "ERROR";
+    case actionType::DEFAULT:
+        res << "DEFAULT";
         break;
     default:
         res << "UNKNOWN";

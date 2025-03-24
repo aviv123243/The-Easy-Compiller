@@ -116,24 +116,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named MyProjectExecutable
+# Target rules for targets named tec
 
 # Build rule for target.
-MyProjectExecutable: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 MyProjectExecutable
-.PHONY : MyProjectExecutable
+tec: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 tec
+.PHONY : tec
 
 # fast build rule for target.
-MyProjectExecutable/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/build
-.PHONY : MyProjectExecutable/fast
+tec/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/build
+.PHONY : tec/fast
 
 src/DFA/DFA.obj: src/DFA/DFA.cpp.obj
 .PHONY : src/DFA/DFA.obj
 
 # target to build an object file
 src/DFA/DFA.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/DFA/DFA.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj
 .PHONY : src/DFA/DFA.cpp.obj
 
 src/DFA/DFA.i: src/DFA/DFA.cpp.i
@@ -141,7 +141,7 @@ src/DFA/DFA.i: src/DFA/DFA.cpp.i
 
 # target to preprocess a source file
 src/DFA/DFA.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/DFA/DFA.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/DFA/DFA.cpp.i
 .PHONY : src/DFA/DFA.cpp.i
 
 src/DFA/DFA.s: src/DFA/DFA.cpp.s
@@ -149,7 +149,7 @@ src/DFA/DFA.s: src/DFA/DFA.cpp.s
 
 # target to generate assembly for a file
 src/DFA/DFA.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/DFA/DFA.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/DFA/DFA.cpp.s
 .PHONY : src/DFA/DFA.cpp.s
 
 src/errorHandler/errorHandler.obj: src/errorHandler/errorHandler.cpp.obj
@@ -157,7 +157,7 @@ src/errorHandler/errorHandler.obj: src/errorHandler/errorHandler.cpp.obj
 
 # target to build an object file
 src/errorHandler/errorHandler.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/errorHandler/errorHandler.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj
 .PHONY : src/errorHandler/errorHandler.cpp.obj
 
 src/errorHandler/errorHandler.i: src/errorHandler/errorHandler.cpp.i
@@ -165,7 +165,7 @@ src/errorHandler/errorHandler.i: src/errorHandler/errorHandler.cpp.i
 
 # target to preprocess a source file
 src/errorHandler/errorHandler.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/errorHandler/errorHandler.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.i
 .PHONY : src/errorHandler/errorHandler.cpp.i
 
 src/errorHandler/errorHandler.s: src/errorHandler/errorHandler.cpp.s
@@ -173,7 +173,7 @@ src/errorHandler/errorHandler.s: src/errorHandler/errorHandler.cpp.s
 
 # target to generate assembly for a file
 src/errorHandler/errorHandler.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/errorHandler/errorHandler.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.s
 .PHONY : src/errorHandler/errorHandler.cpp.s
 
 src/lexer/lexer.obj: src/lexer/lexer.cpp.obj
@@ -181,7 +181,7 @@ src/lexer/lexer.obj: src/lexer/lexer.cpp.obj
 
 # target to build an object file
 src/lexer/lexer.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexer.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj
 .PHONY : src/lexer/lexer.cpp.obj
 
 src/lexer/lexer.i: src/lexer/lexer.cpp.i
@@ -189,7 +189,7 @@ src/lexer/lexer.i: src/lexer/lexer.cpp.i
 
 # target to preprocess a source file
 src/lexer/lexer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/lexer/lexer.cpp.i
 .PHONY : src/lexer/lexer.cpp.i
 
 src/lexer/lexer.s: src/lexer/lexer.cpp.s
@@ -197,7 +197,7 @@ src/lexer/lexer.s: src/lexer/lexer.cpp.s
 
 # target to generate assembly for a file
 src/lexer/lexer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/lexer/lexer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/lexer/lexer.cpp.s
 .PHONY : src/lexer/lexer.cpp.s
 
 src/main/main.obj: src/main/main.cpp.obj
@@ -205,7 +205,7 @@ src/main/main.obj: src/main/main.cpp.obj
 
 # target to build an object file
 src/main/main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/main/main.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/main/main.cpp.obj
 .PHONY : src/main/main.cpp.obj
 
 src/main/main.i: src/main/main.cpp.i
@@ -213,7 +213,7 @@ src/main/main.i: src/main/main.cpp.i
 
 # target to preprocess a source file
 src/main/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/main/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/main/main.cpp.i
 .PHONY : src/main/main.cpp.i
 
 src/main/main.s: src/main/main.cpp.s
@@ -221,7 +221,7 @@ src/main/main.s: src/main/main.cpp.s
 
 # target to generate assembly for a file
 src/main/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/main/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/main/main.cpp.s
 .PHONY : src/main/main.cpp.s
 
 src/nodes/nodes.obj: src/nodes/nodes.cpp.obj
@@ -229,7 +229,7 @@ src/nodes/nodes.obj: src/nodes/nodes.cpp.obj
 
 # target to build an object file
 src/nodes/nodes.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/nodes/nodes.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj
 .PHONY : src/nodes/nodes.cpp.obj
 
 src/nodes/nodes.i: src/nodes/nodes.cpp.i
@@ -237,7 +237,7 @@ src/nodes/nodes.i: src/nodes/nodes.cpp.i
 
 # target to preprocess a source file
 src/nodes/nodes.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/nodes/nodes.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/nodes/nodes.cpp.i
 .PHONY : src/nodes/nodes.cpp.i
 
 src/nodes/nodes.s: src/nodes/nodes.cpp.s
@@ -245,7 +245,7 @@ src/nodes/nodes.s: src/nodes/nodes.cpp.s
 
 # target to generate assembly for a file
 src/nodes/nodes.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/nodes/nodes.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/nodes/nodes.cpp.s
 .PHONY : src/nodes/nodes.cpp.s
 
 src/parser/grammerSymbol/grammerSymbol.obj: src/parser/grammerSymbol/grammerSymbol.cpp.obj
@@ -253,7 +253,7 @@ src/parser/grammerSymbol/grammerSymbol.obj: src/parser/grammerSymbol/grammerSymb
 
 # target to build an object file
 src/parser/grammerSymbol/grammerSymbol.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj
 .PHONY : src/parser/grammerSymbol/grammerSymbol.cpp.obj
 
 src/parser/grammerSymbol/grammerSymbol.i: src/parser/grammerSymbol/grammerSymbol.cpp.i
@@ -261,7 +261,7 @@ src/parser/grammerSymbol/grammerSymbol.i: src/parser/grammerSymbol/grammerSymbol
 
 # target to preprocess a source file
 src/parser/grammerSymbol/grammerSymbol.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.i
 .PHONY : src/parser/grammerSymbol/grammerSymbol.cpp.i
 
 src/parser/grammerSymbol/grammerSymbol.s: src/parser/grammerSymbol/grammerSymbol.cpp.s
@@ -269,7 +269,7 @@ src/parser/grammerSymbol/grammerSymbol.s: src/parser/grammerSymbol/grammerSymbol
 
 # target to generate assembly for a file
 src/parser/grammerSymbol/grammerSymbol.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/grammerSymbol/grammerSymbol.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.s
 .PHONY : src/parser/grammerSymbol/grammerSymbol.cpp.s
 
 src/parser/initParserFunctions.obj: src/parser/initParserFunctions.cpp.obj
@@ -277,7 +277,7 @@ src/parser/initParserFunctions.obj: src/parser/initParserFunctions.cpp.obj
 
 # target to build an object file
 src/parser/initParserFunctions.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj
 .PHONY : src/parser/initParserFunctions.cpp.obj
 
 src/parser/initParserFunctions.i: src/parser/initParserFunctions.cpp.i
@@ -285,7 +285,7 @@ src/parser/initParserFunctions.i: src/parser/initParserFunctions.cpp.i
 
 # target to preprocess a source file
 src/parser/initParserFunctions.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.i
 .PHONY : src/parser/initParserFunctions.cpp.i
 
 src/parser/initParserFunctions.s: src/parser/initParserFunctions.cpp.s
@@ -293,7 +293,7 @@ src/parser/initParserFunctions.s: src/parser/initParserFunctions.cpp.s
 
 # target to generate assembly for a file
 src/parser/initParserFunctions.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/initParserFunctions.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.s
 .PHONY : src/parser/initParserFunctions.cpp.s
 
 src/parser/parseTable/action/action.obj: src/parser/parseTable/action/action.cpp.obj
@@ -301,7 +301,7 @@ src/parser/parseTable/action/action.obj: src/parser/parseTable/action/action.cpp
 
 # target to build an object file
 src/parser/parseTable/action/action.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj
 .PHONY : src/parser/parseTable/action/action.cpp.obj
 
 src/parser/parseTable/action/action.i: src/parser/parseTable/action/action.cpp.i
@@ -309,7 +309,7 @@ src/parser/parseTable/action/action.i: src/parser/parseTable/action/action.cpp.i
 
 # target to preprocess a source file
 src/parser/parseTable/action/action.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.i
 .PHONY : src/parser/parseTable/action/action.cpp.i
 
 src/parser/parseTable/action/action.s: src/parser/parseTable/action/action.cpp.s
@@ -317,7 +317,7 @@ src/parser/parseTable/action/action.s: src/parser/parseTable/action/action.cpp.s
 
 # target to generate assembly for a file
 src/parser/parseTable/action/action.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/action/action.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.s
 .PHONY : src/parser/parseTable/action/action.cpp.s
 
 src/parser/parseTable/actionTable/actionTable.obj: src/parser/parseTable/actionTable/actionTable.cpp.obj
@@ -325,7 +325,7 @@ src/parser/parseTable/actionTable/actionTable.obj: src/parser/parseTable/actionT
 
 # target to build an object file
 src/parser/parseTable/actionTable/actionTable.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj
 .PHONY : src/parser/parseTable/actionTable/actionTable.cpp.obj
 
 src/parser/parseTable/actionTable/actionTable.i: src/parser/parseTable/actionTable/actionTable.cpp.i
@@ -333,7 +333,7 @@ src/parser/parseTable/actionTable/actionTable.i: src/parser/parseTable/actionTab
 
 # target to preprocess a source file
 src/parser/parseTable/actionTable/actionTable.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.i
 .PHONY : src/parser/parseTable/actionTable/actionTable.cpp.i
 
 src/parser/parseTable/actionTable/actionTable.s: src/parser/parseTable/actionTable/actionTable.cpp.s
@@ -341,7 +341,7 @@ src/parser/parseTable/actionTable/actionTable.s: src/parser/parseTable/actionTab
 
 # target to generate assembly for a file
 src/parser/parseTable/actionTable/actionTable.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/actionTable/actionTable.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.s
 .PHONY : src/parser/parseTable/actionTable/actionTable.cpp.s
 
 src/parser/parseTable/gotoTable/gotoTable.obj: src/parser/parseTable/gotoTable/gotoTable.cpp.obj
@@ -349,7 +349,7 @@ src/parser/parseTable/gotoTable/gotoTable.obj: src/parser/parseTable/gotoTable/g
 
 # target to build an object file
 src/parser/parseTable/gotoTable/gotoTable.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj
 .PHONY : src/parser/parseTable/gotoTable/gotoTable.cpp.obj
 
 src/parser/parseTable/gotoTable/gotoTable.i: src/parser/parseTable/gotoTable/gotoTable.cpp.i
@@ -357,7 +357,7 @@ src/parser/parseTable/gotoTable/gotoTable.i: src/parser/parseTable/gotoTable/got
 
 # target to preprocess a source file
 src/parser/parseTable/gotoTable/gotoTable.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.i
 .PHONY : src/parser/parseTable/gotoTable/gotoTable.cpp.i
 
 src/parser/parseTable/gotoTable/gotoTable.s: src/parser/parseTable/gotoTable/gotoTable.cpp.s
@@ -365,7 +365,7 @@ src/parser/parseTable/gotoTable/gotoTable.s: src/parser/parseTable/gotoTable/got
 
 # target to generate assembly for a file
 src/parser/parseTable/gotoTable/gotoTable.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.s
 .PHONY : src/parser/parseTable/gotoTable/gotoTable.cpp.s
 
 src/parser/parser.obj: src/parser/parser.cpp.obj
@@ -373,7 +373,7 @@ src/parser/parser.obj: src/parser/parser.cpp.obj
 
 # target to build an object file
 src/parser/parser.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parser.cpp.obj
 .PHONY : src/parser/parser.cpp.obj
 
 src/parser/parser.i: src/parser/parser.cpp.i
@@ -381,7 +381,7 @@ src/parser/parser.i: src/parser/parser.cpp.i
 
 # target to preprocess a source file
 src/parser/parser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parser.cpp.i
 .PHONY : src/parser/parser.cpp.i
 
 src/parser/parser.s: src/parser/parser.cpp.s
@@ -389,7 +389,7 @@ src/parser/parser.s: src/parser/parser.cpp.s
 
 # target to generate assembly for a file
 src/parser/parser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/parser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/parser.cpp.s
 .PHONY : src/parser/parser.cpp.s
 
 src/parser/productionRule/productionRule.obj: src/parser/productionRule/productionRule.cpp.obj
@@ -397,7 +397,7 @@ src/parser/productionRule/productionRule.obj: src/parser/productionRule/producti
 
 # target to build an object file
 src/parser/productionRule/productionRule.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj
 .PHONY : src/parser/productionRule/productionRule.cpp.obj
 
 src/parser/productionRule/productionRule.i: src/parser/productionRule/productionRule.cpp.i
@@ -405,7 +405,7 @@ src/parser/productionRule/productionRule.i: src/parser/productionRule/production
 
 # target to preprocess a source file
 src/parser/productionRule/productionRule.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.i
 .PHONY : src/parser/productionRule/productionRule.cpp.i
 
 src/parser/productionRule/productionRule.s: src/parser/productionRule/productionRule.cpp.s
@@ -413,7 +413,7 @@ src/parser/productionRule/productionRule.s: src/parser/productionRule/production
 
 # target to generate assembly for a file
 src/parser/productionRule/productionRule.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/productionRule/productionRule.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.s
 .PHONY : src/parser/productionRule/productionRule.cpp.s
 
 src/parser/stackItem/stackItem.obj: src/parser/stackItem/stackItem.cpp.obj
@@ -421,7 +421,7 @@ src/parser/stackItem/stackItem.obj: src/parser/stackItem/stackItem.cpp.obj
 
 # target to build an object file
 src/parser/stackItem/stackItem.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj
 .PHONY : src/parser/stackItem/stackItem.cpp.obj
 
 src/parser/stackItem/stackItem.i: src/parser/stackItem/stackItem.cpp.i
@@ -429,7 +429,7 @@ src/parser/stackItem/stackItem.i: src/parser/stackItem/stackItem.cpp.i
 
 # target to preprocess a source file
 src/parser/stackItem/stackItem.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.i
 .PHONY : src/parser/stackItem/stackItem.cpp.i
 
 src/parser/stackItem/stackItem.s: src/parser/stackItem/stackItem.cpp.s
@@ -437,7 +437,7 @@ src/parser/stackItem/stackItem.s: src/parser/stackItem/stackItem.cpp.s
 
 # target to generate assembly for a file
 src/parser/stackItem/stackItem.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/parser/stackItem/stackItem.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.s
 .PHONY : src/parser/stackItem/stackItem.cpp.s
 
 src/symbolTable/symbolTable.obj: src/symbolTable/symbolTable.cpp.obj
@@ -445,7 +445,7 @@ src/symbolTable/symbolTable.obj: src/symbolTable/symbolTable.cpp.obj
 
 # target to build an object file
 src/symbolTable/symbolTable.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj
 .PHONY : src/symbolTable/symbolTable.cpp.obj
 
 src/symbolTable/symbolTable.i: src/symbolTable/symbolTable.cpp.i
@@ -453,7 +453,7 @@ src/symbolTable/symbolTable.i: src/symbolTable/symbolTable.cpp.i
 
 # target to preprocess a source file
 src/symbolTable/symbolTable.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.i
 .PHONY : src/symbolTable/symbolTable.cpp.i
 
 src/symbolTable/symbolTable.s: src/symbolTable/symbolTable.cpp.s
@@ -461,7 +461,7 @@ src/symbolTable/symbolTable.s: src/symbolTable/symbolTable.cpp.s
 
 # target to generate assembly for a file
 src/symbolTable/symbolTable.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/symbolTable.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.s
 .PHONY : src/symbolTable/symbolTable.cpp.s
 
 src/symbolTable/tableEntery/tableEntery.obj: src/symbolTable/tableEntery/tableEntery.cpp.obj
@@ -469,7 +469,7 @@ src/symbolTable/tableEntery/tableEntery.obj: src/symbolTable/tableEntery/tableEn
 
 # target to build an object file
 src/symbolTable/tableEntery/tableEntery.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj
 .PHONY : src/symbolTable/tableEntery/tableEntery.cpp.obj
 
 src/symbolTable/tableEntery/tableEntery.i: src/symbolTable/tableEntery/tableEntery.cpp.i
@@ -477,7 +477,7 @@ src/symbolTable/tableEntery/tableEntery.i: src/symbolTable/tableEntery/tableEnte
 
 # target to preprocess a source file
 src/symbolTable/tableEntery/tableEntery.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.i
 .PHONY : src/symbolTable/tableEntery/tableEntery.cpp.i
 
 src/symbolTable/tableEntery/tableEntery.s: src/symbolTable/tableEntery/tableEntery.cpp.s
@@ -485,7 +485,7 @@ src/symbolTable/tableEntery/tableEntery.s: src/symbolTable/tableEntery/tableEnte
 
 # target to generate assembly for a file
 src/symbolTable/tableEntery/tableEntery.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/symbolTable/tableEntery/tableEntery.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.s
 .PHONY : src/symbolTable/tableEntery/tableEntery.cpp.s
 
 src/token/token.obj: src/token/token.cpp.obj
@@ -493,7 +493,7 @@ src/token/token.obj: src/token/token.cpp.obj
 
 # target to build an object file
 src/token/token.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/token/token.cpp.obj
 .PHONY : src/token/token.cpp.obj
 
 src/token/token.i: src/token/token.cpp.i
@@ -501,7 +501,7 @@ src/token/token.i: src/token/token.cpp.i
 
 # target to preprocess a source file
 src/token/token.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/token/token.cpp.i
 .PHONY : src/token/token.cpp.i
 
 src/token/token.s: src/token/token.cpp.s
@@ -509,7 +509,7 @@ src/token/token.s: src/token/token.cpp.s
 
 # target to generate assembly for a file
 src/token/token.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyProjectExecutable.dir\build.make CMakeFiles/MyProjectExecutable.dir/src/token/token.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/token/token.cpp.s
 .PHONY : src/token/token.cpp.s
 
 # Help Target
@@ -520,7 +520,7 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... MyProjectExecutable
+	@echo ... tec
 	@echo ... src/DFA/DFA.obj
 	@echo ... src/DFA/DFA.i
 	@echo ... src/DFA/DFA.s

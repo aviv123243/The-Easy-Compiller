@@ -10,7 +10,7 @@ using namespace std;
 
 productionRule::productionRule(NonTerminal left) : _left(left), _numOfRightSideSymbols(0) {}
 
-//productionRule::productionRule() {addSymbol(SyntaxKind::EPSILON);}
+productionRule::productionRule() :productionRule(NonTerminal::PROGRAM) {}
 
 productionRule::~productionRule() {}
 

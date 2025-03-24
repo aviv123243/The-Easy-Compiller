@@ -62,7 +62,7 @@ string AstNodeToString(ASTNode *node)
 {
     if (node->GetType() == GrammarSymbolType::TERMINAL)
     {
-        return syntaxKindToString(((TerminalNode *)node)->getTerminalKind());
+        return syntaxTokenToString(*((TerminalNode *)node)->getToken());
     }
     else
     {

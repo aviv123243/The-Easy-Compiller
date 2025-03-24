@@ -1,0 +1,43 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj"
+  "CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj"
+  "CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj"
+  "CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/main/main.cpp.obj"
+  "CMakeFiles/tec.dir/src/main/main.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj"
+  "CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj"
+  "CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj"
+  "CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj"
+  "CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj"
+  "CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj"
+  "CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/parser/parser.cpp.obj"
+  "CMakeFiles/tec.dir/src/parser/parser.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj"
+  "CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj"
+  "CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj"
+  "CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj"
+  "CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/token/token.cpp.obj"
+  "CMakeFiles/tec.dir/src/token/token.cpp.obj.d"
+  "libtec.dll.a"
+  "tec.exe"
+  "tec.exe.manifest"
+  "tec.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/tec.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

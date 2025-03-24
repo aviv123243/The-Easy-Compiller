@@ -5,7 +5,7 @@
             "name": "Debug My Project",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/MyProjectExecutable.exe", // Matches your output
+            "program": "${workspaceFolder}/build/tec.exe", // Matches your output
             "args": [], // Add any command-line args here
             "stopAtEntry": false, // Set to true to pause at main() entry
             "cwd": "${workspaceFolder}/build", // Working directory for execution

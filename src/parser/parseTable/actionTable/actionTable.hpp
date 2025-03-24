@@ -9,12 +9,14 @@ class ActionTable
 {
     private:
         action **_table;
+        action *_defaultActions;
         int _numOfStates;
 
     public:
         ActionTable(int numOfStates);
         ~ActionTable();
         void add(int state, SyntaxKind terminal, action act);
+        void addDefault(int state, action act);
         action get(int state, SyntaxKind terminal);
 };
 

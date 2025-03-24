@@ -15,6 +15,7 @@ enum GrammarSymbolType
 
 enum NonTerminal
 {
+    START,
     PROGRAM,
     FUNCTION_DECL,
     PARAM_LIST,

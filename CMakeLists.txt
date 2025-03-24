@@ -1,45 +1,42 @@
-# Specify the minimum version of CMake required
 cmake_minimum_required(VERSION 3.10)
+project(TECProject)
 
-# Define the project name
-project(MyProject)
-
-# Set the C++ standard
+# Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Include directories for header files
-include_directories(
-    ${PROJECT_SOURCE_DIR}/src
-    ${PROJECT_SOURCE_DIR}/src/DFA
-    ${PROJECT_SOURCE_DIR}/src/errorHandler
-    ${PROJECT_SOURCE_DIR}/src/errors
-    ${PROJECT_SOURCE_DIR}/src/lexer
-    ${PROJECT_SOURCE_DIR}/src/nodes
-    ${PROJECT_SOURCE_DIR}/src/parser
-    ${PROJECT_SOURCE_DIR}/src/parser/grammerSymbol
-    ${PROJECT_SOURCE_DIR}/src/parser/parseTable
-    ${PROJECT_SOURCE_DIR}/src/parser/parseTable/gotoTable
-)
+# Specify g++ as the compiler
+set(CMAKE_CXX_COMPILER "g++")
 
-# Add the source files
+# Collect all .cpp files from src directory and subdirectories
 file(GLOB_RECURSE SOURCES
-    ${PROJECT_SOURCE_DIR}/src/*.cpp
-    ${PROJECT_SOURCE_DIR}/src/parser/*.cpp
-    ${PROJECT_SOURCE_DIR}/src/parser/parseTable/*.cpp
-    ${PROJECT_SOURCE_DIR}/src/parser/parseTable/gotoTable/*.cpp
+    "src/*.cpp"
 )
 
-# Add the executable (replace MyProjectExecutable with your desired name)
-add_executable(MyProjectExecutable ${SOURCES})
+# Exclude any unwanted files if needed (optional)
+# list(FILTER SOURCES EXCLUDE REGEX "bison.*")
 
-# Optionally, add extra flags or dependencies if needed
-# Example: link libraries (if you have them)
-# target_link_libraries(MyProjectExecutable SomeLibrary)
+# Add executable
+add_executable(tec ${SOURCES})
 
-# Set output directories for binary files
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
-
-# Additional optional configurations for debugging and release
-set(CMAKE_BUILD_TYPE Debug)  # Change to Release for optimized builds
+# Include directories
+target_include_directories(tec PRIVATE
+    "src"
+    "src/DFA"
+    "src/errorHandler"
+    "src/errors"
+    "src/lexer"
+    "src/main"
+    "src/nodes"
+    "src/parser"
+    "src/parser/grammerSymbol"
+    "src/parser/parseTable"
+    "src/parser/parseTable/action"
+    "src/parser/parseTable/actionTable"
+    "src/parser/parseTable/gotoTable"
+    "src/parser/productionRule"
+    "src/parser/stackItem"
+    "src/symbolTable"
+    "src/symbolTable/tableEntery"
+    "src/token"
+)

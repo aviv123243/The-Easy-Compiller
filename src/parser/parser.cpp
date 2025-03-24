@@ -13,8 +13,12 @@ using namespace std;
 Parser::Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler)
     : _actionTable(numOfStates), _gotoTable(numOfStates), _rules(), _stack(), _errorHandler(handler), _cursor(0), _tokens(tokens)
 {
-    computeFirstSets();
-    computeFollowSets();
+    // computeFirstSets();
+    // computeFollowSets();
+
+    _stack.push(StackItem{0, new NonTerminalNode(NonTerminal::START)});
+    initProductionRules();
+    fillTables();
 }
 
 SyntaxToken *Parser::getNextToken()
@@ -78,9 +82,6 @@ bool Parser::match(ASTNode *node, NonTerminal type)
     return true;
 }
 
-void Parser::fillTables()
-{
-}
 
 action Parser::getCurrAction()
 {
@@ -90,7 +91,7 @@ action Parser::getCurrAction()
 void Parser::shift(action currAction)
 {
     int state = currAction.num;
-    SyntaxToken *token = getNextToken();
+    SyntaxToken *token = getCurrToken();
 
     cout << "Shifting to state " << currAction.num << " with token " << syntaxTokenToString(*token) << endl;
     // Create a new terminalNode
@@ -101,6 +102,9 @@ void Parser::shift(action currAction)
 
     // Update current state
     _currState = state;
+
+    // proceed to next token
+    getNextToken();
 }
 
 void Parser::reduce(action currAction)
@@ -108,10 +112,17 @@ void Parser::reduce(action currAction)
     int productionRuleNum = currAction.num;
     cout << "Reducing with rule " << productionRuleNum << endl;
     productionRule rule = _rules[productionRuleNum];
+    cout << rule.toString() << endl;
 
     // Create a new nonTerminalNode
     NonTerminalNode *node = new NonTerminalNode(rule.getLeft());
 
+    if ((rule.getType(0) == GrammarSymbolType::TERMINAL) && (rule.getTerminal(0) == EPSILON)) // if rule is empty return without adding children 
+    {
+        _stack.push(StackItem{_gotoTable.get(_stack.top().state, rule.getLeft()), node});
+        return;
+    }
+    
     // Pop from stack and create the new node
     for (int i = rule.getNumOfRightSideSymbols() - 1; i >= 0; i--)
     {
@@ -150,7 +161,7 @@ ASTNode *Parser::parse()
 
         currAction = getCurrAction();
         cout << "state:" << state << " token:" << syntaxTokenToString(*peek(0)) << " Action: " << actionTypeToString(currAction) << endl;
-
+        
         if (currAction.type == actionType::REDUCE)
         {
             reduce(currAction);
@@ -162,14 +173,16 @@ ASTNode *Parser::parse()
                 shift(currAction);
             }
 
-            else if (currAction.type == actionType::ERROR)
-            {
-                // cout << "Error" << endl;
-                // _errorHandler->addError(new SyntacticError(token));
-            }
+            // else if (currAction.type == actionType::ERROR)
+            // {
+            //     // cout << "Error" << endl;
+            //     // _errorHandler->addError(new SyntacticError(token));
+            // }
         }
 
     } while (currAction.type != actionType::ACCEPT);
+
+    _stack.pop(); // pop the end of file token
 
     return _stack.top().node;
 }
