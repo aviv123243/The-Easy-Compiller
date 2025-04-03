@@ -1,7 +1,7 @@
 
 fn main() => int
 {
-    int x = 7;
+    int x = 7*7*7;
     int y = 6;
     print(max(x,y));
 
@@ -17,3 +17,6 @@ fn max(int x,int y) => int
 
     ret res;
 }
+
+
+

@@ -41,11 +41,7 @@ int main(int argc, char **argv)
             cout << syntaxTokenToString(*tokens[i]) << endl;
         }
 
-        Parser parser(tokens, 154, &errorHandler);
-        // parser.printFirstSet();
-        // parser.printFollowSet();
-        parser.printRules();
-        
+        Parser parser(tokens, 174, &errorHandler);
 
         ASTNode *root = parser.parse();
         PrintParseTree(root);

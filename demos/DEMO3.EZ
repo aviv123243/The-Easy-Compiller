@@ -1,4 +1,11 @@
-fn main(int x) => int 
+fn main(int x) => int[8]
 {
-   x += 4;
+   int x = 4;
+
+   x[4] = 5;
+
+   for(int x = 5;x < 5; x += 1)
+   {
+
+   }
 }

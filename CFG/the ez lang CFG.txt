@@ -1,135 +1,152 @@
 Program -> FunctionDecl Program
-         | /* empty */ ;
+        | /* epsilon */ ;
 
 FunctionDecl -> KEYWORD_FN IDENTIFIER OPEN_PAREN ParamList CLOSED_PAREN RIGHT_ARROW Type OPEN_CURLY StmtList CLOSED_CURLY ;
 
 ParamList -> Param ParamTail
-          | /* empty */ ;
+          | /* epsilon */ ;
 
 ParamTail -> COMMA Param ParamTail
-          | /* empty */ ;
+          | /* epsilon */ ;
 
 Param -> Type IDENTIFIER ;
 
 Type -> BaseType TypeTail ;
 
 BaseType -> KEYWORD_INT
-          | KEYWORD_FLOAT
-          | KEYWORD_CHAR ;
+         | KEYWORD_FLOAT
+         | KEYWORD_CHAR ;
 
 TypeTail -> OPEN_BRACKET INTEGER_LITERAL CLOSED_BRACKET TypeTail
-          | STAR TypeTail
-          | /* empty */ ;
+         | STAR TypeTail
+         | /* epsilon */ ;
 
 StmtList -> Stmt StmtList
-         | /* empty */ ;
+         | /* epsilon */ ;
 
 Stmt -> VarDeclStmt
-      | AssignStmt 
-      | IfStmt
-      | WhileStmt
-      | ForStmt
-      | ReturnStmt
-      | ExprStmt ;
+     | AssignStmt
+     | IfStmt
+     | WhileStmt
+     | ForStmt
+     | ReturnStmt
+     | ExprStmt ;
 
 Body -> OPEN_CURLY StmtList CLOSED_CURLY
-      | Stmt ;
-
-VarDeclExpr -> Type IDENTIFIER InitOpt ;
+     | Stmt ;
 
 VarDeclStmt -> VarDeclExpr SEMICOLON ;
 
-InitOpt -> EQUALS Expr
-         | /* empty */ ;
+VarDeclExpr -> Type IDENTIFIER InitOpt ;
 
-AssignExpr -> AssignTarget AssignOp Expr
+InitOpt -> EQUALS AssignValue
+        | /* epsilon */ ;
 
-AssignStmt -> AssignExpr SEMICOLON;
+AssignValue -> Expr
+            | OPEN_CURLY ExprList CLOSED_CURLY ;
 
-AssignTarget -> IDENTIFIER  
-             | IDENTIFIER OPEN_BRACKET Expr CLOSED_BRACKET  
-             | STAR IDENTIFIER
-			 
-AssignOp -> EQUALS | PLUS_EQUALS |MINUS_EQUALS|SLASH_EQUALS|STAR_EQUALS|
-			AMPERSAND_EQUALS|PIPE_EQUALS|CARET_EQUALS|TILDE_EQUALS ;
+AssignStmt -> AssignExpr SEMICOLON ;
 
-IfStmt -> KEYWORD_IF OPEN_PAREN Expr CLOSED_PAREN Body ElseOpt ;
+AssignExpr -> AssignTarget AssignOp Expr ;
 
-ElseOpt -> KEYWORD_ELSE Body
-         | /* empty */ ;
+AssignTarget -> IDENTIFIER
+             | IDENTIFIER OPEN_BRACKET Expr CLOSED_BRACKET
+             | STAR IDENTIFIER ;
 
-WhileStmt -> KEYWORD_WHILE OPEN_PAREN Expr CLOSED_PAREN Body ;
+AssignOp -> EQUALS
+         | PLUS_EQUALS
+         | MINUS_EQUALS
+         | SLASH_EQUALS
+         | STAR_EQUALS
+         | AMPERSAND_EQUALS
+         | PIPE_EQUALS
+         | CARET_EQUALS
+         | TILDE_EQUALS ;
+
+IfStmt -> KEYWORD_IF OPEN_PAREN ConditionOp CLOSED_PAREN Body %prec THEN
+       | KEYWORD_IF OPEN_PAREN ConditionOp CLOSED_PAREN Body KEYWORD_ELSE Body ;
+
+WhileStmt -> KEYWORD_WHILE OPEN_PAREN ConditionOp CLOSED_PAREN Body ;
+
+ConditionOp -> Expr
+            | AssignExpr ;
 
 ForStmt -> KEYWORD_FOR OPEN_PAREN ForInit SEMICOLON ExprOpt SEMICOLON ForUpdate CLOSED_PAREN Body ;
 
 ForInit -> VarDeclExpr
-         | AssignExpr 
-         | /* empty */ ;
+        | AssignExpr
+        | /* epsilon */ ;
 
 ExprOpt -> Expr
-         | /* empty */ ;
+        | /* epsilon */ ;
 
-ForUpdate -> AssignExpr 
-           | /* empty */ ;
+ForUpdate -> AssignExpr
+          | /* epsilon */ ;
 
-ReturnStmt -> KEYWORD_RET ExprOpt SEMICOLON;
+ReturnStmt -> KEYWORD_RET ExprOpt SEMICOLON ;
 
 ExprStmt -> Expr SEMICOLON ;
 
 ExprList -> Expr ExprTail
-         | /* empty */ ;
+         | /* epsilon */ ;
 
 ExprTail -> COMMA Expr ExprTail
-         | /* empty */ ;
+         | /* epsilon */ ;
 
-Expr -> UnaryExpr RelOpTail ;
+Expr -> UnaryExpr RelOpTail
+     | PointerRefExpr ;
 
-RelOpTail -> RelOp UnaryExpr
-          | /* empty */ ;
+RelOpTail -> RelOp UnaryExpr RelOpTail
+          | /* epsilon */ ;
 
 RelOp -> LESS_THAN
-       | GREATER_THAN
-       | LESS_THAN_EQUALS
-       | GREATER_THAN_EQUALS
-       | EQUALS_EQUALS
-       | BANG_EQUALS ;
+      | GREATER_THAN
+      | LESS_THAN_EQUALS
+      | GREATER_THAN_EQUALS
+      | EQUALS_EQUALS
+      | BANG_EQUALS ;
 
-UnaryExpr -> UnaryOpList SimpleExpr 
- 
-UnaryOpList -> UnaryOp UnaryOpList  
-            | /* empty */  
-			
-UnaryOp -> MINUS  
-        | BANG     
+UnaryExpr -> UnaryOp UnaryExpr
+         | PostIncrement
+         | PreIncrement
+         | SimpleExpr ;
+
+PointerRefExpr -> AMPERSAND IDENTIFIER
+               | STAR IDENTIFIER ;
+
+PostIncrement -> IDENTIFIER PLUS_PLUS
+              | IDENTIFIER MINUS_MINUS ;
+
+PreIncrement -> PLUS_PLUS IDENTIFIER
+             | MINUS_MINUS IDENTIFIER ;
+
+UnaryOp -> MINUS
+        | BANG ;
 
 SimpleExpr -> Term AddOpTail ;
 
 AddOpTail -> AddOp Term AddOpTail
-          | /* empty */ ;
+         | /* epsilon */ ;
 
 AddOp -> PLUS
-       | MINUS
-	   | PIPE
-	   | CARET
-       | PIPE_PIPE ;
+      | MINUS
+      | PIPE
+      | CARET
+      | PIPE_PIPE ;
 
 Term -> Factor MulOpTail ;
 
 MulOpTail -> MulOp Factor MulOpTail
-          | /* empty */ ;
+         | /* epsilon */ ;
 
 MulOp -> STAR
-       | SLASH
-	   | AMPERSAND
-       | AMPERSAND_AMPERSAND ;
+      | SLASH
+      | AMPERSAND
+      | AMPERSAND_AMPERSAND ;
 
 Factor -> OPEN_PAREN Expr CLOSED_PAREN
-        | IDENTIFIER
-        | INTEGER_LITERAL
-        | FLOAT_LITERAL
-        | CHAR_LITERAL
-        | IDENTIFIER FunctionCallOp ;
-		
-FunctionCallOp -> OPEN_PAREN ExprList CLOSED_PAREN
-				| /* empty */ ;
-
+       | IDENTIFIER
+       | INTEGER_LITERAL
+       | FLOAT_LITERAL
+       | CHAR_LITERAL
+       | IDENTIFIER OPEN_PAREN ExprList CLOSED_PAREN ;

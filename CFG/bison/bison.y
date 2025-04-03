@@ -4,7 +4,7 @@ int yylex(void);
 void yyerror(char const *);
 %}
 
-%define lr.default_reduction most
+%define lr.type ielr
 
 /* Token declarations */
 %token KEYWORD_FN IDENTIFIER OPEN_PAREN CLOSED_PAREN RIGHT_ARROW OPEN_CURLY CLOSED_CURLY
@@ -14,7 +14,7 @@ void yyerror(char const *);
 %token KEYWORD_ELSE KEYWORD_WHILE KEYWORD_FOR KEYWORD_RET LESS_THAN GREATER_THAN
 %token LESS_THAN_EQUALS GREATER_THAN_EQUALS EQUALS_EQUALS BANG_EQUALS MINUS BANG
 %token PLUS PIPE CARET PIPE_PIPE SLASH AMPERSAND AMPERSAND_AMPERSAND
-%token INTEGER_LITERAL FLOAT_LITERAL CHAR_LITERAL
+%token INTEGER_LITERAL FLOAT_LITERAL CHAR_LITERAL PLUS_PLUS MINUS_MINUS
 
 /* Precedence declarations */
 %left PIPE_PIPE AMPERSAND_AMPERSAND
@@ -62,8 +62,8 @@ BaseType:
     ;
 
 TypeTail:
-    OPEN_BRACKET INTEGER_LITERAL CLOSED_BRACKET TypeTail
-    | STAR TypeTail
+    OPEN_BRACKET INTEGER_LITERAL CLOSED_BRACKET
+    | STAR
     | /* epsilon */
     ;
 
@@ -96,8 +96,13 @@ VarDeclExpr:
     ;
 
 InitOpt:
-    EQUALS Expr
+    EQUALS AssignValue
     | /* epsilon */
+    ;
+
+AssignValue:
+    Expr
+    | OPEN_CURLY ExprList CLOSED_CURLY
     ;
 
 AssignStmt:
@@ -127,12 +132,17 @@ AssignOp:
     ;
 
 IfStmt:
-    KEYWORD_IF OPEN_PAREN Expr CLOSED_PAREN Body %prec THEN
-    | KEYWORD_IF OPEN_PAREN Expr CLOSED_PAREN Body KEYWORD_ELSE Body
+    KEYWORD_IF OPEN_PAREN ConditionOp CLOSED_PAREN Body %prec THEN
+    | KEYWORD_IF OPEN_PAREN ConditionOp CLOSED_PAREN Body KEYWORD_ELSE Body
     ;
 
 WhileStmt:
-    KEYWORD_WHILE OPEN_PAREN Expr CLOSED_PAREN Body
+    KEYWORD_WHILE OPEN_PAREN ConditionOp CLOSED_PAREN Body
+    ;
+
+ConditionOp:
+    Expr
+    | AssignExpr
     ;
 
 ForStmt:
@@ -175,6 +185,7 @@ ExprTail:
 
 Expr:
     UnaryExpr RelOpTail
+    | PointerRefExpr
     ;
 
 RelOpTail:
@@ -193,7 +204,24 @@ RelOp:
 
 UnaryExpr:
     UnaryOp UnaryExpr
+    | PostIncrement
+    | PreIncrement
     | SimpleExpr
+    ;
+
+PointerRefExpr:
+    AMPERSAND IDENTIFIER
+    | STAR IDENTIFIER
+    ;
+
+PostIncrement:
+    IDENTIFIER PLUS_PLUS
+    | IDENTIFIER MINUS_MINUS
+    ;
+
+PreIncrement:
+    PLUS_PLUS IDENTIFIER
+    | MINUS_MINUS IDENTIFIER
     ;
 
 UnaryOp:

@@ -13,12 +13,12 @@ using namespace std;
 Parser::Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler)
     : _actionTable(numOfStates), _gotoTable(numOfStates), _rules(), _stack(), _errorHandler(handler), _cursor(0), _tokens(tokens)
 {
-    // computeFirstSets();
-    // computeFollowSets();
-
     _stack.push(StackItem{0, new NonTerminalNode(NonTerminal::START)});
     initProductionRules();
     fillTables();
+
+    computeFirstSets();
+    // computeFollowSets();
 }
 
 SyntaxToken *Parser::getNextToken()
