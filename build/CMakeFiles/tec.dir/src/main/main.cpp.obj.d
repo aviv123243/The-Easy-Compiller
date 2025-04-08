@@ -161,12 +161,15 @@ CMakeFiles/tec.dir/src/main/main.cpp.obj: \
  C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/symbolTable.hpp \
  C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/tableEntry/tableEntry.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/functionEntry/functionEntry.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\scope\scope.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\tableentry\tableentry.hpp \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\string \
  c:\users\admin\documents\coding\the-easy-compiller\src\parser\grammersymbol\grammersymbol.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\string \
  c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\scope\scope.hpp \
- c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\tableentry\tableentry.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\stack \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\deque \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_deque.h \

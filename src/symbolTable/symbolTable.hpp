@@ -2,7 +2,7 @@
 #define __SYMBOL_TABLE
 
 #include "tableEntry/tableEntry.hpp"
-class functionEntery;
+#include "functionEntry/functionEntry.hpp"
 #include "../parser/grammerSymbol/grammerSymbol.hpp"
 #include "../token/token.hpp"
 #include "../nodes/nodes.hpp"
@@ -12,15 +12,27 @@ class functionEntery;
 
 using namespace std;
 
-struct symbolTable
+class symbolTable
 {
-    vector<functionEntery*> functions;
+private:
+    vector<functionEntry *> functions;
+
+public:
+    void addFunction(functionEntry *function) { functions.push_back(function); }
+    void print() const
+    {
+        cout << "Symbol Table:" << endl;
+        cout << "num of functions: " << functions.size() << endl;
+        for (const auto &function : functions)
+        {
+            function->print();
+        }
+        cout << "End of Symbol Table" << endl;
+    }
 };
 
-varType createVarType(NonTerminalNode * varNode);
+varType createVarType(NonTerminalNode *varNode);
 tableEntery createTableEntery(NonTerminalNode *varDecNode);
-vector<SyntaxKind> getFunctionParamTypes(NonTerminalNode *paramListNode);
-
-
+vector<SyntaxKind> createFunctionParamTypes(NonTerminalNode *paramListNode);
 
 #endif

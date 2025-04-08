@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -15,10 +16,14 @@ class scope
         vector<scope*> _innerScopes;
 
     public:
-        void addTableVarDecEntry(tableEntery entry) { _tableEntries.push_back(entry); }
+        void addTableVarDecEntry(tableEntery entry) {cout << "Adding entry: " << entry.name << endl;
+             _tableEntries.push_back(entry); }
         void addInnerScope(scope* innerScope) { _innerScopes.push_back(innerScope); }
 
-        vector<tableEntery> getTableEntries() const { return _tableEntries; }
+        vector<tableEntery> getTableEntries() const { 
+            cout << "Table entries size: " << _tableEntries.size() << endl;
+            return _tableEntries; 
+        }
         vector<scope*> getInnerScopes() const { return _innerScopes; }
 
         tableEntery getEntry(string name) {
@@ -31,8 +36,5 @@ class scope
             return res;
         }
 };
-
-
-
 
 #endif

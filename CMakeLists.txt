@@ -1,43 +1,44 @@
 cmake_minimum_required(VERSION 3.10)
-project(The-Easy-Compiller)
+project(TECProject)
 
 # Set C++ standard
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Include directories
-include_directories(
-    ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/src/DFA
-    ${CMAKE_SOURCE_DIR}/src/errorHandler
-    ${CMAKE_SOURCE_DIR}/src/errors
-    ${CMAKE_SOURCE_DIR}/src/lexer
-    ${CMAKE_SOURCE_DIR}/src/nodes
-    ${CMAKE_SOURCE_DIR}/src/parser
-    ${CMAKE_SOURCE_DIR}/src/parser/grammerSymbol
-    ${CMAKE_SOURCE_DIR}/src/parser/parseTable
-    ${CMAKE_SOURCE_DIR}/src/parser/parseTable/action
-    ${CMAKE_SOURCE_DIR}/src/parser/parseTable/actionTable
-    ${CMAKE_SOURCE_DIR}/src/parser/parseTable/gotoTable
-    ${CMAKE_SOURCE_DIR}/src/parser/productionRule
-    ${CMAKE_SOURCE_DIR}/src/parser/stackItem
-    ${CMAKE_SOURCE_DIR}/src/symbolTable
-    ${CMAKE_SOURCE_DIR}/src/symbolTable/scope
-    ${CMAKE_SOURCE_DIR}/src/symbolTable/tableEntry
-    ${CMAKE_SOURCE_DIR}/src/token
+# Specify g++ as the compiler
+set(CMAKE_CXX_COMPILER "g++")
+
+# Collect all .cpp files from src directory and subdirectories
+file(GLOB_RECURSE SOURCES
+    "src/*.cpp"
 )
 
-# Find all source files
-file(GLOB_RECURSE SOURCES 
-    "${CMAKE_SOURCE_DIR}/src/*.cpp"
-)
+# Exclude any unwanted files if needed (optional)
+# list(FILTER SOURCES EXCLUDE REGEX "bison.*")
 
-# Main executable
+# Add executable
 add_executable(tec ${SOURCES})
 
-# Set output directories
-set_target_properties(tec PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"
-    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_SOURCE_DIR}/bin"
-    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/bin"
+# Include directories
+target_include_directories(tec PRIVATE
+    "src"
+    "src/DFA"
+    "src/errorHandler"
+    "src/errors"
+    "src/lexer"
+    "src/main"
+    "src/nodes"
+    "src/parser"
+    "src/parser/grammerSymbol"
+    "src/parser/parseTable"
+    "src/parser/parseTable/action"
+    "src/parser/parseTable/actionTable"
+    "src/parser/parseTable/gotoTable"
+    "src/parser/productionRule"
+    "src/parser/stackItem"
+    "src/symbolTable"
+    "src/symbolTable/scope"
+    "src/symbolTable/functionEntry"
+    "src/symbolTable/tableEntery"
+    "src/token"
 )

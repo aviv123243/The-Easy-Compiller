@@ -1,26 +1,29 @@
+#ifndef __FUNCTION_ENTRY
+#define __FUNCTION_ENTRY
+
 #include "../../token/token.hpp"
 #include "../scope/scope.hpp"
 #include <String>
 #include <vector>
 
-class functionEntery
+class functionEntry
 {
-    private:
-        string name;
-        SyntaxKind returnType;
-        vector<SyntaxKind> paramTypes;
+private:
+    string _name;
+    SyntaxKind _returnType;
+    vector<SyntaxKind> _paramTypes;
 
-        vector<scope *> innerScopes;
+    scope *_scopeRoot;
 
-    public:
-        functionEntery(string name, SyntaxKind returnType, vector<SyntaxKind> paramTypes) : name(name), returnType(returnType), paramTypes(paramTypes) {}
+public:
+    functionEntry(string name, SyntaxKind returnType, vector<SyntaxKind> paramTypes) : _name(name), _returnType(returnType), _paramTypes(paramTypes) {}
 
-        string getName() const { return name; }
-        SyntaxKind getReturnType() const { return returnType; }
-        vector<SyntaxKind> getParamTypes() const { return paramTypes; }
+    string getName() const { return _name; }
+    SyntaxKind getReturnType() const { return _returnType; }
+    vector<SyntaxKind> getParamTypes() const { return _paramTypes; }
 
-        void addInnerScope(scope *innerScope) { innerScopes.push_back(innerScope); }
-        vector<scope *> getInnerScopes() const { return innerScopes; }
-        void print() const;
-
+    void setInnerScope(scope *innerScope) { _scopeRoot = innerScope; }
+    void print() const;
 };
+
+#endif 

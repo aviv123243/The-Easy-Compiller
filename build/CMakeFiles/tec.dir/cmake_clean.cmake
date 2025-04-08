@@ -1,7 +1,4 @@
 file(REMOVE_RECURSE
-  "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe"
-  "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe.manifest"
-  "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.pdb"
   "CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj"
   "CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj.d"
   "CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj"
@@ -39,6 +36,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/tec.dir/src/token/token.cpp.obj"
   "CMakeFiles/tec.dir/src/token/token.cpp.obj.d"
   "libtec.dll.a"
+  "tec.exe"
+  "tec.exe.manifest"
+  "tec.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

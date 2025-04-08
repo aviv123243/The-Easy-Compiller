@@ -27,6 +27,7 @@ int main(int argc, char **argv)
     //-------------------------------------
 
     ErrorHandler errorHandler;
+    symbolTable symbolTable;
     Lexer lex(filePath, "..\\src\\lexerDFAConfig.txt", &errorHandler);
     vector<SyntaxToken *> tokens = lex.getTokens();
 
@@ -41,10 +42,12 @@ int main(int argc, char **argv)
             cout << syntaxTokenToString(*tokens[i]) << endl;
         }
 
-        Parser parser(tokens, 183, &errorHandler);
+        Parser parser(tokens, 183, &errorHandler,&symbolTable);
+        
 
         // parser.printFollowSet();
         ASTNode *root = parser.parse();
+        cout << "Parsing completed!" << endl;
 
         if (errorHandler.getErrorCount() > 0)
         {
@@ -54,6 +57,10 @@ int main(int argc, char **argv)
             cout << "Parsing completed successfully!" << endl;
             PrintParseTree(root);
         }
+
+        symbolTable.print();
+
+        
         
     }
 }

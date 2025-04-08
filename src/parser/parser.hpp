@@ -41,8 +41,9 @@ private:
 
     // symbol table mangaement
     symbolTable *_symbolTable;
-    stack<scope *> _scopesStack;
-    void updateSybolTable(NonTerminalNode *node);
+    stack<scope *> _scopeStack;
+    void updateScope();
+    void updateSybolTable(ASTNode *node);
 
     // init functions
     void initProductionRules();
@@ -72,7 +73,7 @@ private:
     void reportParsingError();
 
 public:
-    Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler);
+    Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, symbolTable *symbolTable);
 
     ASTNode *parse();
 
@@ -82,6 +83,5 @@ public:
     void printFollowSet();
 };
 
-SyntaxKind getType(NonTerminalNode typeNode);
 
 #endif

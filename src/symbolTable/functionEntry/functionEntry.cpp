@@ -3,12 +3,12 @@
 #include <string>
 #include <vector>
 
-void functionEntery::print() const
+void functionEntry::print() const
 {
-    cout << "Function Name: " << name << endl;
-    cout << "Return Type: " << syntaxKindToString(returnType) << endl;
+    cout << "Function Name: " << _name << endl;
+    cout << "Return Type: " << syntaxKindToString(_returnType) << endl;
     cout << "Parameter Types: ";
-    for (const auto &paramType : paramTypes)
+    for (const auto &paramType : _paramTypes)
     {
         cout << syntaxKindToString(paramType) << " ";
     }
