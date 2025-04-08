@@ -60,14 +60,18 @@ const std::vector<ASTNode *> &NonTerminalNode::GetChildren() const
 
 string AstNodeToString(ASTNode *node)
 {
+    string res = "";
+
     if (node->GetType() == GrammarSymbolType::TERMINAL)
     {
-        return syntaxTokenToString(*((TerminalNode *)node)->getToken());
+        res = syntaxTokenToString(*((TerminalNode *)node)->getToken());
     }
     else
     {
-        return nonTerminalToString(((NonTerminalNode *)node)->getNonTerminalKind());
+        res = nonTerminalToString(((NonTerminalNode *)node)->getNonTerminalKind());
     }
+
+    return res;
 }
 
 void printAstNode(ASTNode *node)

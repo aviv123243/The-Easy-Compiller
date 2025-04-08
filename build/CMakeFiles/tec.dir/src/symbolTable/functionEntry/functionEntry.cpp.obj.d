@@ -1,6 +1,6 @@
-CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj: \
- C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\tableEntery\tableEntery.cpp \
- C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\tableEntery\tableEntery.hpp \
+CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj: \
+ C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\functionEntry\functionEntry.cpp \
+ C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\functionEntry\functionEntry.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\string \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\c++config.h \
@@ -80,6 +80,15 @@ CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\functional_hash.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\hash_bytes.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\basic_string.tcc \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\scope\scope.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\tableentry\tableentry.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\vector \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_construct.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_uninitialized.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_vector.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_bvector.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\vector.tcc \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\string \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\iostream \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ostream \

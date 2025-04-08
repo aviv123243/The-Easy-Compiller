@@ -1,26 +1,25 @@
 #ifndef __SYMBOL_TABLE
 #define __SYMBOL_TABLE
 
-#include "tableEntery/tableEntery.hpp"
+#include "tableEntry/tableEntry.hpp"
+class functionEntery;
+#include "../parser/grammerSymbol/grammerSymbol.hpp"
+#include "../token/token.hpp"
+#include "../nodes/nodes.hpp"
 #include <map>
 #include <vector>
 #include <String>
 
 using namespace std;
 
-class SymbolTable
+struct symbolTable
 {
-    private:
-        map<string, tableEntery> _table;
-        vector<SymbolTable*> _innerScopes;
-
-    public:
-        SymbolTable();
-        tableEntery getEntery(string name);
-        bool isExists(string name);
-        bool addSymbol(SyntaxToken *nameToken,SyntaxToken *valTypeToken,enteryType enterytype);
-        const vector<SymbolTable*> &getInnerScopes();   
+    vector<functionEntery*> functions;
 };
+
+varType createVarType(NonTerminalNode * varNode);
+tableEntery createTableEntery(NonTerminalNode *varDecNode);
+vector<SyntaxKind> getFunctionParamTypes(NonTerminalNode *paramListNode);
 
 
 

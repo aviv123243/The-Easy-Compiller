@@ -138,6 +138,16 @@ CMakeFiles/tec.dir/src/parser/parser.cpp.obj: \
  c:\users\admin\documents\coding\the-easy-compiller\src\errors\errors.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\errors\errors.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/symbolTable.hpp \
+ C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/tableEntry/tableEntry.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\parser\grammersymbol\grammersymbol.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\string \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\scope\scope.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\tableentry\tableentry.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\stack \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\deque \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_deque.h \
@@ -156,5 +166,4 @@ CMakeFiles/tec.dir/src/parser/parser.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unordered_map.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\unordered_set \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unordered_set.h \
- c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\grammerSymbol/grammerSymbol.hpp

@@ -9,6 +9,9 @@
 #include "../nodes/nodes.hpp"
 #include "../errorHandler/errorHandler.hpp"
 #include "../errors/errors.hpp"
+#include "../token/token.hpp"
+#include "symbolTable/symbolTable.hpp"
+#include "../scope/scope.hpp"
 #include <stack>
 #include <string>
 #include <vector>
@@ -32,20 +35,26 @@ private:
     action getCurrAction();
     void shift(action currAction);
     void reduce(action currAction);
+    void reduceStatmentToNode(NonTerminalNode *node, productionRule rule);
     bool match(ASTNode *node, SyntaxKind type);
     bool match(ASTNode *node, NonTerminal type);
+
+    // symbol table mangaement
+    symbolTable *_symbolTable;
+    stack<scope *> _scopesStack;
+    void updateSybolTable(NonTerminalNode *node);
 
     // init functions
     void initProductionRules();
     void fillTables();
 
-    // First and Follow sets
-    unordered_map<NonTerminal, unordered_set<SyntaxKind>> _firstSets;
+    // Follow sets
     unordered_map<NonTerminal, unordered_set<SyntaxKind>> _followSets;
+    unordered_map<SyntaxKind, unordered_set<SyntaxKind>> _followTerminalsSets;
+    SyntaxKind getNonTerminalFollowSetItem(NonTerminal nt);
+    SyntaxKind getTerminalFollowSetItem(SyntaxKind kind);
 
-    unordered_set<SyntaxKind> &computeFirst(NonTerminal nt);
-    void computeFirstSets();
-    void computeFollowSets();
+    void initFollowSets();
 
     // Navigation and helpers
     vector<SyntaxToken *> _tokens;
@@ -60,6 +69,8 @@ private:
     // error handling
     ErrorHandler *_errorHandler;
 
+    void reportParsingError();
+
 public:
     Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler);
 
@@ -68,8 +79,9 @@ public:
     // Debugging
     void printStack();
     void printRules();
-    void printFirstSet();
     void printFollowSet();
 };
+
+SyntaxKind getType(NonTerminalNode typeNode);
 
 #endif

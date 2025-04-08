@@ -90,7 +90,7 @@
 						"mingwex"
 					]
 				},
-				"path" : "g++",
+				"path" : "C:/MinGW/bin/g++.exe",
 				"version" : "6.3.0"
 			},
 			"language" : "CXX",

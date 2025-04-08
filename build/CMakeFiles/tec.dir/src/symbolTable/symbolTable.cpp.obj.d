@@ -1,8 +1,7 @@
 CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: \
  C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\symbolTable.cpp \
- C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\symbolTable.hpp \
- C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\tableEntery/tableEntery.hpp \
- c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/actionTable/actionTable.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\parser\parsetable\action\action.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\string \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\c++config.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\os_defines.h \
@@ -81,7 +80,45 @@ CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\functional_hash.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\hash_bytes.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\basic_string.tcc \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\string \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\sstream \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\istream \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ios \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\ios_base.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\locale_classes.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\locale_classes.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\system_error \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\error_constants.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\stdexcept \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\streambuf \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\streambuf.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\basic_ios.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\locale_facets.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\cwctype \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\ctype_base.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\streambuf_iterator.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\ctype_inline.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\locale_facets.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\basic_ios.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ostream \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\ostream.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\istream.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\sstream.tcc \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\parser\grammersymbol\grammersymbol.hpp \
+ C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\tableEntry/tableEntry.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\parser\grammersymbol\grammersymbol.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\parser\grammersymbol\grammersymbol.hpp \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\vector \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_construct.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_uninitialized.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_vector.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_bvector.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\vector.tcc \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\iostream \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\map \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_tree.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\ext\aligned_buffer.h \
@@ -90,12 +127,6 @@ CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\utility \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_relops.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\array \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\stdexcept \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\uses_allocator.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_multimap.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\vector \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_construct.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_uninitialized.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_vector.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_bvector.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\vector.tcc
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\string

@@ -39,7 +39,14 @@ class SyntacticError : public Error
             int line = token -> line;
             int column = token ->column;
 
-            _body = "unvalid placment of token " + syntaxTokenToString(*token) + "on" + "{" + to_string(line) +":" + to_string(column) + "}";
+            _body = "unvalid placment of token " + syntaxTokenToString(*token) + "on" + "{" + to_string(line) +":" + to_string(column) + "}\n";
+        }
+
+        SyntacticError(SyntaxToken * errorToken, SyntaxKind replacment) {
+            int line = errorToken -> line;
+            int column = errorToken ->column;
+
+            _body = "Parser error on {" + to_string(line) +":" + to_string(column) + "} with token " + syntaxTokenToString(*errorToken) + "\n mabe try using " + syntaxKindToString(replacment) + " instead\n";
         }
 
         SyntacticError() {

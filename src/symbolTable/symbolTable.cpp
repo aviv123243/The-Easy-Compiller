@@ -1,34 +1,72 @@
-#include "symbolTable.hpp"
+#include "actionTable.hpp"
 
-//initiallising an empty table
-SymbolTable::SymbolTable() : _table() {}
+#include "tableEntry/tableEntry.hpp"
+#include "../parser/grammerSymbol/grammerSymbol.hpp"
+#include "../token/token.hpp"
+#include "../nodes/nodes.hpp"
+#include <map>
+#include <vector>
+#include <String>
 
-//returns an entery in the table by name of symbol
-tableEntery SymbolTable::getEntery(string name)
+varType createVarType(NonTerminalNode * varNode)
 {
-    return _table[name];
+    vector<ASTNode*> children = varNode->GetChildren();
+    SyntaxKind type = UNEXPECTED_TOKEN;
+    bool isPointer = false;
+    bool isArray = false;
+
+    type = ((TerminalNode *)children[0]) -> getTerminalKind();
+
+    //pointer
+    if(children.size() == 2) 
+    {
+        isPointer = true;
+    } 
+
+    //array
+    if(children.size() == 3) 
+    {
+        isArray = true;
+    }
+
+    varType res = {type, isPointer, isArray};
+    return res;
 }
 
-//finds if an given symbol name exists in the table
-bool SymbolTable::isExists(string name)
+tableEntery createTableEntery(NonTerminalNode *varDecNode)
 {
-    return _table.find(name) != _table.end();
+    tableEntery res = tableEntery{"",UNEXPECTED_TOKEN,false,false,false};
+    vector<ASTNode*> children = varDecNode->GetChildren();
+    
+    
+    res.name = ((TerminalNode *)children[1])->getTerminalKind();
+
+    res.type = createVarType((NonTerminalNode *)children[0]);
+
+    res.isInitialized = false; 
+    
+    return res;
 }
 
-//add entery to table 
-//if symbol already exists it wont do enything and return false
-//otherwise returns true
-bool SymbolTable::addSymbol(SyntaxToken *nameToken,SyntaxToken *valTypeToken,enteryType enterytype)
+vector<SyntaxKind> getFunctionParamTypes(NonTerminalNode *paramListNode)
 {
-    if(isExists(nameToken -> val)) return false;
+    vector<SyntaxKind> paramTypes;
+    vector<ASTNode*> children = paramListNode->GetChildren();
 
-    tableEntery entery = createEntery(nameToken,valTypeToken,enterytype);
-    _table[entery.name] = entery;
+    for (ASTNode* child : children)
+    {
+        if (child->GetType() == GrammarSymbolType::NON_TERMINAL)
+        {
+            NonTerminalNode* paramNode = (NonTerminalNode*)child;
+            if (paramNode->getNonTerminalKind() == PARAM)
+            {
+                vector<ASTNode*> paramChildren = paramNode->GetChildren();
+                SyntaxKind type = ((TerminalNode *)paramChildren[0])->getTerminalKind();
+                paramTypes.push_back(type);
+            }
+        }
+    }
+
+    return paramTypes;
 }
 
-//returns an vector of the inner scopes 
-//every inner scope is an symbol table itself
-const vector<SymbolTable*> &SymbolTable::getInnerScopes()
-{
-    return _innerScopes;
-}

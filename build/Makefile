@@ -440,6 +440,54 @@ src/parser/stackItem/stackItem.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.s
 .PHONY : src/parser/stackItem/stackItem.cpp.s
 
+src/symbolTable/functionEntry/functionEntry.obj: src/symbolTable/functionEntry/functionEntry.cpp.obj
+.PHONY : src/symbolTable/functionEntry/functionEntry.obj
+
+# target to build an object file
+src/symbolTable/functionEntry/functionEntry.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj
+.PHONY : src/symbolTable/functionEntry/functionEntry.cpp.obj
+
+src/symbolTable/functionEntry/functionEntry.i: src/symbolTable/functionEntry/functionEntry.cpp.i
+.PHONY : src/symbolTable/functionEntry/functionEntry.i
+
+# target to preprocess a source file
+src/symbolTable/functionEntry/functionEntry.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.i
+.PHONY : src/symbolTable/functionEntry/functionEntry.cpp.i
+
+src/symbolTable/functionEntry/functionEntry.s: src/symbolTable/functionEntry/functionEntry.cpp.s
+.PHONY : src/symbolTable/functionEntry/functionEntry.s
+
+# target to generate assembly for a file
+src/symbolTable/functionEntry/functionEntry.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.s
+.PHONY : src/symbolTable/functionEntry/functionEntry.cpp.s
+
+src/symbolTable/scope/scope.obj: src/symbolTable/scope/scope.cpp.obj
+.PHONY : src/symbolTable/scope/scope.obj
+
+# target to build an object file
+src/symbolTable/scope/scope.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj
+.PHONY : src/symbolTable/scope/scope.cpp.obj
+
+src/symbolTable/scope/scope.i: src/symbolTable/scope/scope.cpp.i
+.PHONY : src/symbolTable/scope/scope.i
+
+# target to preprocess a source file
+src/symbolTable/scope/scope.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.i
+.PHONY : src/symbolTable/scope/scope.cpp.i
+
+src/symbolTable/scope/scope.s: src/symbolTable/scope/scope.cpp.s
+.PHONY : src/symbolTable/scope/scope.s
+
+# target to generate assembly for a file
+src/symbolTable/scope/scope.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.s
+.PHONY : src/symbolTable/scope/scope.cpp.s
+
 src/symbolTable/symbolTable.obj: src/symbolTable/symbolTable.cpp.obj
 .PHONY : src/symbolTable/symbolTable.obj
 
@@ -464,29 +512,29 @@ src/symbolTable/symbolTable.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.s
 .PHONY : src/symbolTable/symbolTable.cpp.s
 
-src/symbolTable/tableEntery/tableEntery.obj: src/symbolTable/tableEntery/tableEntery.cpp.obj
-.PHONY : src/symbolTable/tableEntery/tableEntery.obj
+src/symbolTable/tableEntry/tableEntry.obj: src/symbolTable/tableEntry/tableEntry.cpp.obj
+.PHONY : src/symbolTable/tableEntry/tableEntry.obj
 
 # target to build an object file
-src/symbolTable/tableEntery/tableEntery.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj
-.PHONY : src/symbolTable/tableEntery/tableEntery.cpp.obj
+src/symbolTable/tableEntry/tableEntry.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj
+.PHONY : src/symbolTable/tableEntry/tableEntry.cpp.obj
 
-src/symbolTable/tableEntery/tableEntery.i: src/symbolTable/tableEntery/tableEntery.cpp.i
-.PHONY : src/symbolTable/tableEntery/tableEntery.i
+src/symbolTable/tableEntry/tableEntry.i: src/symbolTable/tableEntry/tableEntry.cpp.i
+.PHONY : src/symbolTable/tableEntry/tableEntry.i
 
 # target to preprocess a source file
-src/symbolTable/tableEntery/tableEntery.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.i
-.PHONY : src/symbolTable/tableEntery/tableEntery.cpp.i
+src/symbolTable/tableEntry/tableEntry.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.i
+.PHONY : src/symbolTable/tableEntry/tableEntry.cpp.i
 
-src/symbolTable/tableEntery/tableEntery.s: src/symbolTable/tableEntery/tableEntery.cpp.s
-.PHONY : src/symbolTable/tableEntery/tableEntery.s
+src/symbolTable/tableEntry/tableEntry.s: src/symbolTable/tableEntry/tableEntry.cpp.s
+.PHONY : src/symbolTable/tableEntry/tableEntry.s
 
 # target to generate assembly for a file
-src/symbolTable/tableEntery/tableEntery.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.s
-.PHONY : src/symbolTable/tableEntery/tableEntery.cpp.s
+src/symbolTable/tableEntry/tableEntry.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.s
+.PHONY : src/symbolTable/tableEntry/tableEntry.cpp.s
 
 src/token/token.obj: src/token/token.cpp.obj
 .PHONY : src/token/token.obj
@@ -560,12 +608,18 @@ help:
 	@echo ... src/parser/stackItem/stackItem.obj
 	@echo ... src/parser/stackItem/stackItem.i
 	@echo ... src/parser/stackItem/stackItem.s
+	@echo ... src/symbolTable/functionEntry/functionEntry.obj
+	@echo ... src/symbolTable/functionEntry/functionEntry.i
+	@echo ... src/symbolTable/functionEntry/functionEntry.s
+	@echo ... src/symbolTable/scope/scope.obj
+	@echo ... src/symbolTable/scope/scope.i
+	@echo ... src/symbolTable/scope/scope.s
 	@echo ... src/symbolTable/symbolTable.obj
 	@echo ... src/symbolTable/symbolTable.i
 	@echo ... src/symbolTable/symbolTable.s
-	@echo ... src/symbolTable/tableEntery/tableEntery.obj
-	@echo ... src/symbolTable/tableEntery/tableEntery.i
-	@echo ... src/symbolTable/tableEntery/tableEntery.s
+	@echo ... src/symbolTable/tableEntry/tableEntry.obj
+	@echo ... src/symbolTable/tableEntry/tableEntry.i
+	@echo ... src/symbolTable/tableEntry/tableEntry.s
 	@echo ... src/token/token.obj
 	@echo ... src/token/token.i
 	@echo ... src/token/token.s

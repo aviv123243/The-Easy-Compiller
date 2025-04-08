@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"jsonFile" : "directory-.-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10"
@@ -19,7 +19,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "",
 			"projects" : 
 			[
 				{
@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "TECProject",
+					"name" : "The-Easy-Compiller",
 					"targetIndexes" : 
 					[
 						0
@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "tec::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-tec-Debug-2f1a34ae81673004f579.json",
+					"jsonFile" : "target-tec-a2eda63d1523d3935cd8.json",
 					"name" : "tec",
 					"projectIndex" : 0
 				}

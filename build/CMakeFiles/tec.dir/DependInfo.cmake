@@ -21,8 +21,10 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parser.cpp" "CMakeFiles/tec.dir/src/parser/parser.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/parser/parser.cpp.obj.d"
   "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/productionRule/productionRule.cpp" "CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj.d"
   "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/stackItem/stackItem.cpp" "CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj.d"
+  "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/functionEntry/functionEntry.cpp" "CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj.d"
+  "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/scope/scope.cpp" "CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj.d"
   "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/symbolTable.cpp" "CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj.d"
-  "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/tableEntery/tableEntery.cpp" "CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/symbolTable/tableEntery/tableEntery.cpp.obj.d"
+  "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/tableEntry/tableEntry.cpp" "CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj.d"
   "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/token/token.cpp" "CMakeFiles/tec.dir/src/token/token.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/token/token.cpp.obj.d"
   )
 

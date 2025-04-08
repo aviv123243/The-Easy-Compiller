@@ -27,7 +27,6 @@ GotoTable::~GotoTable()
 // adds a new entry to the table
 void GotoTable::add(int startState, NonTerminal nt, int endState)
 {
-    cout << "(" << startState << "," << nt << ") -> " << endState << endl;
     if (nt >= NonTerminal::NON_TERMINAL_COUNT || startState >= _numOfStates || endState >= _numOfStates)
     {
         cerr << "Invalid input on gotoTable::add() function" << endl;

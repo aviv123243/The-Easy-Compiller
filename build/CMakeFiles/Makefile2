@@ -84,12 +84,12 @@ clean: CMakeFiles/tec.dir/clean
 CMakeFiles/tec.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17 "Built target tec"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target tec"
 .PHONY : CMakeFiles/tec.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/tec.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles 17
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles 19
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/tec.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles 0
 .PHONY : CMakeFiles/tec.dir/rule
@@ -101,7 +101,7 @@ tec: CMakeFiles/tec.dir/rule
 # codegen rule for target.
 CMakeFiles/tec.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17 "Finished codegen for target tec"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Finished codegen for target tec"
 .PHONY : CMakeFiles/tec.dir/codegen
 
 # clean rule for target.
