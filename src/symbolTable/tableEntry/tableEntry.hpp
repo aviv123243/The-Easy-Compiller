@@ -9,6 +9,7 @@ using namespace std;
 struct varType
 {
     SyntaxKind type;
+    int size;
     bool isPointer;
     bool isArray;
 };
@@ -20,7 +21,8 @@ struct tableEntery
     bool isInitialized = false;
 };
 
-
+string varTypeToString(varType vType);
+void printVarType(varType vtype);
 void printTableEntery(tableEntery *entry);
 
 

@@ -9,25 +9,21 @@
 #include <vector>
 #include <iostream>
 
-#define PARSER_DEBUG
+//#define PARSER_DEBUG
 
 using namespace std;
 
 Parser::Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, symbolTable *symbolTable)
-    : _actionTable(numOfStates), _gotoTable(numOfStates), _symbolTable(symbolTable), _rules(), _stack(), _errorHandler(handler), _tokens(tokens),_cursor(0)
+    : _actionTable(numOfStates), _gotoTable(numOfStates), _symbolTable(symbolTable), _rules(), _stack(), _errorHandler(handler), _tokens(tokens), _cursor(0)
 {
     _stack.push(StackItem{0, new NonTerminalNode(NonTerminal::START)});
     initProductionRules();
     fillTables();
     initFollowSets();
-
-    cout << "num of tokens: " << tokens.size() << endl;
 }
 
 SyntaxToken *Parser::getNextToken()
 {
-    cout << "getNextToken()" << endl;
-    cout << "cursor: " << _cursor << endl;
     _cursor++;
     return peek(0);
 }
@@ -133,7 +129,6 @@ void Parser::reduce(action currAction)
     cout << rule.toString() << endl;
 #endif
 
-    cout << "here1" << endl;
     // Create a new nonTerminalNode
     NonTerminalNode *node = new NonTerminalNode(rule.getLeft());
 
@@ -153,9 +148,7 @@ void Parser::reduce(action currAction)
         _currState = currentState;
     }
 
-    cout << "here2";
     updateSybolTable(_stack.top().node); // update the symbol table with the new node
-    cout << "here3";
 }
 
 void Parser::reduceStatmentToNode(NonTerminalNode *node, productionRule rule)
@@ -182,29 +175,34 @@ void Parser::updateSybolTable(ASTNode *node)
 {
     if (node->GetType() == NON_TERMINAL)
     {
-        NonTerminalNode *ntNode = (NonTerminalNode *)ntNode;
+        NonTerminalNode *ntNode = (NonTerminalNode *)node;
         if (ntNode->getNonTerminalKind() == FUNCTION_DECL)
         {
-            cout << "Function Declaration" << endl;
             string name = ((TerminalNode *)(ntNode->GetChildren()[1]))->getToken()->val;
 
-            cout << "Function Name: " << name << endl;
             varType funcVarType = createVarType((NonTerminalNode *)(ntNode->GetChildren()[6]));
 
-            cout << "Function Return Type: " << syntaxKindToString(funcVarType.type) << endl;
-            vector<SyntaxKind> paramTypes = createFunctionParamTypes((NonTerminalNode *)(ntNode->GetChildren()[3]));
+            vector<varType> paramTypes = createFunctionParamTypes((NonTerminalNode *)(ntNode->GetChildren()[3]));
 
-            functionEntry *funcEntry = new functionEntry(name, funcVarType.type, paramTypes);
-            funcEntry->setInnerScope(_scopeStack.top());
+            functionEntry *funcEntry = new functionEntry(name, funcVarType, paramTypes);
+
+            funcEntry->setInnerScope(_currRootScope);
+
+            vector<tableEntery> paramEntries = createFunctionParamEnteries((NonTerminalNode *)(ntNode->GetChildren()[3]));
+            for (int i = 0; i < paramEntries.size(); i++)
+            {
+                _currRootScope->addTableEntry(paramEntries[i]);
+            }
+
             _symbolTable->addFunction(funcEntry);
         }
         else if (ntNode->getNonTerminalKind() == VAR_DECL_EXPR)
         {
-            cout << "Variable Declaration" << endl;
-            scope *currScope = _scopeStack.top(); // get the current scope
+            // get the current scope
+            scope *currScope = _scopeStack.top(); 
+
             // add variable to the symbol table
-            currScope->addTableVarDecEntry(createTableEntery(ntNode));
-            cout << "Variable Name: " << ((TerminalNode *)(ntNode->GetChildren()[1]))->getToken()->val << endl;
+            currScope->addTableEntry(createTableEntery_varDec(ntNode));
         }
     }
 }
@@ -213,31 +211,29 @@ void Parser::updateScope()
 {
     if (peek(0)->kind == SyntaxKind::OPEN_CURLY)
     {
+        //entering scope
         scope *newScope = new scope();
 
         // if the stack is empty it means its a new function
         // so just connect it to the stack knowing it dosent have a parent
         // later wre connect the function to the scope in the updateSymbolTable() func
 
-        cout << "scope size: " << _scopeStack.size() << endl;
         if (!_scopeStack.empty())
         {
-            cout << "here0" << endl;
-            cout << "scope size: " << _scopeStack.size() << endl;
             scope *oldScope = _scopeStack.top();
             oldScope->addInnerScope(newScope);
         }
 
-        cout << "here1" << endl;
         _scopeStack.push(newScope);
-        cout << "here2" << endl;
     }
     else if (peek(0)->kind == SyntaxKind::CLOSED_CURLY)
     {
-
+        // exiting scope
         scope *currScope = _scopeStack.top();
         _scopeStack.pop();
-        cout << "Exiting scope" << endl;
+
+        if (_scopeStack.empty())
+            _currRootScope = currScope; // if the stack is empty it means we are at the end of the function
     }
 }
 

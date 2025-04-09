@@ -58,7 +58,7 @@ int main(int argc, char **argv)
             PrintParseTree(root);
         }
 
-        symbolTable.print();
+        //symbolTable.print();
 
         
         

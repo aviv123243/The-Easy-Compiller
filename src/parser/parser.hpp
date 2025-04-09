@@ -42,6 +42,7 @@ private:
     // symbol table mangaement
     symbolTable *_symbolTable;
     stack<scope *> _scopeStack;
+    scope *_currRootScope;
     void updateScope();
     void updateSybolTable(ASTNode *node);
 

@@ -6,11 +6,13 @@
 void functionEntry::print() const
 {
     cout << "Function Name: " << _name << endl;
-    cout << "Return Type: " << syntaxKindToString(_returnType) << endl;
+    cout << "Return Type: " << varTypeToString(_returnType) << endl;
     cout << "Parameter Types: ";
     for (const auto &paramType : _paramTypes)
     {
-        cout << syntaxKindToString(paramType) << " ";
+        cout << varTypeToString(paramType) << " ";
     }
+
+    _scopeRoot->printScope();
     cout << endl;
 }

@@ -32,7 +32,11 @@ public:
 };
 
 varType createVarType(NonTerminalNode *varNode);
-tableEntery createTableEntery(NonTerminalNode *varDecNode);
-vector<SyntaxKind> createFunctionParamTypes(NonTerminalNode *paramListNode);
+tableEntery createTableEntery_varDec(NonTerminalNode *varDecNode);
+tableEntery createTableEntery_param(NonTerminalNode *varDecNode);
+vector<varType> createFunctionParamTypes(NonTerminalNode *paramListNode);
+void createFunctionParamTypesHelper(NonTerminalNode *paramListNode, vector<varType> *paramTypes);
+vector<tableEntery> createFunctionParamEnteries(NonTerminalNode *paramListNode);
+void createFunctionParamEnteriesHelper(NonTerminalNode *paramListNode, vector<tableEntery> *paramTypes);
 
 #endif
