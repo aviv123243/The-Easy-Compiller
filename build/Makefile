@@ -440,6 +440,30 @@ src/parser/stackItem/stackItem.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.s
 .PHONY : src/parser/stackItem/stackItem.cpp.s
 
+src/semantic/semantic.obj: src/semantic/semantic.cpp.obj
+.PHONY : src/semantic/semantic.obj
+
+# target to build an object file
+src/semantic/semantic.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj
+.PHONY : src/semantic/semantic.cpp.obj
+
+src/semantic/semantic.i: src/semantic/semantic.cpp.i
+.PHONY : src/semantic/semantic.i
+
+# target to preprocess a source file
+src/semantic/semantic.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/semantic/semantic.cpp.i
+.PHONY : src/semantic/semantic.cpp.i
+
+src/semantic/semantic.s: src/semantic/semantic.cpp.s
+.PHONY : src/semantic/semantic.s
+
+# target to generate assembly for a file
+src/semantic/semantic.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/semantic/semantic.cpp.s
+.PHONY : src/semantic/semantic.cpp.s
+
 src/symbolTable/functionEntry/functionEntry.obj: src/symbolTable/functionEntry/functionEntry.cpp.obj
 .PHONY : src/symbolTable/functionEntry/functionEntry.obj
 
@@ -608,6 +632,9 @@ help:
 	@echo ... src/parser/stackItem/stackItem.obj
 	@echo ... src/parser/stackItem/stackItem.i
 	@echo ... src/parser/stackItem/stackItem.s
+	@echo ... src/semantic/semantic.obj
+	@echo ... src/semantic/semantic.i
+	@echo ... src/semantic/semantic.s
 	@echo ... src/symbolTable/functionEntry/functionEntry.obj
 	@echo ... src/symbolTable/functionEntry/functionEntry.i
 	@echo ... src/symbolTable/functionEntry/functionEntry.s

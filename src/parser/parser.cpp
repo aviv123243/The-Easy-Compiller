@@ -9,11 +9,11 @@
 #include <vector>
 #include <iostream>
 
-//#define PARSER_DEBUG
+// #define PARSER_DEBUG
 
 using namespace std;
 
-Parser::Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, symbolTable *symbolTable)
+Parser::Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, SymbolTable *symbolTable)
     : _actionTable(numOfStates), _gotoTable(numOfStates), _symbolTable(symbolTable), _rules(), _stack(), _errorHandler(handler), _tokens(tokens), _cursor(0)
 {
     _stack.push(StackItem{0, new NonTerminalNode(NonTerminal::START)});
@@ -180,9 +180,9 @@ void Parser::updateSybolTable(ASTNode *node)
         {
             string name = ((TerminalNode *)(ntNode->GetChildren()[1]))->getToken()->val;
 
-            varType funcVarType = createVarType((NonTerminalNode *)(ntNode->GetChildren()[6]));
+            valType funcVarType = createVarType((NonTerminalNode *)(ntNode->GetChildren()[6]));
 
-            vector<varType> paramTypes = createFunctionParamTypes((NonTerminalNode *)(ntNode->GetChildren()[3]));
+            vector<valType> paramTypes = createFunctionParamTypes((NonTerminalNode *)(ntNode->GetChildren()[3]));
 
             functionEntry *funcEntry = new functionEntry(name, funcVarType, paramTypes);
 
@@ -199,7 +199,7 @@ void Parser::updateSybolTable(ASTNode *node)
         else if (ntNode->getNonTerminalKind() == VAR_DECL_EXPR)
         {
             // get the current scope
-            scope *currScope = _scopeStack.top(); 
+            scope *currScope = _scopeStack.top();
 
             // add variable to the symbol table
             currScope->addTableEntry(createTableEntery_varDec(ntNode));
@@ -211,7 +211,7 @@ void Parser::updateScope()
 {
     if (peek(0)->kind == SyntaxKind::OPEN_CURLY)
     {
-        //entering scope
+        // entering scope
         scope *newScope = new scope();
 
         // if the stack is empty it means its a new function

@@ -79,6 +79,12 @@
 },
 {
   "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
+  "command": "g++  @CMakeFiles/tec.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\tec.dir\\src\\semantic\\semantic.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\semantic\\semantic.cpp",
+  "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/semantic/semantic.cpp",
+  "output": "CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
   "command": "g++  @CMakeFiles/tec.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\tec.dir\\src\\symbolTable\\functionEntry\\functionEntry.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\symbolTable\\functionEntry\\functionEntry.cpp",
   "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/functionEntry/functionEntry.cpp",
   "output": "CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj"

@@ -154,13 +154,14 @@ CMakeFiles/tec.dir/src/main/main.cpp.obj: \
  c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\parser\grammersymbol\grammersymbol.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\tableentry\tableentry.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\errorhandler\errorhandler.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\errors\errors.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/symbolTable.hpp \
  C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/tableEntry/tableEntry.hpp \
- c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/functionEntry/functionEntry.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\scope\scope.hpp \
@@ -177,6 +178,13 @@ CMakeFiles/tec.dir/src/main/main.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_stack.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\unordered_set \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unordered_set.h \
+ c:\users\admin\documents\coding\the-easy-compiller\src\semantic\semantic.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\scope\scope.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\tableentry\tableentry.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\symboltable.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\errorhandler\errorhandler.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\errors\errors.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\fstream \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\codecvt.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\basic_file.h \

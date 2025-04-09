@@ -40,7 +40,7 @@ private:
     bool match(ASTNode *node, NonTerminal type);
 
     // symbol table mangaement
-    symbolTable *_symbolTable;
+    SymbolTable *_symbolTable;
     stack<scope *> _scopeStack;
     scope *_currRootScope;
     void updateScope();
@@ -74,7 +74,7 @@ private:
     void reportParsingError();
 
 public:
-    Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, symbolTable *symbolTable);
+    Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, SymbolTable *symbolTable);
 
     ASTNode *parse();
 
@@ -83,6 +83,5 @@ public:
     void printRules();
     void printFollowSet();
 };
-
 
 #endif

@@ -7,7 +7,7 @@
 #include <vector>
 #include <String>
 
-varType createVarType(NonTerminalNode *varNode)
+valType createVarType(NonTerminalNode *varNode)
 {
     vector<ASTNode *> children = varNode->GetChildren();
 
@@ -33,19 +33,19 @@ varType createVarType(NonTerminalNode *varNode)
         size = stoi(sizeNode->getToken()->val);
     }
 
-    varType res = {type, size, isPointer, isArray};
+    valType res = {type, size, isPointer, isArray};
     return res;
 }
 
 tableEntery createTableEntery_varDec(NonTerminalNode *varDecNode)
 {
-    tableEntery res = tableEntery{"", varType{UNEXPECTED_TOKEN, 1, false, false}, false};
+    tableEntery res = tableEntery{"", valType{UNEXPECTED_TOKEN, 1, false, false}, false};
     vector<ASTNode *> children = varDecNode->GetChildren();
 
-    //set name
+    // set name
     res.name = ((TerminalNode *)children[1])->getToken()->val;
 
-    //set type
+    // set type
     res.type = createVarType((NonTerminalNode *)children[0]);
 
     return res;
@@ -53,19 +53,19 @@ tableEntery createTableEntery_varDec(NonTerminalNode *varDecNode)
 
 tableEntery createTableEntery_param(NonTerminalNode *paramNode)
 {
-    tableEntery res = tableEntery{"", varType{UNEXPECTED_TOKEN, 1, false, false}, false};
+    tableEntery res = tableEntery{"", valType{UNEXPECTED_TOKEN, 1, false, false}, false};
     vector<ASTNode *> children = paramNode->GetChildren();
 
-    //set name
+    // set name
     res.name = ((TerminalNode *)children[1])->getToken()->val;
 
-    //set type
+    // set type
     res.type = createVarType((NonTerminalNode *)children[0]);
 
     return res;
 }
 
-void createFunctionParamTypesHelper(NonTerminalNode *paramListNonEmptyNode, vector<varType> *paramTypes)
+void createFunctionParamTypesHelper(NonTerminalNode *paramListNonEmptyNode, vector<valType> *paramTypes)
 {
     vector<ASTNode *> childern = paramListNonEmptyNode->GetChildren();
     int numOfChildren = childern.size();
@@ -87,10 +87,10 @@ void createFunctionParamTypesHelper(NonTerminalNode *paramListNonEmptyNode, vect
     }
 }
 
-vector<varType> createFunctionParamTypes(NonTerminalNode *paramListNode)
+vector<valType> createFunctionParamTypes(NonTerminalNode *paramListNode)
 {
     vector<ASTNode *> childern = paramListNode->GetChildren();
-    vector<varType> res;
+    vector<valType> res;
 
     if (childern.size() > 0)
     {
@@ -131,5 +131,3 @@ vector<tableEntery> createFunctionParamEnteries(NonTerminalNode *paramListNode)
 
     return res;
 }
-
-

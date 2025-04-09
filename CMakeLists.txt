@@ -36,9 +36,10 @@ target_include_directories(tec PRIVATE
     "src/parser/parseTable/gotoTable"
     "src/parser/productionRule"
     "src/parser/stackItem"
+    "src/semantic"
     "src/symbolTable"
     "src/symbolTable/scope"
     "src/symbolTable/functionEntry"
-    "src/symbolTable/tableEntery"
+    "src/symbolTable/tableEntry"
     "src/token"
 )

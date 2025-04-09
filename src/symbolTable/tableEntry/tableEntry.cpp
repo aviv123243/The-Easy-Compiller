@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 
-string varTypeToString(varType vType)
+string valTypeToString(valType vType)
 {
     stringstream res;
 
@@ -17,17 +17,16 @@ string varTypeToString(varType vType)
     if (vType.isArray)
     {
         res << "["
-        << vType.size
-        << "]";
+            << vType.size
+            << "]";
     }
-
 
     return res.str();
 }
 
-void printVarType(varType vtype)
+void printValType(valType vtype)
 {
-    cout << varTypeToString(vtype) << endl;
+    cout << valTypeToString(vtype) << endl;
 }
 
 void printTableEntery(tableEntery *entry)
@@ -35,7 +34,6 @@ void printTableEntery(tableEntery *entry)
     cout << "---------------------------------" << endl;
     cout << "Variable Name: " << entry->name << endl;
     cout << "Variable Type: " << syntaxKindToString(entry->type.type) << endl;
-    printVarType(entry->type);
+    printValType(entry->type);
     cout << "---------------------------------" << endl;
 }
-

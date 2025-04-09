@@ -3,6 +3,7 @@
 
 #include "../token/token.hpp"
 #include "../parser/grammerSymbol/grammerSymbol.hpp"
+#include "../symbolTable/tableEntry/tableEntry.hpp"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -13,11 +14,22 @@ class ASTNode
 {
 protected:
     GrammarSymbolType _type;
+    valType _valType; //be used for semantic analysis
 
 public:
     const GrammarSymbolType GetType() const
     {
         return _type;
+    }
+
+    const valType GetValType() const
+    {
+        return _valType;
+    }
+    
+    void SetValType(valType valType)
+    {
+        _valType = valType;
     }
 
     const virtual vector<ASTNode *> &GetChildren() const = 0;

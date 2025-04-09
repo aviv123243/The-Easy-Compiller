@@ -10,20 +10,20 @@ class functionEntry
 {
 private:
     string _name;
-    varType _returnType;
-    vector<varType> _paramTypes;
+    valType _returnType;
+    vector<valType> _paramTypes;
 
     scope *_scopeRoot;
 
 public:
-    functionEntry(string name, varType returnType, vector<varType> paramTypes) : _name(name), _returnType(returnType), _paramTypes(paramTypes) {}
+    functionEntry(string name, valType returnType, vector<valType> paramTypes) : _name(name), _returnType(returnType), _paramTypes(paramTypes) {}
 
     string getName() const { return _name; }
-    varType getReturnType() const { return _returnType; }
-    vector<varType> getParamTypes() const { return _paramTypes; }
+    valType getReturnType() const { return _returnType; }
+    vector<valType> getParamTypes() const { return _paramTypes; }
 
     void setInnerScope(scope *innerScope) { _scopeRoot = innerScope; }
     void print() const;
 };
 
-#endif 
+#endif

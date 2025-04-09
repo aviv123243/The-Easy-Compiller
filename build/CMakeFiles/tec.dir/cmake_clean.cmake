@@ -25,6 +25,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj.d"
   "CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj"
   "CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj"
+  "CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj.d"
   "CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj"
   "CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj.d"
   "CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj"

@@ -3,10 +3,9 @@
 
 #include "../../token/token.hpp"
 
-
 using namespace std;
 
-struct varType
+struct valType
 {
     SyntaxKind type;
     int size;
@@ -17,14 +16,12 @@ struct varType
 struct tableEntery
 {
     string name;
-    varType type;
+    valType type;
     bool isInitialized = false;
 };
 
-string varTypeToString(varType vType);
-void printVarType(varType vtype);
+string valTypeToString(valType vType);
+void printValType(valType vtype);
 void printTableEntery(tableEntery *entry);
-
-
 
 #endif

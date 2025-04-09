@@ -59,4 +59,16 @@ class SyntacticError : public Error
         }
 };
 
+class semanticError : public Error
+{
+    public:
+        semanticError(string body) {_body = body;}
+
+        string toString() const override
+        {
+            return "semanticError: " + _body;
+        }
+        
+};
+
 #endif

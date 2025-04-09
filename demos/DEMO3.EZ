@@ -1,13 +1,4 @@
 
-fn main() => int[8]
-{
-    int x = 7*7*7;
-    int y = 6;
-    print(max(x,y));
-
-    ret 0;
-}
-
 fn max(int[8] x,int y,int z) => int
 {
     int res;
@@ -24,11 +15,24 @@ fn max(int[8] x,int y,int z) => int
     while(1)
     {
       int y3 = x;
-      y3++;
+      y_3++;
     }
 
     ret res;
 }
+
+fn main() => int[8]
+{
+    int x = 7*7*7;
+    int y = 6;
+    print(max(x,y));
+
+    ret 0;
+}
+
+
+
+fn p() => int {}
 
 
 

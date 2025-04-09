@@ -12,18 +12,20 @@
 
 using namespace std;
 
-class symbolTable
+class SymbolTable
 {
 private:
-    vector<functionEntry *> functions;
+    vector<functionEntry *> _functions;
 
 public:
-    void addFunction(functionEntry *function) { functions.push_back(function); }
+    void addFunction(functionEntry *function) { _functions.push_back(function); }
+    const std::vector<functionEntry *> &getFunctions() const { return _functions; }
+
     void print() const
     {
         cout << "Symbol Table:" << endl;
-        cout << "num of functions: " << functions.size() << endl;
-        for (const auto &function : functions)
+        cout << "num of functions: " << _functions.size() << endl;
+        for (const auto &function : _functions)
         {
             function->print();
         }
@@ -31,11 +33,11 @@ public:
     }
 };
 
-varType createVarType(NonTerminalNode *varNode);
+valType createVarType(NonTerminalNode *varNode);
 tableEntery createTableEntery_varDec(NonTerminalNode *varDecNode);
 tableEntery createTableEntery_param(NonTerminalNode *varDecNode);
-vector<varType> createFunctionParamTypes(NonTerminalNode *paramListNode);
-void createFunctionParamTypesHelper(NonTerminalNode *paramListNode, vector<varType> *paramTypes);
+vector<valType> createFunctionParamTypes(NonTerminalNode *paramListNode);
+void createFunctionParamTypesHelper(NonTerminalNode *paramListNode, vector<valType> *paramTypes);
 vector<tableEntery> createFunctionParamEnteries(NonTerminalNode *paramListNode);
 void createFunctionParamEnteriesHelper(NonTerminalNode *paramListNode, vector<tableEntery> *paramTypes);
 

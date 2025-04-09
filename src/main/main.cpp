@@ -2,6 +2,7 @@
 #include "../token/token.hpp"
 #include "../errorHandler/errorHandler.hpp"
 #include "../parser/parser.hpp"
+#include "../semantic/semantic.hpp"
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -27,7 +28,7 @@ int main(int argc, char **argv)
     //-------------------------------------
 
     ErrorHandler errorHandler;
-    symbolTable symbolTable;
+    SymbolTable symbolTable;
     Lexer lex(filePath, "..\\src\\lexerDFAConfig.txt", &errorHandler);
     vector<SyntaxToken *> tokens = lex.getTokens();
 
@@ -42,8 +43,7 @@ int main(int argc, char **argv)
             cout << syntaxTokenToString(*tokens[i]) << endl;
         }
 
-        Parser parser(tokens, 183, &errorHandler,&symbolTable);
-        
+        Parser parser(tokens, 183, &errorHandler, &symbolTable);
 
         // parser.printFollowSet();
         ASTNode *root = parser.parse();
@@ -52,15 +52,17 @@ int main(int argc, char **argv)
         if (errorHandler.getErrorCount() > 0)
         {
             errorHandler.printErrors();
-        }else
+        }
+        else
         {
             cout << "Parsing completed successfully!" << endl;
             PrintParseTree(root);
         }
 
-        //symbolTable.print();
+        SemanticAnalyzer semantic(root,&errorHandler,&symbolTable);
+        semantic.analyze();
 
-        
-        
+        errorHandler.printErrors();
+        // symbolTable.print();
     }
 }
