@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj.d"
   "CMakeFiles/tec.dir/src/main/main.cpp.obj"
   "CMakeFiles/tec.dir/src/main/main.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj"
+  "CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj.d"
   "CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj"
   "CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj.d"
   "CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj"

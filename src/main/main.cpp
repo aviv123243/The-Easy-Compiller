@@ -43,11 +43,11 @@ int main(int argc, char **argv)
             cout << syntaxTokenToString(*tokens[i]) << endl;
         }
 
-        Parser parser(tokens, 183, &errorHandler, &symbolTable);
+        SemanticAnalyzer semantic(&errorHandler, &symbolTable);
+        Parser parser(tokens, 183, &errorHandler,&semantic);
 
-        // parser.printFollowSet();
         ASTNode *root = parser.parse();
-        cout << "Parsing completed!" << endl;
+
 
         if (errorHandler.getErrorCount() > 0)
         {
@@ -59,10 +59,5 @@ int main(int argc, char **argv)
             PrintParseTree(root);
         }
 
-        SemanticAnalyzer semantic(root,&errorHandler,&symbolTable);
-        semantic.analyze();
-
-        errorHandler.printErrors();
-        // symbolTable.print();
     }
 }

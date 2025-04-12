@@ -152,6 +152,17 @@ CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj: \
  c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\scope\scope.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\semantic\semantic.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodeanalyzer\nodeanalyzer.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\parser\grammersymbol\grammersymbol.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\scope\scope.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\tableentry\tableentry.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\symboltable.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\errorhandler\errorhandler.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\errors\errors.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\stack \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\deque \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_deque.h \

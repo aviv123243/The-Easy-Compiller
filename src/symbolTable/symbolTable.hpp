@@ -19,6 +19,7 @@ private:
 
 public:
     void addFunction(functionEntry *function) { _functions.push_back(function); }
+    functionEntry *getFunction(string name);
     const std::vector<functionEntry *> &getFunctions() const { return _functions; }
 
     void print() const
@@ -33,7 +34,7 @@ public:
     }
 };
 
-valType createVarType(NonTerminalNode *varNode);
+valType createVarDeclExprType(NonTerminalNode *varNode);
 tableEntery createTableEntery_varDec(NonTerminalNode *varDecNode);
 tableEntery createTableEntery_param(NonTerminalNode *varDecNode);
 vector<valType> createFunctionParamTypes(NonTerminalNode *paramListNode);

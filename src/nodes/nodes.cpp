@@ -71,6 +71,10 @@ string AstNodeToString(ASTNode *node)
         res = nonTerminalToString(((NonTerminalNode *)node)->getNonTerminalKind());
     }
 
+    res += " (";
+    res += valTypeToString(node->GetValType());
+    res += ")";
+
     return res;
 }
 

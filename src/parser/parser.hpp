@@ -12,6 +12,7 @@
 #include "../token/token.hpp"
 #include "symbolTable/symbolTable.hpp"
 #include "../scope/scope.hpp"
+#include "../semantic/semantic.hpp"
 #include <stack>
 #include <string>
 #include <vector>
@@ -39,12 +40,7 @@ private:
     bool match(ASTNode *node, SyntaxKind type);
     bool match(ASTNode *node, NonTerminal type);
 
-    // symbol table mangaement
-    SymbolTable *_symbolTable;
-    stack<scope *> _scopeStack;
-    scope *_currRootScope;
-    void updateScope();
-    void updateSybolTable(ASTNode *node);
+    
 
     // init functions
     void initProductionRules();
@@ -73,8 +69,13 @@ private:
 
     void reportParsingError();
 
+    // semantic analysis
+    SemanticAnalyzer *_semanticAnalyzer;
+    void assignNodeType(ASTNode *node);
+
+
 public:
-    Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, SymbolTable *symbolTable);
+    Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, SemanticAnalyzer *semanticAnalyzer);
 
     ASTNode *parse();
 

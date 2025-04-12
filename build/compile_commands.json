@@ -25,6 +25,12 @@
 },
 {
   "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
+  "command": "g++  @CMakeFiles/tec.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\tec.dir\\src\\nodes\\nodeAnalyzer\\nodeAnalyzer.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\nodes\\nodeAnalyzer\\nodeAnalyzer.cpp",
+  "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp",
+  "output": "CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
   "command": "g++  @CMakeFiles/tec.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\tec.dir\\src\\nodes\\nodes.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\nodes\\nodes.cpp",
   "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/nodes/nodes.cpp",
   "output": "CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj"

@@ -5,12 +5,22 @@
 
 using namespace std;
 
+
+
+enum baseType
+{
+    INT,
+    FLOAT,
+    CHAR,
+    UNDIFINED,
+};
+
 struct valType
 {
-    SyntaxKind type;
-    int size;
-    bool isPointer;
-    bool isArray;
+    baseType type = UNDIFINED;
+    int size = 1;
+    bool isPointer = false;
+    bool isArray = false;
 };
 
 struct tableEntery
@@ -21,6 +31,7 @@ struct tableEntery
 };
 
 string valTypeToString(valType vType);
+string baseTypeToString(baseType bType);
 void printValType(valType vtype);
 void printTableEntery(tableEntery *entry);
 

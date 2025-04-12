@@ -28,6 +28,7 @@ target_include_directories(tec PRIVATE
     "src/lexer"
     "src/main"
     "src/nodes"
+    "src/nodes/nodeAnalyzer"
     "src/parser"
     "src/parser/grammerSymbol"
     "src/parser/parseTable"
@@ -38,8 +39,8 @@ target_include_directories(tec PRIVATE
     "src/parser/stackItem"
     "src/semantic"
     "src/symbolTable"
-    "src/symbolTable/scope"
     "src/symbolTable/functionEntry"
+    "src/symbolTable/scope"
     "src/symbolTable/tableEntry"
     "src/token"
 )

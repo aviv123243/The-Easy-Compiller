@@ -7,9 +7,9 @@ string valTypeToString(valType vType)
 {
     stringstream res;
 
-    res << "\e[1;34m<"
-        << syntaxKindToString(vType.type)
-        << ">\033[0m";
+    res << "\e[0;35m"
+        << baseTypeToString(vType.type)
+        << "\033[0m";
     if (vType.isPointer)
     {
         res << "*";
@@ -24,6 +24,23 @@ string valTypeToString(valType vType)
     return res.str();
 }
 
+string baseTypeToString(baseType bType)
+{
+    switch (bType)
+    {
+    case INT:
+        return "int";
+    case FLOAT:
+        return "float";
+    case CHAR:
+        return "char";
+    case UNDIFINED:
+        return "undefined";
+    default:
+        return "unknown type";
+    }
+}
+
 void printValType(valType vtype)
 {
     cout << valTypeToString(vtype) << endl;
@@ -33,7 +50,7 @@ void printTableEntery(tableEntery *entry)
 {
     cout << "---------------------------------" << endl;
     cout << "Variable Name: " << entry->name << endl;
-    cout << "Variable Type: " << syntaxKindToString(entry->type.type) << endl;
+    cout << "Variable Type: " << baseTypeToString(entry->type.type) << endl;
     printValType(entry->type);
     cout << "---------------------------------" << endl;
 }

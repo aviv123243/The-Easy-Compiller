@@ -9,12 +9,12 @@
 #include <vector>
 #include <iostream>
 
-// #define PARSER_DEBUG
+#define PARSER_DEBUG
 
 using namespace std;
 
-Parser::Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, SymbolTable *symbolTable)
-    : _actionTable(numOfStates), _gotoTable(numOfStates), _symbolTable(symbolTable), _rules(), _stack(), _errorHandler(handler), _tokens(tokens), _cursor(0)
+Parser::Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, SemanticAnalyzer *semanticAnalyser)
+    : _actionTable(numOfStates), _gotoTable(numOfStates), _semanticAnalyzer(semanticAnalyser), _rules(), _stack(), _errorHandler(handler), _tokens(tokens), _cursor(0)
 {
     _stack.push(StackItem{0, new NonTerminalNode(NonTerminal::START)});
     initProductionRules();
@@ -102,6 +102,9 @@ void Parser::shift(action currAction)
     // Create a new terminalNode
     ASTNode *node = new TerminalNode(token);
 
+    // assign the node type for semantic analysis
+    _semanticAnalyzer->assignNodeType(node);
+
     // Push to stack
     _stack.push(StackItem{state, node});
 
@@ -109,7 +112,7 @@ void Parser::shift(action currAction)
     _currState = state;
 
     // update the scope
-    updateScope();
+    _semanticAnalyzer -> updateScope(getCurrToken());
 
     // proceed to next token
     getNextToken();
@@ -148,7 +151,11 @@ void Parser::reduce(action currAction)
         _currState = currentState;
     }
 
-    updateSybolTable(_stack.top().node); // update the symbol table with the new node
+    cout <<"AAAAA";
+    _semanticAnalyzer->assignNodeType(node); // assign the node type for semantic analysis
+    cout << "BBBBB";
+    _semanticAnalyzer-> updateSybolTable(_stack.top().node);     // update the symbol table with the new node
+    cout << "CCCCC";
 }
 
 void Parser::reduceStatmentToNode(NonTerminalNode *node, productionRule rule)
@@ -171,71 +178,7 @@ void Parser::reduceStatmentToNode(NonTerminalNode *node, productionRule rule)
     }
 }
 
-void Parser::updateSybolTable(ASTNode *node)
-{
-    if (node->GetType() == NON_TERMINAL)
-    {
-        NonTerminalNode *ntNode = (NonTerminalNode *)node;
-        if (ntNode->getNonTerminalKind() == FUNCTION_DECL)
-        {
-            string name = ((TerminalNode *)(ntNode->GetChildren()[1]))->getToken()->val;
 
-            valType funcVarType = createVarType((NonTerminalNode *)(ntNode->GetChildren()[6]));
-
-            vector<valType> paramTypes = createFunctionParamTypes((NonTerminalNode *)(ntNode->GetChildren()[3]));
-
-            functionEntry *funcEntry = new functionEntry(name, funcVarType, paramTypes);
-
-            funcEntry->setInnerScope(_currRootScope);
-
-            vector<tableEntery> paramEntries = createFunctionParamEnteries((NonTerminalNode *)(ntNode->GetChildren()[3]));
-            for (int i = 0; i < paramEntries.size(); i++)
-            {
-                _currRootScope->addTableEntry(paramEntries[i]);
-            }
-
-            _symbolTable->addFunction(funcEntry);
-        }
-        else if (ntNode->getNonTerminalKind() == VAR_DECL_EXPR)
-        {
-            // get the current scope
-            scope *currScope = _scopeStack.top();
-
-            // add variable to the symbol table
-            currScope->addTableEntry(createTableEntery_varDec(ntNode));
-        }
-    }
-}
-
-void Parser::updateScope()
-{
-    if (peek(0)->kind == SyntaxKind::OPEN_CURLY)
-    {
-        // entering scope
-        scope *newScope = new scope();
-
-        // if the stack is empty it means its a new function
-        // so just connect it to the stack knowing it dosent have a parent
-        // later wre connect the function to the scope in the updateSymbolTable() func
-
-        if (!_scopeStack.empty())
-        {
-            scope *oldScope = _scopeStack.top();
-            oldScope->addInnerScope(newScope);
-        }
-
-        _scopeStack.push(newScope);
-    }
-    else if (peek(0)->kind == SyntaxKind::CLOSED_CURLY)
-    {
-        // exiting scope
-        scope *currScope = _scopeStack.top();
-        _scopeStack.pop();
-
-        if (_scopeStack.empty())
-            _currRootScope = currScope; // if the stack is empty it means we are at the end of the function
-    }
-}
 
 ASTNode *Parser::parse()
 {

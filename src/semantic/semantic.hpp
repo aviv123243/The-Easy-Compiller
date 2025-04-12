@@ -2,6 +2,7 @@
 #define __SEMANTIC_ANALYZER
 
 #include "../nodes/nodes.hpp"
+#include "../nodes/nodeAnalyzer/nodeAnalyzer.hpp"
 #include "../symbolTable/scope/scope.hpp"
 #include "../symbolTable/tableEntry/tableEntry.hpp"
 #include "../symbolTable/symbolTable.hpp"
@@ -9,39 +10,65 @@
 #include "../errors/errors.hpp"
 #include <stack>
 
+extern map<SyntaxKind, baseType> assignTerminal;
+
 class SemanticAnalyzer
 {
 private:
-    ASTNode *_root;
-    stack<ASTNode *> _nodesStack;
-    stack<scope *> _scopeStack;
-
-    int _functionCursor;
-
     ErrorHandler *_errorHandler;
-    SymbolTable *_symbolTable;
 
-    // helper functions
-    bool isFuncCall(ASTNode *node);
+    map<NonTerminal, void (SemanticAnalyzer::*)(ASTNode *)> _nonTerminalAssignActions;
+
+    // symbol table mangaement
+    SymbolTable *_symbolTable;
+    stack<scope *> _scopeStack;
+    scope *_currRootScope;
+
+    
 
 public:
-    SemanticAnalyzer(ASTNode *root, ErrorHandler *errorHandler, SymbolTable *symbolTable);
-    void fillStack();
-    void initAndCheckTypes();
+    SemanticAnalyzer(ErrorHandler *errorHandler, SymbolTable *symbolTable);
 
-    bool analyzeTypesMatch_varDec(NonTerminalNode* ntNode);
-    bool isTypesMatch_assignment();
-    bool isTypesMatch_funcCall();
-    bool isTypesMatch_return();
-    bool isIndexInt();
-    bool checkIfFuncInScope(NonTerminalNode *funcCallNode);
-    bool isVarInScope();
+    void updateScope(SyntaxToken *currToken);
+    void updateSybolTable(ASTNode *node);
 
-    void checkSymbolTable();
-    bool isFunctionDeclaredTwice();
-    bool isVarDeclaredTwice();
+    const SymbolTable *getSymbolTable() const { return _symbolTable; }
+    const scope *getCurrRootScope() const { return _currRootScope; }
+    const stack<scope *> &getScopeStack() const { return _scopeStack; }
 
-    void analyze();
+    valType checkCompatibilityBinaryOp(valType leftOp, valType rightOp, SyntaxToken *opToken);
+    valType checkCompatibilityAssignExp(valType leftOp, valType rightOp, SyntaxToken *opToken);
+
+    void initAssignActions();
+
+    void assignNodeType(ASTNode *node);
+    void assignParamNodeType(ASTNode *node);
+    void assignTypeNodeType(ASTNode *node);
+    void assignBaseTypeNodeType(ASTNode *node);
+    void assignVarDeclExprNodeType(ASTNode *node);
+    void assignInitOptNodeType(ASTNode *node);
+    void assignAssignValueNodeType(ASTNode *node);
+    void assignAssignExprNodeType(ASTNode *node);
+    void assignAssignTargetNodeType(ASTNode *node);
+    void assignConditionOpNodeType(ASTNode *node);
+    void assignExprNodeType(ASTNode *node);
+    void assignLogicalExprNodeType(ASTNode *node);
+    void assignRelationalExprNodeType(ASTNode *node);
+    void assignAddExprNodeType(ASTNode *node);
+    void assignMulExprNodeType(ASTNode *node);
+    void assignUnaryExprNodeType(ASTNode *node);
+    void assignIncrementExprNodeType(ASTNode *node);
+    void assignAddressExprNodeType(ASTNode *node);
+    void assignDereferenceExprNodeType(ASTNode *node);
+    void assignPrimaryExprNodeType(ASTNode *node);
+
+    // bool checkIfFuncInScope(NonTerminalNode *funcCallNode);
+    // bool isVarInScope();
+    // void checkSymbolTable();
+    // bool isFunctionDeclaredTwice();
+    // bool isVarDeclaredTwice();
+
+    // void analyzeSymbolTable();
 };
 
 #endif

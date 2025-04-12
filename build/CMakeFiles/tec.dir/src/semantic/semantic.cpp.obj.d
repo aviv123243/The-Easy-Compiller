@@ -112,6 +112,10 @@ CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\ostream.tcc \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\istream \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\istream.tcc \
+ c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodeanalyzer\nodeanalyzer.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\parser\grammersymbol\grammersymbol.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\scope\scope.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\tableentry\tableentry.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\tableentry\tableentry.hpp \
@@ -142,4 +146,5 @@ CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\deque \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_deque.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\deque.tcc \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_stack.h
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\stl_stack.h \
+ c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp

@@ -1,15 +1,36 @@
 #include "actionTable.hpp"
 #include "tableEntry/tableEntry.hpp"
+#include "functionEntry/functionEntry.hpp"
+#include "symbolTable.hpp"
 #include "../parser/grammerSymbol/grammerSymbol.hpp"
+#include "../semantic/semantic.hpp"
 #include "../token/token.hpp"
 #include "../nodes/nodes.hpp"
 #include <map>
 #include <vector>
 #include <String>
 
-valType createVarType(NonTerminalNode *varNode)
+// returns the entry with the requested name
+// if function not found returns nullptr
+functionEntry *SymbolTable::getFunction(string name)
 {
-    vector<ASTNode *> children = varNode->GetChildren();
+    functionEntry *res = nullptr;
+    vector<functionEntry *> enteries = getFunctions();
+
+    for (functionEntry *entry : enteries)
+    {
+        if (entry->getName() == name)
+        {
+            res = entry;
+        }
+    }
+
+    return res;
+}
+
+valType createVarDeclExprType(NonTerminalNode *varDeclExprNode)
+{
+    vector<ASTNode *> children = varDeclExprNode->GetChildren();
 
     NonTerminalNode *baseTypeNode = (NonTerminalNode *)children[0];
     SyntaxKind type = ((TerminalNode *)baseTypeNode->GetChildren()[0])->getToken()->kind;
@@ -33,34 +54,34 @@ valType createVarType(NonTerminalNode *varNode)
         size = stoi(sizeNode->getToken()->val);
     }
 
-    valType res = {type, size, isPointer, isArray};
+    valType res = {assignTerminal[type], size, isPointer, isArray};
     return res;
 }
 
 tableEntery createTableEntery_varDec(NonTerminalNode *varDecNode)
 {
-    tableEntery res = tableEntery{"", valType{UNEXPECTED_TOKEN, 1, false, false}, false};
+    tableEntery res = tableEntery{"", valType{UNDIFINED, 1, false, false}, false};
     vector<ASTNode *> children = varDecNode->GetChildren();
 
     // set name
     res.name = ((TerminalNode *)children[1])->getToken()->val;
 
     // set type
-    res.type = createVarType((NonTerminalNode *)children[0]);
+    res.type = createVarDeclExprType((NonTerminalNode *)children[0]);
 
     return res;
 }
 
 tableEntery createTableEntery_param(NonTerminalNode *paramNode)
 {
-    tableEntery res = tableEntery{"", valType{UNEXPECTED_TOKEN, 1, false, false}, false};
+    tableEntery res = tableEntery{"", valType{UNDIFINED, 1, false, false}, false};
     vector<ASTNode *> children = paramNode->GetChildren();
 
     // set name
     res.name = ((TerminalNode *)children[1])->getToken()->val;
 
     // set type
-    res.type = createVarType((NonTerminalNode *)children[0]);
+    res.type = createVarDeclExprType((NonTerminalNode *)children[0]);
 
     return res;
 }
@@ -74,14 +95,14 @@ void createFunctionParamTypesHelper(NonTerminalNode *paramListNonEmptyNode, vect
     {
         typeNode = ((NonTerminalNode *)(childern[0]->GetChildren()[0]));
 
-        paramTypes->push_back(createVarType(typeNode));
+        paramTypes->push_back(createVarDeclExprType(typeNode));
     }
 
     if (numOfChildren == 3)
     {
         typeNode = ((NonTerminalNode *)(childern[2]->GetChildren()[0]));
 
-        paramTypes->push_back(createVarType(typeNode));
+        paramTypes->push_back(createVarDeclExprType(typeNode));
 
         createFunctionParamTypesHelper((NonTerminalNode *)childern[0], paramTypes);
     }

@@ -64,10 +64,19 @@ class semanticError : public Error
     public:
         semanticError(string body) {_body = body;}
 
+        semanticError(string body, SyntaxToken * token) {
+            int line = token -> line;
+            int column = token ->column;
+
+            _body = "semantic error on {" + to_string(line) +":" + to_string(column) + "} with token " + syntaxTokenToString(*token) + "\n" + body;
+        }
+
         string toString() const override
         {
             return "semanticError: " + _body;
         }
+
+        
         
 };
 

@@ -558,6 +558,7 @@ CMakeFiles/tec.dir/src/main/main.cpp.obj: C:/Users/Admin/Documents/Coding/The-Ea
   c:/users/admin/documents/coding/the-easy-compiller/src/errorhandler/errorhandler.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/errors/errors.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/lexer/lexer.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodeanalyzer/nodeanalyzer.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodes.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/parser/grammersymbol/grammersymbol.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/parser/parseTable/actionTable/actionTable.hpp \
@@ -569,6 +570,123 @@ CMakeFiles/tec.dir/src/main/main.cpp.obj: C:/Users/Admin/Documents/Coding/The-Ea
   c:/users/admin/documents/coding/the-easy-compiller/src/semantic/semantic.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/scope/scope.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/symboltable.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/tableentry/tableentry.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/token/token.hpp
+
+CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp \
+  C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/nodes/nodeAnalyzer/nodeAnalyzer.hpp \
+  c:/mingw/include/_mingw.h \
+  c:/mingw/include/ctype.h \
+  c:/mingw/include/direct.h \
+  c:/mingw/include/errno.h \
+  c:/mingw/include/io.h \
+  c:/mingw/include/locale.h \
+  c:/mingw/include/msvcrtver.h \
+  c:/mingw/include/process.h \
+  c:/mingw/include/sdkddkver.h \
+  c:/mingw/include/stdint.h \
+  c:/mingw/include/stdio.h \
+  c:/mingw/include/stdlib.h \
+  c:/mingw/include/sys/stat.h \
+  c:/mingw/include/sys/types.h \
+  c:/mingw/include/sys/types.h \
+  c:/mingw/include/time.h \
+  c:/mingw/include/w32api.h \
+  c:/mingw/include/wchar.h \
+  c:/mingw/include/wctype.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/backward/binders.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/alloc_traits.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/allocator.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/atomic_lockfree_defines.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_ios.tcc \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/basic_string.tcc \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/char_traits.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/functional_hash.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/hash_bytes.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/ios_base.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/istream.tcc \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_classes.tcc \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/locale_facets.tcc \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/localefwd.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/memoryfwd.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/move.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/nested_exception.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream.tcc \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/ostream_insert.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/postypes.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/predefined_ops.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/ptr_traits.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/range_access.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_types.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf.tcc \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/streambuf_iterator.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stringfwd.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/vector.tcc \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/cctype \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/cerrno \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/clocale \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/cstdint \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/cstdio \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/cstdlib \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/cwchar \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/exception \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/atomicity.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/new_allocator.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/numeric_traits.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/string_conversions.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/type_traits.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/initializer_list \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ios \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/iosfwd \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/iostream \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/istream \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/atomic_word.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++allocator.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++config.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/c++locale.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/cpu_defines.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_base.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/ctype_inline.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/error_constants.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr-default.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/gthr.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/mingw32/bits/os_defines.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/new \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ostream \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/string \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/system_error \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/type_traits \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/vector \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/stdarg.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/stddef.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/stdint.h \
+  c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodes.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/parser/grammersymbol/grammersymbol.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/tableentry/tableentry.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/token/token.hpp
 
@@ -947,10 +1065,13 @@ CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj: C:/Users/Admin/Docume
   c:/mingw/lib/gcc/mingw32/6.3.0/include/stdint.h \
   c:/users/admin/documents/coding/the-easy-compiller/src/errorhandler/errorhandler.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/errors/errors.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodeanalyzer/nodeanalyzer.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodes.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/parser/grammersymbol/grammersymbol.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/parser/parsetable/action/action.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/semantic/semantic.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/scope/scope.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/symboltable.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/tableentry/tableentry.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/token/token.hpp
 
@@ -1469,11 +1590,14 @@ CMakeFiles/tec.dir/src/parser/parser.cpp.obj: C:/Users/Admin/Documents/Coding/Th
   c:/mingw/lib/gcc/mingw32/6.3.0/include/stdint.h \
   c:/users/admin/documents/coding/the-easy-compiller/src/errorhandler/errorhandler.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/errors/errors.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodeanalyzer/nodeanalyzer.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodes.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/parser/grammersymbol/grammersymbol.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/parser/parsetable/action/action.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/semantic/semantic.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/functionentry/functionentry.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/scope/scope.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/symboltable.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/tableentry/tableentry.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/token/token.hpp
 
@@ -1852,6 +1976,7 @@ CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj: C:/Users/Admin/Documents/Codin
   c:/mingw/lib/gcc/mingw32/6.3.0/include/stdint.h \
   c:/users/admin/documents/coding/the-easy-compiller/src/errorhandler/errorhandler.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/errors/errors.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodeanalyzer/nodeanalyzer.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodes.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/parser/grammersymbol/grammersymbol.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/functionEntry/functionEntry.hpp \
@@ -1981,6 +2106,8 @@ CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj: C:/Users/Admin/Documents
 
 CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/symbolTable.cpp \
   C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/actionTable/actionTable.hpp \
+  C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/functionEntry/functionEntry.hpp \
+  C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/symbolTable.hpp \
   C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/tableEntry/tableEntry.hpp \
   c:/mingw/include/_mingw.h \
   c:/mingw/include/ctype.h \
@@ -2014,6 +2141,7 @@ CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: C:/Users/Admin/Documents
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/concept_check.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/cpp_type_traits.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/cxxabi_forced.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/deque.tcc \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_defines.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/exception_ptr.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/functexcept.h \
@@ -2039,6 +2167,7 @@ CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: C:/Users/Admin/Documents
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_algobase.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_bvector.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_construct.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_deque.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_function.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_iterator_base_funcs.h \
@@ -2047,6 +2176,7 @@ CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: C:/Users/Admin/Documents
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_multimap.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_pair.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_relops.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_stack.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_tree.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_uninitialized.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/bits/stl_vector.h \
@@ -2065,6 +2195,7 @@ CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: C:/Users/Admin/Documents
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/cwctype \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/debug/assertions.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/debug/debug.h \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/deque \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/exception \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/aligned_buffer.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ext/alloc_traits.h \
@@ -2093,6 +2224,7 @@ CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: C:/Users/Admin/Documents
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/new \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/ostream \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/sstream \
+  c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/stack \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/stdexcept \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/streambuf \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/c++/string \
@@ -2104,9 +2236,15 @@ CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: C:/Users/Admin/Documents
   c:/mingw/lib/gcc/mingw32/6.3.0/include/stdarg.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/stddef.h \
   c:/mingw/lib/gcc/mingw32/6.3.0/include/stdint.h \
+  c:/users/admin/documents/coding/the-easy-compiller/src/errorhandler/errorhandler.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/errors/errors.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodeanalyzer/nodeanalyzer.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodes.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/parser/grammersymbol/grammersymbol.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/parser/parsetable/action/action.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/semantic/semantic.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/scope/scope.hpp \
+  c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/symboltable.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/tableentry/tableentry.hpp \
   c:/users/admin/documents/coding/the-easy-compiller/src/token/token.hpp
 
@@ -2652,6 +2790,8 @@ c:/users/admin/documents/coding/the-easy-compiller/src/errorhandler/errorhandler
 
 c:/users/admin/documents/coding/the-easy-compiller/src/errors/errors.hpp:
 
+c:/users/admin/documents/coding/the-easy-compiller/src/nodes/nodeanalyzer/nodeanalyzer.hpp:
+
 c:/users/admin/documents/coding/the-easy-compiller/src/token/token.hpp:
 
 C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/lexer/lexer.cpp:
@@ -2699,6 +2839,10 @@ c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/symboltable.h
 C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/grammerSymbol/grammerSymbol.cpp:
 
 c:/users/admin/documents/coding/the-easy-compiller/src/symboltable/tableentry/tableentry.hpp:
+
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp:
+
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/nodes/nodeAnalyzer/nodeAnalyzer.hpp:
 
 C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/nodes/nodes.cpp:
 

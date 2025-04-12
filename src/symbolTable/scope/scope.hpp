@@ -28,6 +28,29 @@ public:
     }
     vector<scope *> getInnerScopes() const { return _innerScopes; }
 
+    // returns the entery with the requested name
+    // if the name is not found in this scope, it will search in the inner scopes
+    tableEntery getEntryGlobal(string name)
+    {
+        tableEntery res = {};
+
+        for (tableEntery entry : _tableEntries)
+        {
+            if (entry.name == name)
+            {
+                res = entry;
+            }
+        }
+
+        for (scope *innerScope : _innerScopes)
+        {
+            res = innerScope->getEntryGlobal(name);
+        }
+        
+        return res;
+    }
+
+    // returns the entery with the requested name
     tableEntery getEntry(string name)
     {
         tableEntery res = {};

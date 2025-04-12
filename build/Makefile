@@ -224,6 +224,30 @@ src/main/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/main/main.cpp.s
 .PHONY : src/main/main.cpp.s
 
+src/nodes/nodeAnalyzer/nodeAnalyzer.obj: src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj
+.PHONY : src/nodes/nodeAnalyzer/nodeAnalyzer.obj
+
+# target to build an object file
+src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj
+.PHONY : src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj
+
+src/nodes/nodeAnalyzer/nodeAnalyzer.i: src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.i
+.PHONY : src/nodes/nodeAnalyzer/nodeAnalyzer.i
+
+# target to preprocess a source file
+src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.i
+.PHONY : src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.i
+
+src/nodes/nodeAnalyzer/nodeAnalyzer.s: src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.s
+.PHONY : src/nodes/nodeAnalyzer/nodeAnalyzer.s
+
+# target to generate assembly for a file
+src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.s
+.PHONY : src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.s
+
 src/nodes/nodes.obj: src/nodes/nodes.cpp.obj
 .PHONY : src/nodes/nodes.obj
 
@@ -605,6 +629,9 @@ help:
 	@echo ... src/main/main.obj
 	@echo ... src/main/main.i
 	@echo ... src/main/main.s
+	@echo ... src/nodes/nodeAnalyzer/nodeAnalyzer.obj
+	@echo ... src/nodes/nodeAnalyzer/nodeAnalyzer.i
+	@echo ... src/nodes/nodeAnalyzer/nodeAnalyzer.s
 	@echo ... src/nodes/nodes.obj
 	@echo ... src/nodes/nodes.i
 	@echo ... src/nodes/nodes.s

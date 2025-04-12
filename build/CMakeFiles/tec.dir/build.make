@@ -131,11 +131,26 @@ CMakeFiles/tec.dir/src/main/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/tec.dir/src/main/main.cpp.s"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\main\main.cpp -o CMakeFiles\tec.dir\src\main\main.cpp.s
 
+CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj: CMakeFiles/tec.dir/flags.make
+CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
+CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp
+CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj"
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj -MF CMakeFiles\tec.dir\src\nodes\nodeAnalyzer\nodeAnalyzer.cpp.obj.d -o CMakeFiles\tec.dir\src\nodes\nodeAnalyzer\nodeAnalyzer.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\nodes\nodeAnalyzer\nodeAnalyzer.cpp
+
+CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.i"
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\nodes\nodeAnalyzer\nodeAnalyzer.cpp > CMakeFiles\tec.dir\src\nodes\nodeAnalyzer\nodeAnalyzer.cpp.i
+
+CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.s"
+	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\nodes\nodeAnalyzer\nodeAnalyzer.cpp -o CMakeFiles\tec.dir\src\nodes\nodeAnalyzer\nodeAnalyzer.cpp.s
+
 CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj: CMakeFiles/tec.dir/flags.make
 CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/nodes/nodes.cpp
 CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj -MF CMakeFiles\tec.dir\src\nodes\nodes.cpp.obj.d -o CMakeFiles\tec.dir\src\nodes\nodes.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\nodes\nodes.cpp
 
 CMakeFiles/tec.dir/src/nodes/nodes.cpp.i: cmake_force
@@ -150,7 +165,7 @@ CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj: CMakeFiles/te
 CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/grammerSymbol/grammerSymbol.cpp
 CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj -MF CMakeFiles\tec.dir\src\parser\grammerSymbol\grammerSymbol.cpp.obj.d -o CMakeFiles\tec.dir\src\parser\grammerSymbol\grammerSymbol.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\grammerSymbol\grammerSymbol.cpp
 
 CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.i: cmake_force
@@ -165,7 +180,7 @@ CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj: CMakeFiles/tec.dir/fl
 CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/initParserFunctions.cpp
 CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj -MF CMakeFiles\tec.dir\src\parser\initParserFunctions.cpp.obj.d -o CMakeFiles\tec.dir\src\parser\initParserFunctions.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\initParserFunctions.cpp
 
 CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.i: cmake_force
@@ -180,7 +195,7 @@ CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj: CMakeFiles/tec.d
 CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/action/action.cpp
 CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj -MF CMakeFiles\tec.dir\src\parser\parseTable\action\action.cpp.obj.d -o CMakeFiles\tec.dir\src\parser\parseTable\action\action.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\parseTable\action\action.cpp
 
 CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.i: cmake_force
@@ -195,7 +210,7 @@ CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj: CMakeF
 CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/actionTable/actionTable.cpp
 CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj -MF CMakeFiles\tec.dir\src\parser\parseTable\actionTable\actionTable.cpp.obj.d -o CMakeFiles\tec.dir\src\parser\parseTable\actionTable\actionTable.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\parseTable\actionTable\actionTable.cpp
 
 CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.i: cmake_force
@@ -210,7 +225,7 @@ CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj: CMakeFiles
 CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parseTable/gotoTable/gotoTable.cpp
 CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj -MF CMakeFiles\tec.dir\src\parser\parseTable\gotoTable\gotoTable.cpp.obj.d -o CMakeFiles\tec.dir\src\parser\parseTable\gotoTable\gotoTable.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\parseTable\gotoTable\gotoTable.cpp
 
 CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.i: cmake_force
@@ -225,7 +240,7 @@ CMakeFiles/tec.dir/src/parser/parser.cpp.obj: CMakeFiles/tec.dir/flags.make
 CMakeFiles/tec.dir/src/parser/parser.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/parser/parser.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/parser.cpp
 CMakeFiles/tec.dir/src/parser/parser.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/tec.dir/src/parser/parser.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/tec.dir/src/parser/parser.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/parser/parser.cpp.obj -MF CMakeFiles\tec.dir\src\parser\parser.cpp.obj.d -o CMakeFiles\tec.dir\src\parser\parser.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\parser.cpp
 
 CMakeFiles/tec.dir/src/parser/parser.cpp.i: cmake_force
@@ -240,7 +255,7 @@ CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj: CMakeFiles/
 CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/productionRule/productionRule.cpp
 CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj -MF CMakeFiles\tec.dir\src\parser\productionRule\productionRule.cpp.obj.d -o CMakeFiles\tec.dir\src\parser\productionRule\productionRule.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\productionRule\productionRule.cpp
 
 CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.i: cmake_force
@@ -255,7 +270,7 @@ CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj: CMakeFiles/tec.dir/fl
 CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/parser/stackItem/stackItem.cpp
 CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj -MF CMakeFiles\tec.dir\src\parser\stackItem\stackItem.cpp.obj.d -o CMakeFiles\tec.dir\src\parser\stackItem\stackItem.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\parser\stackItem\stackItem.cpp
 
 CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.i: cmake_force
@@ -270,7 +285,7 @@ CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj: CMakeFiles/tec.dir/flags.make
 CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/semantic/semantic.cpp
 CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj -MF CMakeFiles\tec.dir\src\semantic\semantic.cpp.obj.d -o CMakeFiles\tec.dir\src\semantic\semantic.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\semantic\semantic.cpp
 
 CMakeFiles/tec.dir/src/semantic/semantic.cpp.i: cmake_force
@@ -285,7 +300,7 @@ CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj: CMakeFil
 CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/functionEntry/functionEntry.cpp
 CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj -MF CMakeFiles\tec.dir\src\symbolTable\functionEntry\functionEntry.cpp.obj.d -o CMakeFiles\tec.dir\src\symbolTable\functionEntry\functionEntry.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\functionEntry\functionEntry.cpp
 
 CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.i: cmake_force
@@ -300,7 +315,7 @@ CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj: CMakeFiles/tec.dir/flags
 CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/scope/scope.cpp
 CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj -MF CMakeFiles\tec.dir\src\symbolTable\scope\scope.cpp.obj.d -o CMakeFiles\tec.dir\src\symbolTable\scope\scope.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\scope\scope.cpp
 
 CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.i: cmake_force
@@ -315,7 +330,7 @@ CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: CMakeFiles/tec.dir/flags
 CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/symbolTable.cpp
 CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj -MF CMakeFiles\tec.dir\src\symbolTable\symbolTable.cpp.obj.d -o CMakeFiles\tec.dir\src\symbolTable\symbolTable.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\symbolTable.cpp
 
 CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.i: cmake_force
@@ -330,7 +345,7 @@ CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj: CMakeFiles/tec
 CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/symbolTable/tableEntry/tableEntry.cpp
 CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj -MF CMakeFiles\tec.dir\src\symbolTable\tableEntry\tableEntry.cpp.obj.d -o CMakeFiles\tec.dir\src\symbolTable\tableEntry\tableEntry.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\symbolTable\tableEntry\tableEntry.cpp
 
 CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.i: cmake_force
@@ -345,7 +360,7 @@ CMakeFiles/tec.dir/src/token/token.cpp.obj: CMakeFiles/tec.dir/flags.make
 CMakeFiles/tec.dir/src/token/token.cpp.obj: CMakeFiles/tec.dir/includes_CXX.rsp
 CMakeFiles/tec.dir/src/token/token.cpp.obj: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/token/token.cpp
 CMakeFiles/tec.dir/src/token/token.cpp.obj: CMakeFiles/tec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/tec.dir/src/token/token.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/tec.dir/src/token/token.cpp.obj"
 	g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tec.dir/src/token/token.cpp.obj -MF CMakeFiles\tec.dir\src\token\token.cpp.obj.d -o CMakeFiles\tec.dir\src\token\token.cpp.obj -c C:\Users\Admin\Documents\Coding\The-Easy-Compiller\src\token\token.cpp
 
 CMakeFiles/tec.dir/src/token/token.cpp.i: cmake_force
@@ -362,6 +377,7 @@ tec_OBJECTS = \
 "CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj" \
 "CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj" \
 "CMakeFiles/tec.dir/src/main/main.cpp.obj" \
+"CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj" \
 "CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj" \
 "CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj" \
 "CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj" \
@@ -385,6 +401,7 @@ tec.exe: CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj
 tec.exe: CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj
 tec.exe: CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj
 tec.exe: CMakeFiles/tec.dir/src/main/main.cpp.obj
+tec.exe: CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj
 tec.exe: CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj
 tec.exe: CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj
 tec.exe: CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj
@@ -404,7 +421,7 @@ tec.exe: CMakeFiles/tec.dir/build.make
 tec.exe: CMakeFiles/tec.dir/linkLibs.rsp
 tec.exe: CMakeFiles/tec.dir/objects1.rsp
 tec.exe: CMakeFiles/tec.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking CXX executable tec.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX executable tec.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\tec.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
