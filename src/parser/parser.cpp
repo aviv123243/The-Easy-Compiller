@@ -151,11 +151,8 @@ void Parser::reduce(action currAction)
         _currState = currentState;
     }
 
-    cout <<"AAAAA";
     _semanticAnalyzer->assignNodeType(node); // assign the node type for semantic analysis
-    cout << "BBBBB";
     _semanticAnalyzer-> updateSybolTable(_stack.top().node);     // update the symbol table with the new node
-    cout << "CCCCC";
 }
 
 void Parser::reduceStatmentToNode(NonTerminalNode *node, productionRule rule)

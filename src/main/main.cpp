@@ -48,16 +48,18 @@ int main(int argc, char **argv)
 
         ASTNode *root = parser.parse();
 
+        PrintParseTree(root);
 
         if (errorHandler.getErrorCount() > 0)
         {
+            cout << "Parsing failed with errors!" << endl;
             errorHandler.printErrors();
         }
         else
         {
             cout << "Parsing completed successfully!" << endl;
-            PrintParseTree(root);
         }
-
+         
+        //symbolTable.print();
     }
 }

@@ -6,6 +6,9 @@
 #include "../../token/token.hpp"
 
 bool isFuncCall(ASTNode *node);
+bool isArrDeref(ASTNode *node);
+vector<NonTerminalNode *> getFunctionParamNodes(NonTerminalNode *paramListNode);
+vector<NonTerminalNode *> getFunctionCallParamNodes(NonTerminalNode *paramListNode);
 
 
 

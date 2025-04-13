@@ -23,14 +23,19 @@ private:
     SymbolTable *_symbolTable;
     stack<scope *> _scopeStack;
     scope *_currRootScope;
-
-    
+    vector<NonTerminalNode *> _currFunctionParamNodes;
 
 public:
     SemanticAnalyzer(ErrorHandler *errorHandler, SymbolTable *symbolTable);
 
+    // symbol table mangaement
     void updateScope(SyntaxToken *currToken);
     void updateSybolTable(ASTNode *node);
+
+    void addFunctionNodeToSymbolTable(NonTerminalNode *funcDeclNode);
+    void addVariableNodeToSymbolTable(NonTerminalNode *varDeclNode);
+    void addParamNodeToSymbolTable(NonTerminalNode *paramNode);
+    void addParamListToSymbolTable(vector<NonTerminalNode *> paramNodes);
 
     const SymbolTable *getSymbolTable() const { return _symbolTable; }
     const scope *getCurrRootScope() const { return _currRootScope; }
@@ -38,6 +43,8 @@ public:
 
     valType checkCompatibilityBinaryOp(valType leftOp, valType rightOp, SyntaxToken *opToken);
     valType checkCompatibilityAssignExp(valType leftOp, valType rightOp, SyntaxToken *opToken);
+    valType getVarType(SyntaxToken *IDToken);
+    valType getFunctionCallValTypeAndCheck(NonTerminalNode *funcCallNode);
 
     void initAssignActions();
 

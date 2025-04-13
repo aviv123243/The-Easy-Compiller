@@ -14,25 +14,25 @@ class scope
 private:
     vector<tableEntery> _tableEntries;
     vector<scope *> _innerScopes;
+    scope *_parentScope = nullptr;
 
 public:
     void addTableEntry(tableEntery entry)
     {
         _tableEntries.push_back(entry);
     }
-    void addInnerScope(scope *innerScope) { _innerScopes.push_back(innerScope); }
 
-    vector<tableEntery> getTableEntries() const
+    void addInnerScope(scope *innerScope) { _innerScopes.push_back(innerScope);}
+    void setParentScope(scope *parentScope) { _parentScope = parentScope; }
+
+    vector<tableEntery> getInnerScopeEntries() const
     {
         return _tableEntries;
     }
-    vector<scope *> getInnerScopes() const { return _innerScopes; }
 
-    // returns the entery with the requested name
-    // if the name is not found in this scope, it will search in the inner scopes
-    tableEntery getEntryGlobal(string name)
+    tableEntery getEntry(string name)
     {
-        tableEntery res = {};
+        tableEntery res = {"_undeclared", {}};
 
         for (tableEntery entry : _tableEntries)
         {
@@ -41,6 +41,23 @@ public:
                 res = entry;
             }
         }
+
+        if(res.name == "_undeclared" && _parentScope != nullptr)
+        {
+            res = _parentScope->getEntry(name);
+        }
+
+        return res;
+    }
+    vector<scope *> getInnerScopes() const { return _innerScopes; }
+
+    // returns the entery with the requested name
+    // if the name is not found in this scope, it will search in the inner scopes
+    tableEntery getEntryGlobal(string name)
+    {
+        tableEntery res = {"_undeclared", {}};
+
+        getInnerScopeEntrie(name);
 
         for (scope *innerScope : _innerScopes)
         {
@@ -51,9 +68,9 @@ public:
     }
 
     // returns the entery with the requested name
-    tableEntery getEntry(string name)
+    tableEntery getInnerScopeEntrie(string name)
     {
-        tableEntery res = {};
+        tableEntery res = {"_undeclared", {}};
         for (tableEntery entry : _tableEntries)
         {
             if (entry.name == name)
