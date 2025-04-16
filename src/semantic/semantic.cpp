@@ -43,6 +43,9 @@ void SemanticAnalyzer::addFunctionNodeToSymbolTable(NonTerminalNode *funcDeclNod
         // create the entry
         functionEntry *funcEntry = new functionEntry(name, funcVarType, paramTypes);
 
+        // check return statements
+        checkReturnStatements(funcEntry);
+
         // add the current root scope as their scope
         funcEntry->setInnerScope(_currRootScope);
 
@@ -81,10 +84,7 @@ void SemanticAnalyzer::addParamNodeToSymbolTable(NonTerminalNode *paramNode)
     cout << "adding param node to symbol table" << endl;
     TerminalNode *nameNode = (TerminalNode *)(paramNode->GetChildren()[1]);
     string name = nameNode->getToken()->val;
-    cout << "AAAAAAAAAAAAAAAAAAAAAAA" << endl;
     tableEntery entry = currScope->getEntry(name);
-    cout << "BBBBBBBBBBBBBBBBB" << endl;
-    cout << "entry name: " << entry.name << endl;
 
     if (entry.name != "_undeclared")
     {
@@ -102,34 +102,17 @@ void SemanticAnalyzer::addParamListToSymbolTable(vector<NonTerminalNode *> param
     // get the current scope
     scope *currScope = _scopeStack.top();
     currScope->printScope();
-    cout << "size of param nodes: " << paramNodes.size() << endl;
 
     for (int i = 0; i < paramNodes.size(); i++)
     {
-        cout << "adding param node to symbol table22" << endl;
         addParamNodeToSymbolTable(paramNodes[i]);
-        cout << "added param node to symbol table" << endl;
     }
 }
-
-// void SemanticAnalyzer::addParamListNodeToSymbolTable(NonTerminalNode *paramListNode)
-// {
-//     // get the current scope
-//     scope *currScope = _currRootScope;
-
-//     vector<NonTerminalNode *> paramNodes = getFunctionParamNodes(paramListNode);
-
-//     for (int i = 0; i < paramNodes.size(); i++)
-//     {
-//         addParamNodeToSymbolTable(paramNodes[i]);
-//     }
-    
-// }
 
 void SemanticAnalyzer::updateScope(SyntaxToken *currToken)
 {
     if (currToken->kind == SyntaxKind::OPEN_CURLY)
-    {     
+    {
         // entering scope
         scope *newScope = new scope();
 
@@ -149,14 +132,12 @@ void SemanticAnalyzer::updateScope(SyntaxToken *currToken)
 
         _scopeStack.push(newScope);
 
-
         if (isFunctionScope)
         {
             addParamListToSymbolTable(_currFunctionParamNodes);
             _currFunctionParamNodes.clear(); // clear the param nodes after adding them to the symbol table
         }
 
-        
         cout << "entering scope" << endl;
         cout << "size of scope stack: " << _scopeStack.size() << endl;
     }
@@ -192,6 +173,11 @@ void SemanticAnalyzer::updateSybolTable(ASTNode *node)
         else if (ntNode->getNonTerminalKind() == PARAM_LIST)
         {
             _currFunctionParamNodes = getFunctionParamNodes(ntNode);
+        }
+
+        else if (isReturnStatement(node))
+        {
+            _currFunctionReturnNodes.push_back((NonTerminalNode *)node);
         }
     }
 }
@@ -356,6 +342,32 @@ valType SemanticAnalyzer::checkCompatibilityAssignExp(valType leftOp, valType ri
     return res;
 }
 
+void SemanticAnalyzer::checkReturnStatements(functionEntry *funcEntry)
+{
+    cout << "checking return types" << endl;
+    // check if the function has a return statement
+    vector<NonTerminalNode *> returnNodes = _currFunctionReturnNodes;
+    valType returnType = funcEntry->getReturnType();
+
+    for (int i = 0; i < returnNodes.size(); i++)
+    {
+        cout << "size of return nodes: " << returnNodes.size() << endl;
+        NonTerminalNode *returnNode = returnNodes[i];
+        cout << "return node: " << returnNode->GetValType().type << endl;
+        valType nodeType = returnNode->GetValType();
+        cout << "node type: " << nodeType.type << endl;
+
+        if (nodeType.type != returnType.type || nodeType.isPointer != returnType.isPointer || nodeType.isArray != returnType.isArray)
+        {
+            _errorHandler->addError(new semanticError("return type does not match function declaration"));
+        }
+
+        cout << "return node: " << returnNode->GetValType().type << endl;
+    }
+
+    _currFunctionReturnNodes.clear();
+}
+
 valType SemanticAnalyzer::getVarType(SyntaxToken *IDToken)
 {
     // get the current scope
@@ -376,9 +388,9 @@ valType SemanticAnalyzer::getVarType(SyntaxToken *IDToken)
     }
 }
 
-//returns the functions return type and checks if the function call parameters match the function declaration parameters
-// if the function is not declared it will add an error to the error handler
-// if the function call parameters do not match the function declaration parameters it will add an error to the error handler
+// returns the functions return type and checks if the function call parameters match the function declaration parameters
+//  if the function is not declared it will add an error to the error handler
+//  if the function call parameters do not match the function declaration parameters it will add an error to the error handler
 valType SemanticAnalyzer::getFunctionCallValTypeAndCheck(NonTerminalNode *funcCallNode)
 {
     valType res = {UNDIFINED, 1, false, false};
@@ -438,11 +450,11 @@ void SemanticAnalyzer::initAssignActions()
     _nonTerminalAssignActions[TYPE] = &SemanticAnalyzer::assignTypeNodeType;
     _nonTerminalAssignActions[BASE_TYPE] = &SemanticAnalyzer::assignBaseTypeNodeType;
     _nonTerminalAssignActions[VAR_DECL_EXPR] = &SemanticAnalyzer::assignVarDeclExprNodeType;
-    _nonTerminalAssignActions[INIT_OPT] = &SemanticAnalyzer::assignInitOptNodeType;
     _nonTerminalAssignActions[ASSIGN_VALUE] = &SemanticAnalyzer::assignAssignValueNodeType;
     _nonTerminalAssignActions[ASSIGN_EXPR] = &SemanticAnalyzer::assignAssignExprNodeType;
     _nonTerminalAssignActions[ASSIGN_TARGET] = &SemanticAnalyzer::assignAssignTargetNodeType;
     _nonTerminalAssignActions[CONDITION_OP] = &SemanticAnalyzer::assignConditionOpNodeType;
+    _nonTerminalAssignActions[SIMPLE_STMT] = &SemanticAnalyzer::assignSimpleStmtNodeType;
     _nonTerminalAssignActions[EXPR] = &SemanticAnalyzer::assignExprNodeType;
     _nonTerminalAssignActions[LOGICAL_EXPR] = &SemanticAnalyzer::assignLogicalExprNodeType;
     _nonTerminalAssignActions[RELATIONAL_EXPR] = &SemanticAnalyzer::assignRelationalExprNodeType;
@@ -475,21 +487,19 @@ void SemanticAnalyzer::assignTypeNodeType(ASTNode *node)
     NonTerminalNode *ntNode = (NonTerminalNode *)(node);
 
     vector<ASTNode *> children = ntNode->GetChildren();
-    if (children.size() >= 1)
+
+    valType baseType = children[0]->GetValType();
+    if (children.size() == 1)
     {
-        valType baseType = children[0]->GetValType();
-        if (children.size() == 1)
-        {
-            resType = baseType;
-        }
-        else if (children.size() == 2)
-        {
-            resType = {baseType.type, baseType.size, true, false};
-        }
-        else if (children.size() == 4)
-        {
-            resType = {baseType.type, baseType.size, false, true};
-        }
+        resType = baseType;
+    }
+    else if (children.size() == 2)
+    {
+        resType = {baseType.type, baseType.size, true, false};
+    }
+    else if (children.size() == 4)
+    {
+        resType = {baseType.type, baseType.size, false, true};
     }
 
     node->SetValType(resType);
@@ -537,20 +547,6 @@ void SemanticAnalyzer::assignVarDeclExprNodeType(ASTNode *node)
     }
 }
 
-void SemanticAnalyzer::assignInitOptNodeType(ASTNode *node)
-{
-    valType resType = {UNDIFINED, 0, false, false};
-    NonTerminalNode *ntNode = (NonTerminalNode *)(node);
-
-    vector<ASTNode *> children = ntNode->GetChildren();
-    if (children.size() == 3)
-    {
-        resType = children[1]->GetValType();
-    }
-
-    node->SetValType(resType);
-}
-
 void SemanticAnalyzer::assignAssignValueNodeType(ASTNode *node)
 {
     valType resType = {UNDIFINED, 0, false, false};
@@ -583,14 +579,8 @@ void SemanticAnalyzer::assignAssignExprNodeType(ASTNode *node)
         valType leftOp = children[0]->GetValType();
         valType rightOp = children[2]->GetValType();
 
-        cout << "assignAssignExprNodeType" << endl;
-        cout << "leftOp: " << valTypeToString(leftOp) << endl;
-        cout << "rightOp: " << valTypeToString(rightOp) << endl;
-
         NonTerminalNode *assignOpNode = (NonTerminalNode *)(children[1]);
         SyntaxToken *opToken = ((TerminalNode *)(assignOpNode->GetChildren()[0]))->getToken();
-
-        cout << "opToken: " << syntaxTokenToString(*opToken) << endl;
 
         resType = checkCompatibilityAssignExp(leftOp, rightOp, opToken);
     }
@@ -623,7 +613,7 @@ void SemanticAnalyzer::assignAssignTargetNodeType(ASTNode *node)
     }
     else if (children.size() == 2)
     {
-        valType ptrType = children[1]->GetValType();
+        valType ptrType = _scopeStack.top()->getEntry(((TerminalNode *)(children[1]))->getToken()->val).type;
         if (!ptrType.isPointer)
         {
             _errorHandler->addError(new semanticError("dereferencing non-pointer type", ((TerminalNode *)(children[0]))->getToken()));
@@ -657,6 +647,23 @@ void SemanticAnalyzer::assignConditionOpNodeType(ASTNode *node)
     }
 
     node->SetValType(resType);
+}
+
+void SemanticAnalyzer::assignSimpleStmtNodeType(ASTNode *node)
+{
+    if (isReturnStatement(node))
+    {
+        NonTerminalNode *ntNode = (NonTerminalNode *)node;
+        vector<ASTNode *> children = ntNode->GetChildren();
+
+        NonTerminalNode *ExptOpt = (NonTerminalNode *)(children[1]);
+        vector<ASTNode *> ExptOptChildren = ExptOpt->GetChildren();
+        if (ExptOptChildren.size() > 0)
+        {
+            valType returnType = ExptOptChildren[0]->GetValType();
+            node->SetValType(returnType);
+        }
+    }
 }
 
 void SemanticAnalyzer::assignExprNodeType(ASTNode *node)
@@ -844,14 +851,14 @@ void SemanticAnalyzer::assignDereferenceExprNodeType(ASTNode *node)
     vector<ASTNode *> children = ntNode->GetChildren();
     if (children.size() == 2)
     {
-        valType ptrType = children[1]->GetValType();
-        if (!ptrType.isPointer)
+        valType varType = _scopeStack.top()->getEntry(((TerminalNode *)(children[1]))->getToken()->val).type;
+        if (!varType.isPointer)
         {
             _errorHandler->addError(new semanticError("dereferencing non-pointer type", ((TerminalNode *)(children[0]))->getToken()));
         }
         else
         {
-            resType = {ptrType.type, ptrType.size, false, ptrType.isArray};
+            resType = {varType.type, varType.size, false, varType.isArray};
         }
     }
 
@@ -878,14 +885,15 @@ void SemanticAnalyzer::assignPrimaryExprNodeType(ASTNode *node)
     }
     else if (isArrDeref(node))
     {
-        valType arrType = children[0]->GetValType();
-        if (!arrType.isArray)
+        string varName = ((TerminalNode *)(children[0]))->getToken()->val;
+        valType type = _scopeStack.top()->getEntry(varName).type; 
+        if (!type.isArray && !type.isPointer)
         {
             _errorHandler->addError(new semanticError("indexing non-array type", ((TerminalNode *)(children[1]))->getToken()));
         }
         else
         {
-            resType = {arrType.type, arrType.size, arrType.isPointer, false};
+            resType = {type.type, type.size, false, false};
         }
     }
     else if (children.size() == 3)
@@ -899,5 +907,14 @@ void SemanticAnalyzer::assignPrimaryExprNodeType(ASTNode *node)
     }
 
     node->SetValType(resType);
+}
 
+void SemanticAnalyzer::checkForMainFunction()
+{
+    // check if the main function is declared
+    functionEntry *mainFunc = _symbolTable->getFunction("main");
+    if (mainFunc == nullptr)
+    {
+        _errorHandler->addError(new semanticError("main function not declared"));
+    }
 }

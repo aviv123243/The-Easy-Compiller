@@ -226,6 +226,8 @@ ASTNode *Parser::parse()
 
     } while (currAction.type != actionType::ACCEPT);
 
+    _semanticAnalyzer->checkForMainFunction(); // check if the main function is declared
+
     _stack.pop(); // pop the end of file token
 
     return _stack.top().node;

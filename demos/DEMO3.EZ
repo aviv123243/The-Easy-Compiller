@@ -1,24 +1,6 @@
-
-fn max(int x,int y) => int
-{
-    int res;
-
-    if(x > y) res = x;
-    if(y > x) res = y;
-
-    ret res;
-}
-
 fn main() => int
 {
-    int x = 7*7*7;
-    int y = 6;
-    print(max(x,y));
-
-    ret 0;
+  ret 0;
 }
-
-
-
 
 

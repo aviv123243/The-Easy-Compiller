@@ -60,6 +60,7 @@ int main(int argc, char **argv)
             cout << "Parsing completed successfully!" << endl;
         }
          
+        //parser.printRules();
         //symbolTable.print();
     }
 }

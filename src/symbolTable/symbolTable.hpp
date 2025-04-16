@@ -18,6 +18,7 @@ private:
     vector<functionEntry *> _functions;
 
 public:
+    SymbolTable() {addFunction(new functionEntry("print", {INT}, {}));}
     void addFunction(functionEntry *function) { _functions.push_back(function); }
     functionEntry *getFunction(string name);
     const std::vector<functionEntry *> &getFunctions() const { return _functions; }

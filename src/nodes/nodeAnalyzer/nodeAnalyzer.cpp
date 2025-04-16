@@ -44,6 +44,27 @@ bool isArrDeref(ASTNode *node)
     return res;
 }
 
+bool isReturnStatement(ASTNode *node)
+{
+    bool res = false;
+
+    if (node->GetType() == NON_TERMINAL)
+    {
+        NonTerminalNode *ntNode = ((NonTerminalNode *)node);
+        if (ntNode->getNonTerminalKind() == SIMPLE_STMT)
+        {
+            vector<ASTNode *> children = ntNode->GetChildren();
+
+            if (children.size() == 2)
+            {
+                res = true;
+            }
+        }
+    }
+
+    return res;
+}
+
 
 
 void getFunctionParamNodesHelper(NonTerminalNode *paramListNonEmptyNode, vector<NonTerminalNode *> *paramNodes)

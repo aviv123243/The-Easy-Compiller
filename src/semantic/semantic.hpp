@@ -24,6 +24,7 @@ private:
     stack<scope *> _scopeStack;
     scope *_currRootScope;
     vector<NonTerminalNode *> _currFunctionParamNodes;
+    vector<NonTerminalNode *> _currFunctionReturnNodes;
 
 public:
     SemanticAnalyzer(ErrorHandler *errorHandler, SymbolTable *symbolTable);
@@ -43,6 +44,7 @@ public:
 
     valType checkCompatibilityBinaryOp(valType leftOp, valType rightOp, SyntaxToken *opToken);
     valType checkCompatibilityAssignExp(valType leftOp, valType rightOp, SyntaxToken *opToken);
+    void checkReturnStatements(functionEntry *funcEntry);
     valType getVarType(SyntaxToken *IDToken);
     valType getFunctionCallValTypeAndCheck(NonTerminalNode *funcCallNode);
 
@@ -53,11 +55,11 @@ public:
     void assignTypeNodeType(ASTNode *node);
     void assignBaseTypeNodeType(ASTNode *node);
     void assignVarDeclExprNodeType(ASTNode *node);
-    void assignInitOptNodeType(ASTNode *node);
     void assignAssignValueNodeType(ASTNode *node);
     void assignAssignExprNodeType(ASTNode *node);
     void assignAssignTargetNodeType(ASTNode *node);
     void assignConditionOpNodeType(ASTNode *node);
+    void assignSimpleStmtNodeType(ASTNode *node);
     void assignExprNodeType(ASTNode *node);
     void assignLogicalExprNodeType(ASTNode *node);
     void assignRelationalExprNodeType(ASTNode *node);
@@ -69,13 +71,7 @@ public:
     void assignDereferenceExprNodeType(ASTNode *node);
     void assignPrimaryExprNodeType(ASTNode *node);
 
-    // bool checkIfFuncInScope(NonTerminalNode *funcCallNode);
-    // bool isVarInScope();
-    // void checkSymbolTable();
-    // bool isFunctionDeclaredTwice();
-    // bool isVarDeclaredTwice();
-
-    // void analyzeSymbolTable();
+    void checkForMainFunction();
 };
 
 #endif

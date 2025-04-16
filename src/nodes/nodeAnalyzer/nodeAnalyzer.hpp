@@ -7,6 +7,7 @@
 
 bool isFuncCall(ASTNode *node);
 bool isArrDeref(ASTNode *node);
+bool isReturnStatement(ASTNode *node);
 vector<NonTerminalNode *> getFunctionParamNodes(NonTerminalNode *paramListNode);
 vector<NonTerminalNode *> getFunctionCallParamNodes(NonTerminalNode *paramListNode);
 
