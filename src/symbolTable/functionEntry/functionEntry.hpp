@@ -22,6 +22,8 @@ public:
     valType getReturnType() const { return _returnType; }
     vector<valType> getParamTypes() const { return _paramTypes; }
 
+    scope *getInnerScope() const { return _scopeRoot; }
+
     void setInnerScope(scope *innerScope) { _scopeRoot = innerScope; }
     void print() const;
 };

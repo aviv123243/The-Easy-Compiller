@@ -9,6 +9,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/DFA/DFA.cpp" "CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj.d"
+  "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/codeGenarator/codeGen.cpp" "CMakeFiles/tec.dir/src/codeGenarator/codeGen.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/codeGenarator/codeGen.cpp.obj.d"
+  "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/codeGenarator/lableManager/lableManager.cpp" "CMakeFiles/tec.dir/src/codeGenarator/lableManager/lableManager.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/codeGenarator/lableManager/lableManager.cpp.obj.d"
+  "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/codeGenarator/scratch/scratch.cpp" "CMakeFiles/tec.dir/src/codeGenarator/scratch/scratch.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/codeGenarator/scratch/scratch.cpp.obj.d"
   "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/errorHandler/errorHandler.cpp" "CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj.d"
   "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/lexer/lexer.cpp" "CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj.d"
   "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/main/main.cpp" "CMakeFiles/tec.dir/src/main/main.cpp.obj" "gcc" "CMakeFiles/tec.dir/src/main/main.cpp.obj.d"

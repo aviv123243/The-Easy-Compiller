@@ -190,8 +190,16 @@ CMakeFiles/tec.dir/src/main/main.cpp.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\unordered_set \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\unordered_set.h \
  c:\users\admin\documents\coding\the-easy-compiller\src\semantic\semantic.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\codegenarator\codegen.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\fstream \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\codecvt.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\basic_file.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\mingw32\bits\c++io.h \
- c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\fstream.tcc
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\fstream.tcc \
+ c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodes.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\nodes\nodeanalyzer\nodeanalyzer.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\symboltable.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\functionentry\functionentry.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\symboltable\tableentry\tableentry.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\codegenarator\scratch/scratch.hpp \
+ c:\users\admin\documents\coding\the-easy-compiller\src\codegenarator\lableManager/lableManager.hpp

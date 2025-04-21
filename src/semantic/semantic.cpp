@@ -196,7 +196,6 @@ void SemanticAnalyzer::assignNodeType(ASTNode *node)
     }
     else if (node->GetType() == TERMINAL)
     {
-        cout << "HERE";
         TerminalNode *tNode = (TerminalNode *)node;
         SyntaxKind kind = tNode->getToken()->kind;
 
@@ -207,81 +206,128 @@ void SemanticAnalyzer::assignNodeType(ASTNode *node)
     }
 }
 
-valType SemanticAnalyzer::checkCompatibilityBinaryOp(valType leftOp, valType rightOp, SyntaxToken *opToken)
+bool areTypesEqual(valType a, valType b)
 {
-    valType res = {INT, 0, false, false};
+    return a.type == b.type &&
+           a.isPointer == b.isPointer &&
+           a.isArray == b.isArray;
+}
+
+valType checkArithmeticCompatibility(valType left, valType right, SyntaxToken *opToken, ErrorHandler *_errorHandler)
+{
+    valType res = {UNDIFINED, 0, false, false};
     bool errorOccurred = false;
 
-    if (opToken->kind == PLUS || opToken->kind == MINUS || opToken->kind == STAR || opToken->kind == SLASH)
+    if (left.isPointer || right.isPointer)
     {
-        if (leftOp.isPointer || rightOp.isPointer)
+        if ((opToken->kind == PLUS || opToken->kind == MINUS) &&
+            ((left.isPointer && right.type == INT) || (right.isPointer && left.type == INT)))
         {
-            if ((opToken->kind == PLUS || opToken->kind == MINUS) &&
-                ((leftOp.isPointer && rightOp.type == INT) || (rightOp.isPointer && leftOp.type == INT)))
-            {
-                res = leftOp.isPointer ? leftOp : rightOp;
-            }
-            else
-            {
-                _errorHandler->addError(new semanticError("pointer arithmetic not allowed", opToken));
-                errorOccurred = true;
-            }
-        }
-        else if (leftOp.isArray || rightOp.isArray)
-        {
-            _errorHandler->addError(new semanticError("array arithmetic not allowed", opToken));
-            errorOccurred = true;
-        }
-        else if (leftOp.type == FLOAT || rightOp.type == FLOAT)
-        {
-            res.type = FLOAT;
-        }
-        else if (leftOp.type == INT || rightOp.type == INT)
-        {
-            res.type = INT;
-        }
-        else if (leftOp.type == CHAR || rightOp.type == CHAR)
-        {
-            res.type = CHAR;
+            res = left.isPointer ? left : right;
         }
         else
         {
-            _errorHandler->addError(new semanticError("incompatible types for arithmetic", opToken));
+            _errorHandler->addError(new semanticError("pointer arithmetic not allowed", opToken));
             errorOccurred = true;
         }
     }
-    else if (opToken->kind == EQUALS_EQUALS || opToken->kind == BANG_EQUALS || opToken->kind == LESS_THAN ||
-             opToken->kind == GREATER_THAN || opToken->kind == LESS_THAN_EQUALS || opToken->kind == GREATER_THAN_EQUALS)
+    else if (left.isArray || right.isArray)
     {
-        res.type = INT;
-        if ((leftOp.isPointer && !rightOp.isPointer) || (!leftOp.isPointer && rightOp.isPointer) ||
-            (leftOp.isArray && !rightOp.isArray) || (!leftOp.isArray && rightOp.isArray))
-        {
-            _errorHandler->addError(new semanticError("incompatible types for comparison", opToken));
-            errorOccurred = true;
-        }
+        _errorHandler->addError(new semanticError("array arithmetic not allowed", opToken));
+        errorOccurred = true;
     }
-    else if (opToken->kind == PIPE_PIPE || opToken->kind == AMPERSAND_AMPERSAND)
+    else if (left.type == FLOAT || right.type == FLOAT)
     {
-        res.type = INT;
-        if (leftOp.type != INT || rightOp.type != INT)
-        {
-            _errorHandler->addError(new semanticError("logical operators require int operands", opToken));
-            errorOccurred = true;
-        }
+        res = {FLOAT, 0, false, false};
+    }
+    else if (left.type == INT || right.type == INT)
+    {
+        res = {INT, 0, false, false};
+    }
+    else if (left.type == CHAR || right.type == CHAR)
+    {
+        res = {INT, 0, false, false};
     }
     else
     {
-        _errorHandler->addError(new semanticError("unsupported operator", opToken));
+        _errorHandler->addError(new semanticError("incompatible types for arithmetic", opToken));
         errorOccurred = true;
     }
 
     if (errorOccurred)
-    {
         res = {UNDIFINED, 0, false, false};
+
+    return res;
+}
+
+valType checkComparisonCompatibility(valType left, valType right, SyntaxToken *opToken, ErrorHandler *_errorHandler)
+{
+    valType res = {INT, 0, false, false};
+    if (!areTypesEqual(left, right))
+    {
+        _errorHandler->addError(new semanticError("incompatible types for comparison", opToken));
+        res = {UNDIFINED, 0, false, false};
+    }
+    return res;
+}
+
+valType checkLogicalCompatibility(valType left, valType right, SyntaxToken *opToken, ErrorHandler *_errorHandler)
+{
+    valType res = {INT, 0, false, false};
+    if (left.type != INT || right.type != INT)
+    {
+        _errorHandler->addError(new semanticError("logical operators require int operands", opToken));
+        res = {UNDIFINED, 0, false, false};
+    }
+    return res;
+}
+
+valType checkBitwiseCompatibility(valType left, valType right, SyntaxToken *opToken, ErrorHandler *_errorHandler)
+{
+    valType res = {INT, 0, false, false};
+    if ((left.type != INT && left.type != CHAR) || (right.type != INT && right.type != CHAR))
+    {
+        _errorHandler->addError(new semanticError("bitwise operators require int or char operands", opToken));
+        res = {UNDIFINED, 0, false, false};
+    }
+    return res;
+}
+
+valType SemanticAnalyzer::checkCompatibilityBinaryOp(valType leftOp, valType rightOp, SyntaxToken *opToken)
+{
+    valType res = {UNDIFINED, 0, false, false};
+
+    if (opToken->kind == PLUS || opToken->kind == MINUS || opToken->kind == STAR || opToken->kind == SLASH)
+    {
+        res = checkArithmeticCompatibility(leftOp, rightOp, opToken, _errorHandler);
+    }
+    else if (opToken->kind == EQUALS_EQUALS || opToken->kind == BANG_EQUALS ||
+             opToken->kind == LESS_THAN || opToken->kind == GREATER_THAN ||
+             opToken->kind == LESS_THAN_EQUALS || opToken->kind == GREATER_THAN_EQUALS)
+    {
+        res = checkComparisonCompatibility(leftOp, rightOp, opToken, _errorHandler);
+    }
+    else if (opToken->kind == PIPE_PIPE || opToken->kind == AMPERSAND_AMPERSAND)
+    {
+        res = checkLogicalCompatibility(leftOp, rightOp, opToken, _errorHandler);
+    }
+    else if (opToken->kind == PIPE || opToken->kind == AMPERSAND || opToken->kind == CARET)
+    {
+        res = checkBitwiseCompatibility(leftOp, rightOp, opToken, _errorHandler);
     }
 
     return res;
+}
+
+bool isWideningCompatible(baseType target, baseType source)
+{
+    if (target == FLOAT)
+        return source == FLOAT || source == INT || source == CHAR;
+    if (target == INT)
+        return source == INT || source == CHAR;
+    if (target == CHAR)
+        return source == CHAR;
+    return false;
 }
 
 valType SemanticAnalyzer::checkCompatibilityAssignExp(valType leftOp, valType rightOp, SyntaxToken *opToken)
@@ -312,26 +358,9 @@ valType SemanticAnalyzer::checkCompatibilityAssignExp(valType leftOp, valType ri
         _errorHandler->addError(new semanticError("array assignment not allowed", opToken));
         errorOccurred = true;
     }
-    else if (leftOp.type == FLOAT && (rightOp.type == FLOAT || rightOp.type == FLOAT))
+    else if (isWideningCompatible(leftOp.type, rightOp.type))
     {
-        res.type = FLOAT;
-    }
-    else if (leftOp.type == INT && (rightOp.type == INT || rightOp.type == CHAR))
-    {
-        res.type = INT;
-    }
-    else if (leftOp.type == CHAR && rightOp.type == CHAR)
-    {
-        res.type = CHAR;
-    }
-    else
-    {
-        cout << "\n\n !!!HERE!!! \n\n";
-        cout << "leftOp: " << valTypeToString(leftOp) << endl;
-        cout << "rightOp: " << valTypeToString(rightOp) << endl;
-        cout << "opToken: " << syntaxTokenToString(*opToken) << endl;
-        _errorHandler->addError(new semanticError("incompatible types for assignment", opToken));
-        errorOccurred = true;
+        res.type = leftOp.type;
     }
 
     if (errorOccurred)
@@ -886,7 +915,7 @@ void SemanticAnalyzer::assignPrimaryExprNodeType(ASTNode *node)
     else if (isArrDeref(node))
     {
         string varName = ((TerminalNode *)(children[0]))->getToken()->val;
-        valType type = _scopeStack.top()->getEntry(varName).type; 
+        valType type = _scopeStack.top()->getEntry(varName).type;
         if (!type.isArray && !type.isPointer)
         {
             _errorHandler->addError(new semanticError("indexing non-array type", ((TerminalNode *)(children[1]))->getToken()));

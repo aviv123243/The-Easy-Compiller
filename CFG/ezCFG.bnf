@@ -1,141 +1,140 @@
-<Program> ::= <FunctionDecl> <Program>
-            | ε
+<Program> ::= <empty>
+           | <Program> <FunctionDecl>
 
 <FunctionDecl> ::= KEYWORD_FN IDENTIFIER OPEN_PAREN <ParamList> CLOSED_PAREN RIGHT_ARROW <Type> OPEN_CURLY <StmtList> CLOSED_CURLY
 
-<ParamList> ::= <Param> <ParamTail>
-              | ε
+<ParamList> ::= <empty>
+             | <ParamListNonEmpty>
 
-<ParamTail> ::= COMMA <Param> <ParamTail>
-              | ε
+<ParamListNonEmpty> ::= <Param>
+                     | <ParamListNonEmpty> COMMA <Param>
 
 <Param> ::= <Type> IDENTIFIER
 
-<Type> ::= <BaseType> <TypeTail>
+<Type> ::= <BaseType>
+        | <BaseType> OPEN_BRACKET INTEGER_LITERAL CLOSED_BRACKET
+        | <BaseType> STAR
 
 <BaseType> ::= KEYWORD_INT
-             | KEYWORD_FLOAT
-             | KEYWORD_CHAR
+            | KEYWORD_FLOAT
+            | KEYWORD_CHAR
 
-<TypeTail> ::= OPEN_BRACKET INTEGER_LITERAL CLOSED_BRACKET <TypeTail>
-             | STAR <TypeTail>
-             | ε
+<StmtList> ::= <empty>
+            | <StmtList> <Stmt>
 
-<StmtList> ::= <Stmt> <StmtList>
-             | ε
+<Stmt> ::= <SimpleStmt> SEMICOLON
+        | OPEN_CURLY <StmtList> CLOSED_CURLY
+        | <IfStmt>
+        | <WhileStmt>
+        | <ForStmt>
 
-<Stmt> ::= <VarDeclStmt>
-         | <AssignStmt>
-         | <IfStmt>
-         | <WhileStmt>
-         | <ForStmt>
-         | <ReturnStmt>
-         | <ExprStmt>
-
-<Body> ::= OPEN_CURLY <StmtList> CLOSED_CURLY
-         | <Stmt>
+<SimpleStmt> ::= <VarDeclExpr>
+              | <AssignExpr>
+              | <Expr>
+              | KEYWORD_RET <ExprOpt>
 
 <VarDeclExpr> ::= <Type> IDENTIFIER <InitOpt>
 
-<VarDeclStmt> ::= <VarDeclExpr> SEMICOLON
+<InitOpt> ::= <empty>
+           | EQUALS <AssignValue>
 
-<InitOpt> ::= EQUALS <Expr>
-            | ε
+<AssignValue> ::= <Expr>
+               | OPEN_CURLY <ExprList> CLOSED_CURLY
 
 <AssignExpr> ::= <AssignTarget> <AssignOp> <Expr>
 
-<AssignStmt> ::= <AssignExpr> SEMICOLON
-
 <AssignTarget> ::= IDENTIFIER
-                 | IDENTIFIER OPEN_BRACKET <Expr> CLOSED_BRACKET
-                 | STAR IDENTIFIER
+                | IDENTIFIER OPEN_BRACKET <Expr> CLOSED_BRACKET
+                | STAR IDENTIFIER
 
 <AssignOp> ::= EQUALS
-             | PLUS_EQUALS
-             | MINUS_EQUALS
-             | SLASH_EQUALS
-             | STAR_EQUALS
-             | AMPERSAND_EQUALS
-             | PIPE_EQUALS
-             | CARET_EQUALS
-             | TILDE_EQUALS
+            | PLUS_EQUALS
+            | MINUS_EQUALS
+            | SLASH_EQUALS
+            | STAR_EQUALS
+            | AMPERSAND_EQUALS
+            | PIPE_EQUALS
+            | CARET_EQUALS
+            | TILDE_EQUALS
 
-<IfStmt> ::= KEYWORD_IF OPEN_PAREN <Expr> CLOSED_PAREN <Body> <ElseOpt>
+<IfStmt> ::= KEYWORD_IF OPEN_PAREN <ConditionOp> CLOSED_PAREN <Body>
+          | KEYWORD_IF OPEN_PAREN <ConditionOp> CLOSED_PAREN <Body> KEYWORD_ELSE <Body>
 
-<ElseOpt> ::= KEYWORD_ELSE <Body>
-            | ε
+<WhileStmt> ::= KEYWORD_WHILE OPEN_PAREN <ConditionOp> CLOSED_PAREN <Body>
 
-<WhileStmt> ::= KEYWORD_WHILE OPEN_PAREN <Expr> CLOSED_PAREN <Body>
+<ConditionOp> ::= <Expr>
+               | <AssignExpr>
 
 <ForStmt> ::= KEYWORD_FOR OPEN_PAREN <ForInit> SEMICOLON <ExprOpt> SEMICOLON <ForUpdate> CLOSED_PAREN <Body>
 
-<ForInit> ::= <VarDeclExpr>
-            | <AssignExpr>
-            | ε
+<ForInit> ::= <empty>
+           | <VarDeclExpr>
+           | <AssignExpr>
 
-<ExprOpt> ::= <Expr>
-            | ε
+<ExprOpt> ::= <empty>
+           | <Expr>
 
-<ForUpdate> ::= <AssignExpr>
-              | ε
+<ForUpdate> ::= <empty>
+             | <AssignExpr>
+             | <IncrementExpr>
 
-<ReturnStmt> ::= KEYWORD_RET <ExprOpt> SEMICOLON
+<Body> ::= OPEN_CURLY <StmtList> CLOSED_CURLY
+        | <SimpleStmt> SEMICOLON
+        | <IfStmt>
+        | <WhileStmt>
+        | <ForStmt>
 
-<ExprStmt> ::= <Expr> SEMICOLON
+<ExprList> ::= <empty>
+            | <ExprListNonEmpty>
 
-<ExprList> ::= <Expr> <ExprTail>
-             | ε
+<ExprListNonEmpty> ::= <Expr>
+                    | <ExprListNonEmpty> COMMA <Expr>
 
-<ExprTail> ::= COMMA <Expr> <ExprTail>
-             | ε
+<Expr> ::= <LogicalExpr>
+        | <IncrementExpr>
+        | <AddressExpr>
+        | <DereferenceExpr>
 
-<Expr> ::= <UnaryExpr> <RelOpTail>
+<LogicalExpr> ::= <RelationalExpr>
+               | <LogicalExpr> PIPE_PIPE <RelationalExpr>
+               | <LogicalExpr> AMPERSAND_AMPERSAND <RelationalExpr>
 
-<RelOpTail> ::= <RelOp> <UnaryExpr>
-              | ε
+<RelationalExpr> ::= <AddExpr>
+                  | <RelationalExpr> EQUALS_EQUALS <AddExpr>
+                  | <RelationalExpr> BANG_EQUALS <AddExpr>
+                  | <RelationalExpr> LESS_THAN <AddExpr>
+                  | <RelationalExpr> GREATER_THAN <AddExpr>
+                  | <RelationalExpr> LESS_THAN_EQUALS <AddExpr>
+                  | <RelationalExpr> GREATER_THAN_EQUALS <AddExpr>
 
-<RelOp> ::= LESS_THAN
-          | GREATER_THAN
-          | LESS_THAN_EQUALS
-          | GREATER_THAN_EQUALS
-          | EQUALS_EQUALS
-          | BANG_EQUALS
+<AddExpr> ::= <MulExpr>
+           | <AddExpr> PLUS <MulExpr>
+           | <AddExpr> MINUS <MulExpr>
+           | <AddExpr> PIPE <MulExpr>
+           | <AddExpr> CARET <MulExpr>
 
-<UnaryExpr> ::= <UnaryOpList> <SimpleExpr>
+<MulExpr> ::= <UnaryExpr>
+           | <MulExpr> STAR <UnaryExpr>
+           | <MulExpr> SLASH <UnaryExpr>
+           | <MulExpr> AMPERSAND <UnaryExpr>
 
-<UnaryOpList> ::= <UnaryOp> <UnaryOpList>
-                | ε
+<UnaryExpr> ::= <PrimaryExpr>
+             | MINUS <UnaryExpr>
+             | BANG <UnaryExpr>
 
-<UnaryOp> ::= MINUS
-            | BANG
+<IncrementExpr> ::= IDENTIFIER PLUS_PLUS
+                 | IDENTIFIER MINUS_MINUS
+                 | PLUS_PLUS IDENTIFIER
+                 | MINUS_MINUS IDENTIFIER
 
-<SimpleExpr> ::= <Term> <AddOpTail>
+<AddressExpr> ::= AMPERSAND IDENTIFIER
 
-<AddOpTail> ::= <AddOp> <Term> <AddOpTail>
-              | ε
+<DereferenceExpr> ::= STAR IDENTIFIER
 
-<AddOp> ::= PLUS
-          | MINUS
-          | PIPE
-          | CARET
-          | PIPE_PIPE
-
-<Term> ::= <Factor> <MulOpTail>
-
-<MulOpTail> ::= <MulOp> <Factor> <MulOpTail>
-              | ε
-
-<MulOp> ::= STAR
-          | SLASH
-          | AMPERSAND
-          | AMPERSAND_AMPERSAND
-
-<Factor> ::= OPEN_PAREN <Expr> CLOSED_PAREN
-           | IDENTIFIER
-           | INTEGER_LITERAL
-           | FLOAT_LITERAL
-           | CHAR_LITERAL
-           | IDENTIFIER <FunctionCallOp>
-
-<FunctionCallOp> ::= OPEN_PAREN <ExprList> CLOSED_PAREN
-                   | ε
+<PrimaryExpr> ::= IDENTIFIER
+               | IDENTIFIER OPEN_BRACKET <Expr> CLOSED_BRACKET
+               | INTEGER_LITERAL
+               | FLOAT_LITERAL
+               | CHAR_LITERAL
+               | OPEN_PAREN <Expr> CLOSED_PAREN
+               | IDENTIFIER OPEN_PAREN <ExprList> CLOSED_PAREN

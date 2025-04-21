@@ -1,6 +1,12 @@
 file(REMOVE_RECURSE
   "CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj"
   "CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/codeGenarator/codeGen.cpp.obj"
+  "CMakeFiles/tec.dir/src/codeGenarator/codeGen.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/codeGenarator/lableManager/lableManager.cpp.obj"
+  "CMakeFiles/tec.dir/src/codeGenarator/lableManager/lableManager.cpp.obj.d"
+  "CMakeFiles/tec.dir/src/codeGenarator/scratch/scratch.cpp.obj"
+  "CMakeFiles/tec.dir/src/codeGenarator/scratch/scratch.cpp.obj.d"
   "CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj"
   "CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj.d"
   "CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj"

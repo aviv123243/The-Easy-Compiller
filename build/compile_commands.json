@@ -7,6 +7,24 @@
 },
 {
   "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
+  "command": "g++  @CMakeFiles/tec.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\tec.dir\\src\\codeGenarator\\codeGen.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\codeGenarator\\codeGen.cpp",
+  "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/codeGenarator/codeGen.cpp",
+  "output": "CMakeFiles/tec.dir/src/codeGenarator/codeGen.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
+  "command": "g++  @CMakeFiles/tec.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\tec.dir\\src\\codeGenarator\\lableManager\\lableManager.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\codeGenarator\\lableManager\\lableManager.cpp",
+  "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/codeGenarator/lableManager/lableManager.cpp",
+  "output": "CMakeFiles/tec.dir/src/codeGenarator/lableManager/lableManager.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
+  "command": "g++  @CMakeFiles/tec.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\tec.dir\\src\\codeGenarator\\scratch\\scratch.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\codeGenarator\\scratch\\scratch.cpp",
+  "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/codeGenarator/scratch/scratch.cpp",
+  "output": "CMakeFiles/tec.dir/src/codeGenarator/scratch/scratch.cpp.obj"
+},
+{
+  "directory": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/build",
   "command": "g++  @CMakeFiles/tec.dir/includes_CXX.rsp -g -std=gnu++1z -o CMakeFiles\\tec.dir\\src\\errorHandler\\errorHandler.cpp.obj -c C:\\Users\\Admin\\Documents\\Coding\\The-Easy-Compiller\\src\\errorHandler\\errorHandler.cpp",
   "file": "C:/Users/Admin/Documents/Coding/The-Easy-Compiller/src/errorHandler/errorHandler.cpp",
   "output": "CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj"

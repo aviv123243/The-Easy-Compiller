@@ -43,4 +43,8 @@ target_include_directories(tec PRIVATE
     "src/symbolTable/scope"
     "src/symbolTable/tableEntry"
     "src/token"
+    "src/codeGenarator"
+    "src/codeGenarator/lableManager"
+    "src/codeGenarator/scratch"
 )
+

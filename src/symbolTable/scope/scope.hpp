@@ -30,6 +30,7 @@ public:
         return _tableEntries;
     }
 
+
     tableEntery getEntry(string name)
     {
         tableEntery res = {"_undeclared", {}};
@@ -57,7 +58,7 @@ public:
     {
         tableEntery res = {"_undeclared", {}};
 
-        getInnerScopeEntrie(name);
+        res = getInnerScopeEntrie(name);
 
         for (scope *innerScope : _innerScopes)
         {

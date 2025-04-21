@@ -15,6 +15,7 @@ class ASTNode
 protected:
     GrammarSymbolType _type;
     valType _valType; //be used for semantic analysis
+    int _register; //be used for code gen phase 
 
 public:
     const GrammarSymbolType GetType() const
@@ -30,6 +31,16 @@ public:
     void SetValType(valType valType)
     {
         _valType = valType;
+    }
+
+    int GetRegister() const
+    {
+        return _register;
+    }
+
+    void SetRegister(int regIndex)
+    {
+        _register = regIndex;
     }
 
     const virtual vector<ASTNode *> &GetChildren() const = 0;

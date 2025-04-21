@@ -1,4 +1,5 @@
 #include "nodeAnalyzer.hpp"
+#include <algorithm>
 
 bool isFuncCall(ASTNode *node)
 {
@@ -50,9 +51,12 @@ bool isReturnStatement(ASTNode *node)
 
     if (node->GetType() == NON_TERMINAL)
     {
+        cout << "11";
         NonTerminalNode *ntNode = ((NonTerminalNode *)node);
         if (ntNode->getNonTerminalKind() == SIMPLE_STMT)
         {
+            cout << "22";
+
             vector<ASTNode *> children = ntNode->GetChildren();
 
             if (children.size() == 2)
@@ -62,10 +66,9 @@ bool isReturnStatement(ASTNode *node)
         }
     }
 
+    cout << "returning: " << res;
     return res;
 }
-
-
 
 void getFunctionParamNodesHelper(NonTerminalNode *paramListNonEmptyNode, vector<NonTerminalNode *> *paramNodes)
 {
@@ -97,6 +100,7 @@ vector<NonTerminalNode *> getFunctionParamNodes(NonTerminalNode *paramListNode)
         getFunctionParamNodesHelper((NonTerminalNode *)childern[0], &res);
     }
 
+    std::reverse(res.begin(),res.end());
     return res;
 }
 
@@ -130,5 +134,53 @@ vector<NonTerminalNode *> getFunctionCallParamNodes(NonTerminalNode *paramListNo
         getFunctionParamNodesHelper((NonTerminalNode *)childern[0], &res);
     }
 
+    std::reverse(res.begin(),res.end());
+    return res;
+}
+
+void getFunctionDeclNodesHelper(NonTerminalNode *programNode, vector<NonTerminalNode *> *funcDeclNodes)
+{
+    const vector<ASTNode *> &children = programNode->GetChildren();
+
+    if (children.size() == 2)
+    {
+        funcDeclNodes->push_back((NonTerminalNode *)children[1]);
+        getFunctionDeclNodesHelper((NonTerminalNode *)children[0], funcDeclNodes);
+    }
+}
+
+vector<NonTerminalNode *> getFunctionDeclNodes(NonTerminalNode *programNode)
+{
+    vector<NonTerminalNode *> res;
+    if (!programNode->GetChildren().empty())
+    {
+        getFunctionDeclNodesHelper(programNode, &res);
+    }
+
+    std::reverse(res.begin(),res.end());
+    return res;
+}
+
+
+void getStmtNodesHelper(NonTerminalNode *stmtListNonEmptyNode, vector<NonTerminalNode *> *stmtNodes)
+{
+    const vector<ASTNode *> &children = stmtListNonEmptyNode->GetChildren();
+
+    if (children.size() == 2)
+    {
+        stmtNodes->push_back((NonTerminalNode *)children[1]);
+        getStmtNodesHelper((NonTerminalNode *)children[0], stmtNodes);
+    }
+}
+
+vector<NonTerminalNode *> getStmtNodes(NonTerminalNode *stmtListNode)
+{
+    vector<NonTerminalNode *> res;
+    if (!stmtListNode->GetChildren().empty())
+    {
+        getStmtNodesHelper(stmtListNode, &res);
+    }
+
+    std::reverse(res.begin(),res.end());
     return res;
 }

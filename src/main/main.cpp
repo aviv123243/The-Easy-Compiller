@@ -3,6 +3,7 @@
 #include "../errorHandler/errorHandler.hpp"
 #include "../parser/parser.hpp"
 #include "../semantic/semantic.hpp"
+#include "../codeGenarator/codeGen.hpp"
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -58,8 +59,11 @@ int main(int argc, char **argv)
         else
         {
             cout << "Parsing completed successfully!" << endl;
+            CodeGenarator codeGen("out2.asm",root,&symbolTable);
+            codeGen.genCode();
         }
-         
+        
+        cout << "compiling finished!";
         //parser.printRules();
         //symbolTable.print();
     }

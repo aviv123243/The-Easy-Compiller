@@ -28,6 +28,7 @@ struct tableEntery
     string name;
     valType type;
     bool isInitialized = false;
+    string addr = "";
 };
 
 string valTypeToString(valType vType);

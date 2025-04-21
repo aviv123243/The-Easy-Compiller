@@ -152,6 +152,78 @@ src/DFA/DFA.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/DFA/DFA.cpp.s
 .PHONY : src/DFA/DFA.cpp.s
 
+src/codeGenarator/codeGen.obj: src/codeGenarator/codeGen.cpp.obj
+.PHONY : src/codeGenarator/codeGen.obj
+
+# target to build an object file
+src/codeGenarator/codeGen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/codeGenarator/codeGen.cpp.obj
+.PHONY : src/codeGenarator/codeGen.cpp.obj
+
+src/codeGenarator/codeGen.i: src/codeGenarator/codeGen.cpp.i
+.PHONY : src/codeGenarator/codeGen.i
+
+# target to preprocess a source file
+src/codeGenarator/codeGen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/codeGenarator/codeGen.cpp.i
+.PHONY : src/codeGenarator/codeGen.cpp.i
+
+src/codeGenarator/codeGen.s: src/codeGenarator/codeGen.cpp.s
+.PHONY : src/codeGenarator/codeGen.s
+
+# target to generate assembly for a file
+src/codeGenarator/codeGen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/codeGenarator/codeGen.cpp.s
+.PHONY : src/codeGenarator/codeGen.cpp.s
+
+src/codeGenarator/lableManager/lableManager.obj: src/codeGenarator/lableManager/lableManager.cpp.obj
+.PHONY : src/codeGenarator/lableManager/lableManager.obj
+
+# target to build an object file
+src/codeGenarator/lableManager/lableManager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/codeGenarator/lableManager/lableManager.cpp.obj
+.PHONY : src/codeGenarator/lableManager/lableManager.cpp.obj
+
+src/codeGenarator/lableManager/lableManager.i: src/codeGenarator/lableManager/lableManager.cpp.i
+.PHONY : src/codeGenarator/lableManager/lableManager.i
+
+# target to preprocess a source file
+src/codeGenarator/lableManager/lableManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/codeGenarator/lableManager/lableManager.cpp.i
+.PHONY : src/codeGenarator/lableManager/lableManager.cpp.i
+
+src/codeGenarator/lableManager/lableManager.s: src/codeGenarator/lableManager/lableManager.cpp.s
+.PHONY : src/codeGenarator/lableManager/lableManager.s
+
+# target to generate assembly for a file
+src/codeGenarator/lableManager/lableManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/codeGenarator/lableManager/lableManager.cpp.s
+.PHONY : src/codeGenarator/lableManager/lableManager.cpp.s
+
+src/codeGenarator/scratch/scratch.obj: src/codeGenarator/scratch/scratch.cpp.obj
+.PHONY : src/codeGenarator/scratch/scratch.obj
+
+# target to build an object file
+src/codeGenarator/scratch/scratch.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/codeGenarator/scratch/scratch.cpp.obj
+.PHONY : src/codeGenarator/scratch/scratch.cpp.obj
+
+src/codeGenarator/scratch/scratch.i: src/codeGenarator/scratch/scratch.cpp.i
+.PHONY : src/codeGenarator/scratch/scratch.i
+
+# target to preprocess a source file
+src/codeGenarator/scratch/scratch.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/codeGenarator/scratch/scratch.cpp.i
+.PHONY : src/codeGenarator/scratch/scratch.cpp.i
+
+src/codeGenarator/scratch/scratch.s: src/codeGenarator/scratch/scratch.cpp.s
+.PHONY : src/codeGenarator/scratch/scratch.s
+
+# target to generate assembly for a file
+src/codeGenarator/scratch/scratch.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\tec.dir\build.make CMakeFiles/tec.dir/src/codeGenarator/scratch/scratch.cpp.s
+.PHONY : src/codeGenarator/scratch/scratch.cpp.s
+
 src/errorHandler/errorHandler.obj: src/errorHandler/errorHandler.cpp.obj
 .PHONY : src/errorHandler/errorHandler.obj
 
@@ -620,6 +692,15 @@ help:
 	@echo ... src/DFA/DFA.obj
 	@echo ... src/DFA/DFA.i
 	@echo ... src/DFA/DFA.s
+	@echo ... src/codeGenarator/codeGen.obj
+	@echo ... src/codeGenarator/codeGen.i
+	@echo ... src/codeGenarator/codeGen.s
+	@echo ... src/codeGenarator/lableManager/lableManager.obj
+	@echo ... src/codeGenarator/lableManager/lableManager.i
+	@echo ... src/codeGenarator/lableManager/lableManager.s
+	@echo ... src/codeGenarator/scratch/scratch.obj
+	@echo ... src/codeGenarator/scratch/scratch.i
+	@echo ... src/codeGenarator/scratch/scratch.s
 	@echo ... src/errorHandler/errorHandler.obj
 	@echo ... src/errorHandler/errorHandler.i
 	@echo ... src/errorHandler/errorHandler.s
