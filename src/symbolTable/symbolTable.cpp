@@ -9,6 +9,7 @@
 #include <map>
 #include <vector>
 #include <String>
+#include <algorithm>
 
 // returns the entry with the requested name
 // if function not found returns nullptr
@@ -58,9 +59,9 @@ valType createVarDeclExprType(NonTerminalNode *varDeclExprNode)
     return res;
 }
 
-tableEntery createTableEntery_varDec(NonTerminalNode *varDecNode)
+tableEntry createTableEntery_varDec(NonTerminalNode *varDecNode)
 {
-    tableEntery res = tableEntery{"", valType{UNDIFINED, 1, false, false}, false};
+    tableEntry res = tableEntry{"", valType{UNDIFINED, 1, false, false}, false};
     vector<ASTNode *> children = varDecNode->GetChildren();
 
     // set name
@@ -72,9 +73,9 @@ tableEntery createTableEntery_varDec(NonTerminalNode *varDecNode)
     return res;
 }
 
-tableEntery createTableEntery_param(NonTerminalNode *paramNode)
+tableEntry createTableEntery_param(NonTerminalNode *paramNode)
 {
-    tableEntery res = tableEntery{"", valType{UNDIFINED, 1, false, false}, false};
+    tableEntry res = tableEntry{"", valType{UNDIFINED, 1, false, false}, false};
     vector<ASTNode *> children = paramNode->GetChildren();
 
     // set name
@@ -117,11 +118,12 @@ vector<valType> createFunctionParamTypes(NonTerminalNode *paramListNode)
     {
         createFunctionParamTypesHelper((NonTerminalNode *)childern[0], &res);
     }
-
+    
+    std::reverse(res.begin(), res.end());
     return res;
 }
 
-void createFunctionParamEnteriesHelper(NonTerminalNode *paramListNonEmptyNode, vector<tableEntery> *enteries)
+void createFunctionParamEnteriesHelper(NonTerminalNode *paramListNonEmptyNode, vector<tableEntry> *enteries)
 {
     vector<ASTNode *> childern = paramListNonEmptyNode->GetChildren();
     int numOfChildren = childern.size();
@@ -140,15 +142,16 @@ void createFunctionParamEnteriesHelper(NonTerminalNode *paramListNonEmptyNode, v
     }
 }
 
-vector<tableEntery> createFunctionParamEnteries(NonTerminalNode *paramListNode)
+vector<tableEntry> createFunctionParamEnteries(NonTerminalNode *paramListNode)
 {
     vector<ASTNode *> childern = paramListNode->GetChildren();
-    vector<tableEntery> res;
+    vector<tableEntry> res;
 
     if (childern.size() > 0)
     {
         createFunctionParamEnteriesHelper((NonTerminalNode *)childern[0], &res);
     }
 
+    std::reverse(res.begin(), res.end());
     return res;
 }

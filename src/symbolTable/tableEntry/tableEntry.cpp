@@ -46,7 +46,7 @@ void printValType(valType vtype)
     cout << valTypeToString(vtype) << endl;
 }
 
-void printTableEntery(tableEntery *entry)
+void printTableEntery(tableEntry *entry)
 {
     cout << "---------------------------------" << endl;
     cout << "Variable Name: " << entry->name << endl;

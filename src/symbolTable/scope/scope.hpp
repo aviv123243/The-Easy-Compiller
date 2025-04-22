@@ -12,30 +12,29 @@ using namespace std;
 class scope
 {
 private:
-    vector<tableEntery> _tableEntries;
+    vector<tableEntry> _tableEntries;
     vector<scope *> _innerScopes;
     scope *_parentScope = nullptr;
 
 public:
-    void addTableEntry(tableEntery entry)
+    void addTableEntry(tableEntry entry)
     {
         _tableEntries.push_back(entry);
     }
 
-    void addInnerScope(scope *innerScope) { _innerScopes.push_back(innerScope);}
+    void addInnerScope(scope *innerScope) { _innerScopes.push_back(innerScope); }
     void setParentScope(scope *parentScope) { _parentScope = parentScope; }
+    scope *getParentScope() const { return _parentScope; }
 
-    vector<tableEntery> getInnerScopeEntries() const
+    vector<tableEntry> &getEntries() { return _tableEntries; }
+    
+    // returns the entery with the requested name
+    // if the name is not found in this scope, it will search in the inner scopes
+    tableEntry getEntry(string name)
     {
-        return _tableEntries;
-    }
+        tableEntry res = {"_undeclared", {}};
 
-
-    tableEntery getEntry(string name)
-    {
-        tableEntery res = {"_undeclared", {}};
-
-        for (tableEntery entry : _tableEntries)
+        for (tableEntry entry : _tableEntries)
         {
             if (entry.name == name)
             {
@@ -43,7 +42,7 @@ public:
             }
         }
 
-        if(res.name == "_undeclared" && _parentScope != nullptr)
+        if (res.name == "_undeclared" && _parentScope != nullptr)
         {
             res = _parentScope->getEntry(name);
         }
@@ -53,26 +52,10 @@ public:
     vector<scope *> getInnerScopes() const { return _innerScopes; }
 
     // returns the entery with the requested name
-    // if the name is not found in this scope, it will search in the inner scopes
-    tableEntery getEntryGlobal(string name)
+    tableEntry getInnerScopeEntrie(string name)
     {
-        tableEntery res = {"_undeclared", {}};
-
-        res = getInnerScopeEntrie(name);
-
-        for (scope *innerScope : _innerScopes)
-        {
-            res = innerScope->getEntryGlobal(name);
-        }
-        
-        return res;
-    }
-
-    // returns the entery with the requested name
-    tableEntery getInnerScopeEntrie(string name)
-    {
-        tableEntery res = {"_undeclared", {}};
-        for (tableEntery entry : _tableEntries)
+        tableEntry res = {"_undeclared", {}};
+        for (tableEntry entry : _tableEntries)
         {
             if (entry.name == name)
             {
@@ -86,7 +69,7 @@ public:
     {
         cout << "Scope:" << endl;
 
-        for (tableEntery entry : _tableEntries)
+        for (tableEntry entry : _tableEntries)
         {
             printTableEntery(&entry);
         }

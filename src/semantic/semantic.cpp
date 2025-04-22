@@ -62,7 +62,7 @@ void SemanticAnalyzer::addVariableNodeToSymbolTable(NonTerminalNode *varDeclNode
     // check if the variable already exists in the symbol table (in current or parent scope)
     TerminalNode *nameNode = (TerminalNode *)(varDeclNode->GetChildren()[1]);
     string name = nameNode->getToken()->val;
-    tableEntery entry = currScope->getEntry(name);
+    tableEntry entry = currScope->getEntry(name);
 
     if (entry.name != "_undeclared")
     {
@@ -84,7 +84,7 @@ void SemanticAnalyzer::addParamNodeToSymbolTable(NonTerminalNode *paramNode)
     cout << "adding param node to symbol table" << endl;
     TerminalNode *nameNode = (TerminalNode *)(paramNode->GetChildren()[1]);
     string name = nameNode->getToken()->val;
-    tableEntery entry = currScope->getEntry(name);
+    tableEntry entry = currScope->getEntry(name);
 
     if (entry.name != "_undeclared")
     {
@@ -404,7 +404,7 @@ valType SemanticAnalyzer::getVarType(SyntaxToken *IDToken)
 
     // check if the variable already exists in the symbol table (in current or parent scope)
     string name = IDToken->val;
-    tableEntery entry = currScope->getEntry(name);
+    tableEntry entry = currScope->getEntry(name);
 
     if (entry.name == "_undeclared")
     {
@@ -840,18 +840,20 @@ void SemanticAnalyzer::assignIncrementExprNodeType(ASTNode *node)
     NonTerminalNode *ntNode = (NonTerminalNode *)(node);
 
     vector<ASTNode *> children = ntNode->GetChildren();
-    if (children.size() >= 2)
+
+    TerminalNode *firstChild = (TerminalNode *)(children[0]);
+    TerminalNode *secondChild = (TerminalNode *)(children[1]);
+
+    TerminalNode * varNode = firstChild->getToken()->kind == IDENTIFIER ? firstChild : secondChild;
+    valType operandType = getVarType(varNode->getToken());
+
+    if (operandType.type != INT && !operandType.isPointer)
     {
-        valType operandType = children[children.size() - 1]->GetValType();
-        SyntaxToken *opToken = ((TerminalNode *)(children[children.size() - 2]))->getToken();
-        if (operandType.type != INT && !operandType.isPointer)
-        {
-            _errorHandler->addError(new semanticError("increment/decrement requires int or pointer", opToken));
-        }
-        else
-        {
-            resType = operandType;
-        }
+        _errorHandler->addError(new semanticError("increment/decrement requires int or pointer", varNode->getToken()));
+    }
+    else
+    {
+        resType = operandType;
     }
 
     node->SetValType(resType);

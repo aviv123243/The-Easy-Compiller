@@ -5,8 +5,6 @@
 
 using namespace std;
 
-
-
 enum baseType
 {
     INT,
@@ -23,7 +21,7 @@ struct valType
     bool isArray = false;
 };
 
-struct tableEntery
+struct tableEntry
 {
     string name;
     valType type;
@@ -34,6 +32,6 @@ struct tableEntery
 string valTypeToString(valType vType);
 string baseTypeToString(baseType bType);
 void printValType(valType vtype);
-void printTableEntery(tableEntery *entry);
+void printTableEntery(tableEntry *entry);
 
 #endif

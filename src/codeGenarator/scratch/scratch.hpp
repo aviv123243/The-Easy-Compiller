@@ -24,8 +24,10 @@ public:
     ScratchManager();
     int alloc();
     int allocFloat();
+    bool isFloat(int i);
     void free(int i);
     string getName(int i);
+    string getLowerByteName(int i);
     bool isAllocated(int i) { return _regArr[i].inUse; }
 };
 

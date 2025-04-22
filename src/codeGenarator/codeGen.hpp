@@ -6,6 +6,7 @@
 #include <vector>
 #include <stack>
 #include <string>
+#include <sstream>
 #include "../nodes/nodes.hpp"
 #include "../nodeAnalyzer/nodeAnalyzer.hpp"
 #include "../symbolTable/symbolTable.hpp"
@@ -53,12 +54,21 @@ private:
     void dereferenceExprCodeGen(NonTerminalNode *node);
 
     void castCharToInt(int charReg, int intReg);
-
     void castIntToFloat(int intReg, int xmmReg);
 
     void pushAllCodeGen();
     void popAllCodeGen();
     void movCodeGen(ASTNode *to, ASTNode *from);
+
+    int sizeOfType(const valType &t) const;
+    string nameOfType(const valType &t) const;
+    int layoutLocals(scope *s, int runningOffset);
+    void loadFunctionVariables(functionEntry *func);
+    void loadFunctionVar(string srcAddr, string dstAddr, int reg);
+    void movCommendCodeGen(int leftReg, int rightReg);
+    void loadMem(string srcAddr, int reg);
+    void storeMem(string srcAddr, int reg);
+    string getVarAddr(const std::string &name) const;
 
 public:
     CodeGenarator(string outputFile, ASTNode *root, SymbolTable *symbolTable);

@@ -1,9 +1,4 @@
-fn main() => int
+fn main(int x,char y) => int
 {
-  ret 1 + 2;
+  ret x++;
 }
-
-
-
-
-

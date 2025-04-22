@@ -12,7 +12,7 @@ void ScratchManager::initRegArr()
 {
     int regIndex = 0;
 
-    //int/char registers
+    // int/char registers
     _regArr[regIndex++] = scratchRegister{"rbx", false};
     _regArr[regIndex++] = scratchRegister{"r10", false};
     _regArr[regIndex++] = scratchRegister{"r11", false};
@@ -21,7 +21,7 @@ void ScratchManager::initRegArr()
     _regArr[regIndex++] = scratchRegister{"r14", false};
     _regArr[regIndex++] = scratchRegister{"r15", false};
 
-    //float registers
+    // float registers
     _regArr[regIndex++] = scratchRegister{"xmm0", false};
     _regArr[regIndex++] = scratchRegister{"xmm1", false};
     _regArr[regIndex++] = scratchRegister{"xmm2", false};
@@ -60,8 +60,6 @@ int ScratchManager::alloc()
     return res;
 }
 
-
-
 // allocates a new scratch register
 int ScratchManager::allocFloat()
 {
@@ -82,6 +80,11 @@ int ScratchManager::allocFloat()
     return res;
 }
 
+bool ScratchManager::isFloat(int i)
+{
+    return i >= NUM_OF_SCRATCH_REGISTERS && i < NUM_OF_FLOAT_SCRATCH_REGISTERS;
+}
+
 // frees an occupied register
 void ScratchManager::free(int i)
 {
@@ -96,6 +99,23 @@ string ScratchManager::getName(int i)
 
     if (i >= 0 && i < NUM_OF_FLOAT_SCRATCH_REGISTERS)
         res = _regArr[i].name;
+
+    return res;
+}
+
+string ScratchManager::getLowerByteName(int i)
+{
+    string res = _regArr[i].name;
+
+    // rbx
+    if (res[1] == 'b')
+    {
+        res = "bl";
+    }
+    else
+    {
+        res = res + "l";
+    }
 
     return res;
 }

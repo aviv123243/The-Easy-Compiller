@@ -34,6 +34,7 @@ void CodeGenarator::funcCodeGen(NonTerminalNode *node)
     _outputFile << "\tmov rbp, rsp\n";
     int offset = assignStackOffset(getCurrFunctionEntry()->getInnerScope());
     _outputFile << "\tsub rsp, " << offset << "\n";
+    loadFunctionVariables(getCurrFunctionEntry());
     vector<NonTerminalNode *> stmtNodes = getStmtNodes((NonTerminalNode *)node->GetChildren()[8]);
     for (auto stmt : stmtNodes)
     {
@@ -286,34 +287,32 @@ void CodeGenarator::unaryExprCodeGen(NonTerminalNode *node)
         _outputFile << "\tmovzx " << _scratchManager.getName(reg) << ", al\n";
     }
 }
-
 void CodeGenarator::primaryExprCodeGen(NonTerminalNode *node)
 {
-    vector<ASTNode *> children = node->GetChildren();
+    auto &children = node->GetChildren();
     ASTNode *first = children[0];
 
     if (first->GetType() == TERMINAL)
     {
         SyntaxToken *tok = ((TerminalNode *)first)->getToken();
+
         if (tok->kind == INTEGER_LITERAL)
         {
-            int reg = _scratchManager.alloc();
-            _outputFile << "\tmov " << _scratchManager.getName(reg) << ", " << tok->val << "\n";
-            node->SetRegister(reg);
+            int r = _scratchManager.alloc();
+            _outputFile << "\tmov " << _scratchManager.getName(r)
+                        << ", " << tok->val << "\n";
+            node->SetRegister(r);
         }
-
         else if (tok->kind == IDENTIFIER && children.size() == 1)
         {
-            int reg = _scratchManager.alloc();
-            _outputFile << "\tmov " << _scratchManager.getName(reg) << ", [" << tok->val << "]\n";
-            node->SetRegister(reg);
+            int r = _scratchManager.alloc();
+            loadMem(_scopeStack.top()->getEntry(tok->val).addr, r);
+            node->SetRegister(r);
         }
-
         else if (tok->kind == IDENTIFIER && children.size() == 4)
         {
             callExprCodeGen(node);
         }
-
         else if (tok->kind == OPEN_PAREN)
         {
             exprCodeGen(children[1]);
@@ -333,26 +332,48 @@ void CodeGenarator::callExprCodeGen(NonTerminalNode *node)
 
 void CodeGenarator::incrementExprCodeGen(NonTerminalNode *node)
 {
-    vector<ASTNode *> children = node->GetChildren();
-    SyntaxKind op = ((TerminalNode *)children[0])->getTerminalKind();
-    string instr = (op == PLUS_PLUS) ? "inc" : "dec";
+    auto kids = node->GetChildren();
+    TerminalNode *firstChild = ((TerminalNode *)kids[0]);
+    TerminalNode *secondChild = ((TerminalNode *)kids[1]);
+    SyntaxKind op = firstChild->getTerminalKind() != IDENTIFIER ? firstChild->getTerminalKind() : secondChild->getTerminalKind();
 
-    string varName = ((TerminalNode *)children[1])->getToken()->val;
+    string opCommand = (op == PLUS_PLUS) ? "inc" : "dec";
 
+    tableEntry varEntry;
     int reg = _scratchManager.alloc();
-    _outputFile << "\tmov " << _scratchManager.getName(reg) << ", [" << varName << "]\n";
-    _outputFile << "\t" << instr << " " << _scratchManager.getName(reg) << "\n";
-    _outputFile << "\tmov [" << varName << "], " << _scratchManager.getName(reg) << "\n";
+
+    bool isPre = firstChild->getTerminalKind() != IDENTIFIER;
+
+    int tempReg = _scratchManager.alloc();
+    movCommendCodeGen(tempReg, reg);
+    _outputFile << "\t" << opCommand << " " << _scratchManager.getName(tempReg) << "\n";
+    
+    if (isPre)
+    {
+        varEntry = _scopeStack.top()->getEntry(secondChild->getToken()->val);
+        
+        _outputFile << "\t" << opCommand << " " << varEntry.addr << "\n";
+        loadMem(varEntry.addr, reg);
+    }
+    else
+    {
+        varEntry = _scopeStack.top()->getEntry(firstChild->getToken()->val);
+
+        loadMem(varEntry.addr, reg);
+        _outputFile << "\t" << opCommand << " " << varEntry.addr << "\n";
+
+    }
 
     node->SetRegister(reg);
 }
 
 void CodeGenarator::addressExprCodeGen(NonTerminalNode *node)
 {
-    string varName = ((TerminalNode *)node->GetChildren()[1])->getToken()->val;
-    int reg = _scratchManager.alloc();
-    _outputFile << "\tlea " << _scratchManager.getName(reg) << ", [" << varName << "]\n";
-    node->SetRegister(reg);
+    std::string var = ((TerminalNode *)node->GetChildren()[1])->getToken()->val;
+    std::string addr = getVarAddr(var);
+    int r = _scratchManager.alloc();
+    _outputFile << "\tlea " << _scratchManager.getName(r) << ", " << addr << "\n";
+    node->SetRegister(r);
 }
 
 void CodeGenarator::dereferenceExprCodeGen(NonTerminalNode *node)
@@ -379,11 +400,138 @@ void CodeGenarator::castIntToFloat(int intReg, int xmmReg)
     _outputFile << "\tcvtsi2ss " << _scratchManager.getName(xmmReg) << ", " << _scratchManager.getName(intReg) << "\n";
 }
 
-int CodeGenarator::assignStackOffset(scope *currScope)
+int CodeGenarator::assignStackOffset(scope *root)
 {
-    return 32; // Placeholder
+    int bytes = layoutLocals(root, 0) + 8; // add rbp
+    if (bytes & 0xF)
+        bytes = (bytes + 15) & ~0xF; // keep 16‑byte align
+    return bytes;
 }
 
 void CodeGenarator::pushAllCodeGen() {}
 void CodeGenarator::popAllCodeGen() {}
-void CodeGenarator::movCodeGen(ASTNode *to, ASTNode *from) {}
+
+int CodeGenarator::sizeOfType(const valType &t) const
+{
+    int base = 8;
+    if (t.type == CHAR)
+        base = 1;
+
+    return base * t.size; // arrays: len × elem
+}
+
+string CodeGenarator::nameOfType(const valType &t) const
+{
+    string res = "QWORD";
+
+    if (t.type == CHAR)
+        res = "BYTE";
+
+    return res;
+}
+
+int CodeGenarator::layoutLocals(scope *s, int offsetSoFar)
+{
+    for (auto &e : s->getEntries())
+    {
+        int sizeInStack = sizeOfType(e.type);
+        offsetSoFar += sizeInStack;
+        e.addr = nameOfType(e.type) + " ptr [rbp - " + to_string(offsetSoFar) + "]";
+    }
+    for (scope *inner : s->getInnerScopes())
+        offsetSoFar = layoutLocals(inner, offsetSoFar);
+    return offsetSoFar;
+}
+
+void CodeGenarator::loadFunctionVariables(functionEntry *func)
+{
+    const vector<valType> &params = func->getParamTypes();
+    int startOfParams = 16;
+    int offset = 0;
+    int reg;
+
+    valType currParam;
+    stringstream dstName;
+    stringstream srcName;
+
+    for (size_t i = 0; i < params.size(); i++)
+    {
+        currParam = params[i];
+        reg = _scratchManager.alloc();
+
+        srcName << nameOfType(currParam) << " ptr [rbp+" << startOfParams + offset << "]";
+        dstName << nameOfType(currParam) << " ptr [rbp-" << offset + 8 << "]";
+
+        if (currParam.type == FLOAT)
+            reg = _scratchManager.allocFloat();
+
+        loadFunctionVar(srcName.str(), dstName.str(), reg);
+
+        offset += sizeOfType(currParam);
+
+        _scratchManager.free(reg);
+
+        // clear the string streams
+        srcName.str("");
+        srcName.clear();
+        dstName.str("");
+        dstName.clear();
+    }
+}
+
+void CodeGenarator::loadFunctionVar(string srcAddr, string dstAddr, int reg)
+{
+    loadMem(srcAddr, reg);
+    storeMem(dstAddr, reg);
+}
+
+void CodeGenarator::movCommendCodeGen(int leftReg, int rightReg)
+{
+    string movCommand = "mov ";
+    if (_scratchManager.isFloat(leftReg))
+        movCommand = "movsd ";
+
+    _outputFile << "\t" << movCommand << _scratchManager.getName(leftReg) << ", " << _scratchManager.getName(rightReg) << "\n";
+}
+
+void CodeGenarator::loadMem(string srcAddr, int reg)
+{
+    string movCommand = "mov ";
+
+    if (_scratchManager.isFloat(reg))
+        movCommand = "movsd ";
+
+    if (srcAddr.find("BYTE") != string::npos)
+        movCommand = "movzx ";
+
+    _outputFile << "\t" << movCommand << _scratchManager.getName(reg) << ", " << srcAddr << "\n";
+}
+
+void CodeGenarator::storeMem(string srcAddr, int reg)
+{
+    string movCommand = "mov ";
+    string regName = _scratchManager.getName(reg);
+
+    if (_scratchManager.isFloat(reg))
+        movCommand = "movsd ";
+
+    if (srcAddr.find("BYTE") != string::npos)
+        regName = _scratchManager.getLowerByteName(reg);
+
+    _outputFile << "\t" << movCommand << srcAddr << ", " << regName << "\n";
+}
+
+string CodeGenarator::getVarAddr(const string &name) const
+{
+    scope *it = _scopeStack.top();
+    string res = "";
+    while (it)
+    {
+        for (const auto &e : it->getEntries())
+            if (e.name == name && !e.addr.empty())
+                res = e.addr;
+        it = it->getParentScope();
+    }
+
+    return res;
+}
