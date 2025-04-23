@@ -29,9 +29,9 @@ functionEntry *SymbolTable::getFunction(string name)
     return res;
 }
 
-valType createVarDeclExprType(NonTerminalNode *varDeclExprNode)
+valType createVarDeclExprType(NonTerminalNode *typeNode)
 {
-    vector<ASTNode *> children = varDeclExprNode->GetChildren();
+    vector<ASTNode *> children = typeNode->GetChildren();
 
     NonTerminalNode *baseTypeNode = (NonTerminalNode *)children[0];
     SyntaxKind type = ((TerminalNode *)baseTypeNode->GetChildren()[0])->getToken()->kind;

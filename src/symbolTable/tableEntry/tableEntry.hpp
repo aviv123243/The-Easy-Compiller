@@ -26,6 +26,7 @@ struct tableEntry
     string name;
     valType type;
     bool isInitialized = false;
+    int offset = 0; // offset in the stack
     string addr = "";
 };
 

@@ -1,4 +1,4 @@
-fn main(int x,char y) => int
+fn main(int x,float y) => int
 {
-  ret x++;
+    
 }

@@ -221,7 +221,7 @@ valType checkArithmeticCompatibility(valType left, valType right, SyntaxToken *o
     if (left.isPointer || right.isPointer)
     {
         if ((opToken->kind == PLUS || opToken->kind == MINUS) &&
-            ((left.isPointer && right.type == INT) || (right.isPointer && left.type == INT)))
+            ((left.isPointer && right.isPointer)))
         {
             res = left.isPointer ? left : right;
         }
@@ -297,7 +297,7 @@ valType SemanticAnalyzer::checkCompatibilityBinaryOp(valType leftOp, valType rig
 {
     valType res = {UNDIFINED, 0, false, false};
 
-    if (opToken->kind == PLUS || opToken->kind == MINUS || opToken->kind == STAR || opToken->kind == SLASH)
+    if (opToken->kind == PLUS || opToken->kind == MINUS || opToken->kind == STAR || opToken->kind == SLASH || opToken->kind == COMMA)
     {
         res = checkArithmeticCompatibility(leftOp, rightOp, opToken, _errorHandler);
     }
@@ -332,44 +332,85 @@ bool isWideningCompatible(baseType target, baseType source)
 
 valType SemanticAnalyzer::checkCompatibilityAssignExp(valType leftOp, valType rightOp, SyntaxToken *opToken)
 {
-    valType res = leftOp;
     bool errorOccurred = false;
 
-    if (leftOp.isPointer && rightOp.isPointer)
-    {
-        if (leftOp.type != rightOp.type)
-        {
-            _errorHandler->addError(new semanticError("incompatible pointer types for assignment", opToken));
-            errorOccurred = true;
-        }
-    }
-    else if (leftOp.isPointer && !rightOp.isPointer)
-    {
-        _errorHandler->addError(new semanticError("cannot assign non-pointer to pointer", opToken));
+    if (isPointerToPointerAssignInvalid(leftOp, rightOp, opToken))
         errorOccurred = true;
-    }
-    else if (!leftOp.isPointer && rightOp.isPointer)
-    {
-        _errorHandler->addError(new semanticError("cannot assign pointer to non-pointer", opToken));
+    else if (isArrayToPointerAssignAllowed(leftOp, rightOp))
+        return leftOp;  // success: array decays to pointer
+    else if (isArrayAssignmentInvalid(leftOp, rightOp, opToken))
         errorOccurred = true;
-    }
-    else if (leftOp.isArray || rightOp.isArray)
-    {
-        _errorHandler->addError(new semanticError("array assignment not allowed", opToken));
+    else if (isPointerMismatch(leftOp, rightOp, opToken))
         errorOccurred = true;
-    }
-    else if (isWideningCompatible(leftOp.type, rightOp.type))
+    else if (!isWideningCompatible(leftOp.type, rightOp.type))
     {
-        res.type = leftOp.type;
+        _errorHandler->addError(new semanticError("incompatible types for assignment", opToken));
+        errorOccurred = true;
     }
 
-    if (errorOccurred)
-    {
-        res = {UNDIFINED, 0, false, false};
-    }
-
-    return res;
+    return errorOccurred ? valType{UNDIFINED, 0, false, false} : leftOp;
 }
+
+bool SemanticAnalyzer::isPointerToPointerAssignInvalid(valType left, valType right, SyntaxToken *token)
+{
+    if (left.isPointer && right.isPointer && left.type != right.type)
+    {
+        _errorHandler->addError(new semanticError("incompatible pointer types for assignment", token));
+        return true;
+    }
+    return false;
+}
+
+bool SemanticAnalyzer::isArrayToPointerAssignAllowed(valType left, valType right)
+{
+    return left.isPointer && right.isArray && left.type == right.type;
+}
+
+bool SemanticAnalyzer::isArrayAssignmentInvalid(valType left, valType right, SyntaxToken *token)
+{
+    if (left.isArray && right.isArray)
+    {
+        if (left.size != right.size)
+        {
+            _errorHandler->addError(new semanticError("array size mismatch", token));
+            return true;
+        }
+        if (!isWideningCompatible(left.type, right.type))
+        {
+            _errorHandler->addError(new semanticError("incompatible array types for assignment", token));
+            return true;
+        }
+        return false; // valid array-to-array
+    }
+    if (left.isArray && !right.isArray)
+    {
+        _errorHandler->addError(new semanticError("cannot assign non-array value to array", token));
+        return true;
+    }
+    if (!left.isArray && right.isArray)
+    {
+        _errorHandler->addError(new semanticError("cannot assign array to non-array", token));
+        return true;
+    }
+    return false;
+}
+
+bool SemanticAnalyzer::isPointerMismatch(valType left, valType right, SyntaxToken *token)
+{
+    if (!left.isPointer && right.isPointer)
+    {
+        _errorHandler->addError(new semanticError("cannot assign pointer to non-pointer", token));
+        return true;
+    }
+    if (left.isPointer && !right.isPointer)
+    {
+        _errorHandler->addError(new semanticError("cannot assign non-pointer to pointer", token));
+        return true;
+    }
+    return false;
+}
+
+
 
 void SemanticAnalyzer::checkReturnStatements(functionEntry *funcEntry)
 {
@@ -406,15 +447,18 @@ valType SemanticAnalyzer::getVarType(SyntaxToken *IDToken)
     string name = IDToken->val;
     tableEntry entry = currScope->getEntry(name);
 
+    valType res = {UNDIFINED, 0, false, false};
+
     if (entry.name == "_undeclared")
     {
-        return {UNDIFINED, 0, false, false};
         _errorHandler->addError(new semanticError("variable not declared", IDToken));
     }
     else
     {
-        return entry.type;
+        res = entry.type;
     }
+
+    return res;
 }
 
 // returns the functions return type and checks if the function call parameters match the function declaration parameters
@@ -484,6 +528,8 @@ void SemanticAnalyzer::initAssignActions()
     _nonTerminalAssignActions[ASSIGN_TARGET] = &SemanticAnalyzer::assignAssignTargetNodeType;
     _nonTerminalAssignActions[CONDITION_OP] = &SemanticAnalyzer::assignConditionOpNodeType;
     _nonTerminalAssignActions[SIMPLE_STMT] = &SemanticAnalyzer::assignSimpleStmtNodeType;
+    _nonTerminalAssignActions[EXPR_LIST] = &SemanticAnalyzer::assignExprListNodeType;
+    _nonTerminalAssignActions[EXPR_LIST_NON_EMPTY] = &SemanticAnalyzer::assignExprListNonEmptyNodeType;
     _nonTerminalAssignActions[EXPR] = &SemanticAnalyzer::assignExprNodeType;
     _nonTerminalAssignActions[LOGICAL_EXPR] = &SemanticAnalyzer::assignLogicalExprNodeType;
     _nonTerminalAssignActions[RELATIONAL_EXPR] = &SemanticAnalyzer::assignRelationalExprNodeType;
@@ -528,7 +574,10 @@ void SemanticAnalyzer::assignTypeNodeType(ASTNode *node)
     }
     else if (children.size() == 4)
     {
-        resType = {baseType.type, baseType.size, false, true};
+        TerminalNode *sizeNode = ((TerminalNode *)(children[2]));
+        int size = atoi(sizeNode->getToken()->val.c_str());
+
+        resType = {baseType.type, size, false, true};
     }
 
     node->SetValType(resType);
@@ -554,7 +603,6 @@ void SemanticAnalyzer::assignVarDeclExprNodeType(ASTNode *node)
     NonTerminalNode *ntNode = (NonTerminalNode *)(node);
 
     TerminalNode *varNode = (TerminalNode *)(ntNode->GetChildren()[1]);
-    varNode->SetValType(getVarType(varNode->getToken()));
 
     vector<ASTNode *> children = ntNode->GetChildren();
 
@@ -695,6 +743,39 @@ void SemanticAnalyzer::assignSimpleStmtNodeType(ASTNode *node)
     }
 }
 
+void SemanticAnalyzer::assignExprListNodeType(ASTNode *node)
+{
+    vector<ASTNode *> children = ((NonTerminalNode *)(node))->GetChildren();
+    valType resType = {UNDIFINED, 0, false, false}; 
+    if(children.size() == 1)
+    {
+        resType = children[0]->GetValType();
+    }
+    
+    node->SetValType(resType);
+}
+
+void SemanticAnalyzer::assignExprListNonEmptyNodeType(ASTNode *node)
+{
+    NonTerminalNode *ntNode = (NonTerminalNode *)(node);
+
+    vector<ASTNode *> children = ntNode->GetChildren();
+    valType resType = children[0]->GetValType();
+
+    if (children.size() == 3)
+    {
+        int prevSize = resType.size;
+
+        valType rightOp = children[2]->GetValType();
+        SyntaxToken *opToken = ((TerminalNode *)(children[1]))->getToken();
+        resType = checkCompatibilityBinaryOp(resType, rightOp, opToken);
+
+        resType = valType{resType.type, prevSize + 1, resType.isPointer, resType.isArray};
+    }
+
+    node->SetValType(resType);
+}
+
 void SemanticAnalyzer::assignExprNodeType(ASTNode *node)
 {
     valType resType = {UNDIFINED, 0, false, false};
@@ -807,27 +888,14 @@ void SemanticAnalyzer::assignUnaryExprNodeType(ASTNode *node)
     {
         valType operandType = children[1]->GetValType();
         SyntaxToken *opToken = ((TerminalNode *)(children[0]))->getToken();
-        if (opToken->kind == MINUS)
+
+        if (operandType.isPointer || operandType.isArray)
         {
-            if (operandType.type != INT && operandType.type != FLOAT)
-            {
-                _errorHandler->addError(new semanticError("unary minus requires int or float", opToken));
-            }
-            else
-            {
-                resType = operandType;
-            }
+            _errorHandler->addError(new semanticError("unary operator not allowed on pointer/array", opToken));
         }
-        else if (opToken->kind == BANG)
+        else
         {
-            if (operandType.type != INT)
-            {
-                _errorHandler->addError(new semanticError("logical not requires int", opToken));
-            }
-            else
-            {
-                resType = {INT, 0, false, false};
-            }
+            resType = operandType;
         }
     }
 
@@ -844,7 +912,7 @@ void SemanticAnalyzer::assignIncrementExprNodeType(ASTNode *node)
     TerminalNode *firstChild = (TerminalNode *)(children[0]);
     TerminalNode *secondChild = (TerminalNode *)(children[1]);
 
-    TerminalNode * varNode = firstChild->getToken()->kind == IDENTIFIER ? firstChild : secondChild;
+    TerminalNode *varNode = firstChild->getToken()->kind == IDENTIFIER ? firstChild : secondChild;
     valType operandType = getVarType(varNode->getToken());
 
     if (operandType.type != INT && !operandType.isPointer)
@@ -867,7 +935,13 @@ void SemanticAnalyzer::assignAddressExprNodeType(ASTNode *node)
     vector<ASTNode *> children = ntNode->GetChildren();
     if (children.size() == 2)
     {
-        valType varType = children[1]->GetValType();
+        valType varType = getVarType(((TerminalNode *)(children[1]))->getToken());
+
+        if (varType.isPointer || varType.isArray)
+        {
+            _errorHandler->addError(new semanticError("double pointer abstraction is not allowed!", ((TerminalNode *)(children[0]))->getToken()));
+        }
+
         resType = {varType.type, varType.size, true, varType.isArray};
     }
 
@@ -908,6 +982,7 @@ void SemanticAnalyzer::assignPrimaryExprNodeType(ASTNode *node)
         if (tNode->getToken()->kind == IDENTIFIER)
         {
             resType = getVarType(tNode->getToken());
+            printValType(resType);
         }
         else
         {

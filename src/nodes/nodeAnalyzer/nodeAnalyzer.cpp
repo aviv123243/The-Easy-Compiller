@@ -90,6 +90,26 @@ void getFunctionParamNodesHelper(NonTerminalNode *paramListNonEmptyNode, vector<
     }
 }
 
+int getExprListNonEmptySize(NonTerminalNode *exprListNonEmptyNode)
+{
+    vector<ASTNode *> childern = exprListNonEmptyNode->GetChildren();
+    int numOfChildren = childern.size();
+
+    int res = 0;
+
+    if (numOfChildren == 1)
+    {
+        res = 1;
+    }
+
+    if (numOfChildren == 3)
+    {
+        res = 1 + getExprListNonEmptySize((NonTerminalNode *)childern[0]);
+    }
+
+    return 0;
+}
+
 vector<NonTerminalNode *> getFunctionParamNodes(NonTerminalNode *paramListNode)
 {
     vector<ASTNode *> childern = paramListNode->GetChildren();
@@ -100,7 +120,7 @@ vector<NonTerminalNode *> getFunctionParamNodes(NonTerminalNode *paramListNode)
         getFunctionParamNodesHelper((NonTerminalNode *)childern[0], &res);
     }
 
-    std::reverse(res.begin(),res.end());
+    std::reverse(res.begin(), res.end());
     return res;
 }
 
@@ -134,7 +154,7 @@ vector<NonTerminalNode *> getFunctionCallParamNodes(NonTerminalNode *paramListNo
         getFunctionParamNodesHelper((NonTerminalNode *)childern[0], &res);
     }
 
-    std::reverse(res.begin(),res.end());
+    std::reverse(res.begin(), res.end());
     return res;
 }
 
@@ -157,10 +177,9 @@ vector<NonTerminalNode *> getFunctionDeclNodes(NonTerminalNode *programNode)
         getFunctionDeclNodesHelper(programNode, &res);
     }
 
-    std::reverse(res.begin(),res.end());
+    std::reverse(res.begin(), res.end());
     return res;
 }
-
 
 void getStmtNodesHelper(NonTerminalNode *stmtListNonEmptyNode, vector<NonTerminalNode *> *stmtNodes)
 {
@@ -181,6 +200,6 @@ vector<NonTerminalNode *> getStmtNodes(NonTerminalNode *stmtListNode)
         getStmtNodesHelper(stmtListNode, &res);
     }
 
-    std::reverse(res.begin(),res.end());
+    std::reverse(res.begin(), res.end());
     return res;
 }

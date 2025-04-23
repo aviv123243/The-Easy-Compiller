@@ -5,6 +5,8 @@ CodeGenarator::CodeGenarator(string outputFile, ASTNode *root, SymbolTable *symb
 
 void CodeGenarator::genCode()
 {
+    floatMacroCodeGen();
+
     _outputFile << ".data\n";
     _outputFile << "\n.code\n";
     _outputFile << "extern ExitProcess : proc\n";
@@ -55,6 +57,9 @@ void CodeGenarator::stmtCodeGen(NonTerminalNode *node)
 
 void CodeGenarator::simpleStmtCodeGen(NonTerminalNode *node)
 {
+    vector<ASTNode *> children = node->GetChildren();
+    NonTerminalNode *firstChild = (NonTerminalNode *)children[0];
+
     if (isReturnStatement(node))
     {
         ASTNode *exprOptNode = node->GetChildren()[1];
@@ -68,6 +73,23 @@ void CodeGenarator::simpleStmtCodeGen(NonTerminalNode *node)
         cout << _lableManager.getFunctionEpilogueLable(getCurrFunctionEntry()->getName());
         _outputFile << "\tjmp " << _lableManager.getFunctionEpilogueLable(getCurrFunctionEntry()->getName()) << "\n";
         _outputFile << endl;
+    }
+
+    if (firstChild->getNonTerminalKind() == VAR_DECL_EXPR)
+    {
+        vector<ASTNode *> varDeclChildren = firstChild->GetChildren();
+
+        if (varDeclChildren.size() > 2)
+        {
+            NonTerminalNode *initOptNode = (NonTerminalNode *)varDeclChildren[2];
+            NonTerminalNode *assignValueNode = (NonTerminalNode *)(initOptNode->GetChildren()[1]);
+            NonTerminalNode *exprNode = (NonTerminalNode *)(assignValueNode->GetChildren()[0]);
+
+            exprCodeGen(exprNode);
+            int reg = exprNode->GetRegister();
+            storeMem(getVarAddr(((TerminalNode *)varDeclChildren[1])->getToken()->val), reg);
+            _scratchManager.free(reg);
+        }
     }
 }
 
@@ -264,7 +286,6 @@ void CodeGenarator::mulExprCodeGen(NonTerminalNode *node)
 
 void CodeGenarator::unaryExprCodeGen(NonTerminalNode *node)
 {
-    cout << "<<UNARY_EXPR>> ";
     auto &children = node->GetChildren();
     if (children.size() == 1)
     {
@@ -303,10 +324,17 @@ void CodeGenarator::primaryExprCodeGen(NonTerminalNode *node)
                         << ", " << tok->val << "\n";
             node->SetRegister(r);
         }
+        if (tok->kind == FLOAT_LITERAL)
+        {
+            int r = _scratchManager.allocFloat();
+            _outputFile << "\tmovsd " << _scratchManager.getName(r)
+                        << ", FP8(" << tok->val << ")\n";
+            node->SetRegister(r);
+        }
         else if (tok->kind == IDENTIFIER && children.size() == 1)
         {
             int r = _scratchManager.alloc();
-            loadMem(_scopeStack.top()->getEntry(tok->val).addr, r);
+            loadMem(getVarAddr(tok->val), r);
             node->SetRegister(r);
         }
         else if (tok->kind == IDENTIFIER && children.size() == 4)
@@ -333,37 +361,32 @@ void CodeGenarator::callExprCodeGen(NonTerminalNode *node)
 void CodeGenarator::incrementExprCodeGen(NonTerminalNode *node)
 {
     auto kids = node->GetChildren();
-    TerminalNode *firstChild = ((TerminalNode *)kids[0]);
-    TerminalNode *secondChild = ((TerminalNode *)kids[1]);
-    SyntaxKind op = firstChild->getTerminalKind() != IDENTIFIER ? firstChild->getTerminalKind() : secondChild->getTerminalKind();
+    TerminalNode *opNode = ((TerminalNode *)kids[0])->getTerminalKind() != IDENTIFIER ? (TerminalNode *)kids[0] : (TerminalNode *)kids[1];
+    TerminalNode *idNode = ((TerminalNode *)kids[0])->getTerminalKind() == IDENTIFIER ? (TerminalNode *)kids[0] : (TerminalNode *)kids[1];
+    SyntaxKind op = opNode->getTerminalKind();
 
     string opCommand = (op == PLUS_PLUS) ? "inc" : "dec";
+    bool isPost = ((TerminalNode *)kids[0])->getTerminalKind() == IDENTIFIER;
 
-    tableEntry varEntry;
+    tableEntry varEntry = _scopeStack.top()->getEntry(idNode->getToken()->val);
     int reg = _scratchManager.alloc();
-
-    bool isPre = firstChild->getTerminalKind() != IDENTIFIER;
-
     int tempReg = _scratchManager.alloc();
-    movCommendCodeGen(tempReg, reg);
-    _outputFile << "\t" << opCommand << " " << _scratchManager.getName(tempReg) << "\n";
-    
-    if (isPre)
+    loadMem(varEntry.addr, tempReg);
+
+    if (isPost)
     {
-        varEntry = _scopeStack.top()->getEntry(secondChild->getToken()->val);
-        
-        _outputFile << "\t" << opCommand << " " << varEntry.addr << "\n";
-        loadMem(varEntry.addr, reg);
+        movCommendCodeGen(_scratchManager.getName(reg), _scratchManager.getName(tempReg));
+        _outputFile << "\t" << opCommand << " " << _scratchManager.getName(tempReg) << "\n";
     }
     else
     {
-        varEntry = _scopeStack.top()->getEntry(firstChild->getToken()->val);
-
-        loadMem(varEntry.addr, reg);
-        _outputFile << "\t" << opCommand << " " << varEntry.addr << "\n";
-
+        _outputFile << "\t" << opCommand << " " << _scratchManager.getName(tempReg) << "\n";
+        movCommendCodeGen(_scratchManager.getName(reg), _scratchManager.getName(tempReg));
     }
 
+    storeMem(varEntry.addr, tempReg);
+
+    _scratchManager.free(tempReg);
     node->SetRegister(reg);
 }
 
@@ -389,13 +412,7 @@ void CodeGenarator::dereferenceExprCodeGen(NonTerminalNode *node)
     node->SetRegister(reg);
 }
 
-void CodeGenarator::castCharToInt(int charReg, int intReg)
-{
-    // Sign-extend 8-bit to 32-bit
-    _outputFile << "\tmovsxd " << _scratchManager.getName(intReg) << ", " << _scratchManager.getName(charReg) << "\n"; // signed cast
-}
-
-void CodeGenarator::castIntToFloat(int intReg, int xmmReg)
+void CodeGenarator::castToFloat(int intReg, int xmmReg)
 {
     _outputFile << "\tcvtsi2ss " << _scratchManager.getName(xmmReg) << ", " << _scratchManager.getName(intReg) << "\n";
 }
@@ -467,7 +484,7 @@ void CodeGenarator::loadFunctionVariables(functionEntry *func)
 
         loadFunctionVar(srcName.str(), dstName.str(), reg);
 
-        offset += sizeOfType(currParam);
+        offset += SIZE_OF_STACK_VAR;
 
         _scratchManager.free(reg);
 
@@ -485,13 +502,13 @@ void CodeGenarator::loadFunctionVar(string srcAddr, string dstAddr, int reg)
     storeMem(dstAddr, reg);
 }
 
-void CodeGenarator::movCommendCodeGen(int leftReg, int rightReg)
+void CodeGenarator::movCommendCodeGen(string leftReg, string rightReg)
 {
     string movCommand = "mov ";
-    if (_scratchManager.isFloat(leftReg))
+    if (leftReg.find("xmm") != string::npos)
         movCommand = "movsd ";
 
-    _outputFile << "\t" << movCommand << _scratchManager.getName(leftReg) << ", " << _scratchManager.getName(rightReg) << "\n";
+    _outputFile << "\t" << movCommand << leftReg << ", " << rightReg << "\n";
 }
 
 void CodeGenarator::loadMem(string srcAddr, int reg)
@@ -534,4 +551,19 @@ string CodeGenarator::getVarAddr(const string &name) const
     }
 
     return res;
+}
+
+void CodeGenarator::floatMacroCodeGen()
+{
+    _outputFile << "; Floating-point constant macros\n";
+
+    // 64-bit double macro
+    _outputFile << "FP8 MACRO value\n";
+    _outputFile << "    LOCAL vname\n";
+    _outputFile << "    .const\n";
+    _outputFile << "    align 8\n";
+    _outputFile << "    vname REAL8 value\n";
+    _outputFile << "    .code\n";
+    _outputFile << "    EXITM <vname>\n";
+    _outputFile << "ENDM\n\n";
 }

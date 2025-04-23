@@ -9,7 +9,7 @@
 #include <vector>
 #include <iostream>
 
-#define PARSER_DEBUG
+// #define PARSER_DEBUG
 
 using namespace std;
 

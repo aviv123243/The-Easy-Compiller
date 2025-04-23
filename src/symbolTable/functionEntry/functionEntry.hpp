@@ -16,7 +16,8 @@ private:
     scope *_scopeRoot;
 
 public:
-    functionEntry(string name, valType returnType, vector<valType> paramTypes) : _name(name), _returnType(returnType), _paramTypes(paramTypes) {}
+    functionEntry(string name, valType returnType, vector<valType> paramTypes) : _name(name), _returnType(returnType), _paramTypes(paramTypes) 
+    {_scopeRoot = nullptr;}
 
     string getName() const { return _name; }
     valType getReturnType() const { return _returnType; }

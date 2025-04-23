@@ -59,8 +59,8 @@ int main(int argc, char **argv)
         else
         {
             cout << "Parsing completed successfully!" << endl;
-            CodeGenarator codeGen("out2.asm",root,&symbolTable);
-            codeGen.genCode();
+            //CodeGenarator codeGen("out2.asm",root,&symbolTable);
+            //codeGen.genCode();
         }
         
         cout << "compiling finished!";

@@ -50,7 +50,6 @@ void printTableEntery(tableEntry *entry)
 {
     cout << "---------------------------------" << endl;
     cout << "Variable Name: " << entry->name << endl;
-    cout << "Variable Type: " << baseTypeToString(entry->type.type) << endl;
-    printValType(entry->type);
+    cout << "Variable Type: " << valTypeToString(entry->type) << endl;
     cout << "---------------------------------" << endl;
 }

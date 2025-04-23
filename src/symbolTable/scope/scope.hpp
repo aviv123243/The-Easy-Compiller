@@ -17,6 +17,8 @@ private:
     scope *_parentScope = nullptr;
 
 public:
+    scope() {}
+
     void addTableEntry(tableEntry entry)
     {
         _tableEntries.push_back(entry);
@@ -27,7 +29,7 @@ public:
     scope *getParentScope() const { return _parentScope; }
 
     vector<tableEntry> &getEntries() { return _tableEntries; }
-    
+
     // returns the entery with the requested name
     // if the name is not found in this scope, it will search in the inner scopes
     tableEntry getEntry(string name)
@@ -67,21 +69,29 @@ public:
 
     void printScope()
     {
-        cout << "Scope:" << endl;
+        cout << "Number of entries: " << _tableEntries.size() << endl;
+        cout << "scope" << endl;
 
-        for (tableEntry entry : _tableEntries)
+        for (auto &entry : _tableEntries)
         {
+            // Make sure printTableEntery handles nullptrs or malformed data
             printTableEntery(&entry);
         }
 
         cout << "Inner Scopes:" << endl;
-        if (_innerScopes.size() != 0)
+
+        for (auto *innerScope : _innerScopes)
         {
-            for (scope *innerScope : _innerScopes)
+            if (innerScope != nullptr) // <-- this is the fix
             {
                 innerScope->printScope();
             }
+            else
+            {
+                cout << "Warning: nullptr inner scope found!" << endl;
+            }
         }
+
         cout << "End of Scope" << endl;
     }
 };

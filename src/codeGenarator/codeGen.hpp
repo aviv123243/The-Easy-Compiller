@@ -17,6 +17,8 @@
 #include <stack>
 #include <fstream>
 
+#define SIZE_OF_STACK_VAR 8
+
 using namespace std;
 
 class CodeGenarator
@@ -53,22 +55,23 @@ private:
     void addressExprCodeGen(NonTerminalNode *node);
     void dereferenceExprCodeGen(NonTerminalNode *node);
 
-    void castCharToInt(int charReg, int intReg);
-    void castIntToFloat(int intReg, int xmmReg);
+    void castCharToFloat(int charReg, int intReg);
+    void castToFloat(int intReg, int xmmReg);
 
     void pushAllCodeGen();
     void popAllCodeGen();
-    void movCodeGen(ASTNode *to, ASTNode *from);
 
     int sizeOfType(const valType &t) const;
     string nameOfType(const valType &t) const;
     int layoutLocals(scope *s, int runningOffset);
     void loadFunctionVariables(functionEntry *func);
     void loadFunctionVar(string srcAddr, string dstAddr, int reg);
-    void movCommendCodeGen(int leftReg, int rightReg);
+    void movCommendCodeGen(string leftReg, string rightReg);
     void loadMem(string srcAddr, int reg);
     void storeMem(string srcAddr, int reg);
     string getVarAddr(const std::string &name) const;
+
+    void floatMacroCodeGen();
 
 public:
     CodeGenarator(string outputFile, ASTNode *root, SymbolTable *symbolTable);

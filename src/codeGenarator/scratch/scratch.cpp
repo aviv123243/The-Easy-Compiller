@@ -64,9 +64,9 @@ int ScratchManager::alloc()
 int ScratchManager::allocFloat()
 {
     int res = -1;
-    for (int i = NUM_OF_SCRATCH_REGISTERS; i < NUM_OF_FLOAT_SCRATCH_REGISTERS; i++)
+    for (int i = NUM_OF_SCRATCH_REGISTERS; i < NUM_OF_SCRATCH_REGISTERS + NUM_OF_FLOAT_SCRATCH_REGISTERS; i++)
     {
-        if (!_floatRegArr[i].inUse)
+        if (!_regArr[i].inUse && res == -1)
             res = i;
     }
 
@@ -76,7 +76,7 @@ int ScratchManager::allocFloat()
         exit(-1);
     }
 
-    _floatRegArr[res].inUse = true;
+    _regArr[res].inUse = true;
     return res;
 }
 

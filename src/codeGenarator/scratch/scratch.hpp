@@ -16,8 +16,7 @@ struct scratchRegister
 class ScratchManager
 {
 private:
-    scratchRegister _regArr[NUM_OF_SCRATCH_REGISTERS];
-    scratchRegister _floatRegArr[NUM_OF_FLOAT_SCRATCH_REGISTERS];
+    scratchRegister _regArr[NUM_OF_SCRATCH_REGISTERS + NUM_OF_FLOAT_SCRATCH_REGISTERS];
     void initRegArr();
 
 public:
