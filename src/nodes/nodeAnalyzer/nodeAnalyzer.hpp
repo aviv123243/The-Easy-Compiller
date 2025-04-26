@@ -10,7 +10,7 @@ bool isArrDeref(ASTNode *node);
 bool isReturnStatement(ASTNode *node);
 int getExprListNonEmptySize(NonTerminalNode *exprListNode);
 vector<NonTerminalNode *> getFunctionParamNodes(NonTerminalNode *paramListNode);
-vector<NonTerminalNode *> getFunctionCallParamNodes(NonTerminalNode *paramListNode);
+vector<NonTerminalNode *> getFunctionCallArgsNodes(NonTerminalNode *paramListNode);
 vector<NonTerminalNode *> getFunctionDeclNodes(NonTerminalNode *programNode);
 vector<NonTerminalNode *> getStmtNodes(NonTerminalNode *stmtListNode);
 

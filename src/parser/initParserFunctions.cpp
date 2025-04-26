@@ -25,7 +25,9 @@ void Parser::initProductionRules()
 
     // Rule 3: FunctionDecl -> KEYWORD_FN IDENTIFIER OPEN_PAREN ParamList CLOSED_PAREN RIGHT_ARROW Type OPEN_CURLY StmtList CLOSED_CURLY
     rule.setLeft(FUNCTION_DECL);
-    rule.addSymbol(KEYWORD_FN).addSymbol(IDENTIFIER).addSymbol(OPEN_PAREN).addSymbol(PARAM_LIST).addSymbol(CLOSED_PAREN).addSymbol(RIGHT_ARROW).addSymbol(TYPE).addSymbol(OPEN_CURLY).addSymbol(STMT_LIST).addSymbol(CLOSED_CURLY);
+    rule.addSymbol(KEYWORD_FN).addSymbol(IDENTIFIER).addSymbol(OPEN_PAREN)
+        .addSymbol(PARAM_LIST).addSymbol(CLOSED_PAREN).addSymbol(RIGHT_ARROW)
+        .addSymbol(TYPE).addSymbol(OPEN_CURLY).addSymbol(STMT_LIST).addSymbol(CLOSED_CURLY);
     addProductionRule(rule);
     rule.reset();
 
@@ -149,9 +151,9 @@ void Parser::initProductionRules()
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 24: SimpleStmt -> Expr
+    // Rule 24: SimpleStmt -> IDENTIFIER OPEN_PAREN ExprList CLOSED_PAREN
     rule.setLeft(SIMPLE_STMT);
-    rule.addSymbol(EXPR);
+    rule.addSymbol(IDENTIFIER).addSymbol(OPEN_PAREN).addSymbol(EXPR_LIST).addSymbol(CLOSED_PAREN);
     addProductionRule(rule);
     rule.reset();
 
@@ -271,19 +273,22 @@ void Parser::initProductionRules()
 
     // Rule 44: IfStmt -> KEYWORD_IF OPEN_PAREN ConditionOp CLOSED_PAREN Body
     rule.setLeft(IF_STMT);
-    rule.addSymbol(KEYWORD_IF).addSymbol(OPEN_PAREN).addSymbol(CONDITION_OP).addSymbol(CLOSED_PAREN).addSymbol(BODY);
+    rule.addSymbol(KEYWORD_IF).addSymbol(OPEN_PAREN).addSymbol(CONDITION_OP)
+        .addSymbol(CLOSED_PAREN).addSymbol(BODY);
     addProductionRule(rule);
     rule.reset();
 
     // Rule 45: IfStmt -> KEYWORD_IF OPEN_PAREN ConditionOp CLOSED_PAREN Body KEYWORD_ELSE Body
     rule.setLeft(IF_STMT);
-    rule.addSymbol(KEYWORD_IF).addSymbol(OPEN_PAREN).addSymbol(CONDITION_OP).addSymbol(CLOSED_PAREN).addSymbol(BODY).addSymbol(KEYWORD_ELSE).addSymbol(BODY);
+    rule.addSymbol(KEYWORD_IF).addSymbol(OPEN_PAREN).addSymbol(CONDITION_OP)
+        .addSymbol(CLOSED_PAREN).addSymbol(BODY).addSymbol(KEYWORD_ELSE).addSymbol(BODY);
     addProductionRule(rule);
     rule.reset();
 
     // Rule 46: WhileStmt -> KEYWORD_WHILE OPEN_PAREN ConditionOp CLOSED_PAREN Body
     rule.setLeft(WHILE_STMT);
-    rule.addSymbol(KEYWORD_WHILE).addSymbol(OPEN_PAREN).addSymbol(CONDITION_OP).addSymbol(CLOSED_PAREN).addSymbol(BODY);
+    rule.addSymbol(KEYWORD_WHILE).addSymbol(OPEN_PAREN).addSymbol(CONDITION_OP)
+        .addSymbol(CLOSED_PAREN).addSymbol(BODY);
     addProductionRule(rule);
     rule.reset();
 
@@ -301,7 +306,8 @@ void Parser::initProductionRules()
 
     // Rule 49: ForStmt -> KEYWORD_FOR OPEN_PAREN ForInit SEMICOLON ExprOpt SEMICOLON ForUpdate CLOSED_PAREN Body
     rule.setLeft(FOR_STMT);
-    rule.addSymbol(KEYWORD_FOR).addSymbol(OPEN_PAREN).addSymbol(FOR_INIT).addSymbol(SEMICOLON).addSymbol(EXPR_OPT).addSymbol(SEMICOLON).addSymbol(FOR_UPDATE).addSymbol(CLOSED_PAREN).addSymbol(BODY);
+    rule.addSymbol(KEYWORD_FOR).addSymbol(OPEN_PAREN).addSymbol(FOR_INIT).addSymbol(SEMICOLON)
+        .addSymbol(EXPR_OPT).addSymbol(SEMICOLON).addSymbol(FOR_UPDATE).addSymbol(CLOSED_PAREN).addSymbol(BODY);
     addProductionRule(rule);
     rule.reset();
 
@@ -413,239 +419,239 @@ void Parser::initProductionRules()
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 68: Expr -> IncrementExpr
-    rule.setLeft(EXPR);
-    rule.addSymbol(INCREMENT_EXPR);
-    addProductionRule(rule);
-    rule.reset();
-
-    // Rule 69: Expr -> AddressExpr
+    // Rule 68: Expr -> AddressExpr
     rule.setLeft(EXPR);
     rule.addSymbol(ADDRESS_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 70: Expr -> DereferenceExpr
-    rule.setLeft(EXPR);
-    rule.addSymbol(DEREFERENCE_EXPR);
-    addProductionRule(rule);
-    rule.reset();
-
-    // Rule 71: LogicalExpr -> RelationalExpr
+    // Rule 69: LogicalExpr -> RelationalExpr
     rule.setLeft(LOGICAL_EXPR);
     rule.addSymbol(RELATIONAL_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 72: LogicalExpr -> LogicalExpr PIPE_PIPE RelationalExpr
+    // Rule 70: LogicalExpr -> LogicalExpr PIPE_PIPE RelationalExpr
     rule.setLeft(LOGICAL_EXPR);
     rule.addSymbol(LOGICAL_EXPR).addSymbol(PIPE_PIPE).addSymbol(RELATIONAL_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 73: LogicalExpr -> LogicalExpr AMPERSAND_AMPERSAND RelationalExpr
+    // Rule 71: LogicalExpr -> LogicalExpr AMPERSAND_AMPERSAND RelationalExpr
     rule.setLeft(LOGICAL_EXPR);
     rule.addSymbol(LOGICAL_EXPR).addSymbol(AMPERSAND_AMPERSAND).addSymbol(RELATIONAL_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 74: RelationalExpr -> AddExpr
+    // Rule 72: RelationalExpr -> AddExpr
     rule.setLeft(RELATIONAL_EXPR);
     rule.addSymbol(ADD_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 75: RelationalExpr -> RelationalExpr EQUALS_EQUALS AddExpr
+    // Rule 73: RelationalExpr -> RelationalExpr EQUALS_EQUALS AddExpr
     rule.setLeft(RELATIONAL_EXPR);
     rule.addSymbol(RELATIONAL_EXPR).addSymbol(EQUALS_EQUALS).addSymbol(ADD_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 76: RelationalExpr -> RelationalExpr BANG_EQUALS AddExpr
+    // Rule 74: RelationalExpr -> RelationalExpr BANG_EQUALS AddExpr
     rule.setLeft(RELATIONAL_EXPR);
     rule.addSymbol(RELATIONAL_EXPR).addSymbol(BANG_EQUALS).addSymbol(ADD_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 77: RelationalExpr -> RelationalExpr LESS_THAN AddExpr
+    // Rule 75: RelationalExpr -> RelationalExpr LESS_THAN AddExpr
     rule.setLeft(RELATIONAL_EXPR);
     rule.addSymbol(RELATIONAL_EXPR).addSymbol(LESS_THAN).addSymbol(ADD_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 78: RelationalExpr -> RelationalExpr GREATER_THAN AddExpr
+    // Rule 76: RelationalExpr -> RelationalExpr GREATER_THAN AddExpr
     rule.setLeft(RELATIONAL_EXPR);
     rule.addSymbol(RELATIONAL_EXPR).addSymbol(GREATER_THAN).addSymbol(ADD_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 79: RelationalExpr -> RelationalExpr LESS_THAN_EQUALS AddExpr
+    // Rule 77: RelationalExpr -> RelationalExpr LESS_THAN_EQUALS AddExpr
     rule.setLeft(RELATIONAL_EXPR);
     rule.addSymbol(RELATIONAL_EXPR).addSymbol(LESS_THAN_EQUALS).addSymbol(ADD_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 80: RelationalExpr -> RelationalExpr GREATER_THAN_EQUALS AddExpr
+    // Rule 78: RelationalExpr -> RelationalExpr GREATER_THAN_EQUALS AddExpr
     rule.setLeft(RELATIONAL_EXPR);
     rule.addSymbol(RELATIONAL_EXPR).addSymbol(GREATER_THAN_EQUALS).addSymbol(ADD_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 81: AddExpr -> MulExpr
+    // Rule 79: AddExpr -> MulExpr
     rule.setLeft(ADD_EXPR);
     rule.addSymbol(MUL_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 82: AddExpr -> AddExpr PLUS MulExpr
+    // Rule 80: AddExpr -> AddExpr PLUS MulExpr
     rule.setLeft(ADD_EXPR);
     rule.addSymbol(ADD_EXPR).addSymbol(PLUS).addSymbol(MUL_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 83: AddExpr -> AddExpr MINUS MulExpr
+    // Rule 81: AddExpr -> AddExpr MINUS MulExpr
     rule.setLeft(ADD_EXPR);
     rule.addSymbol(ADD_EXPR).addSymbol(MINUS).addSymbol(MUL_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 84: AddExpr -> AddExpr PIPE MulExpr
+    // Rule 82: AddExpr -> AddExpr PIPE MulExpr
     rule.setLeft(ADD_EXPR);
     rule.addSymbol(ADD_EXPR).addSymbol(PIPE).addSymbol(MUL_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 85: AddExpr -> AddExpr CARET MulExpr
+    // Rule 83: AddExpr -> AddExpr CARET MulExpr
     rule.setLeft(ADD_EXPR);
     rule.addSymbol(ADD_EXPR).addSymbol(CARET).addSymbol(MUL_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 86: MulExpr -> UnaryExpr
+    // Rule 84: MulExpr -> UnaryExpr
     rule.setLeft(MUL_EXPR);
     rule.addSymbol(UNARY_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 87: MulExpr -> MulExpr STAR UnaryExpr
+    // Rule 85: MulExpr -> MulExpr STAR UnaryExpr
     rule.setLeft(MUL_EXPR);
     rule.addSymbol(MUL_EXPR).addSymbol(STAR).addSymbol(UNARY_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 88: MulExpr -> MulExpr SLASH UnaryExpr
+    // Rule 86: MulExpr -> MulExpr SLASH UnaryExpr
     rule.setLeft(MUL_EXPR);
     rule.addSymbol(MUL_EXPR).addSymbol(SLASH).addSymbol(UNARY_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 89: MulExpr -> MulExpr AMPERSAND UnaryExpr
+    // Rule 87: MulExpr -> MulExpr AMPERSAND UnaryExpr
     rule.setLeft(MUL_EXPR);
     rule.addSymbol(MUL_EXPR).addSymbol(AMPERSAND).addSymbol(UNARY_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 90: UnaryExpr -> PrimaryExpr
+    // Rule 88: UnaryExpr -> PrimaryExpr
     rule.setLeft(UNARY_EXPR);
     rule.addSymbol(PRIMARY_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 91: UnaryExpr -> MINUS UnaryExpr
+    // Rule 89: UnaryExpr -> MINUS UnaryExpr
     rule.setLeft(UNARY_EXPR);
     rule.addSymbol(MINUS).addSymbol(UNARY_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 92: UnaryExpr -> BANG UnaryExpr
+    // Rule 90: UnaryExpr -> BANG UnaryExpr
     rule.setLeft(UNARY_EXPR);
     rule.addSymbol(BANG).addSymbol(UNARY_EXPR);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 93: IncrementExpr -> IDENTIFIER PLUS_PLUS
+    // Rule 91: IncrementExpr -> IDENTIFIER PLUS_PLUS
     rule.setLeft(INCREMENT_EXPR);
     rule.addSymbol(IDENTIFIER).addSymbol(PLUS_PLUS);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 94: IncrementExpr -> IDENTIFIER MINUS_MINUS
+    // Rule 92: IncrementExpr -> IDENTIFIER MINUS_MINUS
     rule.setLeft(INCREMENT_EXPR);
     rule.addSymbol(IDENTIFIER).addSymbol(MINUS_MINUS);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 95: IncrementExpr -> PLUS_PLUS IDENTIFIER
+    // Rule 93: IncrementExpr -> PLUS_PLUS IDENTIFIER
     rule.setLeft(INCREMENT_EXPR);
     rule.addSymbol(PLUS_PLUS).addSymbol(IDENTIFIER);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 96: IncrementExpr -> MINUS_MINUS IDENTIFIER
+    // Rule 94: IncrementExpr -> MINUS_MINUS IDENTIFIER
     rule.setLeft(INCREMENT_EXPR);
     rule.addSymbol(MINUS_MINUS).addSymbol(IDENTIFIER);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 97: AddressExpr -> AMPERSAND IDENTIFIER
+    // Rule 95: AddressExpr -> AMPERSAND IDENTIFIER
     rule.setLeft(ADDRESS_EXPR);
     rule.addSymbol(AMPERSAND).addSymbol(IDENTIFIER);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 98: DereferenceExpr -> STAR IDENTIFIER
+    // Rule 96: DereferenceExpr -> STAR IDENTIFIER
     rule.setLeft(DEREFERENCE_EXPR);
     rule.addSymbol(STAR).addSymbol(IDENTIFIER);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 99: PrimaryExpr -> IDENTIFIER
+    // Rule 97: PrimaryExpr -> IDENTIFIER
     rule.setLeft(PRIMARY_EXPR);
     rule.addSymbol(IDENTIFIER);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 100: PrimaryExpr -> IDENTIFIER OPEN_BRACKET Expr CLOSED_BRACKET
+    // Rule 98: PrimaryExpr -> IDENTIFIER OPEN_BRACKET Expr CLOSED_BRACKET
     rule.setLeft(PRIMARY_EXPR);
     rule.addSymbol(IDENTIFIER).addSymbol(OPEN_BRACKET).addSymbol(EXPR).addSymbol(CLOSED_BRACKET);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 101: PrimaryExpr -> INTEGER_LITERAL
+    // Rule 99: PrimaryExpr -> INTEGER_LITERAL
     rule.setLeft(PRIMARY_EXPR);
     rule.addSymbol(INTEGER_LITERAL);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 102: PrimaryExpr -> FLOAT_LITERAL
+    // Rule 100: PrimaryExpr -> FLOAT_LITERAL
     rule.setLeft(PRIMARY_EXPR);
     rule.addSymbol(FLOAT_LITERAL);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 103: PrimaryExpr -> CHAR_LITERAL
+    // Rule 101: PrimaryExpr -> CHAR_LITERAL
     rule.setLeft(PRIMARY_EXPR);
     rule.addSymbol(CHAR_LITERAL);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 104: PrimaryExpr -> OPEN_PAREN Expr CLOSED_PAREN
+    // Rule 102: PrimaryExpr -> OPEN_PAREN Expr CLOSED_PAREN
     rule.setLeft(PRIMARY_EXPR);
     rule.addSymbol(OPEN_PAREN).addSymbol(EXPR).addSymbol(CLOSED_PAREN);
     addProductionRule(rule);
     rule.reset();
 
-    // Rule 105: PrimaryExpr -> IDENTIFIER OPEN_PAREN ExprList CLOSED_PAREN
+    // Rule 103: PrimaryExpr -> IDENTIFIER OPEN_PAREN ExprList CLOSED_PAREN
     rule.setLeft(PRIMARY_EXPR);
     rule.addSymbol(IDENTIFIER).addSymbol(OPEN_PAREN).addSymbol(EXPR_LIST).addSymbol(CLOSED_PAREN);
     addProductionRule(rule);
     rule.reset();
+
+    // Rule 104: PrimaryExpr -> DereferenceExpr
+    rule.setLeft(PRIMARY_EXPR);
+    rule.addSymbol(DEREFERENCE_EXPR);
+    addProductionRule(rule);
+    rule.reset();
+
+    // Rule 105: PrimaryExpr -> IncrementExpr
+    rule.setLeft(PRIMARY_EXPR);
+    rule.addSymbol(INCREMENT_EXPR);
+    addProductionRule(rule);
+    rule.reset();
 }
 
-void Parser::fillTables()
-{
+
+void Parser::fillTables() {
     // State 0
-    _actionTable.addDefault(0, {REDUCE, 1}); // Program -> ε
+    _actionTable.addDefault(0, {REDUCE, 1});
     _gotoTable.add(0, PROGRAM, 1);
 
     // State 1
@@ -654,13 +660,13 @@ void Parser::fillTables()
     _gotoTable.add(1, FUNCTION_DECL, 4);
 
     // State 2
-    _actionTable.addDefault(2, {ACCEPT, 0}); // Accept state
+    _actionTable.addDefault(2, {ACCEPT, 0});
 
     // State 3
     _actionTable.add(3, IDENTIFIER, {SHIFT, 5});
 
     // State 4
-    _actionTable.addDefault(4, {REDUCE, 2}); // Program -> Program FunctionDecl
+    _actionTable.addDefault(4, {REDUCE, 2});
 
     // State 5
     _actionTable.add(5, OPEN_PAREN, {SHIFT, 6});
@@ -669,7 +675,7 @@ void Parser::fillTables()
     _actionTable.add(6, KEYWORD_INT, {SHIFT, 7});
     _actionTable.add(6, KEYWORD_FLOAT, {SHIFT, 8});
     _actionTable.add(6, KEYWORD_CHAR, {SHIFT, 9});
-    _actionTable.addDefault(6, {REDUCE, 4}); // ParamList -> ε
+    _actionTable.addDefault(6, {REDUCE, 4});
     _gotoTable.add(6, PARAM_LIST, 10);
     _gotoTable.add(6, PARAM_LIST_NON_EMPTY, 11);
     _gotoTable.add(6, PARAM, 12);
@@ -677,23 +683,23 @@ void Parser::fillTables()
     _gotoTable.add(6, BASE_TYPE, 14);
 
     // State 7
-    _actionTable.addDefault(7, {REDUCE, 12}); // BaseType -> KEYWORD_INT
+    _actionTable.addDefault(7, {REDUCE, 12});
 
     // State 8
-    _actionTable.addDefault(8, {REDUCE, 13}); // BaseType -> KEYWORD_FLOAT
+    _actionTable.addDefault(8, {REDUCE, 13});
 
     // State 9
-    _actionTable.addDefault(9, {REDUCE, 14}); // BaseType -> KEYWORD_CHAR
+    _actionTable.addDefault(9, {REDUCE, 14});
 
     // State 10
     _actionTable.add(10, CLOSED_PAREN, {SHIFT, 15});
 
     // State 11
     _actionTable.add(11, COMMA, {SHIFT, 16});
-    _actionTable.addDefault(11, {REDUCE, 5}); // ParamList -> ParamListNonEmpty
+    _actionTable.addDefault(11, {REDUCE, 5});
 
     // State 12
-    _actionTable.addDefault(12, {REDUCE, 6}); // ParamListNonEmpty -> Param
+    _actionTable.addDefault(12, {REDUCE, 6});
 
     // State 13
     _actionTable.add(13, IDENTIFIER, {SHIFT, 17});
@@ -701,7 +707,7 @@ void Parser::fillTables()
     // State 14
     _actionTable.add(14, OPEN_BRACKET, {SHIFT, 18});
     _actionTable.add(14, STAR, {SHIFT, 19});
-    _actionTable.addDefault(14, {REDUCE, 9}); // Type -> BaseType
+    _actionTable.addDefault(14, {REDUCE, 9});
 
     // State 15
     _actionTable.add(15, RIGHT_ARROW, {SHIFT, 20});
@@ -715,13 +721,13 @@ void Parser::fillTables()
     _gotoTable.add(16, BASE_TYPE, 14);
 
     // State 17
-    _actionTable.addDefault(17, {REDUCE, 8}); // Param -> Type IDENTIFIER
+    _actionTable.addDefault(17, {REDUCE, 8});
 
     // State 18
     _actionTable.add(18, INTEGER_LITERAL, {SHIFT, 22});
 
     // State 19
-    _actionTable.addDefault(19, {REDUCE, 11}); // Type -> BaseType STAR
+    _actionTable.addDefault(19, {REDUCE, 11});
 
     // State 20
     _actionTable.add(20, KEYWORD_INT, {SHIFT, 7});
@@ -731,7 +737,7 @@ void Parser::fillTables()
     _gotoTable.add(20, BASE_TYPE, 14);
 
     // State 21
-    _actionTable.addDefault(21, {REDUCE, 7}); // ParamListNonEmpty -> ParamListNonEmpty COMMA Param
+    _actionTable.addDefault(21, {REDUCE, 7});
 
     // State 22
     _actionTable.add(22, CLOSED_BRACKET, {SHIFT, 24});
@@ -740,1433 +746,1405 @@ void Parser::fillTables()
     _actionTable.add(23, OPEN_CURLY, {SHIFT, 25});
 
     // State 24
-    _actionTable.addDefault(24, {REDUCE, 10}); // Type -> BaseType OPEN_BRACKET INTEGER_LITERAL CLOSED_BRACKET
+    _actionTable.addDefault(24, {REDUCE, 10});
 
     // State 25
-    _actionTable.addDefault(25, {REDUCE, 15}); // StmtList -> ε
+    _actionTable.addDefault(25, {REDUCE, 15});
     _gotoTable.add(25, STMT_LIST, 26);
 
     // State 26
     _actionTable.add(26, IDENTIFIER, {SHIFT, 27});
-    _actionTable.add(26, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(26, OPEN_CURLY, {SHIFT, 29});
-    _actionTable.add(26, CLOSED_CURLY, {SHIFT, 30});
+    _actionTable.add(26, OPEN_CURLY, {SHIFT, 28});
+    _actionTable.add(26, CLOSED_CURLY, {SHIFT, 29});
     _actionTable.add(26, KEYWORD_INT, {SHIFT, 7});
     _actionTable.add(26, KEYWORD_FLOAT, {SHIFT, 8});
     _actionTable.add(26, KEYWORD_CHAR, {SHIFT, 9});
-    _actionTable.add(26, STAR, {SHIFT, 31});
-    _actionTable.add(26, KEYWORD_IF, {SHIFT, 32});
-    _actionTable.add(26, KEYWORD_WHILE, {SHIFT, 33});
-    _actionTable.add(26, KEYWORD_FOR, {SHIFT, 34});
-    _actionTable.add(26, KEYWORD_RET, {SHIFT, 35});
-    _actionTable.add(26, MINUS, {SHIFT, 36});
-    _actionTable.add(26, BANG, {SHIFT, 37});
-    _actionTable.add(26, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(26, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(26, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(26, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(26, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(26, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(26, TYPE, 44);
+    _actionTable.add(26, STAR, {SHIFT, 30});
+    _actionTable.add(26, KEYWORD_IF, {SHIFT, 31});
+    _actionTable.add(26, KEYWORD_WHILE, {SHIFT, 32});
+    _actionTable.add(26, KEYWORD_FOR, {SHIFT, 33});
+    _actionTable.add(26, KEYWORD_RET, {SHIFT, 34});
+    _gotoTable.add(26, TYPE, 35);
     _gotoTable.add(26, BASE_TYPE, 14);
-    _gotoTable.add(26, STMT, 45);
-    _gotoTable.add(26, SIMPLE_STMT, 46);
-    _gotoTable.add(26, VAR_DECL_EXPR, 47);
-    _gotoTable.add(26, ASSIGN_EXPR, 48);
-    _gotoTable.add(26, ASSIGN_TARGET, 49);
-    _gotoTable.add(26, IF_STMT, 50);
-    _gotoTable.add(26, WHILE_STMT, 51);
-    _gotoTable.add(26, FOR_STMT, 52);
-    _gotoTable.add(26, EXPR, 53);
-    _gotoTable.add(26, LOGICAL_EXPR, 54);
-    _gotoTable.add(26, RELATIONAL_EXPR, 55);
-    _gotoTable.add(26, ADD_EXPR, 56);
-    _gotoTable.add(26, MUL_EXPR, 57);
-    _gotoTable.add(26, UNARY_EXPR, 58);
-    _gotoTable.add(26, INCREMENT_EXPR, 59);
-    _gotoTable.add(26, ADDRESS_EXPR, 60);
-    _gotoTable.add(26, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(26, PRIMARY_EXPR, 62);
+    _gotoTable.add(26, STMT, 36);
+    _gotoTable.add(26, SIMPLE_STMT, 37);
+    _gotoTable.add(26, VAR_DECL_EXPR, 38);
+    _gotoTable.add(26, ASSIGN_EXPR, 39);
+    _gotoTable.add(26, ASSIGN_TARGET, 40);
+    _gotoTable.add(26, IF_STMT, 41);
+    _gotoTable.add(26, WHILE_STMT, 42);
+    _gotoTable.add(26, FOR_STMT, 43);
 
     // State 27
-    _actionTable.add(27, OPEN_PAREN, {SHIFT, 63});
-    _actionTable.add(27, OPEN_BRACKET, {SHIFT, 64});
-    _actionTable.add(27, PLUS_PLUS, {SHIFT, 65});
-    _actionTable.add(27, MINUS_MINUS, {SHIFT, 66});
-    _actionTable.add(27, EQUALS, {REDUCE, 32});
-    _actionTable.add(27, PLUS_EQUALS, {REDUCE, 32});
-    _actionTable.add(27, MINUS_EQUALS, {REDUCE, 32});
-    _actionTable.add(27, SLASH_EQUALS, {REDUCE, 32});
-    _actionTable.add(27, STAR_EQUALS, {REDUCE, 32});
-    _actionTable.add(27, AMPERSAND_EQUALS, {REDUCE, 32});
-    _actionTable.add(27, PIPE_EQUALS, {REDUCE, 32});
-    _actionTable.add(27, CARET_EQUALS, {REDUCE, 32});
-    _actionTable.add(27, TILDE_EQUALS, {REDUCE, 32});
-    _actionTable.addDefault(27, {REDUCE, 99});
+    _actionTable.add(27, OPEN_PAREN, {SHIFT, 44});
+    _actionTable.add(27, OPEN_BRACKET, {SHIFT, 45});
+    _actionTable.addDefault(27, {REDUCE, 32});
 
     // State 28
-    _actionTable.add(28, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(28, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(28, STAR, {SHIFT, 68});
-    _actionTable.add(28, MINUS, {SHIFT, 36});
-    _actionTable.add(28, BANG, {SHIFT, 37});
-    _actionTable.add(28, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(28, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(28, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(28, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(28, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(28, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(28, EXPR, 69);
-    _gotoTable.add(28, LOGICAL_EXPR, 54);
-    _gotoTable.add(28, RELATIONAL_EXPR, 55);
-    _gotoTable.add(28, ADD_EXPR, 56);
-    _gotoTable.add(28, MUL_EXPR, 57);
-    _gotoTable.add(28, UNARY_EXPR, 58);
-    _gotoTable.add(28, INCREMENT_EXPR, 59);
-    _gotoTable.add(28, ADDRESS_EXPR, 60);
-    _gotoTable.add(28, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(28, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(28, {REDUCE, 15});
+    _gotoTable.add(28, STMT_LIST, 46);
 
     // State 29
-    _actionTable.addDefault(29, {REDUCE, 15}); // StmtList -> ε
-    _gotoTable.add(29, STMT_LIST, 70);
+    _actionTable.addDefault(29, {REDUCE, 3});
 
     // State 30
-    _actionTable.addDefault(30, {REDUCE, 3}); // FunctionDecl -> KEYWORD_FN IDENTIFIER ...
+    _actionTable.add(30, IDENTIFIER, {SHIFT, 47});
 
     // State 31
-    _actionTable.add(31, IDENTIFIER, {SHIFT, 71});
+    _actionTable.add(31, OPEN_PAREN, {SHIFT, 48});
 
     // State 32
-    _actionTable.add(32, OPEN_PAREN, {SHIFT, 72});
+    _actionTable.add(32, OPEN_PAREN, {SHIFT, 49});
 
     // State 33
-    _actionTable.add(33, OPEN_PAREN, {SHIFT, 73});
+    _actionTable.add(33, OPEN_PAREN, {SHIFT, 50});
 
     // State 34
-    _actionTable.add(34, OPEN_PAREN, {SHIFT, 74});
+    _actionTable.add(34, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(34, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(34, STAR, {SHIFT, 53});
+    _actionTable.add(34, MINUS, {SHIFT, 54});
+    _actionTable.add(34, BANG, {SHIFT, 55});
+    _actionTable.add(34, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(34, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(34, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(34, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(34, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(34, MINUS_MINUS, {SHIFT, 61});
+    _actionTable.addDefault(34, {REDUCE, 53});
+    _gotoTable.add(34, EXPR_OPT, 62);
+    _gotoTable.add(34, EXPR, 63);
+    _gotoTable.add(34, LOGICAL_EXPR, 64);
+    _gotoTable.add(34, RELATIONAL_EXPR, 65);
+    _gotoTable.add(34, ADD_EXPR, 66);
+    _gotoTable.add(34, MUL_EXPR, 67);
+    _gotoTable.add(34, UNARY_EXPR, 68);
+    _gotoTable.add(34, INCREMENT_EXPR, 69);
+    _gotoTable.add(34, ADDRESS_EXPR, 70);
+    _gotoTable.add(34, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(34, PRIMARY_EXPR, 72);
 
     // State 35
-    _actionTable.add(35, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(35, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(35, STAR, {SHIFT, 68});
-    _actionTable.add(35, MINUS, {SHIFT, 36});
-    _actionTable.add(35, BANG, {SHIFT, 37});
-    _actionTable.add(35, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(35, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(35, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(35, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(35, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(35, MINUS_MINUS, {SHIFT, 43});
-    _actionTable.addDefault(35, {REDUCE, 53});
-    _gotoTable.add(35, EXPR_OPT, 75);
-    _gotoTable.add(35, EXPR, 76);
-    _gotoTable.add(35, LOGICAL_EXPR, 54);
-    _gotoTable.add(35, RELATIONAL_EXPR, 55);
-    _gotoTable.add(35, ADD_EXPR, 56);
-    _gotoTable.add(35, MUL_EXPR, 57);
-    _gotoTable.add(35, UNARY_EXPR, 58);
-    _gotoTable.add(35, INCREMENT_EXPR, 59);
-    _gotoTable.add(35, ADDRESS_EXPR, 60);
-    _gotoTable.add(35, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(35, PRIMARY_EXPR, 62);
+    _actionTable.add(35, IDENTIFIER, {SHIFT, 73});
 
     // State 36
-    _actionTable.add(36, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(36, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(36, MINUS, {SHIFT, 36});
-    _actionTable.add(36, BANG, {SHIFT, 37});
-    _actionTable.add(36, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(36, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(36, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(36, UNARY_EXPR, 78);
-    _gotoTable.add(36, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(36, {REDUCE, 16});
 
     // State 37
-    _actionTable.add(37, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(37, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(37, MINUS, {SHIFT, 36});
-    _actionTable.add(37, BANG, {SHIFT, 37});
-    _actionTable.add(37, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(37, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(37, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(37, UNARY_EXPR, 79);
-    _gotoTable.add(37, PRIMARY_EXPR, 62);
+    _actionTable.add(37, SEMICOLON, {SHIFT, 74});
 
     // State 38
-    _actionTable.add(38, IDENTIFIER, {SHIFT, 80});
+    _actionTable.addDefault(38, {REDUCE, 22});
 
     // State 39
-    _actionTable.addDefault(39, {REDUCE, 101}); // PrimaryExpr -> INTEGER_LITERAL
+    _actionTable.addDefault(39, {REDUCE, 23});
 
     // State 40
-    _actionTable.addDefault(40, {REDUCE, 102}); // PrimaryExpr -> FLOAT_LITERAL
+    _actionTable.add(40, EQUALS, {SHIFT, 75});
+    _actionTable.add(40, PLUS_EQUALS, {SHIFT, 76});
+    _actionTable.add(40, MINUS_EQUALS, {SHIFT, 77});
+    _actionTable.add(40, SLASH_EQUALS, {SHIFT, 78});
+    _actionTable.add(40, STAR_EQUALS, {SHIFT, 79});
+    _actionTable.add(40, AMPERSAND_EQUALS, {SHIFT, 80});
+    _actionTable.add(40, PIPE_EQUALS, {SHIFT, 81});
+    _actionTable.add(40, CARET_EQUALS, {SHIFT, 82});
+    _actionTable.add(40, TILDE_EQUALS, {SHIFT, 83});
+    _gotoTable.add(40, ASSIGN_OP, 84);
 
     // State 41
-    _actionTable.addDefault(41, {REDUCE, 103}); // PrimaryExpr -> CHAR_LITERAL
+    _actionTable.addDefault(41, {REDUCE, 19});
 
     // State 42
-    _actionTable.add(42, IDENTIFIER, {SHIFT, 81});
+    _actionTable.addDefault(42, {REDUCE, 20});
 
     // State 43
-    _actionTable.add(43, IDENTIFIER, {SHIFT, 82});
+    _actionTable.addDefault(43, {REDUCE, 21});
 
     // State 44
-    _actionTable.add(44, IDENTIFIER, {SHIFT, 83});
+    _actionTable.add(44, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(44, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(44, STAR, {SHIFT, 53});
+    _actionTable.add(44, MINUS, {SHIFT, 54});
+    _actionTable.add(44, BANG, {SHIFT, 55});
+    _actionTable.add(44, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(44, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(44, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(44, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(44, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(44, MINUS_MINUS, {SHIFT, 61});
+    _actionTable.addDefault(44, {REDUCE, 63});
+    _gotoTable.add(44, EXPR_LIST, 85);
+    _gotoTable.add(44, EXPR_LIST_NON_EMPTY, 86);
+    _gotoTable.add(44, EXPR, 87);
+    _gotoTable.add(44, LOGICAL_EXPR, 64);
+    _gotoTable.add(44, RELATIONAL_EXPR, 65);
+    _gotoTable.add(44, ADD_EXPR, 66);
+    _gotoTable.add(44, MUL_EXPR, 67);
+    _gotoTable.add(44, UNARY_EXPR, 68);
+    _gotoTable.add(44, INCREMENT_EXPR, 69);
+    _gotoTable.add(44, ADDRESS_EXPR, 70);
+    _gotoTable.add(44, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(44, PRIMARY_EXPR, 72);
 
     // State 45
-    _actionTable.addDefault(45, {REDUCE, 16}); // StmtList -> StmtList Stmt
+    _actionTable.add(45, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(45, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(45, STAR, {SHIFT, 53});
+    _actionTable.add(45, MINUS, {SHIFT, 54});
+    _actionTable.add(45, BANG, {SHIFT, 55});
+    _actionTable.add(45, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(45, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(45, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(45, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(45, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(45, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(45, EXPR, 88);
+    _gotoTable.add(45, LOGICAL_EXPR, 64);
+    _gotoTable.add(45, RELATIONAL_EXPR, 65);
+    _gotoTable.add(45, ADD_EXPR, 66);
+    _gotoTable.add(45, MUL_EXPR, 67);
+    _gotoTable.add(45, UNARY_EXPR, 68);
+    _gotoTable.add(45, INCREMENT_EXPR, 69);
+    _gotoTable.add(45, ADDRESS_EXPR, 70);
+    _gotoTable.add(45, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(45, PRIMARY_EXPR, 72);
 
     // State 46
-    _actionTable.add(46, SEMICOLON, {SHIFT, 84});
+    _actionTable.add(46, IDENTIFIER, {SHIFT, 27});
+    _actionTable.add(46, OPEN_CURLY, {SHIFT, 28});
+    _actionTable.add(46, CLOSED_CURLY, {SHIFT, 89});
+    _actionTable.add(46, KEYWORD_INT, {SHIFT, 7});
+    _actionTable.add(46, KEYWORD_FLOAT, {SHIFT, 8});
+    _actionTable.add(46, KEYWORD_CHAR, {SHIFT, 9});
+    _actionTable.add(46, STAR, {SHIFT, 30});
+    _actionTable.add(46, KEYWORD_IF, {SHIFT, 31});
+    _actionTable.add(46, KEYWORD_WHILE, {SHIFT, 32});
+    _actionTable.add(46, KEYWORD_FOR, {SHIFT, 33});
+    _actionTable.add(46, KEYWORD_RET, {SHIFT, 34});
+    _gotoTable.add(46, TYPE, 35);
+    _gotoTable.add(46, BASE_TYPE, 14);
+    _gotoTable.add(46, STMT, 36);
+    _gotoTable.add(46, SIMPLE_STMT, 37);
+    _gotoTable.add(46, VAR_DECL_EXPR, 38);
+    _gotoTable.add(46, ASSIGN_EXPR, 39);
+    _gotoTable.add(46, ASSIGN_TARGET, 40);
+    _gotoTable.add(46, IF_STMT, 41);
+    _gotoTable.add(46, WHILE_STMT, 42);
+    _gotoTable.add(46, FOR_STMT, 43);
 
     // State 47
-    _actionTable.addDefault(47, {REDUCE, 22}); // SimpleStmt -> VarDeclExpr
+    _actionTable.addDefault(47, {REDUCE, 34});
 
     // State 48
-    _actionTable.addDefault(48, {REDUCE, 23}); // SimpleStmt -> AssignExpr
+    _actionTable.add(48, IDENTIFIER, {SHIFT, 90});
+    _actionTable.add(48, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(48, STAR, {SHIFT, 91});
+    _actionTable.add(48, MINUS, {SHIFT, 54});
+    _actionTable.add(48, BANG, {SHIFT, 55});
+    _actionTable.add(48, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(48, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(48, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(48, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(48, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(48, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(48, ASSIGN_EXPR, 92);
+    _gotoTable.add(48, ASSIGN_TARGET, 40);
+    _gotoTable.add(48, CONDITION_OP, 93);
+    _gotoTable.add(48, EXPR, 94);
+    _gotoTable.add(48, LOGICAL_EXPR, 64);
+    _gotoTable.add(48, RELATIONAL_EXPR, 65);
+    _gotoTable.add(48, ADD_EXPR, 66);
+    _gotoTable.add(48, MUL_EXPR, 67);
+    _gotoTable.add(48, UNARY_EXPR, 68);
+    _gotoTable.add(48, INCREMENT_EXPR, 69);
+    _gotoTable.add(48, ADDRESS_EXPR, 70);
+    _gotoTable.add(48, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(48, PRIMARY_EXPR, 72);
 
     // State 49
-    _actionTable.add(49, EQUALS, {SHIFT, 85});
-    _actionTable.add(49, PLUS_EQUALS, {SHIFT, 86});
-    _actionTable.add(49, MINUS_EQUALS, {SHIFT, 87});
-    _actionTable.add(49, SLASH_EQUALS, {SHIFT, 88});
-    _actionTable.add(49, STAR_EQUALS, {SHIFT, 89});
-    _actionTable.add(49, AMPERSAND_EQUALS, {SHIFT, 90});
-    _actionTable.add(49, PIPE_EQUALS, {SHIFT, 91});
-    _actionTable.add(49, CARET_EQUALS, {SHIFT, 92});
-    _actionTable.add(49, TILDE_EQUALS, {SHIFT, 93});
-    _gotoTable.add(49, ASSIGN_OP, 94);
+    _actionTable.add(49, IDENTIFIER, {SHIFT, 90});
+    _actionTable.add(49, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(49, STAR, {SHIFT, 91});
+    _actionTable.add(49, MINUS, {SHIFT, 54});
+    _actionTable.add(49, BANG, {SHIFT, 55});
+    _actionTable.add(49, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(49, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(49, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(49, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(49, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(49, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(49, ASSIGN_EXPR, 92);
+    _gotoTable.add(49, ASSIGN_TARGET, 40);
+    _gotoTable.add(49, CONDITION_OP, 95);
+    _gotoTable.add(49, EXPR, 94);
+    _gotoTable.add(49, LOGICAL_EXPR, 64);
+    _gotoTable.add(49, RELATIONAL_EXPR, 65);
+    _gotoTable.add(49, ADD_EXPR, 66);
+    _gotoTable.add(49, MUL_EXPR, 67);
+    _gotoTable.add(49, UNARY_EXPR, 68);
+    _gotoTable.add(49, INCREMENT_EXPR, 69);
+    _gotoTable.add(49, ADDRESS_EXPR, 70);
+    _gotoTable.add(49, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(49, PRIMARY_EXPR, 72);
 
     // State 50
-    _actionTable.addDefault(50, {REDUCE, 19}); // Stmt -> IfStmt
+    _actionTable.add(50, IDENTIFIER, {SHIFT, 96});
+    _actionTable.add(50, KEYWORD_INT, {SHIFT, 7});
+    _actionTable.add(50, KEYWORD_FLOAT, {SHIFT, 8});
+    _actionTable.add(50, KEYWORD_CHAR, {SHIFT, 9});
+    _actionTable.add(50, STAR, {SHIFT, 30});
+    _actionTable.addDefault(50, {REDUCE, 50});
+    _gotoTable.add(50, TYPE, 35);
+    _gotoTable.add(50, BASE_TYPE, 14);
+    _gotoTable.add(50, VAR_DECL_EXPR, 97);
+    _gotoTable.add(50, ASSIGN_EXPR, 98);
+    _gotoTable.add(50, ASSIGN_TARGET, 40);
+    _gotoTable.add(50, FOR_INIT, 99);
 
     // State 51
-    _actionTable.addDefault(51, {REDUCE, 20}); // Stmt -> WhileStmt
+    _actionTable.add(51, OPEN_PAREN, {SHIFT, 100});
+    _actionTable.add(51, OPEN_BRACKET, {SHIFT, 101});
+    _actionTable.add(51, PLUS_PLUS, {SHIFT, 102});
+    _actionTable.add(51, MINUS_MINUS, {SHIFT, 103});
+    _actionTable.addDefault(51, {REDUCE, 97});
 
     // State 52
-    _actionTable.addDefault(52, {REDUCE, 21}); // Stmt -> ForStmt
+    _actionTable.add(52, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(52, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(52, STAR, {SHIFT, 53});
+    _actionTable.add(52, MINUS, {SHIFT, 54});
+    _actionTable.add(52, BANG, {SHIFT, 55});
+    _actionTable.add(52, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(52, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(52, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(52, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(52, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(52, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(52, EXPR, 104);
+    _gotoTable.add(52, LOGICAL_EXPR, 64);
+    _gotoTable.add(52, RELATIONAL_EXPR, 65);
+    _gotoTable.add(52, ADD_EXPR, 66);
+    _gotoTable.add(52, MUL_EXPR, 67);
+    _gotoTable.add(52, UNARY_EXPR, 68);
+    _gotoTable.add(52, INCREMENT_EXPR, 69);
+    _gotoTable.add(52, ADDRESS_EXPR, 70);
+    _gotoTable.add(52, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(52, PRIMARY_EXPR, 72);
 
     // State 53
-    _actionTable.addDefault(53, {REDUCE, 24}); // SimpleStmt -> Expr
+    _actionTable.add(53, IDENTIFIER, {SHIFT, 105});
 
     // State 54
-    _actionTable.add(54, PIPE_PIPE, {SHIFT, 95});
-    _actionTable.add(54, AMPERSAND_AMPERSAND, {SHIFT, 96});
-    _actionTable.addDefault(54, {REDUCE, 67});
+    _actionTable.add(54, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(54, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(54, STAR, {SHIFT, 53});
+    _actionTable.add(54, MINUS, {SHIFT, 54});
+    _actionTable.add(54, BANG, {SHIFT, 55});
+    _actionTable.add(54, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(54, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(54, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(54, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(54, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(54, UNARY_EXPR, 106);
+    _gotoTable.add(54, INCREMENT_EXPR, 69);
+    _gotoTable.add(54, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(54, PRIMARY_EXPR, 72);
 
     // State 55
-    _actionTable.add(55, LESS_THAN, {SHIFT, 97});
-    _actionTable.add(55, GREATER_THAN, {SHIFT, 98});
-    _actionTable.add(55, LESS_THAN_EQUALS, {SHIFT, 99});
-    _actionTable.add(55, GREATER_THAN_EQUALS, {SHIFT, 100});
-    _actionTable.add(55, EQUALS_EQUALS, {SHIFT, 101});
-    _actionTable.add(55, BANG_EQUALS, {SHIFT, 102});
-    _actionTable.addDefault(55, {REDUCE, 71});
+    _actionTable.add(55, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(55, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(55, STAR, {SHIFT, 53});
+    _actionTable.add(55, MINUS, {SHIFT, 54});
+    _actionTable.add(55, BANG, {SHIFT, 55});
+    _actionTable.add(55, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(55, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(55, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(55, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(55, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(55, UNARY_EXPR, 107);
+    _gotoTable.add(55, INCREMENT_EXPR, 69);
+    _gotoTable.add(55, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(55, PRIMARY_EXPR, 72);
 
     // State 56
-    _actionTable.add(56, MINUS, {SHIFT, 103});
-    _actionTable.add(56, PLUS, {SHIFT, 104});
-    _actionTable.add(56, PIPE, {SHIFT, 105});
-    _actionTable.add(56, CARET, {SHIFT, 106});
-    _actionTable.addDefault(56, {REDUCE, 74});
+    _actionTable.add(56, IDENTIFIER, {SHIFT, 108});
 
     // State 57
-    _actionTable.add(57, STAR, {SHIFT, 107});
-    _actionTable.add(57, SLASH, {SHIFT, 108});
-    _actionTable.add(57, AMPERSAND, {SHIFT, 109});
-    _actionTable.addDefault(57, {REDUCE, 81});
+    _actionTable.addDefault(57, {REDUCE, 99});
 
     // State 58
-    _actionTable.addDefault(58, {REDUCE, 86}); // MulExpr -> UnaryExpr
+    _actionTable.addDefault(58, {REDUCE, 100});
 
     // State 59
-    _actionTable.addDefault(59, {REDUCE, 68}); // Expr -> IncrementExpr
+    _actionTable.addDefault(59, {REDUCE, 101});
 
     // State 60
-    _actionTable.addDefault(60, {REDUCE, 69}); // Expr -> AddressExpr
+    _actionTable.add(60, IDENTIFIER, {SHIFT, 109});
 
     // State 61
-    _actionTable.addDefault(61, {REDUCE, 70}); // Expr -> DereferenceExpr
+    _actionTable.add(61, IDENTIFIER, {SHIFT, 110});
 
     // State 62
-    _actionTable.addDefault(62, {REDUCE, 90}); // UnaryExpr -> PrimaryExpr
+    _actionTable.addDefault(62, {REDUCE, 25});
 
     // State 63
-    _actionTable.add(63, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(63, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(63, STAR, {SHIFT, 68});
-    _actionTable.add(63, MINUS, {SHIFT, 36});
-    _actionTable.add(63, BANG, {SHIFT, 37});
-    _actionTable.add(63, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(63, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(63, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(63, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(63, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(63, MINUS_MINUS, {SHIFT, 43});
-    _actionTable.addDefault(63, {REDUCE, 63});
-    _gotoTable.add(63, EXPR_LIST, 110);
-    _gotoTable.add(63, EXPR_LIST_NON_EMPTY, 111);
-    _gotoTable.add(63, EXPR, 112);
-    _gotoTable.add(63, LOGICAL_EXPR, 54);
-    _gotoTable.add(63, RELATIONAL_EXPR, 55);
-    _gotoTable.add(63, ADD_EXPR, 56);
-    _gotoTable.add(63, MUL_EXPR, 57);
-    _gotoTable.add(63, UNARY_EXPR, 58);
-    _gotoTable.add(63, INCREMENT_EXPR, 59);
-    _gotoTable.add(63, ADDRESS_EXPR, 60);
-    _gotoTable.add(63, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(63, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(63, {REDUCE, 54});
 
     // State 64
-    _actionTable.add(64, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(64, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(64, STAR, {SHIFT, 68});
-    _actionTable.add(64, MINUS, {SHIFT, 36});
-    _actionTable.add(64, BANG, {SHIFT, 37});
-    _actionTable.add(64, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(64, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(64, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(64, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(64, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(64, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(64, EXPR, 113);
-    _gotoTable.add(64, LOGICAL_EXPR, 54);
-    _gotoTable.add(64, RELATIONAL_EXPR, 55);
-    _gotoTable.add(64, ADD_EXPR, 56);
-    _gotoTable.add(64, MUL_EXPR, 57);
-    _gotoTable.add(64, UNARY_EXPR, 58);
-    _gotoTable.add(64, INCREMENT_EXPR, 59);
-    _gotoTable.add(64, ADDRESS_EXPR, 60);
-    _gotoTable.add(64, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(64, PRIMARY_EXPR, 62);
+    _actionTable.add(64, PIPE_PIPE, {SHIFT, 111});
+    _actionTable.add(64, AMPERSAND_AMPERSAND, {SHIFT, 112});
+    _actionTable.addDefault(64, {REDUCE, 67});
 
     // State 65
-    _actionTable.addDefault(65, {REDUCE, 93}); // IncrementExpr -> IDENTIFIER PLUS_PLUS
+    _actionTable.add(65, LESS_THAN, {SHIFT, 113});
+    _actionTable.add(65, GREATER_THAN, {SHIFT, 114});
+    _actionTable.add(65, LESS_THAN_EQUALS, {SHIFT, 115});
+    _actionTable.add(65, GREATER_THAN_EQUALS, {SHIFT, 116});
+    _actionTable.add(65, EQUALS_EQUALS, {SHIFT, 117});
+    _actionTable.add(65, BANG_EQUALS, {SHIFT, 118});
+    _actionTable.addDefault(65, {REDUCE, 69});
 
     // State 66
-    _actionTable.addDefault(66, {REDUCE, 94}); // IncrementExpr -> IDENTIFIER MINUS_MINUS
+    _actionTable.add(66, MINUS, {SHIFT, 119});
+    _actionTable.add(66, PLUS, {SHIFT, 120});
+    _actionTable.add(66, PIPE, {SHIFT, 121});
+    _actionTable.add(66, CARET, {SHIFT, 122});
+    _actionTable.addDefault(66, {REDUCE, 72});
 
     // State 67
-    _actionTable.add(67, OPEN_PAREN, {SHIFT, 63});
-    _actionTable.add(67, OPEN_BRACKET, {SHIFT, 114});
-    _actionTable.add(67, PLUS_PLUS, {SHIFT, 65});
-    _actionTable.add(67, MINUS_MINUS, {SHIFT, 66});
-    _actionTable.addDefault(67, {REDUCE, 99});
+    _actionTable.add(67, STAR, {SHIFT, 123});
+    _actionTable.add(67, SLASH, {SHIFT, 124});
+    _actionTable.add(67, AMPERSAND, {SHIFT, 125});
+    _actionTable.addDefault(67, {REDUCE, 79});
 
     // State 68
-    _actionTable.add(68, IDENTIFIER, {SHIFT, 115});
+    _actionTable.addDefault(68, {REDUCE, 84});
 
     // State 69
-    _actionTable.add(69, CLOSED_PAREN, {SHIFT, 116});
+    _actionTable.addDefault(69, {REDUCE, 105});
 
     // State 70
-    _actionTable.add(70, IDENTIFIER, {SHIFT, 27});
-    _actionTable.add(70, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(70, OPEN_CURLY, {SHIFT, 29});
-    _actionTable.add(70, CLOSED_CURLY, {SHIFT, 117});
-    _actionTable.add(70, KEYWORD_INT, {SHIFT, 7});
-    _actionTable.add(70, KEYWORD_FLOAT, {SHIFT, 8});
-    _actionTable.add(70, KEYWORD_CHAR, {SHIFT, 9});
-    _actionTable.add(70, STAR, {SHIFT, 31});
-    _actionTable.add(70, KEYWORD_IF, {SHIFT, 32});
-    _actionTable.add(70, KEYWORD_WHILE, {SHIFT, 33});
-    _actionTable.add(70, KEYWORD_FOR, {SHIFT, 34});
-    _actionTable.add(70, KEYWORD_RET, {SHIFT, 35});
-    _actionTable.add(70, MINUS, {SHIFT, 36});
-    _actionTable.add(70, BANG, {SHIFT, 37});
-    _actionTable.add(70, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(70, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(70, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(70, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(70, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(70, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(70, TYPE, 44);
-    _gotoTable.add(70, BASE_TYPE, 14);
-    _gotoTable.add(70, STMT, 45);
-    _gotoTable.add(70, SIMPLE_STMT, 46);
-    _gotoTable.add(70, VAR_DECL_EXPR, 47);
-    _gotoTable.add(70, ASSIGN_EXPR, 48);
-    _gotoTable.add(70, ASSIGN_TARGET, 49);
-    _gotoTable.add(70, IF_STMT, 50);
-    _gotoTable.add(70, WHILE_STMT, 51);
-    _gotoTable.add(70, FOR_STMT, 52);
-    _gotoTable.add(70, EXPR, 53);
-    _gotoTable.add(70, LOGICAL_EXPR, 54);
-    _gotoTable.add(70, RELATIONAL_EXPR, 55);
-    _gotoTable.add(70, ADD_EXPR, 56);
-    _gotoTable.add(70, MUL_EXPR, 57);
-    _gotoTable.add(70, UNARY_EXPR, 58);
-    _gotoTable.add(70, INCREMENT_EXPR, 59);
-    _gotoTable.add(70, ADDRESS_EXPR, 60);
-    _gotoTable.add(70, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(70, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(70, {REDUCE, 68});
 
     // State 71
-    _actionTable.add(71, CLOSED_PAREN, {REDUCE, 98});
-    _actionTable.add(71, SEMICOLON, {REDUCE, 98});
-    _actionTable.addDefault(71, {REDUCE, 34});
+    _actionTable.addDefault(71, {REDUCE, 104});
 
     // State 72
-    _actionTable.add(72, IDENTIFIER, {SHIFT, 27});
-    _actionTable.add(72, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(72, STAR, {SHIFT, 31});
-    _actionTable.add(72, MINUS, {SHIFT, 36});
-    _actionTable.add(72, BANG, {SHIFT, 37});
-    _actionTable.add(72, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(72, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(72, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(72, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(72, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(72, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(72, ASSIGN_EXPR, 118);
-    _gotoTable.add(72, ASSIGN_TARGET, 49);
-    _gotoTable.add(72, CONDITION_OP, 119);
-    _gotoTable.add(72, EXPR, 120);
-    _gotoTable.add(72, LOGICAL_EXPR, 54);
-    _gotoTable.add(72, RELATIONAL_EXPR, 55);
-    _gotoTable.add(72, ADD_EXPR, 56);
-    _gotoTable.add(72, MUL_EXPR, 57);
-    _gotoTable.add(72, UNARY_EXPR, 58);
-    _gotoTable.add(72, INCREMENT_EXPR, 59);
-    _gotoTable.add(72, ADDRESS_EXPR, 60);
-    _gotoTable.add(72, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(72, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(72, {REDUCE, 88});
 
     // State 73
-    _actionTable.add(73, IDENTIFIER, {SHIFT, 27});
-    _actionTable.add(73, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(73, STAR, {SHIFT, 31});
-    _actionTable.add(73, MINUS, {SHIFT, 36});
-    _actionTable.add(73, BANG, {SHIFT, 37});
-    _actionTable.add(73, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(73, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(73, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(73, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(73, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(73, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(73, ASSIGN_EXPR, 118);
-    _gotoTable.add(73, ASSIGN_TARGET, 49);
-    _gotoTable.add(73, CONDITION_OP, 121);
-    _gotoTable.add(73, EXPR, 120);
-    _gotoTable.add(73, LOGICAL_EXPR, 54);
-    _gotoTable.add(73, RELATIONAL_EXPR, 55);
-    _gotoTable.add(73, ADD_EXPR, 56);
-    _gotoTable.add(73, MUL_EXPR, 57);
-    _gotoTable.add(73, UNARY_EXPR, 58);
-    _gotoTable.add(73, INCREMENT_EXPR, 59);
-    _gotoTable.add(73, ADDRESS_EXPR, 60);
-    _gotoTable.add(73, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(73, PRIMARY_EXPR, 62);
+    _actionTable.add(73, EQUALS, {SHIFT, 126});
+    _actionTable.addDefault(73, {REDUCE, 27});
+    _gotoTable.add(73, INIT_OPT, 127);
 
     // State 74
-    _actionTable.add(74, IDENTIFIER, {SHIFT, 122});
-    _actionTable.add(74, KEYWORD_INT, {SHIFT, 7});
-    _actionTable.add(74, KEYWORD_FLOAT, {SHIFT, 8});
-    _actionTable.add(74, KEYWORD_CHAR, {SHIFT, 9});
-    _actionTable.add(74, STAR, {SHIFT, 123});
-    _actionTable.addDefault(74, {REDUCE, 50});
-    _gotoTable.add(74, TYPE, 44);
-    _gotoTable.add(74, BASE_TYPE, 14);
-    _gotoTable.add(74, VAR_DECL_EXPR, 124);
-    _gotoTable.add(74, ASSIGN_EXPR, 125);
-    _gotoTable.add(74, ASSIGN_TARGET, 49);
-    _gotoTable.add(74, FOR_INIT, 126);
+    _actionTable.addDefault(74, {REDUCE, 17});
 
     // State 75
-    _actionTable.addDefault(75, {REDUCE, 25}); // SimpleStmt -> KEYWORD_RET ExprOpt
+    _actionTable.addDefault(75, {REDUCE, 35});
 
     // State 76
-    _actionTable.addDefault(76, {REDUCE, 54}); // ExprOpt -> Expr
+    _actionTable.addDefault(76, {REDUCE, 36});
 
     // State 77
-    _actionTable.add(77, OPEN_PAREN, {SHIFT, 63});
-    _actionTable.add(77, OPEN_BRACKET, {SHIFT, 114});
-    _actionTable.addDefault(77, {REDUCE, 99});
+    _actionTable.addDefault(77, {REDUCE, 37});
 
     // State 78
-    _actionTable.addDefault(78, {REDUCE, 91}); // UnaryExpr -> MINUS UnaryExpr
+    _actionTable.addDefault(78, {REDUCE, 38});
 
     // State 79
-    _actionTable.addDefault(79, {REDUCE, 92}); // UnaryExpr -> BANG UnaryExpr
+    _actionTable.addDefault(79, {REDUCE, 39});
 
     // State 80
-    _actionTable.addDefault(80, {REDUCE, 97}); // AddressExpr -> AMPERSAND IDENTIFIER
+    _actionTable.addDefault(80, {REDUCE, 40});
 
     // State 81
-    _actionTable.addDefault(81, {REDUCE, 95}); // IncrementExpr -> PLUS_PLUS IDENTIFIER
+    _actionTable.addDefault(81, {REDUCE, 41});
 
     // State 82
-    _actionTable.addDefault(82, {REDUCE, 96}); // IncrementExpr -> MINUS_MINUS IDENTIFIER
+    _actionTable.addDefault(82, {REDUCE, 42});
 
     // State 83
-    _actionTable.add(83, EQUALS, {SHIFT, 127});
-    _actionTable.addDefault(83, {REDUCE, 27});
-    _gotoTable.add(83, INIT_OPT, 128);
+    _actionTable.addDefault(83, {REDUCE, 43});
 
     // State 84
-    _actionTable.addDefault(84, {REDUCE, 17}); // Stmt -> SimpleStmt SEMICOLON
+    _actionTable.add(84, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(84, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(84, STAR, {SHIFT, 53});
+    _actionTable.add(84, MINUS, {SHIFT, 54});
+    _actionTable.add(84, BANG, {SHIFT, 55});
+    _actionTable.add(84, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(84, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(84, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(84, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(84, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(84, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(84, EXPR, 128);
+    _gotoTable.add(84, LOGICAL_EXPR, 64);
+    _gotoTable.add(84, RELATIONAL_EXPR, 65);
+    _gotoTable.add(84, ADD_EXPR, 66);
+    _gotoTable.add(84, MUL_EXPR, 67);
+    _gotoTable.add(84, UNARY_EXPR, 68);
+    _gotoTable.add(84, INCREMENT_EXPR, 69);
+    _gotoTable.add(84, ADDRESS_EXPR, 70);
+    _gotoTable.add(84, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(84, PRIMARY_EXPR, 72);
 
     // State 85
-    _actionTable.addDefault(85, {REDUCE, 35}); // AssignOp -> EQUALS
+    _actionTable.add(85, CLOSED_PAREN, {SHIFT, 129});
 
     // State 86
-    _actionTable.addDefault(86, {REDUCE, 36}); // AssignOp -> PLUS_EQUALS
+    _actionTable.add(86, COMMA, {SHIFT, 130});
+    _actionTable.addDefault(86, {REDUCE, 64});
 
     // State 87
-    _actionTable.addDefault(87, {REDUCE, 37}); // AssignOp -> MINUS_EQUALS
+    _actionTable.addDefault(87, {REDUCE, 65});
 
     // State 88
-    _actionTable.addDefault(88, {REDUCE, 38}); // AssignOp -> SLASH_EQUALS
+    _actionTable.add(88, CLOSED_BRACKET, {SHIFT, 131});
 
     // State 89
-    _actionTable.addDefault(89, {REDUCE, 39}); // AssignOp -> STAR_EQUALS
+    _actionTable.addDefault(89, {REDUCE, 18});
 
     // State 90
-    _actionTable.addDefault(90, {REDUCE, 40}); // AssignOp -> AMPERSAND_EQUALS
+    _actionTable.add(90, OPEN_PAREN, {SHIFT, 100});
+    _actionTable.add(90, OPEN_BRACKET, {SHIFT, 132});
+    _actionTable.add(90, PLUS_PLUS, {SHIFT, 102});
+    _actionTable.add(90, MINUS_MINUS, {SHIFT, 103});
+    _actionTable.add(90, EQUALS, {REDUCE, 32});
+    _actionTable.add(90, PLUS_EQUALS, {REDUCE, 32});
+    _actionTable.add(90, MINUS_EQUALS, {REDUCE, 32});
+    _actionTable.add(90, SLASH_EQUALS, {REDUCE, 32});
+    _actionTable.add(90, STAR_EQUALS, {REDUCE, 32});
+    _actionTable.add(90, AMPERSAND_EQUALS, {REDUCE, 32});
+    _actionTable.add(90, PIPE_EQUALS, {REDUCE, 32});
+    _actionTable.add(90, CARET_EQUALS, {REDUCE, 32});
+    _actionTable.add(90, TILDE_EQUALS, {REDUCE, 32});
+    _actionTable.addDefault(90, {REDUCE, 97});
 
     // State 91
-    _actionTable.addDefault(91, {REDUCE, 41}); // AssignOp -> PIPE_EQUALS
+    _actionTable.add(91, IDENTIFIER, {SHIFT, 133});
 
     // State 92
-    _actionTable.addDefault(92, {REDUCE, 42}); // AssignOp -> CARET_EQUALS
+    _actionTable.addDefault(92, {REDUCE, 48});
 
     // State 93
-    _actionTable.addDefault(93, {REDUCE, 43}); // AssignOp -> TILDE_EQUALS
+    _actionTable.add(93, CLOSED_PAREN, {SHIFT, 134});
 
     // State 94
-    _actionTable.add(94, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(94, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(94, STAR, {SHIFT, 68});
-    _actionTable.add(94, MINUS, {SHIFT, 36});
-    _actionTable.add(94, BANG, {SHIFT, 37});
-    _actionTable.add(94, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(94, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(94, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(94, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(94, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(94, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(94, EXPR, 129);
-    _gotoTable.add(94, LOGICAL_EXPR, 54);
-    _gotoTable.add(94, RELATIONAL_EXPR, 55);
-    _gotoTable.add(94, ADD_EXPR, 56);
-    _gotoTable.add(94, MUL_EXPR, 57);
-    _gotoTable.add(94, UNARY_EXPR, 58);
-    _gotoTable.add(94, INCREMENT_EXPR, 59);
-    _gotoTable.add(94, ADDRESS_EXPR, 60);
-    _gotoTable.add(94, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(94, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(94, {REDUCE, 47});
 
     // State 95
-    _actionTable.add(95, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(95, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(95, MINUS, {SHIFT, 36});
-    _actionTable.add(95, BANG, {SHIFT, 37});
-    _actionTable.add(95, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(95, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(95, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(95, RELATIONAL_EXPR, 130);
-    _gotoTable.add(95, ADD_EXPR, 56);
-    _gotoTable.add(95, MUL_EXPR, 57);
-    _gotoTable.add(95, UNARY_EXPR, 58);
-    _gotoTable.add(95, PRIMARY_EXPR, 62);
+    _actionTable.add(95, CLOSED_PAREN, {SHIFT, 135});
 
     // State 96
-    _actionTable.add(96, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(96, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(96, MINUS, {SHIFT, 36});
-    _actionTable.add(96, BANG, {SHIFT, 37});
-    _actionTable.add(96, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(96, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(96, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(96, RELATIONAL_EXPR, 131);
-    _gotoTable.add(96, ADD_EXPR, 56);
-    _gotoTable.add(96, MUL_EXPR, 57);
-    _gotoTable.add(96, UNARY_EXPR, 58);
-    _gotoTable.add(96, PRIMARY_EXPR, 62);
+    _actionTable.add(96, OPEN_BRACKET, {SHIFT, 45});
+    _actionTable.addDefault(96, {REDUCE, 32});
 
     // State 97
-    _actionTable.add(97, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(97, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(97, MINUS, {SHIFT, 36});
-    _actionTable.add(97, BANG, {SHIFT, 37});
-    _actionTable.add(97, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(97, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(97, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(97, ADD_EXPR, 132);
-    _gotoTable.add(97, MUL_EXPR, 57);
-    _gotoTable.add(97, UNARY_EXPR, 58);
-    _gotoTable.add(97, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(97, {REDUCE, 51});
 
     // State 98
-    _actionTable.add(98, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(98, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(98, MINUS, {SHIFT, 36});
-    _actionTable.add(98, BANG, {SHIFT, 37});
-    _actionTable.add(98, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(98, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(98, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(98, ADD_EXPR, 133);
-    _gotoTable.add(98, MUL_EXPR, 57);
-    _gotoTable.add(98, UNARY_EXPR, 58);
-    _gotoTable.add(98, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(98, {REDUCE, 52});
 
     // State 99
-    _actionTable.add(99, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(99, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(99, MINUS, {SHIFT, 36});
-    _actionTable.add(99, BANG, {SHIFT, 37});
-    _actionTable.add(99, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(99, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(99, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(99, ADD_EXPR, 134);
-    _gotoTable.add(99, MUL_EXPR, 57);
-    _gotoTable.add(99, UNARY_EXPR, 58);
-    _gotoTable.add(99, PRIMARY_EXPR, 62);
+    _actionTable.add(99, SEMICOLON, {SHIFT, 136});
 
     // State 100
-    _actionTable.add(100, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(100, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(100, MINUS, {SHIFT, 36});
-    _actionTable.add(100, BANG, {SHIFT, 37});
-    _actionTable.add(100, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(100, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(100, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(100, ADD_EXPR, 135);
-    _gotoTable.add(100, MUL_EXPR, 57);
-    _gotoTable.add(100, UNARY_EXPR, 58);
-    _gotoTable.add(100, PRIMARY_EXPR, 62);
+    _actionTable.add(100, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(100, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(100, STAR, {SHIFT, 53});
+    _actionTable.add(100, MINUS, {SHIFT, 54});
+    _actionTable.add(100, BANG, {SHIFT, 55});
+    _actionTable.add(100, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(100, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(100, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(100, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(100, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(100, MINUS_MINUS, {SHIFT, 61});
+    _actionTable.addDefault(100, {REDUCE, 63});
+    _gotoTable.add(100, EXPR_LIST, 137);
+    _gotoTable.add(100, EXPR_LIST_NON_EMPTY, 86);
+    _gotoTable.add(100, EXPR, 87);
+    _gotoTable.add(100, LOGICAL_EXPR, 64);
+    _gotoTable.add(100, RELATIONAL_EXPR, 65);
+    _gotoTable.add(100, ADD_EXPR, 66);
+    _gotoTable.add(100, MUL_EXPR, 67);
+    _gotoTable.add(100, UNARY_EXPR, 68);
+    _gotoTable.add(100, INCREMENT_EXPR, 69);
+    _gotoTable.add(100, ADDRESS_EXPR, 70);
+    _gotoTable.add(100, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(100, PRIMARY_EXPR, 72);
 
     // State 101
-    _actionTable.add(101, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(101, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(101, MINUS, {SHIFT, 36});
-    _actionTable.add(101, BANG, {SHIFT, 37});
-    _actionTable.add(101, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(101, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(101, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(101, ADD_EXPR, 136);
-    _gotoTable.add(101, MUL_EXPR, 57);
-    _gotoTable.add(101, UNARY_EXPR, 58);
-    _gotoTable.add(101, PRIMARY_EXPR, 62);
+    _actionTable.add(101, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(101, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(101, STAR, {SHIFT, 53});
+    _actionTable.add(101, MINUS, {SHIFT, 54});
+    _actionTable.add(101, BANG, {SHIFT, 55});
+    _actionTable.add(101, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(101, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(101, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(101, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(101, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(101, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(101, EXPR, 138);
+    _gotoTable.add(101, LOGICAL_EXPR, 64);
+    _gotoTable.add(101, RELATIONAL_EXPR, 65);
+    _gotoTable.add(101, ADD_EXPR, 66);
+    _gotoTable.add(101, MUL_EXPR, 67);
+    _gotoTable.add(101, UNARY_EXPR, 68);
+    _gotoTable.add(101, INCREMENT_EXPR, 69);
+    _gotoTable.add(101, ADDRESS_EXPR, 70);
+    _gotoTable.add(101, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(101, PRIMARY_EXPR, 72);
 
     // State 102
-    _actionTable.add(102, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(102, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(102, MINUS, {SHIFT, 36});
-    _actionTable.add(102, BANG, {SHIFT, 37});
-    _actionTable.add(102, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(102, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(102, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(102, ADD_EXPR, 137);
-    _gotoTable.add(102, MUL_EXPR, 57);
-    _gotoTable.add(102, UNARY_EXPR, 58);
-    _gotoTable.add(102, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(102, {REDUCE, 91});
 
     // State 103
-    _actionTable.add(103, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(103, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(103, MINUS, {SHIFT, 36});
-    _actionTable.add(103, BANG, {SHIFT, 37});
-    _actionTable.add(103, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(103, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(103, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(103, MUL_EXPR, 138);
-    _gotoTable.add(103, UNARY_EXPR, 58);
-    _gotoTable.add(103, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(103, {REDUCE, 92});
 
     // State 104
-    _actionTable.add(104, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(104, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(104, MINUS, {SHIFT, 36});
-    _actionTable.add(104, BANG, {SHIFT, 37});
-    _actionTable.add(104, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(104, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(104, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(104, MUL_EXPR, 139);
-    _gotoTable.add(104, UNARY_EXPR, 58);
-    _gotoTable.add(104, PRIMARY_EXPR, 62);
+    _actionTable.add(104, CLOSED_PAREN, {SHIFT, 139});
 
     // State 105
-    _actionTable.add(105, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(105, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(105, MINUS, {SHIFT, 36});
-    _actionTable.add(105, BANG, {SHIFT, 37});
-    _actionTable.add(105, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(105, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(105, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(105, MUL_EXPR, 140);
-    _gotoTable.add(105, UNARY_EXPR, 58);
-    _gotoTable.add(105, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(105, {REDUCE, 96});
 
     // State 106
-    _actionTable.add(106, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(106, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(106, MINUS, {SHIFT, 36});
-    _actionTable.add(106, BANG, {SHIFT, 37});
-    _actionTable.add(106, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(106, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(106, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(106, MUL_EXPR, 141);
-    _gotoTable.add(106, UNARY_EXPR, 58);
-    _gotoTable.add(106, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(106, {REDUCE, 89});
 
     // State 107
-    _actionTable.add(107, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(107, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(107, MINUS, {SHIFT, 36});
-    _actionTable.add(107, BANG, {SHIFT, 37});
-    _actionTable.add(107, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(107, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(107, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(107, UNARY_EXPR, 142);
-    _gotoTable.add(107, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(107, {REDUCE, 90});
 
     // State 108
-    _actionTable.add(108, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(108, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(108, MINUS, {SHIFT, 36});
-    _actionTable.add(108, BANG, {SHIFT, 37});
-    _actionTable.add(108, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(108, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(108, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(108, UNARY_EXPR, 143);
-    _gotoTable.add(108, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(108, {REDUCE, 95});
 
     // State 109
-    _actionTable.add(109, IDENTIFIER, {SHIFT, 77});
-    _actionTable.add(109, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(109, MINUS, {SHIFT, 36});
-    _actionTable.add(109, BANG, {SHIFT, 37});
-    _actionTable.add(109, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(109, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(109, CHAR_LITERAL, {SHIFT, 41});
-    _gotoTable.add(109, UNARY_EXPR, 144);
-    _gotoTable.add(109, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(109, {REDUCE, 93});
 
     // State 110
-    _actionTable.add(110, CLOSED_PAREN, {SHIFT, 145});
+    _actionTable.addDefault(110, {REDUCE, 94});
 
     // State 111
-    _actionTable.add(111, COMMA, {SHIFT, 146});
-    _actionTable.addDefault(111, {REDUCE, 64});
+    _actionTable.add(111, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(111, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(111, STAR, {SHIFT, 53});
+    _actionTable.add(111, MINUS, {SHIFT, 54});
+    _actionTable.add(111, BANG, {SHIFT, 55});
+    _actionTable.add(111, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(111, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(111, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(111, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(111, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(111, RELATIONAL_EXPR, 140);
+    _gotoTable.add(111, ADD_EXPR, 66);
+    _gotoTable.add(111, MUL_EXPR, 67);
+    _gotoTable.add(111, UNARY_EXPR, 68);
+    _gotoTable.add(111, INCREMENT_EXPR, 69);
+    _gotoTable.add(111, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(111, PRIMARY_EXPR, 72);
 
     // State 112
-    _actionTable.addDefault(112, {REDUCE, 65}); // ExprListNonEmpty -> Expr
+    _actionTable.add(112, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(112, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(112, STAR, {SHIFT, 53});
+    _actionTable.add(112, MINUS, {SHIFT, 54});
+    _actionTable.add(112, BANG, {SHIFT, 55});
+    _actionTable.add(112, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(112, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(112, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(112, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(112, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(112, RELATIONAL_EXPR, 141);
+    _gotoTable.add(112, ADD_EXPR, 66);
+    _gotoTable.add(112, MUL_EXPR, 67);
+    _gotoTable.add(112, UNARY_EXPR, 68);
+    _gotoTable.add(112, INCREMENT_EXPR, 69);
+    _gotoTable.add(112, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(112, PRIMARY_EXPR, 72);
 
     // State 113
-    _actionTable.add(113, CLOSED_BRACKET, {SHIFT, 147});
+    _actionTable.add(113, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(113, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(113, STAR, {SHIFT, 53});
+    _actionTable.add(113, MINUS, {SHIFT, 54});
+    _actionTable.add(113, BANG, {SHIFT, 55});
+    _actionTable.add(113, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(113, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(113, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(113, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(113, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(113, ADD_EXPR, 142);
+    _gotoTable.add(113, MUL_EXPR, 67);
+    _gotoTable.add(113, UNARY_EXPR, 68);
+    _gotoTable.add(113, INCREMENT_EXPR, 69);
+    _gotoTable.add(113, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(113, PRIMARY_EXPR, 72);
 
     // State 114
-    _actionTable.add(114, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(114, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(114, STAR, {SHIFT, 68});
-    _actionTable.add(114, MINUS, {SHIFT, 36});
-    _actionTable.add(114, BANG, {SHIFT, 37});
-    _actionTable.add(114, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(114, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(114, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(114, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(114, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(114, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(114, EXPR, 148);
-    _gotoTable.add(114, LOGICAL_EXPR, 54);
-    _gotoTable.add(114, RELATIONAL_EXPR, 55);
-    _gotoTable.add(114, ADD_EXPR, 56);
-    _gotoTable.add(114, MUL_EXPR, 57);
-    _gotoTable.add(114, UNARY_EXPR, 58);
-    _gotoTable.add(114, INCREMENT_EXPR, 59);
-    _gotoTable.add(114, ADDRESS_EXPR, 60);
-    _gotoTable.add(114, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(114, PRIMARY_EXPR, 62);
+    _actionTable.add(114, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(114, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(114, STAR, {SHIFT, 53});
+    _actionTable.add(114, MINUS, {SHIFT, 54});
+    _actionTable.add(114, BANG, {SHIFT, 55});
+    _actionTable.add(114, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(114, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(114, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(114, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(114, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(114, ADD_EXPR, 143);
+    _gotoTable.add(114, MUL_EXPR, 67);
+    _gotoTable.add(114, UNARY_EXPR, 68);
+    _gotoTable.add(114, INCREMENT_EXPR, 69);
+    _gotoTable.add(114, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(114, PRIMARY_EXPR, 72);
 
     // State 115
-    _actionTable.addDefault(115, {REDUCE, 98}); // DereferenceExpr -> STAR IDENTIFIER
+    _actionTable.add(115, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(115, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(115, STAR, {SHIFT, 53});
+    _actionTable.add(115, MINUS, {SHIFT, 54});
+    _actionTable.add(115, BANG, {SHIFT, 55});
+    _actionTable.add(115, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(115, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(115, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(115, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(115, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(115, ADD_EXPR, 144);
+    _gotoTable.add(115, MUL_EXPR, 67);
+    _gotoTable.add(115, UNARY_EXPR, 68);
+    _gotoTable.add(115, INCREMENT_EXPR, 69);
+    _gotoTable.add(115, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(115, PRIMARY_EXPR, 72);
 
     // State 116
-    _actionTable.addDefault(116, {REDUCE, 104}); // PrimaryExpr -> OPEN_PAREN Expr CLOSED_PAREN
+    _actionTable.add(116, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(116, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(116, STAR, {SHIFT, 53});
+    _actionTable.add(116, MINUS, {SHIFT, 54});
+    _actionTable.add(116, BANG, {SHIFT, 55});
+    _actionTable.add(116, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(116, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(116, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(116, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(116, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(116, ADD_EXPR, 145);
+    _gotoTable.add(116, MUL_EXPR, 67);
+    _gotoTable.add(116, UNARY_EXPR, 68);
+    _gotoTable.add(116, INCREMENT_EXPR, 69);
+    _gotoTable.add(116, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(116, PRIMARY_EXPR, 72);
 
     // State 117
-    _actionTable.addDefault(117, {REDUCE, 18}); // Stmt -> OPEN_CURLY StmtList CLOSED_CURLY
+    _actionTable.add(117, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(117, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(117, STAR, {SHIFT, 53});
+    _actionTable.add(117, MINUS, {SHIFT, 54});
+    _actionTable.add(117, BANG, {SHIFT, 55});
+    _actionTable.add(117, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(117, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(117, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(117, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(117, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(117, ADD_EXPR, 146);
+    _gotoTable.add(117, MUL_EXPR, 67);
+    _gotoTable.add(117, UNARY_EXPR, 68);
+    _gotoTable.add(117, INCREMENT_EXPR, 69);
+    _gotoTable.add(117, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(117, PRIMARY_EXPR, 72);
 
     // State 118
-    _actionTable.addDefault(118, {REDUCE, 48}); // ConditionOp -> AssignExpr
+    _actionTable.add(118, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(118, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(118, STAR, {SHIFT, 53});
+    _actionTable.add(118, MINUS, {SHIFT, 54});
+    _actionTable.add(118, BANG, {SHIFT, 55});
+    _actionTable.add(118, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(118, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(118, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(118, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(118, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(118, ADD_EXPR, 147);
+    _gotoTable.add(118, MUL_EXPR, 67);
+    _gotoTable.add(118, UNARY_EXPR, 68);
+    _gotoTable.add(118, INCREMENT_EXPR, 69);
+    _gotoTable.add(118, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(118, PRIMARY_EXPR, 72);
 
     // State 119
-    _actionTable.add(119, CLOSED_PAREN, {SHIFT, 149});
+    _actionTable.add(119, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(119, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(119, STAR, {SHIFT, 53});
+    _actionTable.add(119, MINUS, {SHIFT, 54});
+    _actionTable.add(119, BANG, {SHIFT, 55});
+    _actionTable.add(119, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(119, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(119, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(119, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(119, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(119, MUL_EXPR, 148);
+    _gotoTable.add(119, UNARY_EXPR, 68);
+    _gotoTable.add(119, INCREMENT_EXPR, 69);
+    _gotoTable.add(119, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(119, PRIMARY_EXPR, 72);
 
     // State 120
-    _actionTable.addDefault(120, {REDUCE, 47}); // ConditionOp -> Expr
+    _actionTable.add(120, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(120, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(120, STAR, {SHIFT, 53});
+    _actionTable.add(120, MINUS, {SHIFT, 54});
+    _actionTable.add(120, BANG, {SHIFT, 55});
+    _actionTable.add(120, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(120, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(120, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(120, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(120, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(120, MUL_EXPR, 149);
+    _gotoTable.add(120, UNARY_EXPR, 68);
+    _gotoTable.add(120, INCREMENT_EXPR, 69);
+    _gotoTable.add(120, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(120, PRIMARY_EXPR, 72);
 
     // State 121
-    _actionTable.add(121, CLOSED_PAREN, {SHIFT, 150});
+    _actionTable.add(121, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(121, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(121, STAR, {SHIFT, 53});
+    _actionTable.add(121, MINUS, {SHIFT, 54});
+    _actionTable.add(121, BANG, {SHIFT, 55});
+    _actionTable.add(121, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(121, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(121, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(121, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(121, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(121, MUL_EXPR, 150);
+    _gotoTable.add(121, UNARY_EXPR, 68);
+    _gotoTable.add(121, INCREMENT_EXPR, 69);
+    _gotoTable.add(121, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(121, PRIMARY_EXPR, 72);
 
     // State 122
-    _actionTable.add(122, OPEN_BRACKET, {SHIFT, 151});
-    _actionTable.addDefault(122, {REDUCE, 32});
+    _actionTable.add(122, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(122, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(122, STAR, {SHIFT, 53});
+    _actionTable.add(122, MINUS, {SHIFT, 54});
+    _actionTable.add(122, BANG, {SHIFT, 55});
+    _actionTable.add(122, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(122, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(122, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(122, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(122, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(122, MUL_EXPR, 151);
+    _gotoTable.add(122, UNARY_EXPR, 68);
+    _gotoTable.add(122, INCREMENT_EXPR, 69);
+    _gotoTable.add(122, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(122, PRIMARY_EXPR, 72);
 
     // State 123
-    _actionTable.add(123, IDENTIFIER, {SHIFT, 152});
+    _actionTable.add(123, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(123, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(123, STAR, {SHIFT, 53});
+    _actionTable.add(123, MINUS, {SHIFT, 54});
+    _actionTable.add(123, BANG, {SHIFT, 55});
+    _actionTable.add(123, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(123, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(123, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(123, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(123, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(123, UNARY_EXPR, 152);
+    _gotoTable.add(123, INCREMENT_EXPR, 69);
+    _gotoTable.add(123, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(123, PRIMARY_EXPR, 72);
 
     // State 124
-    _actionTable.addDefault(124, {REDUCE, 51}); // ForInit -> VarDeclExpr
+    _actionTable.add(124, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(124, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(124, STAR, {SHIFT, 53});
+    _actionTable.add(124, MINUS, {SHIFT, 54});
+    _actionTable.add(124, BANG, {SHIFT, 55});
+    _actionTable.add(124, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(124, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(124, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(124, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(124, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(124, UNARY_EXPR, 153);
+    _gotoTable.add(124, INCREMENT_EXPR, 69);
+    _gotoTable.add(124, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(124, PRIMARY_EXPR, 72);
 
     // State 125
-    _actionTable.addDefault(125, {REDUCE, 52}); // ForInit -> AssignExpr
+    _actionTable.add(125, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(125, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(125, STAR, {SHIFT, 53});
+    _actionTable.add(125, MINUS, {SHIFT, 54});
+    _actionTable.add(125, BANG, {SHIFT, 55});
+    _actionTable.add(125, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(125, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(125, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(125, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(125, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(125, UNARY_EXPR, 154);
+    _gotoTable.add(125, INCREMENT_EXPR, 69);
+    _gotoTable.add(125, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(125, PRIMARY_EXPR, 72);
 
     // State 126
-    _actionTable.add(126, SEMICOLON, {SHIFT, 153});
+    _actionTable.add(126, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(126, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(126, OPEN_CURLY, {SHIFT, 155});
+    _actionTable.add(126, STAR, {SHIFT, 53});
+    _actionTable.add(126, MINUS, {SHIFT, 54});
+    _actionTable.add(126, BANG, {SHIFT, 55});
+    _actionTable.add(126, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(126, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(126, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(126, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(126, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(126, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(126, ASSIGN_VALUE, 156);
+    _gotoTable.add(126, EXPR, 157);
+    _gotoTable.add(126, LOGICAL_EXPR, 64);
+    _gotoTable.add(126, RELATIONAL_EXPR, 65);
+    _gotoTable.add(126, ADD_EXPR, 66);
+    _gotoTable.add(126, MUL_EXPR, 67);
+    _gotoTable.add(126, UNARY_EXPR, 68);
+    _gotoTable.add(126, INCREMENT_EXPR, 69);
+    _gotoTable.add(126, ADDRESS_EXPR, 70);
+    _gotoTable.add(126, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(126, PRIMARY_EXPR, 72);
 
     // State 127
-    _actionTable.add(127, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(127, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(127, OPEN_CURLY, {SHIFT, 154});
-    _actionTable.add(127, STAR, {SHIFT, 68});
-    _actionTable.add(127, MINUS, {SHIFT, 36});
-    _actionTable.add(127, BANG, {SHIFT, 37});
-    _actionTable.add(127, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(127, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(127, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(127, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(127, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(127, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(127, ASSIGN_VALUE, 155);
-    _gotoTable.add(127, EXPR, 156);
-    _gotoTable.add(127, LOGICAL_EXPR, 54);
-    _gotoTable.add(127, RELATIONAL_EXPR, 55);
-    _gotoTable.add(127, ADD_EXPR, 56);
-    _gotoTable.add(127, MUL_EXPR, 57);
-    _gotoTable.add(127, UNARY_EXPR, 58);
-    _gotoTable.add(127, INCREMENT_EXPR, 59);
-    _gotoTable.add(127, ADDRESS_EXPR, 60);
-    _gotoTable.add(127, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(127, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(127, {REDUCE, 26});
 
     // State 128
-    _actionTable.addDefault(128, {REDUCE, 26}); // VarDeclExpr -> Type IDENTIFIER InitOpt
+    _actionTable.addDefault(128, {REDUCE, 31});
 
     // State 129
-    _actionTable.addDefault(129, {REDUCE, 31}); // AssignExpr -> AssignTarget AssignOp Expr
+    _actionTable.addDefault(129, {REDUCE, 24});
 
     // State 130
-    _actionTable.add(130, LESS_THAN, {SHIFT, 97});
-    _actionTable.add(130, GREATER_THAN, {SHIFT, 98});
-    _actionTable.add(130, LESS_THAN_EQUALS, {SHIFT, 99});
-    _actionTable.add(130, GREATER_THAN_EQUALS, {SHIFT, 100});
-    _actionTable.add(130, EQUALS_EQUALS, {SHIFT, 101});
-    _actionTable.add(130, BANG_EQUALS, {SHIFT, 102});
-    _actionTable.addDefault(130, {REDUCE, 72});
+    _actionTable.add(130, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(130, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(130, STAR, {SHIFT, 53});
+    _actionTable.add(130, MINUS, {SHIFT, 54});
+    _actionTable.add(130, BANG, {SHIFT, 55});
+    _actionTable.add(130, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(130, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(130, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(130, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(130, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(130, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(130, EXPR, 158);
+    _gotoTable.add(130, LOGICAL_EXPR, 64);
+    _gotoTable.add(130, RELATIONAL_EXPR, 65);
+    _gotoTable.add(130, ADD_EXPR, 66);
+    _gotoTable.add(130, MUL_EXPR, 67);
+    _gotoTable.add(130, UNARY_EXPR, 68);
+    _gotoTable.add(130, INCREMENT_EXPR, 69);
+    _gotoTable.add(130, ADDRESS_EXPR, 70);
+    _gotoTable.add(130, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(130, PRIMARY_EXPR, 72);
 
     // State 131
-    _actionTable.add(131, LESS_THAN, {SHIFT, 97});
-    _actionTable.add(131, GREATER_THAN, {SHIFT, 98});
-    _actionTable.add(131, LESS_THAN_EQUALS, {SHIFT, 99});
-    _actionTable.add(131, GREATER_THAN_EQUALS, {SHIFT, 100});
-    _actionTable.add(131, EQUALS_EQUALS, {SHIFT, 101});
-    _actionTable.add(131, BANG_EQUALS, {SHIFT, 102});
-    _actionTable.addDefault(131, {REDUCE, 73});
+    _actionTable.addDefault(131, {REDUCE, 33});
 
     // State 132
-    _actionTable.add(132, MINUS, {SHIFT, 103});
-    _actionTable.add(132, PLUS, {SHIFT, 104});
-    _actionTable.add(132, PIPE, {SHIFT, 105});
-    _actionTable.add(132, CARET, {SHIFT, 106});
-    _actionTable.addDefault(132, {REDUCE, 77});
+    _actionTable.add(132, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(132, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(132, STAR, {SHIFT, 53});
+    _actionTable.add(132, MINUS, {SHIFT, 54});
+    _actionTable.add(132, BANG, {SHIFT, 55});
+    _actionTable.add(132, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(132, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(132, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(132, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(132, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(132, MINUS_MINUS, {SHIFT, 61});
+    _gotoTable.add(132, EXPR, 159);
+    _gotoTable.add(132, LOGICAL_EXPR, 64);
+    _gotoTable.add(132, RELATIONAL_EXPR, 65);
+    _gotoTable.add(132, ADD_EXPR, 66);
+    _gotoTable.add(132, MUL_EXPR, 67);
+    _gotoTable.add(132, UNARY_EXPR, 68);
+    _gotoTable.add(132, INCREMENT_EXPR, 69);
+    _gotoTable.add(132, ADDRESS_EXPR, 70);
+    _gotoTable.add(132, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(132, PRIMARY_EXPR, 72);
 
     // State 133
-    _actionTable.add(133, MINUS, {SHIFT, 103});
-    _actionTable.add(133, PLUS, {SHIFT, 104});
-    _actionTable.add(133, PIPE, {SHIFT, 105});
-    _actionTable.add(133, CARET, {SHIFT, 106});
-    _actionTable.addDefault(133, {REDUCE, 78});
+    _actionTable.add(133, EQUALS, {REDUCE, 34});
+    _actionTable.add(133, PLUS_EQUALS, {REDUCE, 34});
+    _actionTable.add(133, MINUS_EQUALS, {REDUCE, 34});
+    _actionTable.add(133, SLASH_EQUALS, {REDUCE, 34});
+    _actionTable.add(133, STAR_EQUALS, {REDUCE, 34});
+    _actionTable.add(133, AMPERSAND_EQUALS, {REDUCE, 34});
+    _actionTable.add(133, PIPE_EQUALS, {REDUCE, 34});
+    _actionTable.add(133, CARET_EQUALS, {REDUCE, 34});
+    _actionTable.add(133, TILDE_EQUALS, {REDUCE, 34});
+    _actionTable.addDefault(133, {REDUCE, 96});
 
     // State 134
-    _actionTable.add(134, MINUS, {SHIFT, 103});
-    _actionTable.add(134, PLUS, {SHIFT, 104});
-    _actionTable.add(134, PIPE, {SHIFT, 105});
-    _actionTable.add(134, CARET, {SHIFT, 106});
-    _actionTable.addDefault(134, {REDUCE, 79});
+    _actionTable.add(134, IDENTIFIER, {SHIFT, 27});
+    _actionTable.add(134, OPEN_CURLY, {SHIFT, 160});
+    _actionTable.add(134, KEYWORD_INT, {SHIFT, 7});
+    _actionTable.add(134, KEYWORD_FLOAT, {SHIFT, 8});
+    _actionTable.add(134, KEYWORD_CHAR, {SHIFT, 9});
+    _actionTable.add(134, STAR, {SHIFT, 30});
+    _actionTable.add(134, KEYWORD_IF, {SHIFT, 31});
+    _actionTable.add(134, KEYWORD_WHILE, {SHIFT, 32});
+    _actionTable.add(134, KEYWORD_FOR, {SHIFT, 33});
+    _actionTable.add(134, KEYWORD_RET, {SHIFT, 34});
+    _gotoTable.add(134, TYPE, 35);
+    _gotoTable.add(134, BASE_TYPE, 14);
+    _gotoTable.add(134, SIMPLE_STMT, 161);
+    _gotoTable.add(134, VAR_DECL_EXPR, 38);
+    _gotoTable.add(134, ASSIGN_EXPR, 39);
+    _gotoTable.add(134, ASSIGN_TARGET, 40);
+    _gotoTable.add(134, IF_STMT, 162);
+    _gotoTable.add(134, WHILE_STMT, 163);
+    _gotoTable.add(134, FOR_STMT, 164);
+    _gotoTable.add(134, BODY, 165);
 
     // State 135
-    _actionTable.add(135, MINUS, {SHIFT, 103});
-    _actionTable.add(135, PLUS, {SHIFT, 104});
-    _actionTable.add(135, PIPE, {SHIFT, 105});
-    _actionTable.add(135, CARET, {SHIFT, 106});
-    _actionTable.addDefault(135, {REDUCE, 80});
+    _actionTable.add(135, IDENTIFIER, {SHIFT, 27});
+    _actionTable.add(135, OPEN_CURLY, {SHIFT, 160});
+    _actionTable.add(135, KEYWORD_INT, {SHIFT, 7});
+    _actionTable.add(135, KEYWORD_FLOAT, {SHIFT, 8});
+    _actionTable.add(135, KEYWORD_CHAR, {SHIFT, 9});
+    _actionTable.add(135, STAR, {SHIFT, 30});
+    _actionTable.add(135, KEYWORD_IF, {SHIFT, 31});
+    _actionTable.add(135, KEYWORD_WHILE, {SHIFT, 32});
+    _actionTable.add(135, KEYWORD_FOR, {SHIFT, 33});
+    _actionTable.add(135, KEYWORD_RET, {SHIFT, 34});
+    _gotoTable.add(135, TYPE, 35);
+    _gotoTable.add(135, BASE_TYPE, 14);
+    _gotoTable.add(135, SIMPLE_STMT, 161);
+    _gotoTable.add(135, VAR_DECL_EXPR, 38);
+    _gotoTable.add(135, ASSIGN_EXPR, 39);
+    _gotoTable.add(135, ASSIGN_TARGET, 40);
+    _gotoTable.add(135, IF_STMT, 162);
+    _gotoTable.add(135, WHILE_STMT, 163);
+    _gotoTable.add(135, FOR_STMT, 164);
+    _gotoTable.add(135, BODY, 166);
 
     // State 136
-    _actionTable.add(136, MINUS, {SHIFT, 103});
-    _actionTable.add(136, PLUS, {SHIFT, 104});
-    _actionTable.add(136, PIPE, {SHIFT, 105});
-    _actionTable.add(136, CARET, {SHIFT, 106});
-    _actionTable.addDefault(136, {REDUCE, 75});
+    _actionTable.add(136, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(136, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(136, STAR, {SHIFT, 53});
+    _actionTable.add(136, MINUS, {SHIFT, 54});
+    _actionTable.add(136, BANG, {SHIFT, 55});
+    _actionTable.add(136, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(136, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(136, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(136, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(136, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(136, MINUS_MINUS, {SHIFT, 61});
+    _actionTable.addDefault(136, {REDUCE, 53});
+    _gotoTable.add(136, EXPR_OPT, 167);
+    _gotoTable.add(136, EXPR, 63);
+    _gotoTable.add(136, LOGICAL_EXPR, 64);
+    _gotoTable.add(136, RELATIONAL_EXPR, 65);
+    _gotoTable.add(136, ADD_EXPR, 66);
+    _gotoTable.add(136, MUL_EXPR, 67);
+    _gotoTable.add(136, UNARY_EXPR, 68);
+    _gotoTable.add(136, INCREMENT_EXPR, 69);
+    _gotoTable.add(136, ADDRESS_EXPR, 70);
+    _gotoTable.add(136, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(136, PRIMARY_EXPR, 72);
 
     // State 137
-    _actionTable.add(137, MINUS, {SHIFT, 103});
-    _actionTable.add(137, PLUS, {SHIFT, 104});
-    _actionTable.add(137, PIPE, {SHIFT, 105});
-    _actionTable.add(137, CARET, {SHIFT, 106});
-    _actionTable.addDefault(137, {REDUCE, 76});
+    _actionTable.add(137, CLOSED_PAREN, {SHIFT, 168});
 
     // State 138
-    _actionTable.add(138, STAR, {SHIFT, 107});
-    _actionTable.add(138, SLASH, {SHIFT, 108});
-    _actionTable.add(138, AMPERSAND, {SHIFT, 109});
-    _actionTable.addDefault(138, {REDUCE, 83});
+    _actionTable.add(138, CLOSED_BRACKET, {SHIFT, 169});
 
     // State 139
-    _actionTable.add(139, STAR, {SHIFT, 107});
-    _actionTable.add(139, SLASH, {SHIFT, 108});
-    _actionTable.add(139, AMPERSAND, {SHIFT, 109});
-    _actionTable.addDefault(139, {REDUCE, 82});
+    _actionTable.addDefault(139, {REDUCE, 102});
 
     // State 140
-    _actionTable.add(140, STAR, {SHIFT, 107});
-    _actionTable.add(140, SLASH, {SHIFT, 108});
-    _actionTable.add(140, AMPERSAND, {SHIFT, 109});
-    _actionTable.addDefault(140, {REDUCE, 84});
+    _actionTable.add(140, LESS_THAN, {SHIFT, 113});
+    _actionTable.add(140, GREATER_THAN, {SHIFT, 114});
+    _actionTable.add(140, LESS_THAN_EQUALS, {SHIFT, 115});
+    _actionTable.add(140, GREATER_THAN_EQUALS, {SHIFT, 116});
+    _actionTable.add(140, EQUALS_EQUALS, {SHIFT, 117});
+    _actionTable.add(140, BANG_EQUALS, {SHIFT, 118});
+    _actionTable.addDefault(140, {REDUCE, 70});
 
     // State 141
-    _actionTable.add(141, STAR, {SHIFT, 107});
-    _actionTable.add(141, SLASH, {SHIFT, 108});
-    _actionTable.add(141, AMPERSAND, {SHIFT, 109});
-    _actionTable.addDefault(141, {REDUCE, 85});
+    _actionTable.add(141, LESS_THAN, {SHIFT, 113});
+    _actionTable.add(141, GREATER_THAN, {SHIFT, 114});
+    _actionTable.add(141, LESS_THAN_EQUALS, {SHIFT, 115});
+    _actionTable.add(141, GREATER_THAN_EQUALS, {SHIFT, 116});
+    _actionTable.add(141, EQUALS_EQUALS, {SHIFT, 117});
+    _actionTable.add(141, BANG_EQUALS, {SHIFT, 118});
+    _actionTable.addDefault(141, {REDUCE, 71});
 
     // State 142
-    _actionTable.addDefault(142, {REDUCE, 87}); // MulExpr -> MulExpr STAR UnaryExpr
+    _actionTable.add(142, MINUS, {SHIFT, 119});
+    _actionTable.add(142, PLUS, {SHIFT, 120});
+    _actionTable.add(142, PIPE, {SHIFT, 121});
+    _actionTable.add(142, CARET, {SHIFT, 122});
+    _actionTable.addDefault(142, {REDUCE, 75});
 
     // State 143
-    _actionTable.addDefault(143, {REDUCE, 88}); // MulExpr -> MulExpr SLASH UnaryExpr
+    _actionTable.add(143, MINUS, {SHIFT, 119});
+    _actionTable.add(143, PLUS, {SHIFT, 120});
+    _actionTable.add(143, PIPE, {SHIFT, 121});
+    _actionTable.add(143, CARET, {SHIFT, 122});
+    _actionTable.addDefault(143, {REDUCE, 76});
 
     // State 144
-    _actionTable.addDefault(144, {REDUCE, 89}); // MulExpr -> MulExpr AMPERSAND UnaryExpr
+    _actionTable.add(144, MINUS, {SHIFT, 119});
+    _actionTable.add(144, PLUS, {SHIFT, 120});
+    _actionTable.add(144, PIPE, {SHIFT, 121});
+    _actionTable.add(144, CARET, {SHIFT, 122});
+    _actionTable.addDefault(144, {REDUCE, 77});
 
     // State 145
-    _actionTable.addDefault(145, {REDUCE, 105}); // PrimaryExpr -> IDENTIFIER OPEN_PAREN ExprList CLOSED_PAREN
+    _actionTable.add(145, MINUS, {SHIFT, 119});
+    _actionTable.add(145, PLUS, {SHIFT, 120});
+    _actionTable.add(145, PIPE, {SHIFT, 121});
+    _actionTable.add(145, CARET, {SHIFT, 122});
+    _actionTable.addDefault(145, {REDUCE, 78});
 
     // State 146
-    _actionTable.add(146, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(146, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(146, STAR, {SHIFT, 68});
-    _actionTable.add(146, MINUS, {SHIFT, 36});
-    _actionTable.add(146, BANG, {SHIFT, 37});
-    _actionTable.add(146, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(146, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(146, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(146, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(146, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(146, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(146, EXPR, 157);
-    _gotoTable.add(146, LOGICAL_EXPR, 54);
-    _gotoTable.add(146, RELATIONAL_EXPR, 55);
-    _gotoTable.add(146, ADD_EXPR, 56);
-    _gotoTable.add(146, MUL_EXPR, 57);
-    _gotoTable.add(146, UNARY_EXPR, 58);
-    _gotoTable.add(146, INCREMENT_EXPR, 59);
-    _gotoTable.add(146, ADDRESS_EXPR, 60);
-    _gotoTable.add(146, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(146, PRIMARY_EXPR, 62);
+    _actionTable.add(146, MINUS, {SHIFT, 119});
+    _actionTable.add(146, PLUS, {SHIFT, 120});
+    _actionTable.add(146, PIPE, {SHIFT, 121});
+    _actionTable.add(146, CARET, {SHIFT, 122});
+    _actionTable.addDefault(146, {REDUCE, 73});
 
     // State 147
-    _actionTable.add(147, EQUALS, {REDUCE, 33});
-    _actionTable.add(147, PLUS_EQUALS, {REDUCE, 33});
-    _actionTable.add(147, MINUS_EQUALS, {REDUCE, 33});
-    _actionTable.add(147, SLASH_EQUALS, {REDUCE, 33});
-    _actionTable.add(147, STAR_EQUALS, {REDUCE, 33});
-    _actionTable.add(147, AMPERSAND_EQUALS, {REDUCE, 33});
-    _actionTable.add(147, PIPE_EQUALS, {REDUCE, 33});
-    _actionTable.add(147, CARET_EQUALS, {REDUCE, 33});
-    _actionTable.add(147, TILDE_EQUALS, {REDUCE, 33});
-    _actionTable.addDefault(147, {REDUCE, 100});
+    _actionTable.add(147, MINUS, {SHIFT, 119});
+    _actionTable.add(147, PLUS, {SHIFT, 120});
+    _actionTable.add(147, PIPE, {SHIFT, 121});
+    _actionTable.add(147, CARET, {SHIFT, 122});
+    _actionTable.addDefault(147, {REDUCE, 74});
 
     // State 148
-    _actionTable.add(148, CLOSED_BRACKET, {SHIFT, 158});
+    _actionTable.add(148, STAR, {SHIFT, 123});
+    _actionTable.add(148, SLASH, {SHIFT, 124});
+    _actionTable.add(148, AMPERSAND, {SHIFT, 125});
+    _actionTable.addDefault(148, {REDUCE, 81});
 
     // State 149
-    _actionTable.add(149, IDENTIFIER, {SHIFT, 27});
-    _actionTable.add(149, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(149, OPEN_CURLY, {SHIFT, 159});
-    _actionTable.add(149, KEYWORD_INT, {SHIFT, 7});
-    _actionTable.add(149, KEYWORD_FLOAT, {SHIFT, 8});
-    _actionTable.add(149, KEYWORD_CHAR, {SHIFT, 9});
-    _actionTable.add(149, STAR, {SHIFT, 31});
-    _actionTable.add(149, KEYWORD_IF, {SHIFT, 32});
-    _actionTable.add(149, KEYWORD_WHILE, {SHIFT, 33});
-    _actionTable.add(149, KEYWORD_FOR, {SHIFT, 34});
-    _actionTable.add(149, KEYWORD_RET, {SHIFT, 35});
-    _actionTable.add(149, MINUS, {SHIFT, 36});
-    _actionTable.add(149, BANG, {SHIFT, 37});
-    _actionTable.add(149, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(149, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(149, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(149, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(149, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(149, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(149, TYPE, 44);
-    _gotoTable.add(149, BASE_TYPE, 14);
-    _gotoTable.add(149, SIMPLE_STMT, 160);
-    _gotoTable.add(149, VAR_DECL_EXPR, 47);
-    _gotoTable.add(149, ASSIGN_EXPR, 48);
-    _gotoTable.add(149, ASSIGN_TARGET, 49);
-    _gotoTable.add(149, IF_STMT, 161);
-    _gotoTable.add(149, WHILE_STMT, 162);
-    _gotoTable.add(149, FOR_STMT, 163);
-    _gotoTable.add(149, BODY, 164);
-    _gotoTable.add(149, EXPR, 53);
-    _gotoTable.add(149, LOGICAL_EXPR, 54);
-    _gotoTable.add(149, RELATIONAL_EXPR, 55);
-    _gotoTable.add(149, ADD_EXPR, 56);
-    _gotoTable.add(149, MUL_EXPR, 57);
-    _gotoTable.add(149, UNARY_EXPR, 58);
-    _gotoTable.add(149, INCREMENT_EXPR, 59);
-    _gotoTable.add(149, ADDRESS_EXPR, 60);
-    _gotoTable.add(149, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(149, PRIMARY_EXPR, 62);
+    _actionTable.add(149, STAR, {SHIFT, 123});
+    _actionTable.add(149, SLASH, {SHIFT, 124});
+    _actionTable.add(149, AMPERSAND, {SHIFT, 125});
+    _actionTable.addDefault(149, {REDUCE, 80});
 
     // State 150
-    _actionTable.add(150, IDENTIFIER, {SHIFT, 27});
-    _actionTable.add(150, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(150, OPEN_CURLY, {SHIFT, 159});
-    _actionTable.add(150, KEYWORD_INT, {SHIFT, 7});
-    _actionTable.add(150, KEYWORD_FLOAT, {SHIFT, 8});
-    _actionTable.add(150, KEYWORD_CHAR, {SHIFT, 9});
-    _actionTable.add(150, STAR, {SHIFT, 31});
-    _actionTable.add(150, KEYWORD_IF, {SHIFT, 32});
-    _actionTable.add(150, KEYWORD_WHILE, {SHIFT, 33});
-    _actionTable.add(150, KEYWORD_FOR, {SHIFT, 34});
-    _actionTable.add(150, KEYWORD_RET, {SHIFT, 35});
-    _actionTable.add(150, MINUS, {SHIFT, 36});
-    _actionTable.add(150, BANG, {SHIFT, 37});
-    _actionTable.add(150, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(150, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(150, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(150, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(150, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(150, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(150, TYPE, 44);
-    _gotoTable.add(150, BASE_TYPE, 14);
-    _gotoTable.add(150, SIMPLE_STMT, 160);
-    _gotoTable.add(150, VAR_DECL_EXPR, 47);
-    _gotoTable.add(150, ASSIGN_EXPR, 48);
-    _gotoTable.add(150, ASSIGN_TARGET, 49);
-    _gotoTable.add(150, IF_STMT, 161);
-    _gotoTable.add(150, WHILE_STMT, 162);
-    _gotoTable.add(150, FOR_STMT, 163);
-    _gotoTable.add(150, BODY, 165);
-    _gotoTable.add(150, EXPR, 53);
-    _gotoTable.add(150, LOGICAL_EXPR, 54);
-    _gotoTable.add(150, RELATIONAL_EXPR, 55);
-    _gotoTable.add(150, ADD_EXPR, 56);
-    _gotoTable.add(150, MUL_EXPR, 57);
-    _gotoTable.add(150, UNARY_EXPR, 58);
-    _gotoTable.add(150, INCREMENT_EXPR, 59);
-    _gotoTable.add(150, ADDRESS_EXPR, 60);
-    _gotoTable.add(150, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(150, PRIMARY_EXPR, 62);
+    _actionTable.add(150, STAR, {SHIFT, 123});
+    _actionTable.add(150, SLASH, {SHIFT, 124});
+    _actionTable.add(150, AMPERSAND, {SHIFT, 125});
+    _actionTable.addDefault(150, {REDUCE, 82});
 
     // State 151
-    _actionTable.add(151, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(151, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(151, STAR, {SHIFT, 68});
-    _actionTable.add(151, MINUS, {SHIFT, 36});
-    _actionTable.add(151, BANG, {SHIFT, 37});
-    _actionTable.add(151, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(151, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(151, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(151, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(151, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(151, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(151, EXPR, 166);
-    _gotoTable.add(151, LOGICAL_EXPR, 54);
-    _gotoTable.add(151, RELATIONAL_EXPR, 55);
-    _gotoTable.add(151, ADD_EXPR, 56);
-    _gotoTable.add(151, MUL_EXPR, 57);
-    _gotoTable.add(151, UNARY_EXPR, 58);
-    _gotoTable.add(151, INCREMENT_EXPR, 59);
-    _gotoTable.add(151, ADDRESS_EXPR, 60);
-    _gotoTable.add(151, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(151, PRIMARY_EXPR, 62);
+    _actionTable.add(151, STAR, {SHIFT, 123});
+    _actionTable.add(151, SLASH, {SHIFT, 124});
+    _actionTable.add(151, AMPERSAND, {SHIFT, 125});
+    _actionTable.addDefault(151, {REDUCE, 83});
 
     // State 152
-    _actionTable.addDefault(152, {REDUCE, 34}); // AssignTarget -> STAR IDENTIFIER
+    _actionTable.addDefault(152, {REDUCE, 85});
 
     // State 153
-    _actionTable.add(153, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(153, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(153, STAR, {SHIFT, 68});
-    _actionTable.add(153, MINUS, {SHIFT, 36});
-    _actionTable.add(153, BANG, {SHIFT, 37});
-    _actionTable.add(153, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(153, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(153, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(153, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(153, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(153, MINUS_MINUS, {SHIFT, 43});
-    _actionTable.addDefault(153, {REDUCE, 53});
-    _gotoTable.add(153, EXPR_OPT, 167);
-    _gotoTable.add(153, EXPR, 76);
-    _gotoTable.add(153, LOGICAL_EXPR, 54);
-    _gotoTable.add(153, RELATIONAL_EXPR, 55);
-    _gotoTable.add(153, ADD_EXPR, 56);
-    _gotoTable.add(153, MUL_EXPR, 57);
-    _gotoTable.add(153, UNARY_EXPR, 58);
-    _gotoTable.add(153, INCREMENT_EXPR, 59);
-    _gotoTable.add(153, ADDRESS_EXPR, 60);
-    _gotoTable.add(153, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(153, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(153, {REDUCE, 86});
 
     // State 154
-    _actionTable.add(154, IDENTIFIER, {SHIFT, 67});
-    _actionTable.add(154, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(154, STAR, {SHIFT, 68});
-    _actionTable.add(154, MINUS, {SHIFT, 36});
-    _actionTable.add(154, BANG, {SHIFT, 37});
-    _actionTable.add(154, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(154, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(154, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(154, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(154, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(154, MINUS_MINUS, {SHIFT, 43});
-    _actionTable.addDefault(154, {REDUCE, 63});
-    _gotoTable.add(154, EXPR_LIST, 168);
-    _gotoTable.add(154, EXPR_LIST_NON_EMPTY, 111);
-    _gotoTable.add(154, EXPR, 112);
-    _gotoTable.add(154, LOGICAL_EXPR, 54);
-    _gotoTable.add(154, RELATIONAL_EXPR, 55);
-    _gotoTable.add(154, ADD_EXPR, 56);
-    _gotoTable.add(154, MUL_EXPR, 57);
-    _gotoTable.add(154, UNARY_EXPR, 58);
-    _gotoTable.add(154, INCREMENT_EXPR, 59);
-    _gotoTable.add(154, ADDRESS_EXPR, 60);
-    _gotoTable.add(154, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(154, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(154, {REDUCE, 87});
 
     // State 155
-    _actionTable.addDefault(155, {REDUCE, 28}); // InitOpt -> EQUALS AssignValue
+    _actionTable.add(155, IDENTIFIER, {SHIFT, 51});
+    _actionTable.add(155, OPEN_PAREN, {SHIFT, 52});
+    _actionTable.add(155, STAR, {SHIFT, 53});
+    _actionTable.add(155, MINUS, {SHIFT, 54});
+    _actionTable.add(155, BANG, {SHIFT, 55});
+    _actionTable.add(155, AMPERSAND, {SHIFT, 56});
+    _actionTable.add(155, INTEGER_LITERAL, {SHIFT, 57});
+    _actionTable.add(155, FLOAT_LITERAL, {SHIFT, 58});
+    _actionTable.add(155, CHAR_LITERAL, {SHIFT, 59});
+    _actionTable.add(155, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(155, MINUS_MINUS, {SHIFT, 61});
+    _actionTable.addDefault(155, {REDUCE, 63});
+    _gotoTable.add(155, EXPR_LIST, 170);
+    _gotoTable.add(155, EXPR_LIST_NON_EMPTY, 86);
+    _gotoTable.add(155, EXPR, 87);
+    _gotoTable.add(155, LOGICAL_EXPR, 64);
+    _gotoTable.add(155, RELATIONAL_EXPR, 65);
+    _gotoTable.add(155, ADD_EXPR, 66);
+    _gotoTable.add(155, MUL_EXPR, 67);
+    _gotoTable.add(155, UNARY_EXPR, 68);
+    _gotoTable.add(155, INCREMENT_EXPR, 69);
+    _gotoTable.add(155, ADDRESS_EXPR, 70);
+    _gotoTable.add(155, DEREFERENCE_EXPR, 71);
+    _gotoTable.add(155, PRIMARY_EXPR, 72);
 
     // State 156
-    _actionTable.addDefault(156, {REDUCE, 29}); // AssignValue -> Expr
+    _actionTable.addDefault(156, {REDUCE, 28});
 
     // State 157
-    _actionTable.addDefault(157, {REDUCE, 66}); // ExprListNonEmpty -> ExprListNonEmpty COMMA Expr
+    _actionTable.addDefault(157, {REDUCE, 29});
 
     // State 158
-    _actionTable.addDefault(158, {REDUCE, 100}); // PrimaryExpr -> IDENTIFIER OPEN_BRACKET Expr CLOSED_BRACKET
+    _actionTable.addDefault(158, {REDUCE, 66});
 
     // State 159
-    _actionTable.addDefault(159, {REDUCE, 15});
-    _gotoTable.add(159, STMT_LIST, 169);
+    _actionTable.add(159, CLOSED_BRACKET, {SHIFT, 171});
 
     // State 160
-    _actionTable.add(160, SEMICOLON, {SHIFT, 170});
+    _actionTable.addDefault(160, {REDUCE, 15});
+    _gotoTable.add(160, STMT_LIST, 172);
 
     // State 161
-    _actionTable.addDefault(161, {REDUCE, 60}); // Body -> IfStmt
+    _actionTable.add(161, SEMICOLON, {SHIFT, 173});
 
     // State 162
-    _actionTable.addDefault(162, {REDUCE, 61}); // Body -> WhileStmt
+    _actionTable.addDefault(162, {REDUCE, 60});
 
     // State 163
-    _actionTable.addDefault(163, {REDUCE, 62}); // Body -> ForStmt
+    _actionTable.addDefault(163, {REDUCE, 61});
 
     // State 164
-    _actionTable.add(164, KEYWORD_ELSE, {SHIFT, 171});
-    _actionTable.addDefault(164, {REDUCE, 44});
+    _actionTable.addDefault(164, {REDUCE, 62});
 
     // State 165
-    _actionTable.addDefault(165, {REDUCE, 46}); // WhileStmt -> KEYWORD_WHILE OPEN_PAREN ConditionOp CLOSED_PAREN Body
+    _actionTable.add(165, KEYWORD_ELSE, {SHIFT, 174});
+    _actionTable.addDefault(165, {REDUCE, 44});
 
     // State 166
-    _actionTable.add(166, CLOSED_BRACKET, {SHIFT, 172});
+    _actionTable.addDefault(166, {REDUCE, 46});
 
     // State 167
-    _actionTable.add(167, SEMICOLON, {SHIFT, 173});
+    _actionTable.add(167, SEMICOLON, {SHIFT, 175});
 
     // State 168
-    _actionTable.add(168, CLOSED_CURLY, {SHIFT, 174});
+    _actionTable.addDefault(168, {REDUCE, 103});
 
     // State 169
-    _actionTable.add(169, IDENTIFIER, {SHIFT, 27});
-    _actionTable.add(169, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(169, OPEN_CURLY, {SHIFT, 29});
-    _actionTable.add(169, CLOSED_CURLY, {SHIFT, 175});
-    _actionTable.add(169, KEYWORD_INT, {SHIFT, 7});
-    _actionTable.add(169, KEYWORD_FLOAT, {SHIFT, 8});
-    _actionTable.add(169, KEYWORD_CHAR, {SHIFT, 9});
-    _actionTable.add(169, STAR, {SHIFT, 31});
-    _actionTable.add(169, KEYWORD_IF, {SHIFT, 32});
-    _actionTable.add(169, KEYWORD_WHILE, {SHIFT, 33});
-    _actionTable.add(169, KEYWORD_FOR, {SHIFT, 34});
-    _actionTable.add(169, KEYWORD_RET, {SHIFT, 35});
-    _actionTable.add(169, MINUS, {SHIFT, 36});
-    _actionTable.add(169, BANG, {SHIFT, 37});
-    _actionTable.add(169, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(169, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(169, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(169, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(169, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(169, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(169, TYPE, 44);
-    _gotoTable.add(169, BASE_TYPE, 14);
-    _gotoTable.add(169, STMT, 45);
-    _gotoTable.add(169, SIMPLE_STMT, 46);
-    _gotoTable.add(169, VAR_DECL_EXPR, 47);
-    _gotoTable.add(169, ASSIGN_EXPR, 48);
-    _gotoTable.add(169, ASSIGN_TARGET, 49);
-    _gotoTable.add(169, IF_STMT, 50);
-    _gotoTable.add(169, WHILE_STMT, 51);
-    _gotoTable.add(169, FOR_STMT, 52);
-    _gotoTable.add(169, EXPR, 53);
-    _gotoTable.add(169, LOGICAL_EXPR, 54);
-    _gotoTable.add(169, RELATIONAL_EXPR, 55);
-    _gotoTable.add(169, ADD_EXPR, 56);
-    _gotoTable.add(169, MUL_EXPR, 57);
-    _gotoTable.add(169, UNARY_EXPR, 58);
-    _gotoTable.add(169, INCREMENT_EXPR, 59);
-    _gotoTable.add(169, ADDRESS_EXPR, 60);
-    _gotoTable.add(169, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(169, PRIMARY_EXPR, 62);
+    _actionTable.addDefault(169, {REDUCE, 98});
 
     // State 170
-    _actionTable.addDefault(170, {REDUCE, 59}); // Body -> SimpleStmt SEMICOLON
+    _actionTable.add(170, CLOSED_CURLY, {SHIFT, 176});
 
     // State 171
-    _actionTable.add(171, IDENTIFIER, {SHIFT, 27});
-    _actionTable.add(171, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(171, OPEN_CURLY, {SHIFT, 159});
-    _actionTable.add(171, KEYWORD_INT, {SHIFT, 7});
-    _actionTable.add(171, KEYWORD_FLOAT, {SHIFT, 8});
-    _actionTable.add(171, KEYWORD_CHAR, {SHIFT, 9});
-    _actionTable.add(171, STAR, {SHIFT, 31});
-    _actionTable.add(171, KEYWORD_IF, {SHIFT, 32});
-    _actionTable.add(171, KEYWORD_WHILE, {SHIFT, 33});
-    _actionTable.add(171, KEYWORD_FOR, {SHIFT, 34});
-    _actionTable.add(171, KEYWORD_RET, {SHIFT, 35});
-    _actionTable.add(171, MINUS, {SHIFT, 36});
-    _actionTable.add(171, BANG, {SHIFT, 37});
-    _actionTable.add(171, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(171, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(171, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(171, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(171, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(171, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(171, TYPE, 44);
-    _gotoTable.add(171, BASE_TYPE, 14);
-    _gotoTable.add(171, SIMPLE_STMT, 160);
-    _gotoTable.add(171, VAR_DECL_EXPR, 47);
-    _gotoTable.add(171, ASSIGN_EXPR, 48);
-    _gotoTable.add(171, ASSIGN_TARGET, 49);
-    _gotoTable.add(171, IF_STMT, 161);
-    _gotoTable.add(171, WHILE_STMT, 162);
-    _gotoTable.add(171, FOR_STMT, 163);
-    _gotoTable.add(171, BODY, 176);
-    _gotoTable.add(171, EXPR, 53);
-    _gotoTable.add(171, LOGICAL_EXPR, 54);
-    _gotoTable.add(171, RELATIONAL_EXPR, 55);
-    _gotoTable.add(171, ADD_EXPR, 56);
-    _gotoTable.add(171, MUL_EXPR, 57);
-    _gotoTable.add(171, UNARY_EXPR, 58);
-    _gotoTable.add(171, INCREMENT_EXPR, 59);
-    _gotoTable.add(171, ADDRESS_EXPR, 60);
-    _gotoTable.add(171, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(171, PRIMARY_EXPR, 62);
+    _actionTable.add(171, EQUALS, {REDUCE, 33});
+    _actionTable.add(171, PLUS_EQUALS, {REDUCE, 33});
+    _actionTable.add(171, MINUS_EQUALS, {REDUCE, 33});
+    _actionTable.add(171, SLASH_EQUALS, {REDUCE, 33});
+    _actionTable.add(171, STAR_EQUALS, {REDUCE, 33});
+    _actionTable.add(171, AMPERSAND_EQUALS, {REDUCE, 33});
+    _actionTable.add(171, PIPE_EQUALS, {REDUCE, 33});
+    _actionTable.add(171, CARET_EQUALS, {REDUCE, 33});
+    _actionTable.add(171, TILDE_EQUALS, {REDUCE, 33});
+    _actionTable.addDefault(171, {REDUCE, 98});
 
     // State 172
-    _actionTable.addDefault(172, {REDUCE, 33}); // AssignTarget -> IDENTIFIER OPEN_BRACKET Expr CLOSED_BRACKET
+    _actionTable.add(172, IDENTIFIER, {SHIFT, 27});
+    _actionTable.add(172, OPEN_CURLY, {SHIFT, 28});
+    _actionTable.add(172, CLOSED_CURLY, {SHIFT, 177});
+    _actionTable.add(172, KEYWORD_INT, {SHIFT, 7});
+    _actionTable.add(172, KEYWORD_FLOAT, {SHIFT, 8});
+    _actionTable.add(172, KEYWORD_CHAR, {SHIFT, 9});
+    _actionTable.add(172, STAR, {SHIFT, 30});
+    _actionTable.add(172, KEYWORD_IF, {SHIFT, 31});
+    _actionTable.add(172, KEYWORD_WHILE, {SHIFT, 32});
+    _actionTable.add(172, KEYWORD_FOR, {SHIFT, 33});
+    _actionTable.add(172, KEYWORD_RET, {SHIFT, 34});
+    _gotoTable.add(172, TYPE, 35);
+    _gotoTable.add(172, BASE_TYPE, 14);
+    _gotoTable.add(172, STMT, 36);
+    _gotoTable.add(172, SIMPLE_STMT, 37);
+    _gotoTable.add(172, VAR_DECL_EXPR, 38);
+    _gotoTable.add(172, ASSIGN_EXPR, 39);
+    _gotoTable.add(172, ASSIGN_TARGET, 40);
+    _gotoTable.add(172, IF_STMT, 41);
+    _gotoTable.add(172, WHILE_STMT, 42);
+    _gotoTable.add(172, FOR_STMT, 43);
 
     // State 173
-    _actionTable.add(173, IDENTIFIER, {SHIFT, 177});
-    _actionTable.add(173, STAR, {SHIFT, 123});
-    _actionTable.add(173, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(173, MINUS_MINUS, {SHIFT, 43});
-    _actionTable.addDefault(173, {REDUCE, 55}); // ForUpdate -> (empty)
-    _gotoTable.add(173, ASSIGN_EXPR, 178);
-    _gotoTable.add(173, ASSIGN_TARGET, 49);
-    _gotoTable.add(173, FOR_UPDATE, 179);
-    _gotoTable.add(173, INCREMENT_EXPR, 180);
+    _actionTable.addDefault(173, {REDUCE, 59});
 
     // State 174
-    _actionTable.addDefault(174, {REDUCE, 30}); // AssignValue -> OPEN_CURLY ExprList CLOSED_CURLY
+    _actionTable.add(174, IDENTIFIER, {SHIFT, 27});
+    _actionTable.add(174, OPEN_CURLY, {SHIFT, 160});
+    _actionTable.add(174, KEYWORD_INT, {SHIFT, 7});
+    _actionTable.add(174, KEYWORD_FLOAT, {SHIFT, 8});
+    _actionTable.add(174, KEYWORD_CHAR, {SHIFT, 9});
+    _actionTable.add(174, STAR, {SHIFT, 30});
+    _actionTable.add(174, KEYWORD_IF, {SHIFT, 31});
+    _actionTable.add(174, KEYWORD_WHILE, {SHIFT, 32});
+    _actionTable.add(174, KEYWORD_FOR, {SHIFT, 33});
+    _actionTable.add(174, KEYWORD_RET, {SHIFT, 34});
+    _gotoTable.add(174, TYPE, 35);
+    _gotoTable.add(174, BASE_TYPE, 14);
+    _gotoTable.add(174, SIMPLE_STMT, 161);
+    _gotoTable.add(174, VAR_DECL_EXPR, 38);
+    _gotoTable.add(174, ASSIGN_EXPR, 39);
+    _gotoTable.add(174, ASSIGN_TARGET, 40);
+    _gotoTable.add(174, IF_STMT, 162);
+    _gotoTable.add(174, WHILE_STMT, 163);
+    _gotoTable.add(174, FOR_STMT, 164);
+    _gotoTable.add(174, BODY, 178);
 
     // State 175
-    _actionTable.addDefault(175, {REDUCE, 58}); // Body -> OPEN_CURLY StmtList CLOSED_CURLY
+    _actionTable.add(175, IDENTIFIER, {SHIFT, 179});
+    _actionTable.add(175, STAR, {SHIFT, 30});
+    _actionTable.add(175, PLUS_PLUS, {SHIFT, 60});
+    _actionTable.add(175, MINUS_MINUS, {SHIFT, 61});
+    _actionTable.addDefault(175, {REDUCE, 55});
+    _gotoTable.add(175, ASSIGN_EXPR, 180);
+    _gotoTable.add(175, ASSIGN_TARGET, 40);
+    _gotoTable.add(175, FOR_UPDATE, 181);
+    _gotoTable.add(175, INCREMENT_EXPR, 182);
 
     // State 176
-    _actionTable.addDefault(176, {REDUCE, 45}); // IfStmt -> KEYWORD_IF OPEN_PAREN ConditionOp CLOSED mascarPAREN Body KEYWORD_ELSE Body
+    _actionTable.addDefault(176, {REDUCE, 30});
 
     // State 177
-    _actionTable.add(177, OPEN_BRACKET, {SHIFT, 151});
-    _actionTable.add(177, PLUS_PLUS, {SHIFT, 65});
-    _actionTable.add(177, MINUS_MINUS, {SHIFT, 66});
-    _actionTable.addDefault(177, {REDUCE, 32}); // AssignTarget -> IDENTIFIER
+    _actionTable.addDefault(177, {REDUCE, 58});
 
     // State 178
-    _actionTable.addDefault(178, {REDUCE, 56}); // ForUpdate -> AssignExpr
+    _actionTable.addDefault(178, {REDUCE, 45});
 
     // State 179
-    _actionTable.add(179, CLOSED_PAREN, {SHIFT, 181});
+    _actionTable.add(179, OPEN_BRACKET, {SHIFT, 45});
+    _actionTable.add(179, PLUS_PLUS, {SHIFT, 102});
+    _actionTable.add(179, MINUS_MINUS, {SHIFT, 103});
+    _actionTable.addDefault(179, {REDUCE, 32});
 
     // State 180
-    _actionTable.addDefault(180, {REDUCE, 57}); // ForUpdate -> IncrementExpr
+    _actionTable.addDefault(180, {REDUCE, 56});
 
     // State 181
-    _actionTable.add(181, IDENTIFIER, {SHIFT, 27});
-    _actionTable.add(181, OPEN_PAREN, {SHIFT, 28});
-    _actionTable.add(181, OPEN_CURLY, {SHIFT, 159});
-    _actionTable.add(181, KEYWORD_INT, {SHIFT, 7});
-    _actionTable.add(181, KEYWORD_FLOAT, {SHIFT, 8});
-    _actionTable.add(181, KEYWORD_CHAR, {SHIFT, 9});
-    _actionTable.add(181, STAR, {SHIFT, 31});
-    _actionTable.add(181, KEYWORD_IF, {SHIFT, 32});
-    _actionTable.add(181, KEYWORD_WHILE, {SHIFT, 33});
-    _actionTable.add(181, KEYWORD_FOR, {SHIFT, 34});
-    _actionTable.add(181, KEYWORD_RET, {SHIFT, 35});
-    _actionTable.add(181, MINUS, {SHIFT, 36});
-    _actionTable.add(181, BANG, {SHIFT, 37});
-    _actionTable.add(181, AMPERSAND, {SHIFT, 38});
-    _actionTable.add(181, INTEGER_LITERAL, {SHIFT, 39});
-    _actionTable.add(181, FLOAT_LITERAL, {SHIFT, 40});
-    _actionTable.add(181, CHAR_LITERAL, {SHIFT, 41});
-    _actionTable.add(181, PLUS_PLUS, {SHIFT, 42});
-    _actionTable.add(181, MINUS_MINUS, {SHIFT, 43});
-    _gotoTable.add(181, TYPE, 44);
-    _gotoTable.add(181, BASE_TYPE, 14);
-    _gotoTable.add(181, SIMPLE_STMT, 160);
-    _gotoTable.add(181, VAR_DECL_EXPR, 47);
-    _gotoTable.add(181, ASSIGN_EXPR, 48);
-    _gotoTable.add(181, ASSIGN_TARGET, 49);
-    _gotoTable.add(181, IF_STMT, 161);
-    _gotoTable.add(181, WHILE_STMT, 162);
-    _gotoTable.add(181, FOR_STMT, 163);
-    _gotoTable.add(181, BODY, 182);
-    _gotoTable.add(181, EXPR, 53);
-    _gotoTable.add(181, LOGICAL_EXPR, 54);
-    _gotoTable.add(181, RELATIONAL_EXPR, 55);
-    _gotoTable.add(181, ADD_EXPR, 56);
-    _gotoTable.add(181, MUL_EXPR, 57);
-    _gotoTable.add(181, UNARY_EXPR, 58);
-    _gotoTable.add(181, INCREMENT_EXPR, 59);
-    _gotoTable.add(181, ADDRESS_EXPR, 60);
-    _gotoTable.add(181, DEREFERENCE_EXPR, 61);
-    _gotoTable.add(181, PRIMARY_EXPR, 62);
+    _actionTable.add(181, CLOSED_PAREN, {SHIFT, 183});
 
     // State 182
-    _actionTable.addDefault(182, {REDUCE, 49}); // ForStmt -> KEYWORD_FOR OPEN_PAREN ForInit SEMICOLON ExprOpt SEMICOLON ForUpdate CLOSED_PAREN Body
+    _actionTable.addDefault(182, {REDUCE, 57});
+
+    // State 183
+    _actionTable.add(183, IDENTIFIER, {SHIFT, 27});
+    _actionTable.add(183, OPEN_CURLY, {SHIFT, 160});
+    _actionTable.add(183, KEYWORD_INT, {SHIFT, 7});
+    _actionTable.add(183, KEYWORD_FLOAT, {SHIFT, 8});
+    _actionTable.add(183, KEYWORD_CHAR, {SHIFT, 9});
+    _actionTable.add(183, STAR, {SHIFT, 30});
+    _actionTable.add(183, KEYWORD_IF, {SHIFT, 31});
+    _actionTable.add(183, KEYWORD_WHILE, {SHIFT, 32});
+    _actionTable.add(183, KEYWORD_FOR, {SHIFT, 33});
+    _actionTable.add(183, KEYWORD_RET, {SHIFT, 34});
+    _gotoTable.add(183, TYPE, 35);
+    _gotoTable.add(183, BASE_TYPE, 14);
+    _gotoTable.add(183, SIMPLE_STMT, 161);
+    _gotoTable.add(183, VAR_DECL_EXPR, 38);
+    _gotoTable.add(183, ASSIGN_EXPR, 39);
+    _gotoTable.add(183, ASSIGN_TARGET, 40);
+    _gotoTable.add(183, IF_STMT, 162);
+    _gotoTable.add(183, WHILE_STMT, 163);
+    _gotoTable.add(183, FOR_STMT, 164);
+    _gotoTable.add(183, BODY, 184);
+
+    // State 184
+    _actionTable.addDefault(184, {REDUCE, 49});
+
 }
 
-void Parser::initFollowSets() {
+
+void Parser::initFollowSets()
+{
     // **FOLLOW Sets for Non-Terminals**
-    _followSets[NonTerminal::START] = { SyntaxKind::END_OF_FILE };
-    _followSets[NonTerminal::PROGRAM] = { SyntaxKind::END_OF_FILE, SyntaxKind::KEYWORD_FN };
-    _followSets[NonTerminal::FUNCTION_DECL] = { SyntaxKind::END_OF_FILE, SyntaxKind::KEYWORD_FN };
-    _followSets[NonTerminal::PARAM_LIST] = { SyntaxKind::CLOSED_PAREN };
-    _followSets[NonTerminal::TYPE] = { SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_CURLY };
+    _followSets[NonTerminal::START] = {SyntaxKind::END_OF_FILE};
+    _followSets[NonTerminal::PROGRAM] = {SyntaxKind::END_OF_FILE, SyntaxKind::KEYWORD_FN};
+    _followSets[NonTerminal::FUNCTION_DECL] = {SyntaxKind::END_OF_FILE, SyntaxKind::KEYWORD_FN};
+    _followSets[NonTerminal::PARAM_LIST] = {SyntaxKind::CLOSED_PAREN};
+    _followSets[NonTerminal::TYPE] = {SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_CURLY};
     _followSets[NonTerminal::STMT_LIST] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::OPEN_CURLY, SyntaxKind::CLOSED_CURLY,
         SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
         SyntaxKind::KEYWORD_CHAR, SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_IF, SyntaxKind::KEYWORD_WHILE,
-        SyntaxKind::KEYWORD_FOR
-    };
-    _followSets[NonTerminal::PARAM_LIST_NON_EMPTY] = { SyntaxKind::CLOSED_PAREN, SyntaxKind::COMMA };
-    _followSets[NonTerminal::PARAM] = { SyntaxKind::CLOSED_PAREN, SyntaxKind::COMMA };
-    _followSets[NonTerminal::BASE_TYPE] = { SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_CURLY, SyntaxKind::OPEN_BRACKET, SyntaxKind::STAR };
+        SyntaxKind::KEYWORD_FOR};
+    _followSets[NonTerminal::PARAM_LIST_NON_EMPTY] = {SyntaxKind::CLOSED_PAREN, SyntaxKind::COMMA};
+    _followSets[NonTerminal::PARAM] = {SyntaxKind::CLOSED_PAREN, SyntaxKind::COMMA};
+    _followSets[NonTerminal::BASE_TYPE] = {SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_CURLY, SyntaxKind::OPEN_BRACKET, SyntaxKind::STAR};
     _followSets[NonTerminal::STMT] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::OPEN_CURLY, SyntaxKind::CLOSED_CURLY,
         SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
         SyntaxKind::KEYWORD_CHAR, SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_IF, SyntaxKind::KEYWORD_WHILE,
-        SyntaxKind::KEYWORD_FOR
-    };
-    _followSets[NonTerminal::SIMPLE_STMT] = { SyntaxKind::SEMICOLON };
+        SyntaxKind::KEYWORD_FOR};
+    _followSets[NonTerminal::SIMPLE_STMT] = {SyntaxKind::SEMICOLON};
     _followSets[NonTerminal::IF_STMT] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::OPEN_CURLY, SyntaxKind::CLOSED_CURLY,
         SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
         SyntaxKind::KEYWORD_CHAR, SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_IF, SyntaxKind::KEYWORD_ELSE,
-        SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR
-    };
+        SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR};
     _followSets[NonTerminal::WHILE_STMT] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::OPEN_CURLY, SyntaxKind::CLOSED_CURLY,
         SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
         SyntaxKind::KEYWORD_CHAR, SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_IF, SyntaxKind::KEYWORD_ELSE,
-        SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR
-    };
+        SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR};
     _followSets[NonTerminal::FOR_STMT] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::OPEN_CURLY, SyntaxKind::CLOSED_CURLY,
         SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
         SyntaxKind::KEYWORD_CHAR, SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_IF, SyntaxKind::KEYWORD_ELSE,
-        SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR
-    };
-    _followSets[NonTerminal::VAR_DECL_EXPR] = { SyntaxKind::SEMICOLON };
-    _followSets[NonTerminal::ASSIGN_EXPR] = { SyntaxKind::CLOSED_PAREN, SyntaxKind::SEMICOLON };
+        SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR};
+    _followSets[NonTerminal::VAR_DECL_EXPR] = {SyntaxKind::SEMICOLON};
+    _followSets[NonTerminal::ASSIGN_EXPR] = {SyntaxKind::CLOSED_PAREN, SyntaxKind::SEMICOLON};
     _followSets[NonTerminal::EXPR] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
-        SyntaxKind::SEMICOLON
-    };
-    _followSets[NonTerminal::EXPR_OPT] = { SyntaxKind::SEMICOLON };
-    _followSets[NonTerminal::INIT_OPT] = { SyntaxKind::SEMICOLON };
-    _followSets[NonTerminal::ASSIGN_VALUE] = { SyntaxKind::SEMICOLON };
-    _followSets[NonTerminal::EXPR_LIST] = { SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY };
+        SyntaxKind::SEMICOLON};
+    _followSets[NonTerminal::EXPR_OPT] = {SyntaxKind::SEMICOLON};
+    _followSets[NonTerminal::INIT_OPT] = {SyntaxKind::SEMICOLON};
+    _followSets[NonTerminal::ASSIGN_VALUE] = {SyntaxKind::SEMICOLON};
+    _followSets[NonTerminal::EXPR_LIST] = {SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY};
     _followSets[NonTerminal::ASSIGN_TARGET] = {
         SyntaxKind::EQUALS, SyntaxKind::PLUS_EQUALS, SyntaxKind::MINUS_EQUALS, SyntaxKind::SLASH_EQUALS,
         SyntaxKind::STAR_EQUALS, SyntaxKind::AMPERSAND_EQUALS, SyntaxKind::PIPE_EQUALS, SyntaxKind::CARET_EQUALS,
-        SyntaxKind::TILDE_EQUALS
-    };
+        SyntaxKind::TILDE_EQUALS};
     _followSets[NonTerminal::ASSIGN_OP] = {
-        SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR
-    };
-    _followSets[NonTerminal::CONDITION_OP] = { SyntaxKind::CLOSED_PAREN };
+        SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR};
+    _followSets[NonTerminal::CONDITION_OP] = {SyntaxKind::CLOSED_PAREN};
     _followSets[NonTerminal::BODY] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::OPEN_CURLY, SyntaxKind::CLOSED_CURLY,
         SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
         SyntaxKind::KEYWORD_CHAR, SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_IF, SyntaxKind::KEYWORD_ELSE,
-        SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR
-    };
-    _followSets[NonTerminal::FOR_INIT] = { SyntaxKind::SEMICOLON };
-    _followSets[NonTerminal::FOR_UPDATE] = { SyntaxKind::CLOSED_PAREN };
+        SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR};
+    _followSets[NonTerminal::FOR_INIT] = {SyntaxKind::SEMICOLON};
+    _followSets[NonTerminal::FOR_UPDATE] = {SyntaxKind::CLOSED_PAREN};
     _followSets[NonTerminal::INCREMENT_EXPR] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
-        SyntaxKind::SEMICOLON
-    };
-    _followSets[NonTerminal::EXPR_LIST_NON_EMPTY] = { SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA };
+        SyntaxKind::SEMICOLON};
+    _followSets[NonTerminal::EXPR_LIST_NON_EMPTY] = {SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA};
     _followSets[NonTerminal::LOGICAL_EXPR] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
-        SyntaxKind::SEMICOLON
-    };
+        SyntaxKind::SEMICOLON};
     _followSets[NonTerminal::ADDRESS_EXPR] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
-        SyntaxKind::SEMICOLON
-    };
+        SyntaxKind::SEMICOLON};
     _followSets[NonTerminal::DEREFERENCE_EXPR] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
-        SyntaxKind::SEMICOLON
-    };
+        SyntaxKind::SEMICOLON};
     _followSets[NonTerminal::RELATIONAL_EXPR] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
-        SyntaxKind::SEMICOLON
-    };
+        SyntaxKind::SEMICOLON};
     _followSets[NonTerminal::ADD_EXPR] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
-        SyntaxKind::SEMICOLON
-    };
+        SyntaxKind::SEMICOLON};
     _followSets[NonTerminal::MUL_EXPR] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
-        SyntaxKind::STAR, SyntaxKind::SEMICOLON
-    };
+        SyntaxKind::STAR, SyntaxKind::SEMICOLON};
     _followSets[NonTerminal::UNARY_EXPR] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
-        SyntaxKind::STAR, SyntaxKind::SEMICOLON
-    };
+        SyntaxKind::STAR, SyntaxKind::SEMICOLON};
     _followSets[NonTerminal::PRIMARY_EXPR] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
-        SyntaxKind::STAR, SyntaxKind::SEMICOLON
-    };
+        SyntaxKind::STAR, SyntaxKind::SEMICOLON};
 
     // **FOLLOW Sets for Terminals**
     // Common set for tokens that start expressions (used by operators)
     std::unordered_set<SyntaxKind> exprStarters = {
         SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::INTEGER_LITERAL, SyntaxKind::FLOAT_LITERAL,
         SyntaxKind::CHAR_LITERAL, SyntaxKind::STRING_LITERAL, SyntaxKind::STAR, SyntaxKind::AMPERSAND,
-        SyntaxKind::BANG, SyntaxKind::PLUS_PLUS, SyntaxKind::MINUS_MINUS, SyntaxKind::MINUS
-    };
+        SyntaxKind::BANG, SyntaxKind::PLUS_PLUS, SyntaxKind::MINUS_MINUS, SyntaxKind::MINUS};
 
     // Binary operators (e.g., +, -, *, /, ||, &&, ==, etc.)
     _followTerminalsSets[SyntaxKind::PIPE_PIPE] = exprStarters;
@@ -2196,19 +2174,17 @@ void Parser::initFollowSets() {
     _followTerminalsSets[SyntaxKind::TILDE_EQUALS] = exprStarters;
 
     // Unary operators
-    _followTerminalsSets[SyntaxKind::AMPERSAND] = { SyntaxKind::IDENTIFIER }; // Address-of
-    _followTerminalsSets[SyntaxKind::BANG] = exprStarters; // Logical not
-    _followTerminalsSets[SyntaxKind::MINUS] = exprStarters; // Unary minus
+    _followTerminalsSets[SyntaxKind::AMPERSAND] = {SyntaxKind::IDENTIFIER}; // Address-of
+    _followTerminalsSets[SyntaxKind::BANG] = exprStarters;                  // Logical not
+    _followTerminalsSets[SyntaxKind::MINUS] = exprStarters;                 // Unary minus
 
     // Increment/Decrement operators
     _followTerminalsSets[SyntaxKind::PLUS_PLUS] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA,
-        SyntaxKind::CLOSED_BRACKET, SyntaxKind::SEMICOLON
-    };
+        SyntaxKind::CLOSED_BRACKET, SyntaxKind::SEMICOLON};
     _followTerminalsSets[SyntaxKind::MINUS_MINUS] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA,
-        SyntaxKind::CLOSED_BRACKET, SyntaxKind::SEMICOLON
-    };
+        SyntaxKind::CLOSED_BRACKET, SyntaxKind::SEMICOLON};
 
     // Literals
     std::unordered_set<SyntaxKind> literalFollow = {
@@ -2216,27 +2192,25 @@ void Parser::initFollowSets() {
         SyntaxKind::SEMICOLON, SyntaxKind::PLUS, SyntaxKind::MINUS, SyntaxKind::STAR, SyntaxKind::SLASH,
         SyntaxKind::PIPE, SyntaxKind::AMPERSAND, SyntaxKind::CARET, SyntaxKind::PIPE_PIPE, SyntaxKind::AMPERSAND_AMPERSAND,
         SyntaxKind::EQUALS_EQUALS, SyntaxKind::BANG_EQUALS, SyntaxKind::LESS_THAN, SyntaxKind::GREATER_THAN,
-        SyntaxKind::LESS_THAN_EQUALS, SyntaxKind::GREATER_THAN_EQUALS
-    };
+        SyntaxKind::LESS_THAN_EQUALS, SyntaxKind::GREATER_THAN_EQUALS};
     _followTerminalsSets[SyntaxKind::INTEGER_LITERAL] = literalFollow;
     _followTerminalsSets[SyntaxKind::FLOAT_LITERAL] = literalFollow;
     _followTerminalsSets[SyntaxKind::CHAR_LITERAL] = literalFollow;
     _followTerminalsSets[SyntaxKind::STRING_LITERAL] = literalFollow;
 
     // Keywords
-    _followTerminalsSets[SyntaxKind::KEYWORD_FN] = { SyntaxKind::IDENTIFIER };
-    _followTerminalsSets[SyntaxKind::KEYWORD_INT] = { SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_CURLY, SyntaxKind::OPEN_BRACKET, SyntaxKind::STAR };
-    _followTerminalsSets[SyntaxKind::KEYWORD_FLOAT] = { SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_CURLY, SyntaxKind::OPEN_BRACKET, SyntaxKind::STAR };
-    _followTerminalsSets[SyntaxKind::KEYWORD_CHAR] = { SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_CURLY, SyntaxKind::OPEN_BRACKET, SyntaxKind::STAR };
+    _followTerminalsSets[SyntaxKind::KEYWORD_FN] = {SyntaxKind::IDENTIFIER};
+    _followTerminalsSets[SyntaxKind::KEYWORD_INT] = {SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_CURLY, SyntaxKind::OPEN_BRACKET, SyntaxKind::STAR};
+    _followTerminalsSets[SyntaxKind::KEYWORD_FLOAT] = {SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_CURLY, SyntaxKind::OPEN_BRACKET, SyntaxKind::STAR};
+    _followTerminalsSets[SyntaxKind::KEYWORD_CHAR] = {SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_CURLY, SyntaxKind::OPEN_BRACKET, SyntaxKind::STAR};
     _followTerminalsSets[SyntaxKind::KEYWORD_RET] = exprStarters; // Followed by optional expression
-    _followTerminalsSets[SyntaxKind::KEYWORD_IF] = { SyntaxKind::OPEN_PAREN };
+    _followTerminalsSets[SyntaxKind::KEYWORD_IF] = {SyntaxKind::OPEN_PAREN};
     _followTerminalsSets[SyntaxKind::KEYWORD_ELSE] = {
         SyntaxKind::OPEN_CURLY, SyntaxKind::IDENTIFIER, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
         SyntaxKind::KEYWORD_CHAR, SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_IF, SyntaxKind::KEYWORD_WHILE,
-        SyntaxKind::KEYWORD_FOR
-    };
-    _followTerminalsSets[SyntaxKind::KEYWORD_WHILE] = { SyntaxKind::OPEN_PAREN };
-    _followTerminalsSets[SyntaxKind::KEYWORD_FOR] = { SyntaxKind::OPEN_PAREN };
+        SyntaxKind::KEYWORD_FOR};
+    _followTerminalsSets[SyntaxKind::KEYWORD_WHILE] = {SyntaxKind::OPEN_PAREN};
+    _followTerminalsSets[SyntaxKind::KEYWORD_FOR] = {SyntaxKind::OPEN_PAREN};
 
     // Punctuation
     _followTerminalsSets[SyntaxKind::OPEN_PAREN] = exprStarters;
@@ -2245,36 +2219,31 @@ void Parser::initFollowSets() {
         SyntaxKind::SEMICOLON, SyntaxKind::PLUS, SyntaxKind::MINUS, SyntaxKind::STAR, SyntaxKind::SLASH,
         SyntaxKind::PIPE, SyntaxKind::AMPERSAND, SyntaxKind::CARET, SyntaxKind::PIPE_PIPE, SyntaxKind::AMPERSAND_AMPERSAND,
         SyntaxKind::EQUALS_EQUALS, SyntaxKind::BANG_EQUALS, SyntaxKind::LESS_THAN, SyntaxKind::GREATER_THAN,
-        SyntaxKind::LESS_THAN_EQUALS, SyntaxKind::GREATER_THAN_EQUALS
-    };
+        SyntaxKind::LESS_THAN_EQUALS, SyntaxKind::GREATER_THAN_EQUALS};
     _followTerminalsSets[SyntaxKind::OPEN_CURLY] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::OPEN_CURLY, SyntaxKind::CLOSED_CURLY,
         SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
         SyntaxKind::KEYWORD_CHAR, SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_IF, SyntaxKind::KEYWORD_WHILE,
-        SyntaxKind::KEYWORD_FOR
-    };
+        SyntaxKind::KEYWORD_FOR};
     _followTerminalsSets[SyntaxKind::CLOSED_CURLY] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::OPEN_CURLY, SyntaxKind::CLOSED_CURLY,
         SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
         SyntaxKind::KEYWORD_CHAR, SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_IF, SyntaxKind::KEYWORD_ELSE,
-        SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR
-    };
+        SyntaxKind::KEYWORD_WHILE, SyntaxKind::KEYWORD_FOR};
     _followTerminalsSets[SyntaxKind::OPEN_BRACKET] = exprStarters;
     _followTerminalsSets[SyntaxKind::CLOSED_BRACKET] = {
         SyntaxKind::CLOSED_PAREN, SyntaxKind::CLOSED_CURLY, SyntaxKind::COMMA, SyntaxKind::CLOSED_BRACKET,
         SyntaxKind::SEMICOLON, SyntaxKind::PLUS, SyntaxKind::MINUS, SyntaxKind::STAR, SyntaxKind::SLASH,
         SyntaxKind::PIPE, SyntaxKind::AMPERSAND, SyntaxKind::CARET, SyntaxKind::PIPE_PIPE, SyntaxKind::AMPERSAND_AMPERSAND,
         SyntaxKind::EQUALS_EQUALS, SyntaxKind::BANG_EQUALS, SyntaxKind::LESS_THAN, SyntaxKind::GREATER_THAN,
-        SyntaxKind::LESS_THAN_EQUALS, SyntaxKind::GREATER_THAN_EQUALS
-    };
+        SyntaxKind::LESS_THAN_EQUALS, SyntaxKind::GREATER_THAN_EQUALS};
     _followTerminalsSets[SyntaxKind::COMMA] = exprStarters;
     _followTerminalsSets[SyntaxKind::SEMICOLON] = {
         SyntaxKind::IDENTIFIER, SyntaxKind::OPEN_PAREN, SyntaxKind::OPEN_CURLY, SyntaxKind::CLOSED_CURLY,
         SyntaxKind::INTEGER_LITERAL, SyntaxKind::STAR, SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT,
         SyntaxKind::KEYWORD_CHAR, SyntaxKind::KEYWORD_RET, SyntaxKind::KEYWORD_IF, SyntaxKind::KEYWORD_WHILE,
-        SyntaxKind::KEYWORD_FOR
-    };
-    _followTerminalsSets[SyntaxKind::RIGHT_ARROW] = { SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT, SyntaxKind::KEYWORD_CHAR };
+        SyntaxKind::KEYWORD_FOR};
+    _followTerminalsSets[SyntaxKind::RIGHT_ARROW] = {SyntaxKind::KEYWORD_INT, SyntaxKind::KEYWORD_FLOAT, SyntaxKind::KEYWORD_CHAR};
 
     // Identifier
     _followTerminalsSets[SyntaxKind::IDENTIFIER] = {
@@ -2285,6 +2254,5 @@ void Parser::initFollowSets() {
         SyntaxKind::CLOSED_BRACKET, SyntaxKind::SEMICOLON, SyntaxKind::PLUS, SyntaxKind::MINUS, SyntaxKind::STAR,
         SyntaxKind::SLASH, SyntaxKind::PIPE, SyntaxKind::AMPERSAND, SyntaxKind::CARET, SyntaxKind::PIPE_PIPE,
         SyntaxKind::AMPERSAND_AMPERSAND, SyntaxKind::EQUALS_EQUALS, SyntaxKind::BANG_EQUALS, SyntaxKind::LESS_THAN,
-        SyntaxKind::GREATER_THAN, SyntaxKind::LESS_THAN_EQUALS, SyntaxKind::GREATER_THAN_EQUALS
-    };
+        SyntaxKind::GREATER_THAN, SyntaxKind::LESS_THAN_EQUALS, SyntaxKind::GREATER_THAN_EQUALS};
 }

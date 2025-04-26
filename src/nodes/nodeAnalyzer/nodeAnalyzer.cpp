@@ -8,7 +8,7 @@ bool isFuncCall(ASTNode *node)
     if (node->GetType() == NON_TERMINAL)
     {
         NonTerminalNode *ntNode = ((NonTerminalNode *)node);
-        if (ntNode->getNonTerminalKind() == PRIMARY_EXPR)
+        if (ntNode->getNonTerminalKind() == PRIMARY_EXPR || ntNode->getNonTerminalKind() == SIMPLE_STMT)
         {
             vector<ASTNode *> children = ntNode->GetChildren();
 
@@ -22,6 +22,7 @@ bool isFuncCall(ASTNode *node)
 
     return res;
 }
+
 
 bool isArrDeref(ASTNode *node)
 {
@@ -124,7 +125,7 @@ vector<NonTerminalNode *> getFunctionParamNodes(NonTerminalNode *paramListNode)
     return res;
 }
 
-void getFunctionCallParamNodesHelper(NonTerminalNode *exprListNonEmptyNode, vector<NonTerminalNode *> *exprNodes)
+void getFunctionCallArgsNodesHelper(NonTerminalNode *exprListNonEmptyNode, vector<NonTerminalNode *> *exprNodes)
 {
     vector<ASTNode *> childern = exprListNonEmptyNode->GetChildren();
     int numOfChildren = childern.size();
@@ -140,13 +141,13 @@ void getFunctionCallParamNodesHelper(NonTerminalNode *exprListNonEmptyNode, vect
     {
         exprNode = ((NonTerminalNode *)(childern[2]));
         exprNodes->push_back(exprNode);
-        getFunctionCallParamNodesHelper((NonTerminalNode *)childern[0], exprNodes);
+        getFunctionCallArgsNodesHelper((NonTerminalNode *)childern[0], exprNodes);
     }
 }
 
-vector<NonTerminalNode *> getFunctionCallParamNodes(NonTerminalNode *paramListNode)
+vector<NonTerminalNode *> getFunctionCallArgsNodes(NonTerminalNode *exprListNode)
 {
-    vector<ASTNode *> childern = paramListNode->GetChildren();
+    vector<ASTNode *> childern = exprListNode->GetChildren();
     vector<NonTerminalNode *> res;
 
     if (childern.size() > 0)

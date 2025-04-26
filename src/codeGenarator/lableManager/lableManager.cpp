@@ -11,20 +11,22 @@ int LabelManager::create()
 
 string LabelManager::getName(int lableNum)
 {
-    return ".L" + lableNum;
+    stringstream res;
+    res << "L" << lableNum;
+    return res.str();
 }
 
 string LabelManager::getFunctionLable(string funcName)
 {
-    return "function_" + funcName + ":";
+    return "function_" + funcName ;
 }
 
 string LabelManager::getFunctionPreambleLable(string funcName)
 {
-    return "function_" + funcName + "_preamble:";
+    return "function_" + funcName + "_preamble";
 }
 
 string LabelManager::getFunctionEpilogueLable(string funcName)
 {
-    return "function_" + funcName + "_epilogue:";
+    return "function_" + funcName + "_epilogue";
 }

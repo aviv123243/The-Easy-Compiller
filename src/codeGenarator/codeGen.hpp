@@ -17,6 +17,7 @@
 #include <stack>
 #include <fstream>
 
+#define NUM_OF_BUILT_IN_FUNCTIONS 2
 #define SIZE_OF_STACK_VAR 8
 
 using namespace std;
@@ -37,25 +38,45 @@ private:
     int assignStackOffset(scope *currScope);
 
     void funcCodeGen(NonTerminalNode *node);
+    void stmtListCodeGen(NonTerminalNode *node);
     void stmtCodeGen(NonTerminalNode *node);
     void simpleStmtCodeGen(NonTerminalNode *node);
+
+    void varDeclExprCodeGen(NonTerminalNode *node);
+
+    void ifStmtCodeGen(NonTerminalNode *node);
+
+    void conditionOptionCodeGen(NonTerminalNode *node);
+
+    void whileStmtCodeGen(NonTerminalNode *node);
+
+    void forStmtCodeGen(NonTerminalNode *node);
+
+    void forInitCodeGen(NonTerminalNode *node);
+
+    void forUpdateCodeGen(NonTerminalNode *node);
+
+    void bodyCodeGen(NonTerminalNode *node);
+
+    void assignExpressionCodeGen(NonTerminalNode *node);
 
     void exprOptCodeGen(NonTerminalNode *node);
     void exprCodeGen(ASTNode *node);
     void addExprCodeGen(NonTerminalNode *node);
     void mulExprCodeGen(NonTerminalNode *node);
     void unaryExprCodeGen(NonTerminalNode *node);
+    void neg(int reg);
+    void compareToZero(int reg);
     void primaryExprCodeGen(NonTerminalNode *node);
     void callExprCodeGen(NonTerminalNode *node);
 
     void logicalExprCodeGen(NonTerminalNode *node);
     void relationalExprCodeGen(NonTerminalNode *node);
+    void pushArgs(vector<NonTerminalNode *> args);
     void incrementExprCodeGen(NonTerminalNode *node);
-    void pointerExprCodeGen(NonTerminalNode *node);
     void addressExprCodeGen(NonTerminalNode *node);
     void dereferenceExprCodeGen(NonTerminalNode *node);
 
-    void castCharToFloat(int charReg, int intReg);
     void castToFloat(int intReg, int xmmReg);
 
     void pushAllCodeGen();
@@ -66,11 +87,16 @@ private:
     int layoutLocals(scope *s, int runningOffset);
     void loadFunctionVariables(functionEntry *func);
     void loadFunctionVar(string srcAddr, string dstAddr, int reg);
-    void movCommendCodeGen(string leftReg, string rightReg);
+    void push(int reg);
+    void mov(string leftReg, string rightReg);
+    void loadMemPtrValue(string srcAddr, int reg);
     void loadMem(string srcAddr, int reg);
+    void storeMemPtrValue(string srcAddr, int reg);
     void storeMem(string srcAddr, int reg);
     string getVarAddr(const std::string &name) const;
 
+    void printIntFuncCodeGen();
+    void printFloatFuncCodeGen();
     void floatMacroCodeGen();
 
 public:

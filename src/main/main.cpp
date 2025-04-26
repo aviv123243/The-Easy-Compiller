@@ -10,23 +10,20 @@
 #include <fstream>
 
 using namespace std;
+string getFileBaseName(string fileName);
 
 int main(int argc, char **argv)
 {
     string filePath;
 
-    if (argc > 2)
+    if (argc != 2)
     {
         cout << "ERROR: Please enter the input file";
         return 1;
     }
 
-    //-------ONLY FOR CONVENIENCE---------
-    else if (argc == 1)
-    {
-        filePath = "..\\demos\\DEMO3.EZ";
-    }
-    //-------------------------------------
+    filePath = argv[1];
+    string baseName = getFileBaseName(filePath);
 
     ErrorHandler errorHandler;
     SymbolTable symbolTable;
@@ -45,11 +42,12 @@ int main(int argc, char **argv)
         }
 
         SemanticAnalyzer semantic(&errorHandler, &symbolTable);
-        Parser parser(tokens, 183, &errorHandler,&semantic);
+        Parser parser(tokens, 185, &errorHandler, &semantic);
 
         ASTNode *root = parser.parse();
 
         PrintParseTree(root);
+        // parser.printRules();
 
         if (errorHandler.getErrorCount() > 0)
         {
@@ -59,12 +57,29 @@ int main(int argc, char **argv)
         else
         {
             cout << "Parsing completed successfully!" << endl;
-            //CodeGenarator codeGen("out2.asm",root,&symbolTable);
-            //codeGen.genCode();
+            cout << "Generating code to " << baseName << ".asm" << endl;
+            CodeGenarator codeGen(baseName + ".asm", root, &symbolTable);
+            codeGen.genCode();
         }
-        
+
         cout << "compiling finished!";
-        //parser.printRules();
-        //symbolTable.print();
+
+        // symbolTable.print();
     }
+}
+
+string getFileBaseName(string fileName)
+{
+
+    size_t lastSlash = fileName.find_last_of("\\/");
+    if (lastSlash == string::npos)
+        lastSlash = -1; 
+
+    size_t lastDot = fileName.find_last_of('.');
+    if (lastDot == string::npos)
+        lastDot = fileName.length(); 
+
+    string baseName = fileName.substr(lastSlash + 1, lastDot - lastSlash - 1);
+
+    return baseName;
 }

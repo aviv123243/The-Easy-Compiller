@@ -22,7 +22,6 @@ void ScratchManager::initRegArr()
     _regArr[regIndex++] = scratchRegister{"r15", false};
 
     // float registers
-    _regArr[regIndex++] = scratchRegister{"xmm0", false};
     _regArr[regIndex++] = scratchRegister{"xmm1", false};
     _regArr[regIndex++] = scratchRegister{"xmm2", false};
     _regArr[regIndex++] = scratchRegister{"xmm3", false};

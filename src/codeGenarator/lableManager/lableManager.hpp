@@ -1,6 +1,7 @@
 #ifndef __LABLE_MANAGER
 #define __LABLE_MANAGER
 
+#include <sstream>
 #include <string>
 
 using namespace std;

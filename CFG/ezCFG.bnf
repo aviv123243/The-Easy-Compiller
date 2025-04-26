@@ -1,9 +1,9 @@
-<Program> ::= <empty>
-           | <Program> <FunctionDecl>
+<Program> ::= ε
+            | <Program> <FunctionDecl>
 
 <FunctionDecl> ::= KEYWORD_FN IDENTIFIER OPEN_PAREN <ParamList> CLOSED_PAREN RIGHT_ARROW <Type> OPEN_CURLY <StmtList> CLOSED_CURLY
 
-<ParamList> ::= <empty>
+<ParamList> ::= ε
              | <ParamListNonEmpty>
 
 <ParamListNonEmpty> ::= <Param>
@@ -19,7 +19,7 @@
             | KEYWORD_FLOAT
             | KEYWORD_CHAR
 
-<StmtList> ::= <empty>
+<StmtList> ::= ε
             | <StmtList> <Stmt>
 
 <Stmt> ::= <SimpleStmt> SEMICOLON
@@ -30,12 +30,12 @@
 
 <SimpleStmt> ::= <VarDeclExpr>
               | <AssignExpr>
-              | <Expr>
+              | IDENTIFIER OPEN_PAREN <ExprList> CLOSED_PAREN
               | KEYWORD_RET <ExprOpt>
 
 <VarDeclExpr> ::= <Type> IDENTIFIER <InitOpt>
 
-<InitOpt> ::= <empty>
+<InitOpt> ::= ε
            | EQUALS <AssignValue>
 
 <AssignValue> ::= <Expr>
@@ -67,14 +67,14 @@
 
 <ForStmt> ::= KEYWORD_FOR OPEN_PAREN <ForInit> SEMICOLON <ExprOpt> SEMICOLON <ForUpdate> CLOSED_PAREN <Body>
 
-<ForInit> ::= <empty>
+<ForInit> ::= ε
            | <VarDeclExpr>
            | <AssignExpr>
 
-<ExprOpt> ::= <empty>
+<ExprOpt> ::= ε
            | <Expr>
 
-<ForUpdate> ::= <empty>
+<ForUpdate> ::= ε
              | <AssignExpr>
              | <IncrementExpr>
 
@@ -84,16 +84,14 @@
         | <WhileStmt>
         | <ForStmt>
 
-<ExprList> ::= <empty>
+<ExprList> ::= ε
             | <ExprListNonEmpty>
 
 <ExprListNonEmpty> ::= <Expr>
                     | <ExprListNonEmpty> COMMA <Expr>
 
 <Expr> ::= <LogicalExpr>
-        | <IncrementExpr>
         | <AddressExpr>
-        | <DereferenceExpr>
 
 <LogicalExpr> ::= <RelationalExpr>
                | <LogicalExpr> PIPE_PIPE <RelationalExpr>
@@ -138,3 +136,5 @@
                | CHAR_LITERAL
                | OPEN_PAREN <Expr> CLOSED_PAREN
                | IDENTIFIER OPEN_PAREN <ExprList> CLOSED_PAREN
+               | <DereferenceExpr>
+               | <IncrementExpr>

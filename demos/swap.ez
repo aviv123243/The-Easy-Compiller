@@ -1,0 +1,30 @@
+fn swap(int *x,int *y) => int{
+    <> swaping to integers using xor
+    <> while reding and writing from memory using pointers
+    *x = *x ^ *y;
+    *y = *x ^ *y;
+    *x = *x ^ *y;
+       
+    ret 0;
+}
+
+fn main() => int 
+{
+    <> set the initial variables 
+    int x = 2;
+    int y = 7;
+
+    <> print them to the screen
+    printInt(x);
+    printInt(y);
+
+    <> invoke swap!
+    swap(&x,&y);
+
+    <> print again
+    printInt(x);
+    printInt(y);
+    
+    <> return 0 to the operating system
+    ret 0;
+}

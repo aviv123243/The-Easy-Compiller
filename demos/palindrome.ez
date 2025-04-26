@@ -1,0 +1,45 @@
+fn reverse(int x) => int
+{
+    int res = 0;
+    int div10;
+    int dig;
+
+    while(x != 0)
+    {
+        <> dividing by 10
+        div10 = x/10;
+
+        <> calculating the right-most digit
+        dig = x - div10*10;
+
+        <> adding the digit to the result
+        res = res * 10;
+        res = res + dig;
+
+        <> updating the number
+        x = div10;
+    }
+
+    <> returning the result
+    ret res;
+}
+
+fn isPalindrome(int x) => int
+{
+    <> getting the reverse
+    int rev = reverse(x);
+
+    <> comparing it to the original number
+    ret x == rev;
+}
+
+fn main() => int
+{
+    int x = 1221;
+    int res = reverse(x);
+
+    printInt(res);
+    printInt(isPalindrome(x));
+
+    ret 0;
+}

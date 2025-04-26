@@ -13,9 +13,6 @@ file(GLOB_RECURSE SOURCES
     "src/*.cpp"
 )
 
-# Exclude any unwanted files if needed (optional)
-# list(FILTER SOURCES EXCLUDE REGEX "bison.*")
-
 # Add executable
 add_executable(tec ${SOURCES})
 

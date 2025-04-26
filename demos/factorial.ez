@@ -1,0 +1,27 @@
+fn fact(int x) => int
+{
+    <> declaring variables
+    int i;
+    int res = 1;
+
+    <> looping to calculate the factorial result
+    for(i = x;i > 0;i--) res = res * i;
+    
+    <> returning the result
+    ret res;
+}
+
+fn main() => int
+{
+    <> setting the initial input
+    int x = 4;
+
+    <> calling the function and printing
+    printInt(fact(x));
+
+    <> returning 0 to the operating system
+    ret 0;
+}
+
+
+
