@@ -75,6 +75,8 @@ L0:
 	cqo
 	idiv r12
 	mov r11, rax
+	mov r12, QWORD ptr [rbp - 16]
+	imul r11, r12
 	sub r10, r11
 	mov rax, r10
 	jmp function_mod_epilogue
@@ -139,7 +141,7 @@ function_main:
 	push rbp
 	mov rbp, rsp
 	sub rsp, 16
-	mov r14, 27
+	mov r14, 17
 	mov QWORD ptr [rbp - 8], r14
 	mov r14, QWORD ptr [rbp - 8]
 	push r14

@@ -41,35 +41,22 @@ private:
     void stmtListCodeGen(NonTerminalNode *node);
     void stmtCodeGen(NonTerminalNode *node);
     void simpleStmtCodeGen(NonTerminalNode *node);
-
     void varDeclExprCodeGen(NonTerminalNode *node);
-
     void ifStmtCodeGen(NonTerminalNode *node);
-
     void conditionOptionCodeGen(NonTerminalNode *node);
-
     void whileStmtCodeGen(NonTerminalNode *node);
-
     void forStmtCodeGen(NonTerminalNode *node);
-
     void forInitCodeGen(NonTerminalNode *node);
-
     void forUpdateCodeGen(NonTerminalNode *node);
-
     void bodyCodeGen(NonTerminalNode *node);
-
     void assignExpressionCodeGen(NonTerminalNode *node);
-
     void exprOptCodeGen(NonTerminalNode *node);
     void exprCodeGen(ASTNode *node);
     void addExprCodeGen(NonTerminalNode *node);
     void mulExprCodeGen(NonTerminalNode *node);
     void unaryExprCodeGen(NonTerminalNode *node);
-    void neg(int reg);
-    void compareToZero(int reg);
     void primaryExprCodeGen(NonTerminalNode *node);
     void callExprCodeGen(NonTerminalNode *node);
-
     void logicalExprCodeGen(NonTerminalNode *node);
     void relationalExprCodeGen(NonTerminalNode *node);
     void pushArgs(vector<NonTerminalNode *> args);
@@ -79,9 +66,6 @@ private:
 
     void castToFloat(int intReg, int xmmReg);
 
-    void pushAllCodeGen();
-    void popAllCodeGen();
-
     int sizeOfType(const valType &t) const;
     string nameOfType(const valType &t) const;
     int layoutLocals(scope *s, int runningOffset);
@@ -89,11 +73,13 @@ private:
     void loadFunctionVar(string srcAddr, string dstAddr, int reg);
     void push(int reg);
     void mov(string leftReg, string rightReg);
+    void neg(int reg);
+    void compareToZero(int reg);
     void loadMemPtrValue(string srcAddr, int reg);
     void loadMem(string srcAddr, int reg);
     void storeMemPtrValue(string srcAddr, int reg);
     void storeMem(string srcAddr, int reg);
-    string getVarAddr(const std::string &name) const;
+    string getVarAddr(const string &name) const;
 
     void printIntFuncCodeGen();
     void printFloatFuncCodeGen();

@@ -36,18 +36,11 @@ int main(int argc, char **argv)
     }
     else
     {
-        for (int i = 0; i < tokens.size(); i++)
-        {
-            cout << syntaxTokenToString(*tokens[i]) << endl;
-        }
-
         SemanticAnalyzer semantic(&errorHandler, &symbolTable);
         Parser parser(tokens, 185, &errorHandler, &semantic);
 
         ASTNode *root = parser.parse();
 
-        PrintParseTree(root);
-        // parser.printRules();
 
         if (errorHandler.getErrorCount() > 0)
         {
@@ -63,8 +56,6 @@ int main(int argc, char **argv)
         }
 
         cout << "compiling finished!";
-
-        // symbolTable.print();
     }
 }
 

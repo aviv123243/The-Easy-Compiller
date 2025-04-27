@@ -88,7 +88,7 @@ function_main:
 	push rbp
 	mov rbp, rsp
 	sub rsp, 16
-	mov r12, 4
+	mov r12, 5
 	mov QWORD ptr [rbp - 8], r12
 	mov r12, QWORD ptr [rbp - 8]
 	push r12

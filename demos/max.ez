@@ -1,0 +1,20 @@
+fn max(int x,int y) => int
+{
+    int MAX;
+
+    if(x > y) {
+        MAX = x;
+    }else
+    {
+        MAX = y;
+    }
+
+    ret MAX;
+}
+
+fn main() => int
+{
+    printInt(max(2,7));
+}
+
+

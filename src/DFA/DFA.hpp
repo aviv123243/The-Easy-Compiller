@@ -16,10 +16,11 @@ private:
     int **_mat;
     int _stateCount;
     int _startState;
+
     vector<int> _endStates;
 
     unordered_map<char, int> _alphabetToIndex;
-
+    
     void isStateExistsWErr(int state, bool wantedResult) const;
     void isSymbolExistsErr(char alpha, bool wantedResult) const;
 

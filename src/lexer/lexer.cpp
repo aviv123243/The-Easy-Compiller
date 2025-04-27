@@ -9,6 +9,8 @@
 #include <iostream>
 #include <fstream>
 
+// #define LEXER_DEBUG
+
 using namespace std;
 
 SyntaxKind endStateToSyntaxKind[] = {
@@ -50,6 +52,14 @@ vector<SyntaxToken *> Lexer::getTokens()
     }
 
     tokens.push_back(currToken); // pushing the EOF token
+
+    #ifdef LEXER_DEBUG
+        for (int i = 0; i < tokens.size(); i++)
+            {
+                cout << syntaxTokenToString(*tokens[i]) << endl;
+            }
+    #endif 
+
     return tokens;
 }
 
@@ -131,6 +141,7 @@ SyntaxToken *Lexer::getNextToken()
             _errorHandler->addError(new SyntaxError("Unexpected token error", _currLine, _currColumn));
         }
     }
+
 
     return resToken;
 }

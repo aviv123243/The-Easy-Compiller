@@ -50,41 +50,6 @@ void Parser::addProductionRule(productionRule rule)
     _rules.push_back(rule);
 }
 
-bool Parser::match(ASTNode *node, SyntaxKind type)
-{
-    if (node->GetType() != GrammarSymbolType::TERMINAL)
-    {
-        _errorHandler->addError(new SyntacticError());
-        return false;
-    }
-
-    TerminalNode *terminalNode = (TerminalNode *)node;
-    if (terminalNode->getTerminalKind() != type)
-    {
-        _errorHandler->addError(new SyntacticError(terminalNode->getToken()));
-        return false;
-    }
-
-    return true;
-}
-
-bool Parser::match(ASTNode *node, NonTerminal type)
-{
-    bool res = true;
-
-    if (node->GetType() != GrammarSymbolType::NON_TERMINAL)
-    {
-        res = false;
-    }
-
-    if (((NonTerminalNode *)node)->getNonTerminalKind() != type)
-    {
-        res = false;
-    }
-
-    return res;
-}
-
 action Parser::getCurrAction()
 {
     return _actionTable.get(_stack.top().state, peek(0)->kind);
@@ -160,16 +125,6 @@ void Parser::reduceStatmentToNode(NonTerminalNode *node, productionRule rule)
     // Pop from stack and create the new node
     for (int i = rule.getNumOfRightSideSymbols() - 1; i >= 0; i--)
     {
-        if (rule.getType(i) == GrammarSymbolType::TERMINAL)
-        {
-            match(_stack.top().node, rule.getTerminal(i));
-        }
-
-        if (rule.getType(i) == GrammarSymbolType::NON_TERMINAL)
-        {
-            match(_stack.top().node, rule.getNonTerminal(i));
-        }
-
         node->AddChildToFront(_stack.top().node);
         _stack.pop();
     }
@@ -229,6 +184,10 @@ ASTNode *Parser::parse()
     _semanticAnalyzer->checkForMainFunction(); // check if the main function is declared
 
     _stack.pop(); // pop the end of file token
+
+    #ifdef PARSER_DEBUG
+    PrintParseTree(_stack.top().node);
+    #endif
 
     return _stack.top().node;
 }

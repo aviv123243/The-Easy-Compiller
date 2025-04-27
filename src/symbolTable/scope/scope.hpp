@@ -69,16 +69,12 @@ public:
 
     void printScope()
     {
-        cout << "Number of entries: " << _tableEntries.size() << endl;
-        cout << "scope" << endl;
-
+        
         for (auto &entry : _tableEntries)
         {
             // Make sure printTableEntery handles nullptrs or malformed data
             printTableEntery(&entry);
         }
-
-        cout << "Inner Scopes:" << endl;
 
         for (auto *innerScope : _innerScopes)
         {
@@ -92,7 +88,6 @@ public:
             }
         }
 
-        cout << "End of Scope" << endl;
     }
 };
 

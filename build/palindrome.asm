@@ -125,18 +125,32 @@ function_main:
 	push rbp
 	mov rbp, rsp
 	sub rsp, 32
-	mov r10, 1221
+	mov r10, 1234
 	mov QWORD ptr [rbp - 8], r10
 	mov r10, QWORD ptr [rbp - 8]
 	push r10
 	call function_reverse
 	mov r10, rax
-	mov QWORD ptr [rbp - 16], r10
-	mov r10, QWORD ptr [rbp - 16]
 	push r10
 	call function_printInt
 	mov r10, rax
 	mov r10, QWORD ptr [rbp - 8]
+	push r10
+	call function_isPalindrome
+	mov r10, rax
+	push r10
+	call function_printInt
+	mov r10, rax
+	mov r10, 12321
+	mov QWORD ptr [rbp - 16], r10
+	mov r10, QWORD ptr [rbp - 16]
+	push r10
+	call function_reverse
+	mov r10, rax
+	push r10
+	call function_printInt
+	mov r10, rax
+	mov r10, QWORD ptr [rbp - 16]
 	push r10
 	call function_isPalindrome
 	mov r10, rax

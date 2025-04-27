@@ -35,11 +35,14 @@ fn isPalindrome(int x) => int
 
 fn main() => int
 {
-    int x = 1221;
-    int res = reverse(x);
+    int x = 1234;
 
-    printInt(res);
+    printInt(reverse(x));
     printInt(isPalindrome(x));
+
+    int y = 12321;
+    printInt(reverse(y));
+    printInt(isPalindrome(y));
 
     ret 0;
 }

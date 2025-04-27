@@ -47,7 +47,7 @@ function_printFloat:
 	pop rbp
 	ret
 
-function_swap:
+function_swap_xor:
 	push rbp
 	mov rbp, rsp
 	sub rsp, 32
@@ -78,9 +78,43 @@ function_swap:
 	mov QWORD PTR [r10], rbx
 	mov rbx, 0
 	mov rax, rbx
-	jmp function_swap_epilogue
+	jmp function_swap_xor_epilogue
 
-function_swap_epilogue:
+function_swap_xor_epilogue:
+	mov rsp, rbp
+	pop rbp
+	ret
+
+function_swap_add:
+	push rbp
+	mov rbp, rsp
+	sub rsp, 32
+	mov rbx, QWORD PTR [rbp+16]
+	mov QWORD PTR [rbp-8], rbx
+	mov rbx, QWORD PTR [rbp+24]
+	mov QWORD PTR [rbp-16], rbx
+	mov rbx, QWORD ptr [rbp - 8]
+	mov rbx, [rbx]
+	mov r10, QWORD ptr [rbp - 16]
+	mov r10, [r10]
+	add rbx, r10
+	mov r10, QWORD ptr [rbp - 8]
+	mov QWORD PTR [r10], rbx
+	mov rbx, QWORD ptr [rbp - 8]
+	mov rbx, [rbx]
+	mov r10, QWORD ptr [rbp - 16]
+	mov r10, [r10]
+	sub rbx, r10
+	mov r10, QWORD ptr [rbp - 16]
+	mov QWORD PTR [r10], rbx
+	mov rbx, QWORD ptr [rbp - 8]
+	mov rbx, [rbx]
+	mov r10, QWORD ptr [rbp - 16]
+	mov r10, [r10]
+	sub rbx, r10
+	mov r10, QWORD ptr [rbp - 8]
+	mov QWORD PTR [r10], rbx
+function_swap_add_epilogue:
 	mov rsp, rbp
 	pop rbp
 	ret
@@ -105,7 +139,7 @@ function_main:
 	push rbx
 	lea rbx, QWORD ptr [rbp - 8]
 	push rbx
-	call function_swap
+	call function_swap_add
 	mov rbx, rax
 	mov rbx, QWORD ptr [rbp - 8]
 	push rbx

@@ -37,10 +37,6 @@ private:
     void shift(action currAction);
     void reduce(action currAction);
     void reduceStatmentToNode(NonTerminalNode *node, productionRule rule);
-    bool match(ASTNode *node, SyntaxKind type);
-    bool match(ASTNode *node, NonTerminal type);
-
-    
 
     // init functions
     void initProductionRules();
@@ -72,7 +68,6 @@ private:
     // semantic analysis
     SemanticAnalyzer *_semanticAnalyzer;
     void assignNodeType(ASTNode *node);
-
 
 public:
     Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, SemanticAnalyzer *semanticAnalyzer);

@@ -431,7 +431,6 @@ void CodeGenarator::relationalExprCodeGen(NonTerminalNode *node)
 
 void CodeGenarator::addExprCodeGen(NonTerminalNode *node)
 {
-    cout << "<ADD_EXPR> ";
     auto &children = node->GetChildren();
     if (children.size() == 1)
     {
@@ -525,38 +524,6 @@ void CodeGenarator::unaryExprCodeGen(NonTerminalNode *node)
     }
 }
 
-void CodeGenarator::neg(int reg)
-{
-    if (_scratchManager.isFloat(reg))
-    {
-        // -x ==> 0 - x
-
-        int zeroReg = _scratchManager.allocFloat();
-        _outputFile << "xorps " << _scratchManager.getName(zeroReg) << ", " << _scratchManager.getName(zeroReg) << "\n";
-        _outputFile << "\tpsubd " << _scratchManager.getName(zeroReg) << ", " << _scratchManager.getName(reg) << "\n";
-        _outputFile << "\tmovsd " << _scratchManager.getName(reg) << ", " << _scratchManager.getName(zeroReg) << "\n";
-        _scratchManager.free(zeroReg);
-    }
-    else
-    {
-        _outputFile << "\tneg " << _scratchManager.getName(reg) << "\n";
-    }
-}
-
-void CodeGenarator::compareToZero(int reg)
-{
-    if (_scratchManager.isFloat(reg))
-    {
-        int zeroReg = _scratchManager.allocFloat();
-        _outputFile << "xorps " << _scratchManager.getName(zeroReg) << ", " << _scratchManager.getName(zeroReg) << "\n";
-        _outputFile << "\tcomisd " << _scratchManager.getName(reg) << ", " << _scratchManager.getName(zeroReg) << "\n";
-        _scratchManager.free(zeroReg);
-    }
-    else
-    {
-        _outputFile << "\tcmp " << _scratchManager.getName(reg) << ", 0\n";
-    }
-}
 
 void CodeGenarator::primaryExprCodeGen(NonTerminalNode *node)
 {
@@ -716,9 +683,6 @@ int CodeGenarator::assignStackOffset(scope *root)
     return bytes;
 }
 
-void CodeGenarator::pushAllCodeGen() {}
-void CodeGenarator::popAllCodeGen() {}
-
 int CodeGenarator::sizeOfType(const valType &t) const
 {
     int base = 8;
@@ -816,6 +780,40 @@ void CodeGenarator::mov(string leftReg, string rightReg)
     _outputFile << "\t" << movCommand << leftReg << ", " << rightReg << "\n";
 }
 
+
+void CodeGenarator::neg(int reg)
+{
+    if (_scratchManager.isFloat(reg))
+    {
+        // -x ==> 0 - x
+
+        int zeroReg = _scratchManager.allocFloat();
+        _outputFile << "xorps " << _scratchManager.getName(zeroReg) << ", " << _scratchManager.getName(zeroReg) << "\n";
+        _outputFile << "\tpsubd " << _scratchManager.getName(zeroReg) << ", " << _scratchManager.getName(reg) << "\n";
+        _outputFile << "\tmovsd " << _scratchManager.getName(reg) << ", " << _scratchManager.getName(zeroReg) << "\n";
+        _scratchManager.free(zeroReg);
+    }
+    else
+    {
+        _outputFile << "\tneg " << _scratchManager.getName(reg) << "\n";
+    }
+}
+
+void CodeGenarator::compareToZero(int reg)
+{
+    if (_scratchManager.isFloat(reg))
+    {
+        int zeroReg = _scratchManager.allocFloat();
+        _outputFile << "xorps " << _scratchManager.getName(zeroReg) << ", " << _scratchManager.getName(zeroReg) << "\n";
+        _outputFile << "\tcomisd " << _scratchManager.getName(reg) << ", " << _scratchManager.getName(zeroReg) << "\n";
+        _scratchManager.free(zeroReg);
+    }
+    else
+    {
+        _outputFile << "\tcmp " << _scratchManager.getName(reg) << ", 0\n";
+    }
+}
+
 void CodeGenarator::loadMemPtrValue(string srcAddr, int reg)
 {
     string movCommand = "mov ";
@@ -854,7 +852,6 @@ void CodeGenarator::storeMemPtrValue(string srcAddr, int reg)
     if (srcAddr.find("BYTE") != string::npos)
         regName = _scratchManager.getLowerByteName(reg);
 
-        cout << "srcAddr: " << srcAddr << endl;
     int tempReg = _scratchManager.alloc();
     loadMem(srcAddr, tempReg);
 

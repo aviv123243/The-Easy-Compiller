@@ -11,10 +11,10 @@ fn fact(int x) => int
     ret res;
 }
 
-fn main() => int
+fn main() => float
 {
     <> setting the initial input
-    int x = 4;
+    int x = 5;
 
     <> calling the function and printing
     printInt(fact(x));

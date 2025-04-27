@@ -1,16 +1,15 @@
 <> mod(a,b) --> a % b
-
 fn mod(int a,int b) => int
 {
+    <> return the rest of the devision 
 
     if(b == 0) 
     {
         ret a;
     }
     else{
-        ret a - a/b;
+        ret a - (a/b)*b;
     }
-
 }
 
 fn isPrime(int x) => int
@@ -19,6 +18,7 @@ fn isPrime(int x) => int
     int res = 1;
     int div;
 
+    <> if an number can devide with id with no remainder 
     for(i = 2;i<x; i++)
     {
         <> if its not prime set the result to false
@@ -30,7 +30,7 @@ fn isPrime(int x) => int
 
 fn main() => int
 {
-    int n = 101;
+    int n = 17;
     printInt(isPrime(n));
 
     ret 0;

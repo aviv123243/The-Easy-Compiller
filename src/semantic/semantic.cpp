@@ -81,7 +81,6 @@ void SemanticAnalyzer::addParamNodeToSymbolTable(NonTerminalNode *paramNode)
     scope *currScope = _scopeStack.top();
 
     // check if the variable already exists in the symbol table (in current or parent scope)
-    cout << "adding param node to symbol table" << endl;
     TerminalNode *nameNode = (TerminalNode *)(paramNode->GetChildren()[1]);
     string name = nameNode->getToken()->val;
     tableEntry entry = currScope->getEntry(name);
@@ -137,9 +136,6 @@ void SemanticAnalyzer::updateScope(SyntaxToken *currToken)
             addParamListToSymbolTable(_currFunctionParamNodes);
             _currFunctionParamNodes.clear(); // clear the param nodes after adding them to the symbol table
         }
-
-        cout << "entering scope" << endl;
-        cout << "size of scope stack: " << _scopeStack.size() << endl;
     }
     else if (currToken->kind == SyntaxKind::CLOSED_CURLY)
     {
@@ -149,9 +145,6 @@ void SemanticAnalyzer::updateScope(SyntaxToken *currToken)
 
         if (_scopeStack.empty())
             _currRootScope = currScope; // if the stack is empty it means we are at the end of the function
-
-        cout << "exiting scope" << endl;
-        cout << "size of scope stack: " << _scopeStack.size() << endl;
     }
 }
 
@@ -426,25 +419,20 @@ bool SemanticAnalyzer::isPointerMismatch(valType left, valType right, SyntaxToke
 
 void SemanticAnalyzer::checkReturnStatements(functionEntry *funcEntry)
 {
-    cout << "checking return types" << endl;
     // check if the function has a return statement
     vector<NonTerminalNode *> returnNodes = _currFunctionReturnNodes;
     valType returnType = funcEntry->getReturnType();
 
     for (int i = 0; i < returnNodes.size(); i++)
     {
-        cout << "size of return nodes: " << returnNodes.size() << endl;
         NonTerminalNode *returnNode = returnNodes[i];
-        cout << "return node: " << returnNode->GetValType().type << endl;
+
         valType nodeType = returnNode->GetValType();
-        cout << "node type: " << nodeType.type << endl;
 
         if (nodeType.type != returnType.type || nodeType.isPointer != returnType.isPointer || nodeType.isArray != returnType.isArray)
         {
             _errorHandler->addError(new semanticError("return type does not match function declaration"));
         }
-
-        cout << "return node: " << returnNode->GetValType().type << endl;
     }
 
     _currFunctionReturnNodes.clear();
@@ -753,6 +741,14 @@ void SemanticAnalyzer::assignSimpleStmtNodeType(ASTNode *node)
             node->SetValType(returnType);
         }
     }
+
+    if(isFuncCall(node))
+    {
+        NonTerminalNode *ntNode = (NonTerminalNode *)node;
+
+        valType funcCallType = getFunctionCallValTypeAndCheck(ntNode);
+        node->SetValType(funcCallType);
+    }
 }
 
 void SemanticAnalyzer::assignExprListNodeType(ASTNode *node)
@@ -773,7 +769,7 @@ void SemanticAnalyzer::assignExprListNonEmptyNodeType(ASTNode *node)
 
     vector<ASTNode *> children = ntNode->GetChildren();
     valType resType = children[0]->GetValType();
-    resType.isArray = false; 
+    resType.isArray = false;
     resType.isPointer = false;
 
     if (children.size() == 3)
@@ -1003,11 +999,11 @@ void SemanticAnalyzer::assignPrimaryExprNodeType(ASTNode *node)
         }
         else
         {
-            TerminalNode  *tNode = (TerminalNode *)(child);
+            TerminalNode *tNode = (TerminalNode *)(child);
             if (tNode->getToken()->kind == IDENTIFIER)
                 resType = getVarType(tNode->getToken());
             else
-                resType = { assignTerminal[tNode->getToken()->kind], 0, false, false };
+                resType = {assignTerminal[tNode->getToken()->kind], 0, false, false};
         }
     }
     else if (children.size() == 3)
@@ -1023,7 +1019,7 @@ void SemanticAnalyzer::assignPrimaryExprNodeType(ASTNode *node)
         if (!type.isArray && !type.isPointer)
             _errorHandler->addError(new semanticError("indexing non-array type", static_cast<TerminalNode *>(children[1])->getToken()));
         else
-            resType = { type.type, type.size, false, false };
+            resType = {type.type, type.size, false, false};
     }
     else if (isFuncCall(node))
     {
@@ -1034,7 +1030,6 @@ void SemanticAnalyzer::assignPrimaryExprNodeType(ASTNode *node)
     node->SetValType(resType);
 }
 
-
 void SemanticAnalyzer::checkForMainFunction()
 {
     // check if the main function is declared
@@ -1042,5 +1037,11 @@ void SemanticAnalyzer::checkForMainFunction()
     if (mainFunc == nullptr)
     {
         _errorHandler->addError(new semanticError("main function not declared"));
+    }
+    else if (mainFunc->getReturnType().type != INT)
+    {
+        cout << "main function return type: " << mainFunc->getReturnType().type << endl;
+        // check if the main function has a return type of int
+        _errorHandler->addError(new semanticError("main function must return int"));
     }
 }

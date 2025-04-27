@@ -52,11 +52,9 @@ bool isReturnStatement(ASTNode *node)
 
     if (node->GetType() == NON_TERMINAL)
     {
-        cout << "11";
         NonTerminalNode *ntNode = ((NonTerminalNode *)node);
         if (ntNode->getNonTerminalKind() == SIMPLE_STMT)
         {
-            cout << "22";
 
             vector<ASTNode *> children = ntNode->GetChildren();
 
@@ -67,7 +65,6 @@ bool isReturnStatement(ASTNode *node)
         }
     }
 
-    cout << "returning: " << res;
     return res;
 }
 
