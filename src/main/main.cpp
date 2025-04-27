@@ -41,7 +41,6 @@ int main(int argc, char **argv)
 
         ASTNode *root = parser.parse();
 
-
         if (errorHandler.getErrorCount() > 0)
         {
             cout << "Parsing failed with errors!" << endl;
@@ -64,11 +63,11 @@ string getFileBaseName(string fileName)
 
     size_t lastSlash = fileName.find_last_of("\\/");
     if (lastSlash == string::npos)
-        lastSlash = -1; 
+        lastSlash = -1;
 
     size_t lastDot = fileName.find_last_of('.');
     if (lastDot == string::npos)
-        lastDot = fileName.length(); 
+        lastDot = fileName.length();
 
     string baseName = fileName.substr(lastSlash + 1, lastDot - lastSlash - 1);
 
