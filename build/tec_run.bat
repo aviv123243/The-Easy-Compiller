@@ -1,4 +1,4 @@
-
+@echo off
 setlocal
 
 set "filename=%~1"
@@ -20,10 +20,10 @@ if /i not "%~x1"==".ez" (
     exit /b 1
 )
 
-echo Building executable from %filename%...
+REM echo Building executable from %filename%:
+REM echo.
 call tec_build_exe.bat "%filename%"
 
-REM Check if the build was successful
 if not exist "%basename%.exe" (
     echo Error: Build failed - executable not created
     exit /b 1

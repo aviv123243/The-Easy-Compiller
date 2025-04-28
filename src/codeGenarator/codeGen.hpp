@@ -17,7 +17,7 @@
 #include <stack>
 #include <fstream>
 
-#define NUM_OF_BUILT_IN_FUNCTIONS 2
+#define NUM_OF_BUILT_IN_FUNCTIONS 3
 #define SIZE_OF_STACK_VAR 8
 
 using namespace std;
@@ -80,9 +80,9 @@ private:
     void storeMemPtrValue(string srcAddr, int reg);
     void storeMem(string srcAddr, int reg);
     string getVarAddr(const string &name) const;
-
     void printIntFuncCodeGen();
     void printFloatFuncCodeGen();
+    void printBoolFuncCodeGen();
     void floatMacroCodeGen();
 
 public:

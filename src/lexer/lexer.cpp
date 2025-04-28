@@ -138,7 +138,7 @@ SyntaxToken *Lexer::getNextToken()
             // if the token is invalid, add an error to the handler and skip it
             _cursor++;
             resToken->kind = SyntaxKind::UNEXPECTED_TOKEN;
-            _errorHandler->addError(new SyntaxError("Unexpected token error", _currLine, _currColumn));
+            _errorHandler->addError(new SyntaxError("Unexpected token error", resToken));
         }
     }
 

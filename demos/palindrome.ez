@@ -36,13 +36,8 @@ fn isPalindrome(int x) => int
 fn main() => int
 {
     int x = 1234;
-
     printInt(reverse(x));
-    printInt(isPalindrome(x));
-
-    int y = 12321;
-    printInt(reverse(y));
-    printInt(isPalindrome(y));
+    printBool(isPalindrome(x));
 
     ret 0;
 }

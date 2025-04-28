@@ -9,12 +9,17 @@
 #include <iostream>
 #include <fstream>
 
+#define RED "\e[0;31m"
+#define GRN "\e[0;32m"
+#define WHT "\e[0;37m"
+
 using namespace std;
 string getFileBaseName(string fileName);
 
 int main(int argc, char **argv)
 {
     string filePath;
+    int errorLevel = 0;
 
     if (argc != 2)
     {
@@ -33,9 +38,12 @@ int main(int argc, char **argv)
     if (errorHandler.getErrorCount() > 0)
     {
         errorHandler.printErrors();
+        errorLevel = 1;
     }
     else
     {
+        cout << GRN << "Lexing completed successfully!" << WHT << endl;
+
         SemanticAnalyzer semantic(&errorHandler, &symbolTable);
         Parser parser(tokens, 185, &errorHandler, &semantic);
 
@@ -43,19 +51,21 @@ int main(int argc, char **argv)
 
         if (errorHandler.getErrorCount() > 0)
         {
-            cout << "Parsing failed with errors!" << endl;
             errorHandler.printErrors();
+            errorLevel = 1;
         }
         else
         {
-            cout << "Parsing completed successfully!" << endl;
-            cout << "Generating code to " << baseName << ".asm" << endl;
+            cout <<GRN<< "Parsing completed successfully!" <<WHT<< endl;
             CodeGenarator codeGen(baseName + ".asm", root, &symbolTable);
             codeGen.genCode();
+
+            cout << GRN<<"compiling finished!"<<WHT<<"\n\n";
         }
 
-        cout << "compiling finished!";
     }
+
+    return errorLevel;
 }
 
 string getFileBaseName(string fileName)

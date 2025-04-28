@@ -10,6 +10,8 @@ void CodeGenarator::genCode()
     _outputFile << ".data\n";
     _outputFile << "format_int db \"%d \", 10, 0\n";
     _outputFile << "format_float db \"%lf \", 10, 0\n";
+    _outputFile << "\tformat_true   db \"true\",  10, 0\n";
+    _outputFile << "\tformat_false  db \"false\", 10, 0\n";
     _outputFile << "\n.code\n";
     _outputFile << "extern ExitProcess : proc\n";
 
@@ -20,8 +22,11 @@ void CodeGenarator::genCode()
     _outputFile << "\tmov ecx, eax\n";
     _outputFile << "\tcall ExitProcess\n";
     _outputFile << " main ENDP\n";
+
     printIntFuncCodeGen();
     printFloatFuncCodeGen();
+    printBoolFuncCodeGen();
+
     vector<NonTerminalNode *> funcDeclNodes = getFunctionDeclNodes((NonTerminalNode *)_root);
     int j = 0;
     for (int i = NUM_OF_BUILT_IN_FUNCTIONS; i < _functions.size(); i++)
@@ -921,6 +926,40 @@ void CodeGenarator::printFloatFuncCodeGen()
     _outputFile << "\tlea rcx, format_float\n";          // Load address of format string into rcx
     _outputFile << "\tcall printf\n";
 
+    _outputFile << "\tadd rsp, 32\n";
+    _outputFile << "\tmov eax, 0\n";
+    _outputFile << "\tmov rsp, rbp\n";
+    _outputFile << "\tpop rbp\n";
+    _outputFile << "\tret\n";
+}
+
+
+void CodeGenarator::printBoolFuncCodeGen()
+{
+    _outputFile << "function_printBool:\n";
+    _outputFile << "\tpush rbp\n";
+    _outputFile << "\tmov rbp, rsp\n";
+    _outputFile << "\tsub rsp, 16\n"; 
+    _outputFile << "\tsub rsp, 32\n"; 
+
+    // load the bool parameter
+    _outputFile << "\tmov rdx, QWORD PTR [rbp+16]\n";
+    _outputFile << "\tcmp rdx, 0\n";
+    _outputFile << "\tjne bool_true\n";
+
+    // false-path
+    _outputFile << "\tlea rcx, format_false\n";
+    _outputFile << "\tjmp bool_print\n";
+
+    // true-path
+    _outputFile << "bool_true:\n";
+    _outputFile << "\tlea rcx, format_true\n";
+
+    // common print
+    _outputFile << "bool_print:\n";
+    _outputFile << "\tcall printf\n";
+
+    // tear down
     _outputFile << "\tadd rsp, 32\n";
     _outputFile << "\tmov eax, 0\n";
     _outputFile << "\tmov rsp, rbp\n";

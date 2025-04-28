@@ -21,6 +21,7 @@ public:
     SymbolTable() { 
         addFunction(new functionEntry("printInt", {INT}, {valType{INT}})); 
         addFunction(new functionEntry("printFloat", {INT}, {valType{FLOAT}}));
+        addFunction(new functionEntry("printBool", {INT}, {valType{INT}}));
     }
 
     void addFunction(functionEntry *function) { _functions.push_back(function); }

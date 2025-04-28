@@ -141,6 +141,8 @@ CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj: \
  c:\users\admin\documents\coding\the-easy-compiller\src\errorhandler\errorhandler.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\errors\errors.hpp \
  c:\users\admin\documents\coding\the-easy-compiller\src\token\token.hpp \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\sstream \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\bits\sstream.tcc \
  c:\users\admin\documents\coding\the-easy-compiller\src\errors\errors.hpp \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\stack \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\c++\deque \

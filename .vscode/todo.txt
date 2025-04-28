@@ -1,8 +1,0 @@
-complete the semantic analyser 
-
-the bootom-up seartch cheking and putting the types for eatch node 
-
-the top down checking scope related things 
-
-the symbol table double defenition / not main function / e.t.c 
-
