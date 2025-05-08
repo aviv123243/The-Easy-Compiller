@@ -14,7 +14,7 @@ fn max(int x,int y) => int
 
 fn main() => int
 {
-    printInt(max(2,7));
+    printInt(max(18,7));
 }
 
 

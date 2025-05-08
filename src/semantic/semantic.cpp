@@ -1040,7 +1040,6 @@ void SemanticAnalyzer::checkForMainFunction()
     }
     else if (mainFunc->getReturnType().type != INT)
     {
-        cout << "main function return type: " << mainFunc->getReturnType().type << endl;
         // check if the main function has a return type of int
         _errorHandler->addError(new semanticError("main function must return int"));
     }

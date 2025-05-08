@@ -1,7 +1,7 @@
 #include "codeGen.hpp"
 
 CodeGenarator::CodeGenarator(string outputFile, ASTNode *root, SymbolTable *symbolTable)
-    : _outputFile(outputFile), _root(root), _functions(symbolTable->getFunctions()), _currFunctionIndex(0) {}
+    : _outputFile(outputFile), _root(root), _functions(symbolTable->getFunctions()), _currFunctionIndex(0), _currScopeIndex(0) {}
 
 void CodeGenarator::genCode()
 {
@@ -274,6 +274,7 @@ void CodeGenarator::forUpdateCodeGen(NonTerminalNode *node)
 
 void CodeGenarator::bodyCodeGen(NonTerminalNode *node)
 {
+
     vector<ASTNode *> children = node->GetChildren();
     NonTerminalNode *firstChild = (NonTerminalNode *)children[0];
 
@@ -307,10 +308,11 @@ void CodeGenarator::assignExpressionCodeGen(NonTerminalNode *node)
     exprCodeGen(rightExprNode);
     int reg = rightExprNode->GetRegister();
 
-    if(leftExprNode->GetChildren().size() == 2)
+    if (leftExprNode->GetChildren().size() == 2)
     {
         storeMemPtrValue(getVarAddr(((TerminalNode *)leftExprNode->GetChildren()[1])->getToken()->val), reg);
-    }else
+    }
+    else
     {
         storeMem(getVarAddr(((TerminalNode *)leftExprNode->GetChildren()[0])->getToken()->val), reg);
     }
@@ -330,23 +332,24 @@ void CodeGenarator::exprOptCodeGen(NonTerminalNode *node)
 void CodeGenarator::exprCodeGen(ASTNode *node)
 {
     ASTNode *child = node->GetChildren()[0];
-    if (child->GetType() == NON_TERMINAL) {
-      auto nt = (NonTerminalNode*)child;
-      switch (nt->getNonTerminalKind()) {
+    if (child->GetType() == NON_TERMINAL)
+    {
+        auto nt = (NonTerminalNode *)child;
+        switch (nt->getNonTerminalKind())
+        {
         case LOGICAL_EXPR:
-          logicalExprCodeGen(nt);
-          break;
+            logicalExprCodeGen(nt);
+            break;
         case ADDRESS_EXPR:
-          addressExprCodeGen(nt);
-          break;
+            addressExprCodeGen(nt);
+            break;
         case PRIMARY_EXPR:
-          primaryExprCodeGen(nt);
-          break;
-      }
+            primaryExprCodeGen(nt);
+            break;
+        }
     }
     node->SetRegister(child->GetRegister());
 }
-
 
 void CodeGenarator::logicalExprCodeGen(NonTerminalNode *node)
 {
@@ -529,62 +532,67 @@ void CodeGenarator::unaryExprCodeGen(NonTerminalNode *node)
     }
 }
 
-
 void CodeGenarator::primaryExprCodeGen(NonTerminalNode *node)
 {
-    std::vector<ASTNode*> children = node->GetChildren();
+    std::vector<ASTNode *> children = node->GetChildren();
     ASTNode *first = children[0];
 
     // 1) if it's a nested non-terminal for * or ++/--, delegate immediately
-    if (first->GetType() == NON_TERMINAL) {
-        NonTerminalNode *nt = (NonTerminalNode*) first;
-        if (nt->getNonTerminalKind() == DEREFERENCE_EXPR) {
+    if (first->GetType() == NON_TERMINAL)
+    {
+        NonTerminalNode *nt = (NonTerminalNode *)first;
+        if (nt->getNonTerminalKind() == DEREFERENCE_EXPR)
+        {
             dereferenceExprCodeGen(nt);
             node->SetRegister(nt->GetRegister());
             return;
         }
-        if (nt->getNonTerminalKind() == INCREMENT_EXPR) {
+        if (nt->getNonTerminalKind() == INCREMENT_EXPR)
+        {
             incrementExprCodeGen(nt);
             node->SetRegister(nt->GetRegister());
             return;
         }
     }
 
-    TerminalNode *tNode = (TerminalNode*) first;
+    TerminalNode *tNode = (TerminalNode *)first;
     SyntaxToken *tok = tNode->getToken();
 
     // integer literal
-    if (tok->kind == INTEGER_LITERAL) {
+    if (tok->kind == INTEGER_LITERAL)
+    {
         int r = _scratchManager.alloc();
         _outputFile << "\tmov " << _scratchManager.getName(r)
                     << ", " << tok->val << "\n";
         node->SetRegister(r);
     }
     // float literal
-    else if (tok->kind == FLOAT_LITERAL) {
+    else if (tok->kind == FLOAT_LITERAL)
+    {
         int r = _scratchManager.allocFloat();
         _outputFile << "\tmovsd " << _scratchManager.getName(r)
                     << ", FP8(" << tok->val << ")\n";
         node->SetRegister(r);
     }
     // simple variable load
-    else if (tok->kind == IDENTIFIER && children.size() == 1) {
+    else if (tok->kind == IDENTIFIER && children.size() == 1)
+    {
         int r = _scratchManager.alloc();
         loadMem(getVarAddr(tok->val), r);
         node->SetRegister(r);
     }
     // parenthesized expression: ( Expr )
-    else if (tok->kind == OPEN_PAREN && children.size() == 3) {
+    else if (tok->kind == OPEN_PAREN && children.size() == 3)
+    {
         exprCodeGen(children[1]);
         node->SetRegister(children[1]->GetRegister());
     }
     // function call: IDENTIFIER OPEN_PAREN ExprList CLOSED_PAREN
-    else if (isFuncCall(node)) {
+    else if (isFuncCall(node))
+    {
         callExprCodeGen(node);
     }
-    
 }
-
 
 void CodeGenarator::callExprCodeGen(NonTerminalNode *node)
 {
@@ -670,7 +678,7 @@ void CodeGenarator::dereferenceExprCodeGen(NonTerminalNode *node)
     TerminalNode *idNode = (TerminalNode *)node->GetChildren()[1];
 
     string idAddr = getVarAddr(idNode->getToken()->val);
-    loadMemPtrValue(idAddr,reg);
+    loadMemPtrValue(idAddr, reg);
 
     node->SetRegister(reg);
 }
@@ -785,7 +793,6 @@ void CodeGenarator::mov(string leftReg, string rightReg)
     _outputFile << "\t" << movCommand << leftReg << ", " << rightReg << "\n";
 }
 
-
 void CodeGenarator::neg(int reg)
 {
     if (_scratchManager.isFloat(reg))
@@ -824,13 +831,11 @@ void CodeGenarator::loadMemPtrValue(string srcAddr, int reg)
     string movCommand = "mov ";
     string regName = _scratchManager.getName(reg);
 
-
     if (srcAddr.find("BYTE") != string::npos)
         regName = _scratchManager.getLowerByteName(reg);
 
-    
     _outputFile << "\t" << "mov " << regName << ", " << srcAddr << "\n";
-    _outputFile << "\t" << "mov " << regName << ", [" << regName << "]\n";  
+    _outputFile << "\t" << "mov " << regName << ", [" << regName << "]\n";
 }
 
 void CodeGenarator::loadMem(string srcAddr, int reg)
@@ -933,14 +938,13 @@ void CodeGenarator::printFloatFuncCodeGen()
     _outputFile << "\tret\n";
 }
 
-
 void CodeGenarator::printBoolFuncCodeGen()
 {
     _outputFile << "function_printBool:\n";
     _outputFile << "\tpush rbp\n";
     _outputFile << "\tmov rbp, rsp\n";
-    _outputFile << "\tsub rsp, 16\n"; 
-    _outputFile << "\tsub rsp, 32\n"; 
+    _outputFile << "\tsub rsp, 16\n";
+    _outputFile << "\tsub rsp, 32\n";
 
     // load the bool parameter
     _outputFile << "\tmov rdx, QWORD PTR [rbp+16]\n";

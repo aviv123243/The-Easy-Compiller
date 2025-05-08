@@ -54,7 +54,7 @@ class SyntacticError : public Error
             _body = " unvalid placment of token " + syntaxTokenToString(*token) + "on" + "{" + to_string(line) +":" + to_string(column) + "}\n";
         }
 
-        SyntacticError(SyntaxToken * errorToken, SyntaxKind replacment) : Error("SyntacticError"){
+        SyntacticError(SyntaxToken * errorToken, SyntaxKind replacment) : Error("Parsing Error"){
             int line = errorToken -> line;
             int column = errorToken ->column;
 
@@ -70,9 +70,9 @@ class SyntacticError : public Error
 class semanticError : public Error
 {
     public:
-        semanticError(string body) : Error("semanticError") {_body = body;}
+        semanticError(string body) : Error("Semantic Error") {_body = body;}
 
-        semanticError(string body, SyntaxToken * token) : Error("semanticError"){
+        semanticError(string body, SyntaxToken * token) : Error("Semantic Error"){
             int line = token -> line;
             int column = token ->column;
 

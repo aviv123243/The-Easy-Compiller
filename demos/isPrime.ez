@@ -30,7 +30,7 @@ fn isPrime(int x) => int
 
 fn main() => int
 {
-    int n = 64;
+    int n = 101;
     printBool(isPrime(n));
 
     ret 0;

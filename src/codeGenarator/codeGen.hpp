@@ -29,6 +29,7 @@ private:
     ASTNode *_root;
     vector<functionEntry *> _functions;
     int _currFunctionIndex;
+    int _currScopeIndex;
     stack<scope *> _scopeStack;
 
     ScratchManager _scratchManager;

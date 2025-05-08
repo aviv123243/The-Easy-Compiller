@@ -11,7 +11,7 @@ fn fact(int x) => int
     ret res;
 }
 
-fn main() => float
+fn main() => int
 {
     <> setting the initial input
     int x = 5;

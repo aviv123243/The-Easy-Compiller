@@ -1,0 +1,711 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+abstract class ASTNode {
+	+GetType() : GrammarSymbolType {query}
+	#_type : GrammarSymbolType
+	+GetRegister() : int {query}
+	#_register : int
+	+GetValType() : valType {query}
+	#_valType : valType
+	+{abstract} GetChildren() : vector<ASTNode*>& {query}
+	+SetRegister(int regIndex) : void
+	+SetValType(valType valType) : void
+}
+
+
+class ActionTable {
+	+ActionTable(int numOfStates)
+	+~ActionTable()
+	+get(int state, SyntaxKind terminal) : action
+	-_defaultActions : action*
+	-_table : action**
+	-_numOfStates : int
+	+add(int state, SyntaxKind terminal, action act) : void
+	+addDefault(int state, action act) : void
+}
+
+
+class CodeGenarator {
+	+CodeGenarator(string outputFile, ASTNode* root, SymbolTable* symbolTable)
+	-_root : ASTNode*
+	-_lableManager : LabelManager
+	-_scratchManager : ScratchManager
+	-getCurrFunctionEntry() : functionEntry*
+	-_currFunctionIndex : int
+	-assignStackOffset(scope* currScope) : int
+	-layoutLocals(scope* s, int runningOffset) : int
+	-sizeOfType(const valType& t) : int {query}
+	-_outputFile : ofstream
+	-_scopeStack : stack<scope*>
+	-getVarAddr(const std::string& name) : string {query}
+	-nameOfType(const valType& t) : string {query}
+	-_functions : vector<functionEntry*>
+	-addExprCodeGen(NonTerminalNode* node) : void
+	-addressExprCodeGen(NonTerminalNode* node) : void
+	-assignExpressionCodeGen(NonTerminalNode* node) : void
+	-bodyCodeGen(NonTerminalNode* node) : void
+	-callExprCodeGen(NonTerminalNode* node) : void
+	-castToFloat(int intReg, int xmmReg) : void
+	-compareToZero(int reg) : void
+	-conditionOptionCodeGen(NonTerminalNode* node) : void
+	-dereferenceExprCodeGen(NonTerminalNode* node) : void
+	-exprCodeGen(ASTNode* node) : void
+	-exprOptCodeGen(NonTerminalNode* node) : void
+	-floatMacroCodeGen() : void
+	-forInitCodeGen(NonTerminalNode* node) : void
+	-forStmtCodeGen(NonTerminalNode* node) : void
+	-forUpdateCodeGen(NonTerminalNode* node) : void
+	-funcCodeGen(NonTerminalNode* node) : void
+	+genCode() : void
+	-ifStmtCodeGen(NonTerminalNode* node) : void
+	-incrementExprCodeGen(NonTerminalNode* node) : void
+	-loadFunctionVar(string srcAddr, string dstAddr, int reg) : void
+	-loadFunctionVariables(functionEntry* func) : void
+	-loadMem(string srcAddr, int reg) : void
+	-loadMemPtrValue(string srcAddr, int reg) : void
+	-logicalExprCodeGen(NonTerminalNode* node) : void
+	-mov(string leftReg, string rightReg) : void
+	-mulExprCodeGen(NonTerminalNode* node) : void
+	-neg(int reg) : void
+	-popAllCodeGen() : void
+	-primaryExprCodeGen(NonTerminalNode* node) : void
+	-printFloatFuncCodeGen() : void
+	-printIntFuncCodeGen() : void
+	-push(int reg) : void
+	-pushAllCodeGen() : void
+	-pushArgs(vector<NonTerminalNode*> args) : void
+	-relationalExprCodeGen(NonTerminalNode* node) : void
+	-simpleStmtCodeGen(NonTerminalNode* node) : void
+	-stmtCodeGen(NonTerminalNode* node) : void
+	-stmtListCodeGen(NonTerminalNode* node) : void
+	-storeMem(string srcAddr, int reg) : void
+	-storeMemPtrValue(string srcAddr, int reg) : void
+	-unaryExprCodeGen(NonTerminalNode* node) : void
+	-varDeclExprCodeGen(NonTerminalNode* node) : void
+	-whileStmtCodeGen(NonTerminalNode* node) : void
+}
+
+
+class DFA {
+	+DFA(int stateCount, vector<char>* alphabet)
+	+DFA(string DFAConfigFile)
+	+DFA()
+	+isStateExsists(int state) : bool {query}
+	+isSymbolExists(const char alpha) : bool {query}
+	+_startState : int
+	+_stateCount : int
+	+getStartState() : int {query}
+	+getState(int state, char alpha) : int {query}
+	+_mat : int**
+	+inLanguage(string& word) : pair<bool , int> {query}
+	+_alphabetToIndex : unordered_map<char, int>
+	+getAlphabet() : vector<char> {query}
+	+_endStates : vector<int>
+	+getEndStates() : vector<int>& {query}
+	+addAlpha(char alpha) : void
+	+addEndState(int state) : void
+	+initMatrix() : void
+	+insertTransition(int from, char alpha, int to) : void
+	+insertTransitionString(string& transition) : void
+	-isStateExistsWErr(int state, bool wantedResult) : void {query}
+	-isSymbolExistsErr(char alpha, bool wantedResult) : void {query}
+	+printMatrix() : void {query}
+	+setStartState(int state) : void
+	+setStateCount(int numOfStates) : void
+	+writeDFAToFile(string dstFile) : void
+}
+
+
+abstract class Error {
+	+Error(string body)
+	+Error()
+	#_body : string
+	+{abstract} toString() : string {query}
+}
+
+
+class ErrorHandler {
+	+ErrorHandler()
+	+getErrorCount() : int {query}
+	-_errors : vector<Error*>
+	+addError(Error* error) : void
+	+printErrors() : void
+}
+
+
+class GotoTable {
+	+GotoTable(int numOfStates)
+	+~GotoTable()
+	+_numOfStates : int
+	+get(int state, NonTerminal nt) : int
+	-_table : int**
+	+add(int startState, NonTerminal nt, int endState) : void
+}
+
+
+class LabelManager {
+	+LabelManager()
+	-_lableNum : int
+	+create() : int
+	+getFunctionEpilogueLable(string funcName) : string
+	+getFunctionLable(string funcName) : string
+	+getFunctionPreambleLable(string funcName) : string
+	+getName(int lableNum) : string
+}
+
+
+class Lexer {
+	+Lexer(string srcFile, string DFAConfigFile, ErrorHandler* handler)
+	-_dfa : DFA
+	-_errorHandler : ErrorHandler*
+	+getNextToken() : SyntaxToken*
+	-_currColumn : int
+	-_currLine : int
+	-_cursor : int
+	-_fileSize : int
+	-_srcFile : string
+	+getTokens() : vector<SyntaxToken*>
+	+printTransitionMatrix() : void {query}
+	+updatePosition(char ch) : void
+}
+
+
+class NonTerminalNode {
+	+NonTerminalNode(NonTerminal nonTerminalKind)
+	-_nonTerminalKind : NonTerminal
+	+getNonTerminalKind() : NonTerminal {query}
+	+GetChildren() : std::vector<ASTNode*>& {query}
+	-_children : vector<ASTNode*>
+	+AddChildToEnd(ASTNode* child) : void
+	+AddChildToFront(ASTNode* child) : void
+}
+
+
+class Parser {
+	+Parser(vector<SyntaxToken*> tokens, int numOfStates, ErrorHandler* handler, SemanticAnalyzer* semanticAnalyzer)
+	+parse() : ASTNode*
+	-_actionTable : ActionTable
+	-_errorHandler : ErrorHandler*
+	-_gotoTable : GotoTable
+	-_semanticAnalyzer : SemanticAnalyzer*
+	-getNonTerminalFollowSetItem(NonTerminal nt) : SyntaxKind
+	-getTerminalFollowSetItem(SyntaxKind kind) : SyntaxKind
+	-getCurrToken() : SyntaxToken*
+	-getNextToken() : SyntaxToken*
+	-peek(int index) : SyntaxToken*
+	-getCurrAction() : action
+	-match(ASTNode* node, SyntaxKind type) : bool
+	-match(ASTNode* node, NonTerminal type) : bool
+	-_currState : int
+	-_cursor : int
+	-_stack : stack<StackItem>
+	-_followSets : unordered_map<NonTerminal, unordered_set<SyntaxKind>>
+	-_followTerminalsSets : unordered_map<SyntaxKind, unordered_set<SyntaxKind>>
+	-_tokens : vector<SyntaxToken*>
+	-_rules : vector<productionRule>
+	-addProductionRule(productionRule rule) : void
+	-assignNodeType(ASTNode* node) : void
+	-fillTables() : void
+	-initFollowSets() : void
+	-initProductionRules() : void
+	+printFollowSet() : void
+	+printRules() : void
+	+printStack() : void
+	-reduce(action currAction) : void
+	-reduceStatmentToNode(NonTerminalNode* node, productionRule rule) : void
+	-reportParsingError() : void
+	-shift(action currAction) : void
+}
+
+
+class ScratchManager {
+	+ScratchManager()
+	+isAllocated(int i) : bool
+	+isFloat(int i) : bool
+	+alloc() : int
+	+allocFloat() : int
+	-_regArr : scratchRegister[]
+	+getLowerByteName(int i) : string
+	+getName(int i) : string
+	+free(int i) : void
+	-initRegArr() : void
+}
+
+
+class SemanticAnalyzer {
+	+SemanticAnalyzer(ErrorHandler* errorHandler, SymbolTable* symbolTable)
+	-_errorHandler : ErrorHandler*
+	-_symbolTable : SymbolTable*
+	-isArrayAssignmentInvalid(valType left, valType right, SyntaxToken* token) : bool
+	-isArrayToPointerAssignAllowed(valType left, valType right) : bool
+	-isPointerMismatch(valType left, valType right, SyntaxToken* token) : bool
+	-isPointerToPointerAssignInvalid(valType left, valType right, SyntaxToken* token) : bool
+	-_currRootScope : scope*
+	-void(SemanticAnalyzer::* ) ( ASTNode*) : std::map<NonTerminal ,
+	-_scopeStack : std::stack<scope*>
+	-_currFunctionParamNodes : std::vector<NonTerminalNode*>
+	-_currFunctionReturnNodes : std::vector<NonTerminalNode*>
+	+checkCompatibilityAssignExp(valType leftOp, valType rightOp, SyntaxToken* opToken) : valType
+	+checkCompatibilityBinaryOp(valType leftOp, valType rightOp, SyntaxToken* opToken) : valType
+	-getFunctionCallValTypeAndCheck(NonTerminalNode* funcCallNode) : valType
+	-getVarType(SyntaxToken* IDToken) : valType
+	+addFunctionNodeToSymbolTable(NonTerminalNode* funcDeclNode) : void
+	+addParamListToSymbolTable(std::vector<NonTerminalNode*> paramNodes) : void
+	+addParamNodeToSymbolTable(NonTerminalNode* paramNode) : void
+	+addVariableNodeToSymbolTable(NonTerminalNode* varDeclNode) : void
+	-assignAddExprNodeType(ASTNode* node) : void
+	-assignAddressExprNodeType(ASTNode* node) : void
+	-assignAssignExprNodeType(ASTNode* node) : void
+	-assignAssignTargetNodeType(ASTNode* node) : void
+	-assignAssignValueNodeType(ASTNode* node) : void
+	-assignBaseTypeNodeType(ASTNode* node) : void
+	-assignConditionOpNodeType(ASTNode* node) : void
+	-assignDereferenceExprNodeType(ASTNode* node) : void
+	-assignExprListNodeType(ASTNode* node) : void
+	-assignExprListNonEmptyNodeType(ASTNode* node) : void
+	-assignExprNodeType(ASTNode* node) : void
+	-assignIncrementExprNodeType(ASTNode* node) : void
+	-assignLogicalExprNodeType(ASTNode* node) : void
+	-assignMulExprNodeType(ASTNode* node) : void
+	+assignNodeType(ASTNode* node) : void
+	-assignParamNodeType(ASTNode* node) : void
+	-assignPrimaryExprNodeType(ASTNode* node) : void
+	-assignRelationalExprNodeType(ASTNode* node) : void
+	-assignSimpleStmtNodeType(ASTNode* node) : void
+	-assignTypeNodeType(ASTNode* node) : void
+	-assignUnaryExprNodeType(ASTNode* node) : void
+	-assignVarDeclExprNodeType(ASTNode* node) : void
+	+checkForMainFunction() : void
+	+checkReturnStatements(functionEntry* funcEntry) : void
+	-initAssignActions() : void
+	+updateScope(SyntaxToken* currToken) : void
+	+updateSybolTable(ASTNode* node) : void
+}
+
+
+class SymbolTable {
+	+SymbolTable()
+	+getFunction(string name) : functionEntry*
+	+getFunctions() : std::vector<functionEntry*>& {query}
+	-_functions : vector<functionEntry*>
+	+addFunction(functionEntry* function) : void
+	+print() : void {query}
+}
+
+
+class SyntacticError {
+	+SyntacticError(SyntaxToken* token)
+	+SyntacticError(SyntaxToken* errorToken, SyntaxKind replacment)
+	+SyntacticError()
+	+toString() : string {query}
+}
+
+
+class SyntaxError {
+	+SyntaxError(string body, int line, int column)
+	-_column : int
+	-_line : int
+	+toString() : string {query}
+}
+
+
+class TerminalNode {
+	+TerminalNode(SyntaxToken* token)
+	-_syntaxKind : SyntaxKind
+	+getTerminalKind() : SyntaxKind {query}
+	-_token : SyntaxToken*
+	+getToken() : SyntaxToken* {query}
+	+GetChildren() : vector<ASTNode*>& {query}
+}
+
+
+class functionEntry {
+	+functionEntry(string name, valType returnType, vector<valType> paramTypes)
+	-_scopeRoot : scope*
+	+getInnerScope() : scope* {query}
+	-_name : string
+	+getName() : string {query}
+	-_returnType : valType
+	+getReturnType() : valType {query}
+	-_paramTypes : vector<valType>
+	+getParamTypes() : vector<valType> {query}
+	+print() : void {query}
+	+setInnerScope(scope* innerScope) : void
+}
+
+
+class productionRule {
+	+productionRule(NonTerminal left)
+	+productionRule()
+	+~productionRule()
+	+getType(int index) : GrammarSymbolType
+	-_left : NonTerminal
+	+getLeft() : NonTerminal
+	+getNonTerminal(int index) : NonTerminal
+	+getTerminal(int index) : SyntaxKind
+	-_numOfRightSideSymbols : int
+	+getNumOfRightSideSymbols() : int
+	+addSymbol(SyntaxKind terminal) : productionRule&
+	+addSymbol(NonTerminal nonTerminal) : productionRule&
+	+addSymbol() : productionRule&
+	+toString() : string
+	-_rightSideTypes : vector<GrammarSymbolType>
+	-_rightSideSymbols : vector<int>
+	+reset() : void
+	+setLeft(NonTerminal left) : void
+}
+
+
+class scope {
+	+scope()
+	-_parentScope : scope*
+	+getParentScope() : scope* {query}
+	+getEntry(string name) : tableEntry
+	+getInnerScopeEntrie(string name) : tableEntry
+	-_innerScopes : vector<scope*>
+	+getInnerScopes() : vector<scope*> {query}
+	-_tableEntries : vector<tableEntry>
+	+getEntries() : vector<tableEntry>&
+	+addInnerScope(scope* innerScope) : void
+	+addTableEntry(tableEntry entry) : void
+	+printScope() : void
+	+setParentScope(scope* parentScope) : void
+}
+
+
+class semanticError {
+	+semanticError(string body)
+	+semanticError(string body, SyntaxToken* token)
+	+toString() : string {query}
+}
+
+
+enum GrammarSymbolType {
+	NON_TERMINAL
+	TERMINAL
+}
+
+
+enum NonTerminal {
+	ADDRESS_EXPR
+	ADD_EXPR
+	ASSIGN_EXPR
+	ASSIGN_OP
+	ASSIGN_TARGET
+	ASSIGN_VALUE
+	BASE_TYPE
+	BODY
+	CONDITION_OP
+	DEREFERENCE_EXPR
+	EXPR
+	EXPR_LIST
+	EXPR_LIST_NON_EMPTY
+	EXPR_OPT
+	FOR_INIT
+	FOR_STMT
+	FOR_UPDATE
+	FUNCTION_DECL
+	IF_STMT
+	INCREMENT_EXPR
+	INIT_OPT
+	LOGICAL_EXPR
+	MUL_EXPR
+	NON_TERMINAL_COUNT
+	PARAM
+	PARAM_LIST
+	PARAM_LIST_NON_EMPTY
+	PRIMARY_EXPR
+	PROGRAM
+	RELATIONAL_EXPR
+	SIMPLE_STMT
+	START
+	STMT
+	STMT_LIST
+	TYPE
+	UNARY_EXPR
+	VAR_DECL_EXPR
+	WHILE_STMT
+}
+
+
+enum SyntaxKind {
+	AMPERSAND
+	AMPERSAND_AMPERSAND
+	AMPERSAND_EQUALS
+	BANG
+	BANG_EQUALS
+	CARET
+	CARET_EQUALS
+	CHAR_LITERAL
+	CLOSED_BRACKET
+	CLOSED_CURLY
+	CLOSED_PAREN
+	COMMA
+	END_OF_FILE
+	EPSILON
+	EQUALS
+	EQUALS_EQUALS
+	FLOAT_LITERAL
+	GREATER_THAN
+	GREATER_THAN_EQUALS
+	IDENTIFIER
+	INTEGER_LITERAL
+	KEYWORD_CHAR
+	KEYWORD_ELSE
+	KEYWORD_FLOAT
+	KEYWORD_FN
+	KEYWORD_FOR
+	KEYWORD_IF
+	KEYWORD_INT
+	KEYWORD_RET
+	KEYWORD_WHILE
+	LESS_THAN
+	LESS_THAN_EQUALS
+	MINUS
+	MINUS_EQUALS
+	MINUS_MINUS
+	OPEN_BRACKET
+	OPEN_CURLY
+	OPEN_PAREN
+	PIPE
+	PIPE_EQUALS
+	PIPE_PIPE
+	PLUS
+	PLUS_EQUALS
+	PLUS_PLUS
+	RIGHT_ARROW
+	SEMICOLON
+	SLASH
+	SLASH_EQUALS
+	STAR
+	STAR_EQUALS
+	STRING_LITERAL
+	SYNTAX_KIND_COUNT
+	TILDE
+	TILDE_EQUALS
+	UNEXPECTED_TOKEN
+}
+
+
+enum actionType {
+	ACCEPT
+	DEFAULT
+	REDUCE
+	SHIFT
+}
+
+
+enum baseType {
+	CHAR
+	FLOAT
+	INT
+	UNDIFINED
+}
+
+
+class StackItem {
+	+node : ASTNode*
+	+state : int
+}
+
+
+class SyntaxToken {
+	+kind : SyntaxKind
+	+column : int
+	+line : int
+	+val : string
+}
+
+
+class action {
+	+type : actionType
+	+num : int
+}
+
+
+class scratchRegister {
+	+inUse : bool
+	+name : string
+}
+
+
+class tableEntry {
+	+isInitialized : bool
+	+offset : int
+	+addr : string
+	+name : string
+	+type : valType
+}
+
+
+class valType {
+	+type : baseType
+	+isArray : bool
+	+isPointer : bool
+	+size : int
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+ASTNode <|-- NonTerminalNode
+
+
+ASTNode <|-- TerminalNode
+
+
+Error <|-- SyntacticError
+
+
+Error <|-- SyntaxError
+
+
+Error <|-- semanticError
+
+
+
+
+
+/' Aggregation relationships '/
+
+ASTNode *-- GrammarSymbolType
+
+
+ASTNode *-- valType
+
+
+ActionTable "2" o-- action
+
+
+CodeGenarator o-- ASTNode
+
+
+CodeGenarator *-- LabelManager
+
+
+CodeGenarator *-- ScratchManager
+
+
+CodeGenarator o-- functionEntry
+
+
+CodeGenarator o-- scope
+
+
+ErrorHandler o-- Error
+
+
+Lexer *-- DFA
+
+
+Lexer o-- ErrorHandler
+
+
+NonTerminalNode o-- ASTNode
+
+
+NonTerminalNode *-- NonTerminal
+
+
+Parser *-- ActionTable
+
+
+Parser o-- ErrorHandler
+
+
+Parser *-- GotoTable
+
+
+Parser *-- NonTerminal
+
+
+Parser o-- SemanticAnalyzer
+
+
+Parser *-- StackItem
+
+
+Parser *-- SyntaxKind
+
+
+Parser o-- SyntaxToken
+
+
+Parser *-- productionRule
+
+
+ScratchManager *-- scratchRegister
+
+
+SemanticAnalyzer o-- ErrorHandler
+
+
+SemanticAnalyzer "2" o-- NonTerminalNode
+
+
+SemanticAnalyzer o-- SymbolTable
+
+
+SemanticAnalyzer "2" o-- scope
+
+
+StackItem o-- ASTNode
+
+
+SymbolTable o-- functionEntry
+
+
+SyntaxToken *-- SyntaxKind
+
+
+TerminalNode *-- SyntaxKind
+
+
+TerminalNode o-- SyntaxToken
+
+
+action *-- actionType
+
+
+functionEntry o-- scope
+
+
+functionEntry "2" *-- valType
+
+
+productionRule *-- GrammarSymbolType
+
+
+productionRule *-- NonTerminal
+
+
+scope "2" o-- scope
+
+
+scope *-- tableEntry
+
+
+tableEntry *-- valType
+
+
+valType *-- baseType
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml

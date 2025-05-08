@@ -1,152 +1,140 @@
-Program -> FunctionDecl Program
-        | /* epsilon */ ;
+Program → ε
+        | Program FunctionDecl
 
-FunctionDecl -> KEYWORD_FN IDENTIFIER OPEN_PAREN ParamList CLOSED_PAREN RIGHT_ARROW Type OPEN_CURLY StmtList CLOSED_CURLY ;
+FunctionDecl → 'fn' IDENTIFIER '(' ParamList ')' '->' Type '{' StmtList '}'
 
-ParamList -> Param ParamTail
-          | /* epsilon */ ;
+ParamList → ε
+          | ParamListNonEmpty
 
-ParamTail -> COMMA Param ParamTail
-          | /* epsilon */ ;
+ParamListNonEmpty → Param
+                  | ParamListNonEmpty ',' Param
 
-Param -> Type IDENTIFIER ;
+Param → Type IDENTIFIER
 
-Type -> BaseType TypeTail ;
+Type → BaseType
+     | BaseType '[' INTEGER_LITERAL ']'
+     | BaseType '*'
 
-BaseType -> KEYWORD_INT
-         | KEYWORD_FLOAT
-         | KEYWORD_CHAR ;
+BaseType → 'int'
+         | 'float'
+         | 'char'
 
-TypeTail -> OPEN_BRACKET INTEGER_LITERAL CLOSED_BRACKET TypeTail
-         | STAR TypeTail
-         | /* epsilon */ ;
+StmtList → ε
+         | StmtList Stmt
 
-StmtList -> Stmt StmtList
-         | /* epsilon */ ;
-
-Stmt -> VarDeclStmt
-     | AssignStmt
+Stmt → SimpleStmt ';'
+     | '{' StmtList '}'
      | IfStmt
      | WhileStmt
      | ForStmt
-     | ReturnStmt
-     | ExprStmt ;
 
-Body -> OPEN_CURLY StmtList CLOSED_CURLY
-     | Stmt ;
+SimpleStmt → VarDeclExpr
+           | AssignExpr
+           | IDENTIFIER '(' ExprList ')'
+           | 'ret' ExprOpt
 
-VarDeclStmt -> VarDeclExpr SEMICOLON ;
+VarDeclExpr → Type IDENTIFIER InitOpt
 
-VarDeclExpr -> Type IDENTIFIER InitOpt ;
+InitOpt → ε
+        | '=' AssignValue
 
-InitOpt -> EQUALS AssignValue
-        | /* epsilon */ ;
+AssignValue → Expr
+            | '{' ExprList '}'
 
-AssignValue -> Expr
-            | OPEN_CURLY ExprList CLOSED_CURLY ;
+AssignExpr → AssignTarget AssignOp Expr
 
-AssignStmt -> AssignExpr SEMICOLON ;
+AssignTarget → IDENTIFIER
+             | IDENTIFIER '[' Expr ']'
+             | '*' IDENTIFIER
 
-AssignExpr -> AssignTarget AssignOp Expr ;
+AssignOp → '='
+         | '+='
+         | '-='
+         | '/='
+         | '*='
+         | '&='
+         | '|='
+         | '^='
+         | '~='
 
-AssignTarget -> IDENTIFIER
-             | IDENTIFIER OPEN_BRACKET Expr CLOSED_BRACKET
-             | STAR IDENTIFIER ;
+IfStmt → 'if' '(' ConditionOp ')' Body
+       | 'if' '(' ConditionOp ')' Body 'else' Body
 
-AssignOp -> EQUALS
-         | PLUS_EQUALS
-         | MINUS_EQUALS
-         | SLASH_EQUALS
-         | STAR_EQUALS
-         | AMPERSAND_EQUALS
-         | PIPE_EQUALS
-         | CARET_EQUALS
-         | TILDE_EQUALS ;
+WhileStmt → 'while' '(' ConditionOp ')' Body
 
-IfStmt -> KEYWORD_IF OPEN_PAREN ConditionOp CLOSED_PAREN Body %prec THEN
-       | KEYWORD_IF OPEN_PAREN ConditionOp CLOSED_PAREN Body KEYWORD_ELSE Body ;
+ConditionOp → Expr
+            | AssignExpr
 
-WhileStmt -> KEYWORD_WHILE OPEN_PAREN ConditionOp CLOSED_PAREN Body ;
+ForStmt → 'for' '(' ForInit ';' ExprOpt ';' ForUpdate ')' Body
 
-ConditionOp -> Expr
-            | AssignExpr ;
-
-ForStmt -> KEYWORD_FOR OPEN_PAREN ForInit SEMICOLON ExprOpt SEMICOLON ForUpdate CLOSED_PAREN Body ;
-
-ForInit -> VarDeclExpr
+ForInit → ε
+        | VarDeclExpr
         | AssignExpr
-        | /* epsilon */ ;
 
-ExprOpt -> Expr
-        | /* epsilon */ ;
+ExprOpt → ε
+        | Expr
 
-ForUpdate -> AssignExpr
-          | /* epsilon */ ;
+ForUpdate → ε
+          | AssignExpr
+          | IncrementExpr
 
-ReturnStmt -> KEYWORD_RET ExprOpt SEMICOLON ;
+Body → '{' StmtList '}'
+     | SimpleStmt ';'
+     | IfStmt
+     | WhileStmt
+     | ForStmt
 
-ExprStmt -> Expr SEMICOLON ;
+ExprList → ε
+         | ExprListNonEmpty
 
-ExprList -> Expr ExprTail
-         | /* epsilon */ ;
+ExprListNonEmpty → Expr
+                 | ExprListNonEmpty ',' Expr
 
-ExprTail -> COMMA Expr ExprTail
-         | /* epsilon */ ;
+Expr → LogicalExpr
+     | AddressExpr
 
-Expr -> UnaryExpr RelOpTail
-     | PointerRefExpr ;
+LogicalExpr → RelationalExpr
+            | LogicalExpr '||' RelationalExpr
+            | LogicalExpr '&&' RelationalExpr
 
-RelOpTail -> RelOp UnaryExpr RelOpTail
-          | /* epsilon */ ;
+RelationalExpr → AddExpr
+               | RelationalExpr '==' AddExpr
+               | RelationalExpr '!=' AddExpr
+               | RelationalExpr '<' AddExpr
+               | RelationalExpr '>' AddExpr
+               | RelationalExpr '<=' AddExpr
+               | RelationalExpr '>=' AddExpr
 
-RelOp -> LESS_THAN
-      | GREATER_THAN
-      | LESS_THAN_EQUALS
-      | GREATER_THAN_EQUALS
-      | EQUALS_EQUALS
-      | BANG_EQUALS ;
+AddExpr → MulExpr
+        | AddExpr '+' MulExpr
+        | AddExpr '-' MulExpr
+        | AddExpr '|' MulExpr
+        | AddExpr '^' MulExpr
 
-UnaryExpr -> UnaryOp UnaryExpr
-         | PostIncrement
-         | PreIncrement
-         | SimpleExpr ;
+MulExpr → UnaryExpr
+        | MulExpr '*' UnaryExpr
+        | MulExpr '/' UnaryExpr
+        | MulExpr '&' UnaryExpr
 
-PointerRefExpr -> AMPERSAND IDENTIFIER
-               | STAR IDENTIFIER ;
+UnaryExpr → PrimaryExpr
+          | '-' UnaryExpr
+          | '!' UnaryExpr
 
-PostIncrement -> IDENTIFIER PLUS_PLUS
-              | IDENTIFIER MINUS_MINUS ;
+IncrementExpr → IDENTIFIER '++'
+              | IDENTIFIER '--'
+              | '++' IDENTIFIER
+              | '--' IDENTIFIER
 
-PreIncrement -> PLUS_PLUS IDENTIFIER
-             | MINUS_MINUS IDENTIFIER ;
+AddressExpr → '&' IDENTIFIER
 
-UnaryOp -> MINUS
-        | BANG ;
+DereferenceExpr → '*' IDENTIFIER
 
-SimpleExpr -> Term AddOpTail ;
-
-AddOpTail -> AddOp Term AddOpTail
-         | /* epsilon */ ;
-
-AddOp -> PLUS
-      | MINUS
-      | PIPE
-      | CARET
-      | PIPE_PIPE ;
-
-Term -> Factor MulOpTail ;
-
-MulOpTail -> MulOp Factor MulOpTail
-         | /* epsilon */ ;
-
-MulOp -> STAR
-      | SLASH
-      | AMPERSAND
-      | AMPERSAND_AMPERSAND ;
-
-Factor -> OPEN_PAREN Expr CLOSED_PAREN
-       | IDENTIFIER
-       | INTEGER_LITERAL
-       | FLOAT_LITERAL
-       | CHAR_LITERAL
-       | IDENTIFIER OPEN_PAREN ExprList CLOSED_PAREN ;
+PrimaryExpr → IDENTIFIER
+            | IDENTIFIER '[' Expr ']'
+            | INTEGER_LITERAL
+            | FLOAT_LITERAL
+            | CHAR_LITERAL
+            | '(' Expr ')'
+            | IDENTIFIER '(' ExprList ')'
+            | DereferenceExpr
+            | IncrementExpr

@@ -67,7 +67,6 @@ private:
 
     // semantic analysis
     SemanticAnalyzer *_semanticAnalyzer;
-    void assignNodeType(ASTNode *node);
 
 public:
     Parser(vector<SyntaxToken *> tokens, int numOfStates, ErrorHandler *handler, SemanticAnalyzer *semanticAnalyzer);

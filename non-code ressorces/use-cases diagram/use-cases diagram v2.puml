@@ -1,0 +1,45 @@
+@startuml
+skinparam usecase {
+  BackgroundColor #EEF
+  BorderColor Black
+  ArrowColor Black
+}
+
+actor "User" as User
+actor "Developer" as Dev
+
+package "Compiler System" {
+  usecase "Write Source Code (.ez)" as UC1
+  usecase "Run Compiler Pipeline" as UC2
+  usecase "Lexical Analysis" as UC3
+  usecase "Parsing (Syntax Analysis)" as UC4
+  usecase "Semantic Analysis" as UC5
+  usecase "Code Generation (.asm)" as UC6
+  usecase "Assemble & Link Executable" as UC7
+  usecase "Run Generated Program" as UC8
+  usecase "Report Errors" as UC9
+  usecase "Test Compiler Components" as UC10
+}
+
+User --> UC1
+User --> UC2
+User --> UC8
+
+UC2 --> UC3
+UC2 --> UC4
+UC2 --> UC5
+UC2 --> UC6
+UC2 --> UC7
+UC2 --> UC9
+
+UC3 --> UC9
+UC4 --> UC9
+UC5 --> UC9
+UC6 --> UC9
+
+Dev --> UC10
+UC10 --> UC3
+UC10 --> UC4
+UC10 --> UC5
+UC10 --> UC6
+@enduml
