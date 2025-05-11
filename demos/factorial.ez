@@ -14,7 +14,7 @@ fn fact(int x) => int
 fn main() => int
 {
     <> setting the initial input
-    int x = 5;
+    int x = 4;
 
     <> calling the function and printing
     printInt(fact(x));

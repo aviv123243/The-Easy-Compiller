@@ -19,7 +19,7 @@
 #>
 
 param(
-    [string]$SrcDir    = "src",
+    [string]$SrcDir    = "..\src",
     [string]$OutDoc    = "code-export.docx",
     [string]$Highlight = "zenburn"
 )

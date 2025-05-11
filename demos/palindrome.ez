@@ -35,7 +35,7 @@ fn isPalindrome(int x) => int
 
 fn main() => int
 {
-    int x = 12321;
+    int x = 1234;
     printInt(reverse(x));
     printBool(isPalindrome(x));
 

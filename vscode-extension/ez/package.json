@@ -1,0 +1,25 @@
+{
+  "name": "ez",
+  "displayName": "ez",
+  "description": "ez",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "ez",
+      "aliases": ["ez", "ez"],
+      "extensions": [".ez",".EZ"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "ez",
+      "scopeName": "source.ez",
+      "path": "./syntaxes/ez.tmLanguage.json"
+    }]
+  }
+}

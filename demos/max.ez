@@ -1,15 +1,10 @@
 fn max(int x,int y) => int
 {
-    int MAX;
-
     if(x > y) {
-        MAX = x;
-    }else
-    {
-        MAX = y;
+        ret x;
     }
 
-    ret MAX;
+    ret y;
 }
 
 fn main() => int
