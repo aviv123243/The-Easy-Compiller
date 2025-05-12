@@ -16,6 +16,11 @@ file(GLOB_RECURSE SOURCES
 # Add executable
 add_executable(tec ${SOURCES})
 
+# Set output directory for the executable
+set_target_properties(tec PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"
+)
+
 # Include directories
 target_include_directories(tec PRIVATE
     "src"
@@ -44,4 +49,3 @@ target_include_directories(tec PRIVATE
     "src/codeGenarator/lableManager"
     "src/codeGenarator/scratch"
 )
-

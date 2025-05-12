@@ -445,38 +445,38 @@ tec_OBJECTS = \
 # External object files for target tec
 tec_EXTERNAL_OBJECTS =
 
-tec.exe: CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/codeGenarator/codeGen.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/codeGenarator/lableManager/lableManager.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/codeGenarator/scratch/scratch.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/main/main.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/parser/parser.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj
-tec.exe: CMakeFiles/tec.dir/src/token/token.cpp.obj
-tec.exe: CMakeFiles/tec.dir/build.make
-tec.exe: CMakeFiles/tec.dir/linkLibs.rsp
-tec.exe: CMakeFiles/tec.dir/objects1.rsp
-tec.exe: CMakeFiles/tec.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable tec.exe"
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/DFA/DFA.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/codeGenarator/codeGen.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/codeGenarator/lableManager/lableManager.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/codeGenarator/scratch/scratch.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/errorHandler/errorHandler.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/lexer/lexer.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/main/main.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/nodes/nodeAnalyzer/nodeAnalyzer.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/nodes/nodes.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/parser/grammerSymbol/grammerSymbol.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/parser/initParserFunctions.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/parser/parseTable/action/action.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/parser/parseTable/actionTable/actionTable.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/parser/parseTable/gotoTable/gotoTable.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/parser/parser.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/parser/productionRule/productionRule.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/parser/stackItem/stackItem.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/semantic/semantic.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/symbolTable/functionEntry/functionEntry.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/symbolTable/scope/scope.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/symbolTable/symbolTable.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/symbolTable/tableEntry/tableEntry.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/src/token/token.cpp.obj
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/build.make
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/linkLibs.rsp
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/objects1.rsp
+C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe: CMakeFiles/tec.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Admin\Documents\Coding\The-Easy-Compiller\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX executable C:\Users\Admin\Documents\Coding\The-Easy-Compiller\bin\tec.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\tec.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/tec.dir/build: tec.exe
+CMakeFiles/tec.dir/build: C:/Users/Admin/Documents/Coding/The-Easy-Compiller/bin/tec.exe
 .PHONY : CMakeFiles/tec.dir/build
 
 CMakeFiles/tec.dir/clean:
